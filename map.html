@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CoCo Statewide Transit Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --legend-bg: rgba(255, 255, 255, 0.94);
+            --legend-border: #e2e8f0;
+            --map-shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        .dark {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --legend-bg: rgba(15, 23, 42, 0.92);
+            --legend-border: #334155;
+            --map-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .map-container {
+            flex-grow: 1;
+            width: 100%;
+            position: relative;
+        }
+
+        /* UI Overlays */
+        .legend-panel {
+            background: var(--legend-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--legend-border);
+            transition: all 0.3s;
+        }
+        
+        .control-btn {
+            background-color: var(--legend-bg);
+            border: 1px solid var(--legend-border);
+            color: var(--text-color);
+        }
+
+        /* Leaflet Customizations */
+        .leaflet-container {
+            background-color: var(--bg-color);
+        }
+        
+        .dark .leaflet-tile-pane {
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+        
+        .station-tooltip {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--legend-border);
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 6px var(--map-shadow);
+            border-radius: 6px;
+            padding: 3px 7px;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+        .hub-tooltip {
+            font-weight: 800;
+            font-size: 13px;
+            border-width: 2px;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+        .dark .hub-tooltip {
+            color: #60a5fa;
+        }
+        .leaflet-tooltip-left::before,
+        .leaflet-tooltip-right::before,
+        .leaflet-tooltip-top::before,
+        .leaflet-tooltip-bottom::before {
+            border-color: transparent !important;
+        }
+
+        .filter-chip {
+            transition: all 0.15s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+        }
+        .filter-chip.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        /* Custom scrollbars for legend and line list */
+        .legend-panel, #scrollableLineList {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+        }
+        .legend-panel::-webkit-scrollbar,
+        #scrollableLineList::-webkit-scrollbar {
+            width: 6px;
+        }
+        .legend-panel::-webkit-scrollbar-track,
+        #scrollableLineList::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .legend-panel::-webkit-scrollbar-thumb,
+        #scrollableLineList::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.4);
+            border-radius: 9999px;
+        }
+        #scrollableLineList::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 p-3 sm:p-4 shadow-md z-20 flex justify-between items-center shrink-0 transition-colors">
+        <div class="flex items-center gap-3 sm:gap-4">
+            <a href="index.html" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 shadow-sm text-xs font-semibold transition-colors shrink-0" title="Back to Home Portal">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Home Portal</span>
+            </a>
+            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_10px_rgba(59,130,246,0.6)] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight transition-colors">CoCo <span class="text-blue-600 dark:text-blue-400">Command</span></h1>
+                <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wider transition-colors">STATEWIDE TRANSIT MASTER NETWORK</p>
+            </div>
+        </div>
+        <div class="flex gap-2 sm:gap-3 items-center">
+            <div class="hidden lg:flex gap-2">
+                <span class="px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-xs font-bold border border-blue-300 dark:border-blue-700/50">C & A Cards</span>
+                <span class="px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 text-xs font-bold border border-indigo-300 dark:border-indigo-700/50">CoCoR (COR) Rail</span>
+                <span class="px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 text-xs font-bold border border-purple-300 dark:border-purple-700/50">CoCoM (COM) Bus Division</span>
+                <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium border border-slate-300 dark:border-slate-600">Bustang</span>
+                <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium border border-slate-300 dark:border-slate-600">Pegasus</span>
+                <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium border border-slate-300 dark:border-slate-600">Snowstang</span>
+                <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium border border-slate-300 dark:border-slate-600">Outrider</span>
+            </div>
+            
+            <!-- Mobile Legend Toggle -->
+            <button onclick="toggleLegend()" class="md:hidden p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+
+            <!-- Major Station Names Toggle -->
+            <button id="headerToggleStationNamesBtn" onclick="toggleMajorStationNames()" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600 shadow-sm text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Hide/Show Major Station Names">
+                <svg id="headerStationNamesIcon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span id="stationNamesBtnText" class="hidden sm:inline">Hide Major Names</span>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600 shadow-sm transition-colors hover:bg-slate-200 dark:hover:bg-slate-700">
+                <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Map Area -->
+    <main class="map-container relative z-0" id="mapContainer">
+        <!-- Interactive Legend Panel -->
+        <div id="legendPanel" class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 legend-panel p-4 sm:p-5 rounded-2xl shadow-2xl z-[1000] w-72 sm:w-84 hidden md:flex flex-col max-h-[80vh] pointer-events-auto">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2 mb-3 shrink-0">
+                <h3 class="text-slate-900 dark:text-white font-bold text-xs sm:text-sm tracking-widest uppercase">Transit Network</h3>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-slate-400 font-semibold" id="activeFilterLabel">All Systems</span>
+                    <button id="clearSelectionBtn" onclick="clearSelection()" class="hidden text-[10px] bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900/80 text-red-700 dark:text-red-300 font-bold px-2 py-0.5 rounded transition-all">Clear ✕</button>
+                </div>
+            </div>
+
+            <!-- Category Filter Chips -->
+            <div class="flex flex-wrap gap-1.5 mb-2.5 pb-2 border-b border-slate-200 dark:border-slate-700 text-[11px] font-semibold shrink-0">
+                <button onclick="filterCategory('all')" id="chip-all" class="filter-chip active px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">All</button>
+                <button onclick="filterCategory('rail')" id="chip-rail" class="filter-chip px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">CoCoR (COR)</button>
+                <button onclick="filterCategory('cocom')" id="chip-cocom" class="filter-chip px-2 py-0.5 rounded-md border border-purple-400 dark:border-purple-600 text-purple-700 dark:text-purple-300 font-bold">All CoCoM (COM)</button>
+                <button onclick="filterCategory('bustang')" id="chip-bustang" class="filter-chip px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">Bustang</button>
+                <button onclick="filterCategory('pegasus')" id="chip-pegasus" class="filter-chip px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">Pegasus</button>
+                <button onclick="filterCategory('snowstang')" id="chip-snowstang" class="filter-chip px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">Snowstang</button>
+                <button onclick="filterCategory('outrider')" id="chip-outrider" class="filter-chip px-2 py-0.5 rounded-md border border-slate-300 dark:border-slate-600">Outrider</button>
+            </div>
+
+            <!-- Major Station Names Quick Control in Legend -->
+            <div class="flex items-center justify-between py-1.5 px-2 mb-3 text-[11px] bg-slate-50 dark:bg-slate-800/80 rounded-lg border border-slate-200 dark:border-slate-700 shrink-0">
+                <span class="font-medium text-slate-600 dark:text-slate-300">Major Station Names</span>
+                <button onclick="toggleMajorStationNames()" id="legendStationNamesToggleBtn" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900 transition-all">
+                    Hide Names
+                </button>
+            </div>
+            
+            <!-- Dedicated Scrollable Line List -->
+            <div id="scrollableLineList" class="space-y-4 text-xs overflow-y-auto pr-1.5 flex-grow overscroll-contain">
+                <!-- CoCoR Rail Backbone (Standard & Express X Lines) -->
+                <div class="category-block" data-category="rail">
+                    <h4 class="text-[10px] font-bold text-blue-600 dark:text-blue-400 mb-1.5 uppercase tracking-wider">CoCoR Rail / COR (Standard & Express X)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-fr" onclick="toggleRouteSelection('rail-fr')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #2563eb;"></div>
+                                <span class="text-[11px] leading-tight">Front Range (<button type="button" class="tier-btn tier-btn-local hover:underline text-blue-600 dark:text-blue-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-fr', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-blue-600 dark:text-blue-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-fr', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-blue-600 dark:text-blue-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-ne" onclick="toggleRouteSelection('rail-ne')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #b45309;"></div>
+                                <span class="text-[11px] leading-tight">Northeast Line (<button type="button" class="tier-btn tier-btn-local hover:underline text-amber-600 dark:text-amber-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ne', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-amber-600 dark:text-amber-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ne', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-amber-600 dark:text-amber-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-ep" onclick="toggleRouteSelection('rail-ep')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #eab308;"></div>
+                                <span class="text-[11px] leading-tight">Eastern Plains (<button type="button" class="tier-btn tier-btn-local hover:underline text-yellow-600 dark:text-yellow-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ep', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-yellow-600 dark:text-yellow-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ep', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-yellow-600 dark:text-yellow-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-sl" onclick="toggleRouteSelection('rail-sl')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #dc2626;"></div>
+                                <span class="text-[11px] leading-tight">Southern Line (<button type="button" class="tier-btn tier-btn-local hover:underline text-red-600 dark:text-red-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-sl', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-red-600 dark:text-red-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-sl', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-red-600 dark:text-red-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-av" onclick="toggleRouteSelection('rail-av')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #9333ea;"></div>
+                                <span class="text-[11px] leading-tight">Arkansas Valley (<button type="button" class="tier-btn tier-btn-local hover:underline text-purple-600 dark:text-purple-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-av', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-purple-600 dark:text-purple-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-av', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-purple-600 dark:text-purple-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-lt" onclick="toggleRouteSelection('rail-lt')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #4338ca;"></div>
+                                <span class="text-[11px] leading-tight">Lamar–Trinidad (<button type="button" class="tier-btn tier-btn-local hover:underline text-indigo-600 dark:text-indigo-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-lt', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-indigo-600 dark:text-indigo-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-lt', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-indigo-600 dark:text-indigo-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amtrak Partnership Rail -->
+                <div class="category-block" data-category="rail">
+                    <h4 class="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Amtrak Partner Cars (Standard & Express)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-cz" onclick="toggleRouteSelection('rail-cz')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #475569;"></div>
+                                <span class="text-[11px] leading-tight">California Zephyr (<button type="button" class="tier-btn tier-btn-local hover:underline text-slate-600 dark:text-slate-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-cz', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-slate-600 dark:text-slate-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-cz', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-slate-600 dark:text-slate-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-wpe" onclick="toggleRouteSelection('rail-wpe')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #0284c7;"></div>
+                                <span class="text-[11px] leading-tight">Winter Park Express (<button type="button" class="tier-btn tier-btn-local hover:underline text-sky-600 dark:text-sky-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-wpe', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-sky-600 dark:text-sky-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-wpe', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-sky-600 dark:text-sky-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-swc" onclick="toggleRouteSelection('rail-swc')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #1e293b;"></div>
+                                <span class="text-[11px] leading-tight">Southwest Chief (<button type="button" class="tier-btn tier-btn-local hover:underline text-slate-700 dark:text-slate-300 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-swc', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-slate-700 dark:text-slate-300 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-swc', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-slate-700 dark:text-slate-300 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Banner for CoCoM Bus Network -->
+                <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-extrabold uppercase tracking-widest text-purple-600 dark:text-purple-400">CoCoM Bus Division (COM)</span>
+                        <span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-semibold">Statewide Reach</span>
+                    </div>
+                </div>
+
+                <!-- Bustang under CoCoM -->
+                <div class="category-block" data-category="bustang">
+                    <h4 class="text-[10px] font-bold text-purple-600 dark:text-purple-400 mb-1.5 uppercase tracking-wider">CoCoM Bustang (Intercity Express)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-west" onclick="toggleRouteSelection('bustang-west')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #7c3aed; border-color: #7c3aed;"></div>
+                                <span class="text-[11px] leading-tight">West Line (Denver ↔ Grand Jct)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-purple-600 dark:text-purple-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-north" onclick="toggleRouteSelection('bustang-north')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0d9488; border-color: #0d9488;"></div>
+                                <span class="text-[11px] leading-tight">North Line (Denver ↔ Ft Collins)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-teal-600 dark:text-teal-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-south" onclick="toggleRouteSelection('bustang-south')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0891b2; border-color: #0891b2;"></div>
+                                <span class="text-[11px] leading-tight">South Line (Denver ↔ Pueblo)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-cyan-600 dark:text-cyan-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pegasus under CoCoM -->
+                <div class="category-block" data-category="pegasus">
+                    <h4 class="text-[10px] font-bold text-rose-600 dark:text-rose-400 mb-1.5 uppercase tracking-wider">CoCoM Pegasus (I-70 Mountain Shuttle)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="pegasus" onclick="toggleRouteSelection('pegasus')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full shrink-0" style="background-color: #f43f5e;"></div>
+                                <span class="text-[11px] leading-tight">Pegasus Shuttle (Denver ↔ Avon)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-600 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snowstang under CoCoM -->
+                <div class="category-block" data-category="snowstang">
+                    <h4 class="text-[10px] font-bold text-sky-600 dark:text-sky-400 mb-1.5 uppercase tracking-wider">CoCoM Snowstang (Ski Express)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="snowstang-loveland" onclick="toggleRouteSelection('snowstang-loveland')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dotted shrink-0" style="background-color: #38bdf8; border-color: #38bdf8;"></div>
+                                <span class="text-[11px] leading-tight">Loveland & Arapahoe Basin</span>
+                            </div>
+                            <span class="select-check text-[11px] text-sky-600 dark:text-sky-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="snowstang-copper" onclick="toggleRouteSelection('snowstang-copper')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dotted shrink-0" style="background-color: #c026d3; border-color: #c026d3;"></div>
+                                <span class="text-[11px] leading-tight">Copper Mountain & Breckenridge</span>
+                            </div>
+                            <span class="select-check text-[11px] text-fuchsia-600 dark:text-fuchsia-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outrider under CoCoM -->
+                <div class="category-block" data-category="outrider">
+                    <h4 class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mb-1.5 uppercase tracking-wider">CoCoM Outrider (Rural Regional)</h4>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-craig" onclick="toggleRouteSelection('outrider-craig')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #16a34a; border-color: #16a34a;"></div>
+                                <span class="text-[11px] leading-tight">Craig ↔ Denver (US-40)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-emerald-600 dark:text-emerald-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-gunnison" onclick="toggleRouteSelection('outrider-gunnison')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #84cc16; border-color: #84cc16;"></div>
+                                <span class="text-[11px] leading-tight">Crested Butte / Gunnison ↔ Denver (US-285)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-lime-600 dark:text-lime-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-durango" onclick="toggleRouteSelection('outrider-durango')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #ea580c; border-color: #ea580c;"></div>
+                                <span class="text-[11px] leading-tight">Durango ↔ Grand Junction (US-160/145/550)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-orange-600 dark:text-orange-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-alamosa" onclick="toggleRouteSelection('outrider-alamosa')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #e11d48; border-color: #e11d48;"></div>
+                                <span class="text-[11px] leading-tight">Alamosa ↔ Salida ↔ Cañon City ↔ Pueblo</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-600 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-lamar" onclick="toggleRouteSelection('outrider-lamar')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #d97706; border-color: #d97706;"></div>
+                                <span class="text-[11px] leading-tight">Lamar ↔ Colorado Springs (US-50)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-amber-600 dark:text-amber-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-sterling" onclick="toggleRouteSelection('outrider-sterling')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #10b981; border-color: #10b981;"></div>
+                                <span class="text-[11px] leading-tight">Sterling ↔ Denver (I-76)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-emerald-600 dark:text-emerald-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-greeley" onclick="toggleRouteSelection('outrider-greeley')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #059669; border-color: #059669;"></div>
+                                <span class="text-[11px] leading-tight">Sterling ↔ Greeley (US-34)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-teal-600 dark:text-teal-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-estes" onclick="toggleRouteSelection('outrider-estes')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0e7490; border-color: #0e7490;"></div>
+                                <span class="text-[11px] leading-tight">Denver ↔ Boulder ↔ Estes Park (US-36)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-cyan-600 dark:text-cyan-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-trinidad" onclick="toggleRouteSelection('outrider-trinidad')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #881337; border-color: #881337;"></div>
+                                <span class="text-[11px] leading-tight">Pueblo ↔ Trinidad (I-25)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-800 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-jct-cb" onclick="toggleRouteSelection('outrider-jct-cb')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #ec4899; border-color: #ec4899;"></div>
+                                <span class="text-[11px] leading-tight">Grand Junction ↔ Crested Butte (US-50 / CO-135)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-pink-600 dark:text-pink-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="absolute top-4 left-4 sm:top-6 sm:left-6 z-[1000] flex flex-col gap-2 pointer-events-auto">
+            <button onclick="map.zoomIn()" class="w-9 h-9 sm:w-10 sm:h-10 control-btn rounded-lg font-bold shadow-md hover:brightness-95 flex items-center justify-center transition-colors text-xl">+</button>
+            <button onclick="map.zoomOut()" class="w-9 h-9 sm:w-10 sm:h-10 control-btn rounded-lg font-bold shadow-md hover:brightness-95 flex items-center justify-center transition-colors text-2xl leading-none">-</button>
+            <button onclick="resetZoom()" class="w-9 h-9 sm:w-10 sm:h-10 control-btn rounded-lg font-bold shadow-md hover:brightness-95 flex items-center justify-center transition-colors" title="Reset View">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+            </button>
+            <button id="mapToggleStationNamesBtn" onclick="toggleMajorStationNames()" class="w-9 h-9 sm:w-10 sm:h-10 control-btn rounded-lg font-bold shadow-md hover:brightness-95 flex items-center justify-center transition-colors" title="Hide/Show Major Station Names">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Colorado Geographic Bounds
+        const coloradoBounds = L.latLngBounds([36.9, -109.1], [41.1, -102.0]);
+
+        // Initialize Leaflet Map locked over Colorado
+        const map = L.map('mapContainer', { 
+            zoomControl: false, 
+            attributionControl: false,
+            maxBounds: coloradoBounds,
+            maxBoundsViscosity: 1.0,
+            minZoom: 6,
+            maxZoom: 18
+        }).setView([39.05, -105.5], 7);
+
+        // OpenStreetMap Tile Layer
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // Master Colorado Coordinates
+        const coords = {
+            // Front Range Urban Corridor
+            ftcollins: [40.5853, -105.0844],
+            loveland: [40.3978, -105.0750],
+            berthoud: [40.3080, -105.0780],
+            longmont: [40.1672, -105.1019],
+            boulder: [40.0150, -105.2705],
+            broomfield: [39.9142, -105.0869],
+            denver: [39.7525, -105.0000],
+            federalcenter: [39.7197, -105.1328],
+            woolymammoth: [39.6978, -105.2100],
+            castlerock: [39.3722, -104.8561],
+            monument: [39.0910, -104.8720],
+            cosprings: [38.8339, -104.8214],
+            fountain: [38.6820, -104.7000],
+            pueblo: [38.2544, -104.6091],
+            coloradocity: [38.0300, -104.7300],
+            walsenburg: [37.6239, -104.7803],
+            aguilar: [37.4000, -104.6500],
+            trinidad: [37.1695, -104.5005],
+
+            // Northern Plains & Weld County
+            greeley: [40.4233, -104.7091],
+            kersey: [40.3870, -104.5600],
+            dia: [39.8561, -104.6737],
+            brighton: [39.9869, -104.8206],
+            hudson: [40.0750, -104.6400],
+            keenesburg: [40.1080, -104.5200],
+            wiggins: [40.2330, -104.0720],
+            ftmorgan: [40.2503, -103.8000],
+            brush: [40.2589, -103.6238],
+            sterling: [40.6255, -103.2077],
+            julesburg: [40.9883, -102.2644],
+
+            // Eastern Plains Corridor
+            limon: [39.2639, -103.6922],
+            flagler: [39.2930, -103.0670],
+            burlington: [39.3044, -102.2694],
+
+            // Arkansas River Valley
+            fowler: [38.1500, -104.2500],
+            manzanola: [38.1100, -103.8650],
+            rockyford: [38.0680, -103.7200],
+            lajunta: [37.9850, -103.5439],
+            lasanimas: [38.0680, -103.2220],
+            lamar: [38.0872, -102.6208],
+
+            // Royal Gorge & Central Arkansas
+            canoncity: [38.4410, -105.2424],
+            cotopaxi: [38.3710, -105.6880],
+            salida: [38.5347, -105.9989],
+            ponchasprings: [38.5150, -106.0750],
+            buenavista: [38.8422, -106.1311],
+            fairplay: [39.2247, -105.9986],
+            bailey: [39.4750, -105.4750],
+
+            // San Luis Valley & Southwest
+            moffat: [37.9980, -105.9080],
+            alamosa: [37.4694, -105.8700],
+            montevista: [37.5790, -106.1460],
+            delnorte: [37.6780, -106.3530],
+            southfork: [37.6650, -106.6350],
+            pagosa: [37.2694, -107.0100],
+            bayfield: [37.2260, -107.5980],
+            durango: [37.2753, -107.8800],
+            mancos: [37.3450, -108.2880],
+            cortez: [37.3489, -108.5859],
+            dolores: [37.4740, -108.4980],
+            rico: [37.6920, -108.0300],
+
+            // I-70 Mountain Corridor & Canyons
+            elrancho: [39.7020, -105.3350],
+            idahosprings: [39.7425, -105.5136],
+            georgetown: [39.7150, -105.6970],
+            frisco: [39.5744, -106.0975],
+            vail: [39.6403, -106.3742],
+            avon: [39.6340, -106.5170],
+            eagle: [39.6550, -106.8280],
+            glenwood: [39.5505, -107.3248],
+            newcastle: [39.5720, -107.5350],
+            rifle: [39.5340, -107.7830],
+            parachute: [39.4520, -108.0520],
+            palisade: [39.1100, -108.3550],
+            grandjct: [39.0639, -108.5506],
+
+            // Ski Resorts & High Passes
+            loveland_ski: [39.6800, -105.8970],
+            abasin: [39.6425, -105.8719],
+            copper: [39.5022, -106.1510],
+            breckenridge: [39.4817, -106.0384],
+
+            // Northern Mountains & Yampa Valley
+            winterpark: [39.8869, -105.7625],
+            fraser: [39.9480, -105.8170],
+            granby: [40.0861, -105.9397],
+            kremmling: [40.0583, -106.3986],
+            steamboat: [40.4850, -106.8317],
+            hayden: [40.4850, -107.2580],
+            craig: [40.5153, -107.5464],
+
+            // Estes Park / RMNP Gateway
+            lyons: [40.2247, -105.2714],
+            estespark: [40.3772, -105.5217],
+            rmnp: [40.3430, -105.5990],
+
+            // Western Slope & San Juan Skyway
+            delta: [38.7422, -108.0689],
+            olathe: [38.6040, -107.9820],
+            montrose: [38.4783, -107.8761],
+            ridgway: [38.1570, -107.7580],
+            placerville: [38.0150, -108.0530],
+            telluride: [37.9375, -107.8123],
+            gunnison: [38.5458, -106.9253],
+            crestedbutte: [38.8697, -106.9878]
+        };
+
+        // All 23 unique non-overlapping line styles
+        const styles = {
+            // Rail Lines (Standard local & Express X)
+            fr: { color: '#2563eb', weight: 6, opacity: 0.95, lineJoin: 'round' }, // Royal Blue (FR / FRX)
+            ne: { color: '#b45309', weight: 6, opacity: 0.95, lineJoin: 'round' }, // Amber Bronze (NE / NEX)
+            ep: { color: '#eab308', weight: 6, opacity: 0.95, lineJoin: 'round' }, // Gold (EP / EPX)
+            sl: { color: '#dc2626', weight: 6, opacity: 0.95, lineJoin: 'round' }, // Crimson (SL / SLX)
+            av: { color: '#9333ea', weight: 5, opacity: 0.95, lineJoin: 'round' }, // Violet (AV / AVX)
+            lt: { color: '#4338ca', weight: 5, opacity: 0.95, lineJoin: 'round' }, // Deep Indigo (LT / LTX)
+            cz: { color: '#475569', weight: 5, opacity: 0.9, lineJoin: 'round' },  // Slate Gray (CZ / ZX)
+            wpe: { color: '#0284c7', weight: 5, opacity: 0.9, lineJoin: 'round' }, // Sky Cobalt (W / WX)
+            swc: { color: '#1e293b', weight: 5, opacity: 0.9, lineJoin: 'round' }, // Charcoal (S / SX)
+
+            // Bustang Intercity Express (Dashed)
+            bustangWest: { color: '#7c3aed', weight: 4.5, dashArray: '8, 8', opacity: 1, lineJoin: 'round' }, // Purple
+            bustangNorth: { color: '#0d9488', weight: 4.5, dashArray: '8, 8', opacity: 1, lineJoin: 'round' }, // Teal
+            bustangSouth: { color: '#0891b2', weight: 4.5, dashArray: '8, 8', opacity: 1, lineJoin: 'round' }, // Cyan Ocean
+
+            // Pegasus (Fast Dotted/Dash)
+            pegasus: { color: '#f43f5e', weight: 4, dashArray: '4, 6', opacity: 1, lineJoin: 'round' }, // Rose Coral
+
+            // Snowstang (Ski Express Dotted)
+            snowstangLoveland: { color: '#38bdf8', weight: 4, dashArray: '3, 6', opacity: 1, lineJoin: 'round' }, // Ice Azure
+            snowstangCopper: { color: '#c026d3', weight: 4, dashArray: '3, 6', opacity: 1, lineJoin: 'round' }, // Fuchsia
+
+            // Bustang Outrider (Medium Dashes)
+            outriderCraig: { color: '#16a34a', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Forest Green
+            outriderGunnison: { color: '#84cc16', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Lime
+            outriderDurango: { color: '#ea580c', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Flame Orange
+            outriderAlamosa: { color: '#e11d48', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Ruby Berry
+            outriderLamar: { color: '#d97706', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Warm Ochre
+            outriderSterling: { color: '#10b981', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Emerald Mint
+            outriderGreeley: { color: '#059669', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Deep Teal/Green
+            outriderEstes: { color: '#0e7490', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Deep Mountain Cyan
+            outriderTrinidad: { color: '#881337', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Maroon
+            outriderJctCb: { color: '#ec4899', weight: 3.5, dashArray: '6, 6', opacity: 1, lineJoin: 'round' }, // Hot Pink
+        };
+
+        // Master Route Definitions
+        // All CoCoR rail lines come in Standard and Express (-X)
+        const routesData = [
+            // ==================== 1. CoCoR RAIL BACKBONE (Standard & Express X) ====================
+            {
+                id: 'rail-fr',
+                name: 'CoCoR Front Range Line (FR Local & FRX Express)',
+                category: 'rail',
+                style: styles.fr,
+                path: [
+                    coords.ftcollins,
+                    [40.5400, -105.0780],
+                    [40.4800, -105.0770],
+                    coords.loveland,
+                    [40.3450, -105.0770],
+                    coords.berthoud,
+                    [40.2400, -105.0900],
+                    coords.longmont,
+                    [40.1300, -105.1300],
+                    [40.0980, -105.1630],
+                    [40.0550, -105.2100],
+                    coords.boulder,
+                    [39.9950, -105.2400],
+                    [39.9720, -105.1850],
+                    [39.9560, -105.1550],
+                    [39.9320, -105.1250],
+                    coords.broomfield,
+                    [39.8750, -105.0550],
+                    [39.8350, -105.0250],
+                    [39.7950, -104.9980],
+                    coords.denver,
+                    [39.7250, -105.0010],
+                    [39.6920, -104.9960],
+                    [39.6540, -104.9980],
+                    [39.6130, -105.0160],
+                    [39.5700, -105.0220],
+                    [39.5420, -104.9850],
+                    [39.5250, -104.8850],
+                    [39.4650, -104.8720],
+                    coords.castlerock,
+                    [39.3100, -104.8750],
+                    [39.2250, -104.8870],
+                    [39.1500, -104.9050],
+                    [39.1180, -104.9080],
+                    coords.monument,
+                    [39.0150, -104.8380],
+                    [38.9600, -104.8120],
+                    [38.8950, -104.8180],
+                    coords.cosprings,
+                    [38.7750, -104.7700],
+                    coords.fountain,
+                    [38.5800, -104.6600],
+                    [38.4800, -104.6300],
+                    [38.3800, -104.6150],
+                    coords.pueblo,
+                    [38.1600, -104.6550],
+                    [38.0800, -104.7000],
+                    coords.coloradocity,
+                    [37.8900, -104.7800],
+                    [37.7500, -104.7900],
+                    coords.walsenburg,
+                    [37.5200, -104.7200],
+                    coords.aguilar,
+                    [37.3000, -104.5800],
+                    [37.2300, -104.5300],
+                    coords.trinidad
+                ]
+            },
+            {
+                id: 'rail-ne',
+                name: 'CoCoR Northeast Line (NE Local & NEX Express)',
+                category: 'rail',
+                style: styles.ne,
+                path: [
+                    coords.denver,
+                    [39.7680, -104.9550],
+                    [39.7710, -104.8900],
+                    [39.7520, -104.8450],
+                    [39.7850, -104.7800],
+                    [39.8250, -104.7200],
+                    coords.dia,
+                    [39.9200, -104.7350],
+                    coords.brighton,
+                    [40.0150, -104.7750],
+                    coords.hudson,
+                    coords.keenesburg,
+                    [40.1680, -104.3700],
+                    coords.wiggins,
+                    [40.2450, -103.9200],
+                    coords.ftmorgan,
+                    coords.brush,
+                    [40.3250, -103.5250],
+                    [40.3800, -103.4500],
+                    [40.4850, -103.3500],
+                    [40.5480, -103.2750],
+                    coords.sterling,
+                    [40.7100, -103.1100],
+                    [40.7589, -103.0660],
+                    [40.8100, -102.9400],
+                    [40.8589, -102.8008],
+                    [40.9100, -102.6300],
+                    [40.9364, -102.5252],
+                    [40.9600, -102.3900],
+                    coords.julesburg
+                ]
+            },
+            {
+                id: 'rail-ep',
+                name: 'CoCoR Eastern Plains Line (EP Local & EPX Express)',
+                category: 'rail',
+                style: styles.ep,
+                path: [
+                    coords.denver,
+                    [39.7680, -104.9520],
+                    [39.7710, -104.8870],
+                    [39.7520, -104.8420],
+                    [39.7850, -104.7770],
+                    [39.8250, -104.7170],
+                    coords.dia,
+                    [39.7900, -104.6850],
+                    [39.7450, -104.6000],
+                    [39.7550, -104.4270],
+                    [39.7350, -104.3200],
+                    [39.7120, -104.2220],
+                    [39.6750, -104.1350],
+                    [39.6150, -104.0450],
+                    [39.5450, -103.9550],
+                    [39.4600, -103.8750],
+                    [39.3450, -103.7500],
+                    coords.limon,
+                    [39.2780, -103.5000],
+                    [39.2880, -103.3950],
+                    [39.2860, -103.2750],
+                    coords.flagler,
+                    [39.2990, -102.8690],
+                    [39.3030, -102.7450],
+                    [39.3030, -102.6030],
+                    [39.3040, -102.4200],
+                    coords.burlington
+                ]
+            },
+            {
+                id: 'rail-sl',
+                name: 'CoCoR Southern Line (SL Local & SLX Express)',
+                category: 'rail',
+                style: styles.sl,
+                path: [
+                    coords.pueblo,
+                    [38.2000, -104.6000],
+                    [38.1200, -104.6500],
+                    coords.coloradocity,
+                    [37.8800, -104.7750],
+                    coords.walsenburg,
+                    [37.6050, -104.8700],
+                    [37.5650, -105.0050],
+                    [37.5350, -105.0750],
+                    [37.5450, -105.1400],
+                    [37.5920, -105.1970],
+                    [37.5650, -105.2850],
+                    [37.4900, -105.3750],
+                    [37.4280, -105.4350],
+                    [37.4410, -105.5100],
+                    [37.4550, -105.6800],
+                    coords.alamosa,
+                    coords.montevista,
+                    [37.6350, -106.2400],
+                    coords.delnorte,
+                    [37.6700, -106.4800],
+                    coords.southfork,
+                    [37.5850, -106.7200],
+                    [37.5350, -106.7650],
+                    [37.4815, -106.8005],
+                    [37.4550, -106.8450],
+                    [37.4250, -106.8900],
+                    [37.3700, -106.9450],
+                    coords.pagosa,
+                    [37.2400, -107.1850],
+                    [37.2150, -107.3100],
+                    [37.2200, -107.3550],
+                    [37.2500, -107.4500],
+                    coords.bayfield,
+                    [37.2250, -107.6450],
+                    [37.2350, -107.7550],
+                    [37.2550, -107.8250],
+                    coords.durango
+                ]
+            },
+            {
+                id: 'rail-av',
+                name: 'CoCoR Arkansas Valley Line (AV Local & AVX Express)',
+                category: 'rail',
+                style: styles.av,
+                path: [
+                    coords.pueblo,
+                    [38.2320, -104.3500],
+                    coords.fowler,
+                    coords.manzanola,
+                    coords.rockyford,
+                    [38.0150, -103.6300],
+                    coords.lajunta,
+                    [38.0100, -103.4200],
+                    coords.lasanimas,
+                    [38.0900, -102.9500],
+                    [38.1000, -102.7500],
+                    coords.lamar
+                ]
+            },
+            {
+                id: 'rail-lt',
+                name: 'CoCoR Lamar–Trinidad Line (LT Local & LTX Express)',
+                category: 'rail',
+                style: styles.lt,
+                path: [
+                    coords.lamar,
+                    [38.1000, -102.7500],
+                    [38.0900, -102.9500],
+                    coords.lasanimas,
+                    [38.0100, -103.4200],
+                    coords.lajunta,
+                    [37.8280, -103.7700],
+                    [37.7100, -103.8900],
+                    [37.6400, -103.9700],
+                    [37.5600, -104.0600],
+                    [37.4700, -104.1600],
+                    [37.3800, -104.2600],
+                    [37.2800, -104.3700],
+                    [37.2500, -104.4100],
+                    coords.trinidad
+                ]
+            },
+            {
+                id: 'rail-cz',
+                name: 'Amtrak California Zephyr (CZ / ZX Express)',
+                category: 'rail',
+                style: styles.cz,
+                path: [
+                    coords.denver,
+                    [39.7900, -105.0050],
+                    [39.8000, -105.0800],
+                    [39.8400, -105.1700],
+                    [39.8700, -105.2300],
+                    [39.8820, -105.2450],
+                    [39.8950, -105.2900],
+                    [39.9250, -105.3500],
+                    [39.9400, -105.3700],
+                    [39.9300, -105.4300],
+                    [39.9150, -105.5100],
+                    [39.9050, -105.5800],
+                    [39.9020, -105.6450],
+                    coords.winterpark,
+                    coords.fraser,
+                    [39.9920, -105.8950],
+                    coords.granby,
+                    [40.0550, -106.1750],
+                    [40.0750, -106.1000],
+                    coords.kremmling,
+                    [40.0200, -106.4700],
+                    [39.9750, -106.5150],
+                    [39.9400, -106.5500],
+                    [39.9000, -106.5800],
+                    [39.8700, -106.6300],
+                    [39.8550, -106.6500],
+                    [39.8750, -106.6850],
+                    [39.9150, -106.7250],
+                    [39.8700, -106.8800],
+                    [39.7750, -107.0100],
+                    [39.6730, -107.0580],
+                    [39.6050, -107.1500],
+                    [39.5650, -107.2400],
+                    coords.glenwood,
+                    [39.5600, -107.4100],
+                    coords.newcastle,
+                    [39.5450, -107.6500],
+                    coords.rifle,
+                    [39.4900, -107.9400],
+                    coords.parachute,
+                    [39.3300, -108.2100],
+                    [39.2400, -108.2900],
+                    [39.1700, -108.3300],
+                    [39.1450, -108.3200],
+                    coords.palisade,
+                    [39.0750, -108.4550],
+                    coords.grandjct
+                ]
+            },
+            {
+                id: 'rail-wpe',
+                name: 'Amtrak Winter Park Express (W / WX Ski Express)',
+                category: 'rail',
+                style: styles.wpe,
+                path: [
+                    coords.denver,
+                    [39.7930, -105.0080],
+                    [39.8030, -105.0830],
+                    [39.8430, -105.1730],
+                    [39.8730, -105.2330],
+                    [39.8850, -105.2480],
+                    [39.8980, -105.2930],
+                    [39.9280, -105.3530],
+                    [39.9430, -105.3710],
+                    [39.9330, -105.4330],
+                    [39.9180, -105.5130],
+                    [39.9080, -105.5830],
+                    [39.9050, -105.6480],
+                    coords.winterpark
+                ]
+            },
+            {
+                id: 'rail-swc',
+                name: 'Amtrak Southwest Chief (S / SX Express)',
+                category: 'rail',
+                style: styles.swc,
+                path: [
+                    coords.lamar,
+                    [38.1100, -102.9550],
+                    coords.lasanimas,
+                    [38.0900, -103.3000],
+                    coords.lajunta,
+                    [37.8280, -103.7700],
+                    [37.7100, -103.8900],
+                    [37.6400, -103.9700],
+                    [37.5600, -104.0600],
+                    [37.4700, -104.1600],
+                    [37.3800, -104.2600],
+                    [37.2800, -104.3700],
+                    [37.2500, -104.4100],
+                    coords.trinidad
+                ]
+            },
+
+            // ==================== 2. CoCoM BUSTANG INTERCITY EXPRESS ====================
+            {
+                id: 'bustang-west',
+                name: 'CoCoM Bustang West Line (I-70)',
+                category: 'bustang',
+                style: styles.bustangWest,
+                path: [
+                    coords.denver,
+                    coords.federalcenter,
+                    coords.woolymammoth,
+                    [39.7020, -105.2150],
+                    [39.6950, -105.2650],
+                    [39.7050, -105.3650],
+                    [39.7280, -105.4350],
+                    coords.idahosprings,
+                    [39.7620, -105.6000],
+                    coords.georgetown,
+                    [39.6960, -105.7250],
+                    [39.6880, -105.8050],
+                    [39.6780, -105.9060],
+                    [39.6800, -105.9380],
+                    [39.6500, -106.0250],
+                    coords.frisco,
+                    [39.5400, -106.1250],
+                    coords.copper,
+                    [39.5100, -106.1950],
+                    [39.5290, -106.2180],
+                    coords.vail,
+                    coords.avon,
+                    [39.6450, -106.6000],
+                    coords.eagle,
+                    [39.6470, -106.9510],
+                    [39.6500, -107.0600],
+                    [39.6150, -107.1350],
+                    [39.5850, -107.2150],
+                    coords.glenwood,
+                    coords.newcastle,
+                    coords.rifle,
+                    coords.parachute,
+                    [39.3350, -108.2150],
+                    [39.2600, -108.2800],
+                    coords.palisade,
+                    coords.grandjct
+                ]
+            },
+            {
+                id: 'bustang-north',
+                name: 'CoCoM Bustang North Line (I-25)',
+                category: 'bustang',
+                style: styles.bustangNorth,
+                path: [
+                    coords.denver,
+                    [39.8650, -104.9850],
+                    [39.9850, -104.9850],
+                    coords.longmont,
+                    coords.berthoud,
+                    coords.loveland,
+                    coords.ftcollins
+                ]
+            },
+            {
+                id: 'bustang-south',
+                name: 'CoCoM Bustang South Line (I-25)',
+                category: 'bustang',
+                style: styles.bustangSouth,
+                path: [
+                    coords.denver,
+                    [39.6780, -104.9400],
+                    [39.5350, -104.8700],
+                    coords.castlerock,
+                    coords.monument,
+                    coords.cosprings,
+                    coords.fountain,
+                    coords.pueblo
+                ]
+            },
+
+            // ==================== 3. CoCoM PEGASUS MOUNTAIN SHUTTLE ====================
+            {
+                id: 'pegasus',
+                name: 'CoCoM Pegasus Mountain Express Shuttle',
+                category: 'pegasus',
+                style: styles.pegasus,
+                path: [
+                    coords.denver,
+                    coords.federalcenter,
+                    coords.woolymammoth,
+                    coords.elrancho,
+                    coords.idahosprings,
+                    coords.georgetown,
+                    [39.6780, -105.9060],
+                    [39.6500, -106.0250],
+                    coords.frisco,
+                    [39.5400, -106.1250],
+                    [39.5290, -106.2180],
+                    coords.vail,
+                    coords.avon
+                ]
+            },
+
+            // ==================== 4. CoCoM SNOWSTANG SKI EXPRESS ====================
+            {
+                id: 'snowstang-loveland',
+                name: 'CoCoM Snowstang: Loveland & Arapahoe Basin',
+                category: 'snowstang',
+                style: styles.snowstangLoveland,
+                path: [
+                    coords.denver,
+                    coords.federalcenter,
+                    coords.woolymammoth,
+                    coords.idahosprings,
+                    coords.georgetown,
+                    [39.6880, -105.8050],
+                    coords.loveland_ski,
+                    [39.6600, -105.8750],
+                    coords.abasin
+                ]
+            },
+            {
+                id: 'snowstang-copper',
+                name: 'CoCoM Snowstang: Copper Mountain & Breckenridge',
+                category: 'snowstang',
+                style: styles.snowstangCopper,
+                path: [
+                    coords.denver,
+                    coords.federalcenter,
+                    coords.woolymammoth,
+                    coords.idahosprings,
+                    [39.6780, -105.9060],
+                    coords.frisco,
+                    coords.breckenridge,
+                    coords.frisco,
+                    coords.copper
+                ]
+            },
+
+            // ==================== 5. CoCoM OUTRIDER RURAL REGIONAL NETWORK ====================
+            {
+                id: 'outrider-craig',
+                name: 'CoCoM Outrider: Craig ↔ Denver (US-40)',
+                category: 'outrider',
+                style: styles.outriderCraig,
+                path: [
+                    coords.craig,
+                    coords.hayden,
+                    coords.steamboat,
+                    [40.3850, -106.6120],
+                    [40.3000, -106.5700],
+                    coords.kremmling,
+                    coords.granby,
+                    coords.fraser,
+                    coords.winterpark,
+                    [39.7980, -105.7750],
+                    [39.7600, -105.6850],
+                    coords.idahosprings,
+                    coords.federalcenter,
+                    coords.denver
+                ]
+            },
+            {
+                id: 'outrider-gunnison',
+                name: 'CoCoM Outrider: Crested Butte / Gunnison ↔ Denver (US-285)',
+                category: 'outrider',
+                style: styles.outriderGunnison,
+                path: [
+                    coords.crestedbutte,
+                    [38.6500, -106.8500],
+                    coords.gunnison,
+                    [38.5300, -106.3300],
+                    coords.ponchasprings,
+                    coords.salida,
+                    coords.buenavista,
+                    coords.fairplay,
+                    [39.4100, -105.7500],
+                    coords.bailey,
+                    [39.5600, -105.3200],
+                    coords.federalcenter,
+                    coords.denver
+                ]
+            },
+            {
+                id: 'outrider-durango',
+                name: 'CoCoM Outrider: Durango ↔ Grand Junction (San Juan Skyway)',
+                category: 'outrider',
+                style: styles.outriderDurango,
+                path: [
+                    coords.bayfield,
+                    coords.durango,
+                    coords.mancos,
+                    coords.cortez,
+                    coords.dolores,
+                    coords.rico,
+                    [37.8650, -107.9850],
+                    coords.telluride,
+                    coords.placerville,
+                    coords.ridgway,
+                    coords.montrose,
+                    coords.olathe,
+                    coords.delta,
+                    [38.9700, -108.4500],
+                    coords.grandjct
+                ]
+            },
+            {
+                id: 'outrider-alamosa',
+                name: 'CoCoM Outrider: Alamosa ↔ Salida ↔ Cañon City ↔ Pueblo',
+                category: 'outrider',
+                style: styles.outriderAlamosa,
+                path: [
+                    coords.alamosa,
+                    coords.moffat,
+                    coords.ponchasprings,
+                    coords.salida,
+                    coords.cotopaxi,
+                    coords.canoncity,
+                    [38.4350, -105.0000],
+                    [38.3000, -104.7500],
+                    coords.pueblo
+                ]
+            },
+            {
+                id: 'outrider-lamar',
+                name: 'CoCoM Outrider: Lamar ↔ Colorado Springs (US-50 / I-25)',
+                category: 'outrider',
+                style: styles.outriderLamar,
+                path: [
+                    coords.lamar,
+                    coords.lasanimas,
+                    coords.lajunta,
+                    coords.rockyford,
+                    coords.manzanola,
+                    coords.fowler,
+                    coords.pueblo,
+                    coords.fountain,
+                    coords.cosprings
+                ]
+            },
+            {
+                id: 'outrider-sterling',
+                name: 'CoCoM Outrider: Sterling ↔ Denver (I-76)',
+                category: 'outrider',
+                style: styles.outriderSterling,
+                path: [
+                    coords.sterling,
+                    coords.brush,
+                    coords.ftmorgan,
+                    coords.wiggins,
+                    coords.keenesburg,
+                    coords.hudson,
+                    coords.dia,
+                    coords.denver
+                ]
+            },
+            {
+                id: 'outrider-greeley',
+                name: 'CoCoM Outrider: Sterling ↔ Greeley (US-34)',
+                category: 'outrider',
+                style: styles.outriderGreeley,
+                path: [
+                    coords.sterling,
+                    coords.brush,
+                    coords.ftmorgan,
+                    coords.wiggins,
+                    coords.kersey,
+                    coords.greeley
+                ]
+            },
+            {
+                id: 'outrider-estes',
+                name: 'CoCoM Outrider: Denver ↔ Boulder ↔ Estes Park (US-36)',
+                category: 'outrider',
+                style: styles.outriderEstes,
+                path: [
+                    coords.denver,
+                    coords.broomfield,
+                    coords.boulder,
+                    coords.lyons,
+                    coords.estespark,
+                    coords.rmnp
+                ]
+            },
+            {
+                id: 'outrider-trinidad',
+                name: 'CoCoM Outrider: Pueblo ↔ Trinidad (I-25)',
+                category: 'outrider',
+                style: styles.outriderTrinidad,
+                path: [
+                    coords.pueblo,
+                    coords.coloradocity,
+                    coords.walsenburg,
+                    coords.aguilar,
+                    coords.trinidad
+                ]
+            },
+            {
+                id: 'outrider-jct-cb',
+                name: 'CoCoM Outrider: Grand Junction ↔ Crested Butte (US-50 / CO-135)',
+                category: 'outrider',
+                style: styles.outriderJctCb,
+                path: [
+                    coords.grandjct,
+                    coords.delta,
+                    coords.olathe,
+                    coords.montrose,
+                    [38.4500, -107.5000],
+                    coords.gunnison,
+                    [38.6500, -106.8500],
+                    coords.crestedbutte
+                ]
+            }
+        ];
+
+        // Route stops and local/express tier specifications
+        const routeStopsAndTiers = {
+            'rail-fr': {
+                tiers: {
+                    local: ['ftcollins', 'loveland', 'berthoud', 'longmont', 'boulder', 'broomfield', 'denver', 'castlerock', 'monument', 'cosprings', 'fountain', 'pueblo', 'coloradocity', 'walsenburg', 'aguilar', 'trinidad'],
+                    express: ['ftcollins', 'loveland', 'longmont', 'boulder', 'denver', 'cosprings', 'pueblo', 'trinidad']
+                }
+            },
+            'rail-ne': {
+                tiers: {
+                    local: ['denver', 'dia', 'brighton', 'hudson', 'keenesburg', 'wiggins', 'ftmorgan', 'brush', 'sterling', 'julesburg'],
+                    express: ['denver', 'dia', 'ftmorgan', 'sterling', 'julesburg']
+                }
+            },
+            'rail-ep': {
+                tiers: {
+                    local: ['denver', 'dia', 'limon', 'flagler', 'burlington'],
+                    express: ['denver', 'dia', 'limon', 'burlington']
+                }
+            },
+            'rail-sl': {
+                tiers: {
+                    local: ['pueblo', 'walsenburg', 'alamosa', 'montevista', 'delnorte', 'southfork', 'pagosa', 'bayfield', 'durango'],
+                    express: ['pueblo', 'walsenburg', 'alamosa', 'durango']
+                }
+            },
+            'rail-av': {
+                tiers: {
+                    local: ['pueblo', 'fowler', 'manzanola', 'rockyford', 'lajunta', 'lasanimas', 'lamar'],
+                    express: ['pueblo', 'rockyford', 'lajunta', 'lamar']
+                }
+            },
+            'rail-lt': {
+                tiers: {
+                    local: ['lamar', 'lasanimas', 'lajunta', 'trinidad'],
+                    express: ['lamar', 'lajunta', 'trinidad']
+                }
+            },
+            'rail-cz': {
+                tiers: {
+                    local: ['denver', 'winterpark', 'fraser', 'granby', 'kremmling', 'glenwood', 'palisade', 'grandjct'],
+                    express: ['denver', 'winterpark', 'glenwood', 'grandjct']
+                }
+            },
+            'rail-wpe': {
+                tiers: {
+                    local: ['denver', 'winterpark'],
+                    express: ['denver', 'winterpark']
+                }
+            },
+            'rail-swc': {
+                tiers: {
+                    local: ['lamar', 'lasanimas', 'lajunta', 'trinidad'],
+                    express: ['lamar', 'lajunta', 'trinidad']
+                }
+            },
+            'bustang-west': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'georgetown', 'frisco', 'copper', 'vail', 'avon', 'eagle', 'glenwood', 'newcastle', 'rifle', 'parachute', 'palisade', 'grandjct']
+            },
+            'bustang-north': {
+                stops: ['denver', 'longmont', 'berthoud', 'loveland', 'ftcollins']
+            },
+            'bustang-south': {
+                stops: ['denver', 'castlerock', 'monument', 'cosprings', 'fountain', 'pueblo']
+            },
+            'pegasus': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'elrancho', 'idahosprings', 'georgetown', 'frisco', 'vail', 'avon']
+            },
+            'snowstang-loveland': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'georgetown', 'loveland_ski', 'abasin']
+            },
+            'snowstang-copper': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'frisco', 'breckenridge', 'copper']
+            },
+            'outrider-craig': {
+                stops: ['craig', 'hayden', 'steamboat', 'kremmling', 'granby', 'fraser', 'winterpark', 'idahosprings', 'federalcenter', 'denver']
+            },
+            'outrider-gunnison': {
+                stops: ['crestedbutte', 'gunnison', 'ponchasprings', 'salida', 'buenavista', 'fairplay', 'bailey', 'federalcenter', 'denver']
+            },
+            'outrider-durango': {
+                stops: ['bayfield', 'durango', 'mancos', 'cortez', 'dolores', 'rico', 'telluride', 'placerville', 'ridgway', 'montrose', 'olathe', 'delta', 'grandjct']
+            },
+            'outrider-alamosa': {
+                stops: ['alamosa', 'moffat', 'ponchasprings', 'salida', 'cotopaxi', 'canoncity', 'pueblo']
+            },
+            'outrider-lamar': {
+                stops: ['lamar', 'lasanimas', 'lajunta', 'rockyford', 'manzanola', 'fowler', 'pueblo', 'fountain', 'cosprings']
+            },
+            'outrider-sterling': {
+                stops: ['sterling', 'brush', 'ftmorgan', 'wiggins', 'keenesburg', 'hudson', 'dia', 'denver']
+            },
+            'outrider-greeley': {
+                stops: ['sterling', 'brush', 'ftmorgan', 'wiggins', 'kersey', 'greeley']
+            },
+            'outrider-estes': {
+                stops: ['denver', 'broomfield', 'boulder', 'lyons', 'estespark', 'rmnp']
+            },
+            'outrider-trinidad': {
+                stops: ['pueblo', 'coloradocity', 'walsenburg', 'aguilar', 'trinidad']
+            },
+            'outrider-jct-cb': {
+                stops: ['grandjct', 'delta', 'olathe', 'montrose', 'gunnison', 'crestedbutte']
+            }
+        };
+
+        // Attach stops & tiers to routesData
+        routesData.forEach(r => {
+            const cfg = routeStopsAndTiers[r.id];
+            if (cfg) {
+                if (cfg.tiers) {
+                    r.tiers = cfg.tiers;
+                    r.stops = [...new Set([...cfg.tiers.local, ...cfg.tiers.express])];
+                }
+                if (cfg.stops) {
+                    r.stops = cfg.stops;
+                }
+            }
+        });
+
+        // Store active polylines
+        const polylineLayers = [];
+
+        // Render All Polylines
+        routesData.forEach(route => {
+            const polyline = L.polyline(route.path, route.style).addTo(map);
+            polyline.bindTooltip(`<b>${route.name}</b>`, { sticky: true, className: 'station-tooltip' });
+            polyline._routeData = route;
+            polyline.on('click', () => toggleRouteSelection(route.id));
+            polylineLayers.push(polyline);
+        });
+
+        // Stations Data with complete statewide coverage
+        const stations = [
+            // Multimodal Hubs
+            { coord: coords.denver, name: "Denver Union Station", hub: true, color: '#1d4ed8' },
+            { coord: coords.cosprings, name: "Colorado Springs Depot", hub: true, color: '#1d4ed8' },
+            { coord: coords.pueblo, name: "Pueblo Union Depot", hub: true, color: '#1d4ed8' },
+            { coord: coords.grandjct, name: "Grand Junction Hub", hub: true, color: '#1d4ed8' },
+            { coord: coords.glenwood, name: "Glenwood Springs Hub", hub: true, color: '#1d4ed8' },
+            { coord: coords.frisco, name: "Frisco Transfer Center", hub: true, color: '#1d4ed8' },
+            { coord: coords.durango, name: "Durango Transit Hub", hub: true, color: '#1d4ed8' },
+            { coord: coords.ftcollins, name: "Fort Collins DTC", hub: true, color: '#1d4ed8' },
+            { coord: coords.dia, name: "Denver Int'l Airport (DEN)", hub: true, color: '#eab308' },
+            { coord: coords.salida, name: "Salida Chaffee Hub", hub: true, color: '#1d4ed8' },
+            
+            // Front Range Towns
+            { coord: coords.loveland, name: "Loveland Centerra", hub: false, color: '#3b82f6' },
+            { coord: coords.berthoud, name: "Berthoud", hub: false, color: '#3b82f6' },
+            { coord: coords.longmont, name: "Longmont Hub", hub: false, color: '#3b82f6' },
+            { coord: coords.boulder, name: "Boulder Downtown", hub: false, color: '#3b82f6' },
+            { coord: coords.broomfield, name: "Broomfield", hub: false, color: '#3b82f6' },
+            { coord: coords.castlerock, name: "Castle Rock", hub: false, color: '#3b82f6' },
+            { coord: coords.monument, name: "Monument", hub: false, color: '#3b82f6' },
+            { coord: coords.fountain, name: "Fountain", hub: false, color: '#3b82f6' },
+            { coord: coords.coloradocity, name: "Colorado City", hub: false, color: '#3b82f6' },
+            { coord: coords.walsenburg, name: "Walsenburg", hub: false, color: '#dc2626' },
+            { coord: coords.aguilar, name: "Aguilar", hub: false, color: '#881337' },
+            { coord: coords.trinidad, name: "Trinidad", hub: false, color: '#3b82f6' },
+            { coord: coords.federalcenter, name: "Denver Federal Center", hub: false, color: '#6366f1' },
+            { coord: coords.woolymammoth, name: "Wooly Mammoth P&R", hub: false, color: '#6366f1' },
+
+            // Northern Plains & Weld County Towns
+            { coord: coords.greeley, name: "Greeley Transit Center", hub: false, color: '#059669' },
+            { coord: coords.kersey, name: "Kersey", hub: false, color: '#059669' },
+            { coord: coords.brighton, name: "Brighton", hub: false, color: '#b45309' },
+            { coord: coords.hudson, name: "Hudson", hub: false, color: '#b45309' },
+            { coord: coords.keenesburg, name: "Keenesburg", hub: false, color: '#b45309' },
+            { coord: coords.wiggins, name: "Wiggins", hub: false, color: '#b45309' },
+            { coord: coords.ftmorgan, name: "Fort Morgan", hub: false, color: '#b45309' },
+            { coord: coords.brush, name: "Brush", hub: false, color: '#b45309' },
+            { coord: coords.sterling, name: "Sterling", hub: false, color: '#b45309' },
+            { coord: coords.julesburg, name: "Julesburg", hub: false, color: '#b45309' },
+
+            // Eastern Plains Towns
+            { coord: coords.limon, name: "Limon", hub: false, color: '#eab308' },
+            { coord: coords.flagler, name: "Flagler", hub: false, color: '#eab308' },
+            { coord: coords.burlington, name: "Burlington", hub: false, color: '#eab308' },
+
+            // Arkansas River Valley Towns
+            { coord: coords.fowler, name: "Fowler", hub: false, color: '#9333ea' },
+            { coord: coords.manzanola, name: "Manzanola", hub: false, color: '#9333ea' },
+            { coord: coords.rockyford, name: "Rocky Ford", hub: false, color: '#9333ea' },
+            { coord: coords.lajunta, name: "La Junta Hub", hub: false, color: '#9333ea' },
+            { coord: coords.lasanimas, name: "Las Animas", hub: false, color: '#d97706' },
+            { coord: coords.lamar, name: "Lamar", hub: false, color: '#d97706' },
+
+            // Royal Gorge & Central Arkansas
+            { coord: coords.canoncity, name: "Cañon City", hub: false, color: '#e11d48' },
+            { coord: coords.cotopaxi, name: "Cotopaxi", hub: false, color: '#e11d48' },
+            { coord: coords.ponchasprings, name: "Poncha Springs", hub: false, color: '#84cc16' },
+            { coord: coords.buenavista, name: "Buena Vista", hub: false, color: '#84cc16' },
+            { coord: coords.fairplay, name: "Fairplay", hub: false, color: '#84cc16' },
+            { coord: coords.bailey, name: "Bailey", hub: false, color: '#84cc16' },
+
+            // San Luis Valley & Southwest Towns
+            { coord: coords.moffat, name: "Moffat", hub: false, color: '#e11d48' },
+            { coord: coords.alamosa, name: "Alamosa Hub", hub: false, color: '#dc2626' },
+            { coord: coords.montevista, name: "Monte Vista", hub: false, color: '#dc2626' },
+            { coord: coords.delnorte, name: "Del Norte", hub: false, color: '#dc2626' },
+            { coord: coords.southfork, name: "South Fork", hub: false, color: '#dc2626' },
+            { coord: coords.pagosa, name: "Pagosa Springs", hub: false, color: '#dc2626' },
+            { coord: coords.bayfield, name: "Bayfield", hub: false, color: '#dc2626' },
+            { coord: coords.mancos, name: "Mancos", hub: false, color: '#ea580c' },
+            { coord: coords.cortez, name: "Cortez", hub: false, color: '#ea580c' },
+            { coord: coords.dolores, name: "Dolores", hub: false, color: '#ea580c' },
+            { coord: coords.rico, name: "Rico", hub: false, color: '#ea580c' },
+
+            // I-70 Corridor & Western Slope Towns
+            { coord: coords.elrancho, name: "El Rancho (Evergreen)", hub: false, color: '#f43f5e' },
+            { coord: coords.idahosprings, name: "Idaho Springs", hub: false, color: '#a855f7' },
+            { coord: coords.georgetown, name: "Georgetown", hub: false, color: '#a855f7' },
+            { coord: coords.vail, name: "Vail Transportation Center", hub: false, color: '#a855f7' },
+            { coord: coords.avon, name: "Avon Station", hub: false, color: '#f43f5e' },
+            { coord: coords.eagle, name: "Eagle Chambers P&R", hub: false, color: '#a855f7' },
+            { coord: coords.newcastle, name: "New Castle", hub: false, color: '#a855f7' },
+            { coord: coords.rifle, name: "Rifle", hub: false, color: '#a855f7' },
+            { coord: coords.parachute, name: "Parachute", hub: false, color: '#a855f7' },
+            { coord: coords.palisade, name: "Palisade", hub: false, color: '#a855f7' },
+
+            // Ski Resorts & High Passes
+            { coord: coords.loveland_ski, name: "Loveland Ski Area", hub: false, color: '#38bdf8' },
+            { coord: coords.abasin, name: "Arapahoe Basin", hub: false, color: '#38bdf8' },
+            { coord: coords.copper, name: "Copper Mountain", hub: false, color: '#c026d3' },
+            { coord: coords.breckenridge, name: "Breckenridge Station", hub: false, color: '#c026d3' },
+
+            // Northern Mountains & Yampa Valley Towns
+            { coord: coords.winterpark, name: "Winter Park Resort", hub: false, color: '#0284c7' },
+            { coord: coords.fraser, name: "Fraser", hub: false, color: '#0284c7' },
+            { coord: coords.granby, name: "Granby", hub: false, color: '#0284c7' },
+            { coord: coords.kremmling, name: "Kremmling", hub: false, color: '#16a34a' },
+            { coord: coords.steamboat, name: "Steamboat Springs", hub: false, color: '#16a34a' },
+            { coord: coords.hayden, name: "Hayden", hub: false, color: '#16a34a' },
+            { coord: coords.craig, name: "Craig", hub: false, color: '#16a34a' },
+
+            // Estes Park / RMNP Gateway Towns
+            { coord: coords.lyons, name: "Lyons", hub: false, color: '#0284c7' },
+            { coord: coords.estespark, name: "Estes Park Visitor Center", hub: false, color: '#0284c7' },
+            { coord: coords.rmnp, name: "RMNP Bear Lake Transit Hub", hub: false, color: '#0284c7' },
+
+            // Western Slope Valley Towns
+            { coord: coords.delta, name: "Delta", hub: false, color: '#ea580c' },
+            { coord: coords.olathe, name: "Olathe", hub: false, color: '#ea580c' },
+            { coord: coords.montrose, name: "Montrose", hub: false, color: '#ea580c' },
+            { coord: coords.ridgway, name: "Ridgway", hub: false, color: '#ea580c' },
+            { coord: coords.placerville, name: "Placerville", hub: false, color: '#ea580c' },
+            { coord: coords.telluride, name: "Telluride", hub: false, color: '#ea580c' },
+            { coord: coords.gunnison, name: "Gunnison", hub: false, color: '#84cc16' },
+            { coord: coords.crestedbutte, name: "Crested Butte", hub: false, color: '#84cc16' }
+        ];
+
+        // Major Station Names Visibility State
+        let majorStationNamesHidden = false;
+
+        // Map station ID from coordinates key
+        const coordEntries = Object.entries(coords);
+        stations.forEach(st => {
+            const found = coordEntries.find(([k, v]) => Math.abs(v[0] - st.coord[0]) < 0.0001 && Math.abs(v[1] - st.coord[1]) < 0.0001);
+            st.id = found ? found[0] : st.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            const marker = L.circleMarker(st.coord, {
+                radius: st.hub ? 7 : 5,
+                fillColor: '#ffffff',
+                color: st.color,
+                weight: st.hub ? 3 : 2,
+                fillOpacity: 1
+            });
+
+            marker.bindTooltip(st.name, {
+                permanent: st.hub && !majorStationNamesHidden,
+                direction: 'auto',
+                className: st.hub ? 'station-tooltip hub-tooltip' : 'station-tooltip'
+            });
+
+            st._marker = marker;
+            marker.addTo(map);
+        });
+
+        // Interactive Line Selection & Category Filter State
+        const selectedRoutes = new Map(); // routeId -> 'all' | 'local' | 'express'
+        let currentCategory = 'all';
+
+        function updateMapDisplay() {
+            const isSelecting = selectedRoutes.size > 0;
+            const visibleStopIds = new Set();
+            const cocomCategories = ['bustang', 'pegasus', 'snowstang', 'outrider'];
+
+            // 1. Filter polylines
+            polylineLayers.forEach(poly => {
+                const route = poly._routeData;
+                const isSelected = selectedRoutes.has(route.id);
+                const inCategory = (currentCategory === 'all') || 
+                                  (currentCategory === 'cocom' && cocomCategories.includes(route.category)) || 
+                                  (route.category === currentCategory);
+
+                if (isSelecting) {
+                    if (isSelected) {
+                        poly.setStyle({ opacity: route.style.opacity || 1, weight: (route.style.weight || 4) + 1.5 });
+                        const tier = selectedRoutes.get(route.id);
+                        if (tier === 'local' && route.tiers && route.tiers.local) {
+                            route.tiers.local.forEach(id => visibleStopIds.add(id));
+                        } else if (tier === 'express' && route.tiers && route.tiers.express) {
+                            route.tiers.express.forEach(id => visibleStopIds.add(id));
+                        } else if (route.stops) {
+                            route.stops.forEach(id => visibleStopIds.add(id));
+                        }
+                    } else {
+                        poly.setStyle({ opacity: 0.05, weight: 1.5 });
+                    }
+                } else {
+                    if (inCategory) {
+                        poly.setStyle({ opacity: route.style.opacity || 1, weight: route.style.weight || 4 });
+                        if (route.stops) {
+                            route.stops.forEach(id => visibleStopIds.add(id));
+                        }
+                    } else {
+                        poly.setStyle({ opacity: 0.07, weight: 1.5 });
+                    }
+                }
+            });
+
+            // 2. Filter stations (Requirement 3 & 6)
+            stations.forEach(st => {
+                if (!st._marker) return;
+                const show = visibleStopIds.has(st.id);
+                if (show) {
+                    if (!map.hasLayer(st._marker)) map.addLayer(st._marker);
+                } else {
+                    if (map.hasLayer(st._marker)) map.removeLayer(st._marker);
+                }
+            });
+
+            // 3. Update Clear button in legend header
+            const clearBtn = document.getElementById('clearSelectionBtn');
+            if (clearBtn) {
+                if (isSelecting) {
+                    clearBtn.classList.remove('hidden');
+                    clearBtn.innerText = `Clear (${selectedRoutes.size}) ✕`;
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
+            }
+
+            // 4. Update line-item highlights and checkmarks in legend
+            document.querySelectorAll('.line-item').forEach(el => {
+                const rid = el.getAttribute('data-route-id');
+                const check = el.querySelector('.select-check');
+                const localBtn = el.querySelector('.tier-btn-local');
+                const expressBtn = el.querySelector('.tier-btn-express');
+
+                if (selectedRoutes.has(rid)) {
+                    el.classList.add('bg-blue-50', 'dark:bg-blue-900/40', 'border-blue-400');
+                    el.classList.remove('border-transparent');
+                    if (check) check.classList.remove('opacity-0');
+
+                    const tier = selectedRoutes.get(rid);
+                    if (localBtn) {
+                        if (tier === 'local') {
+                            localBtn.classList.add('bg-blue-600', 'text-white');
+                        } else {
+                            localBtn.classList.remove('bg-blue-600', 'text-white');
+                        }
+                    }
+                    if (expressBtn) {
+                        if (tier === 'express') {
+                            expressBtn.classList.add('bg-blue-600', 'text-white');
+                        } else {
+                            expressBtn.classList.remove('bg-blue-600', 'text-white');
+                        }
+                    }
+                } else {
+                    el.classList.remove('bg-blue-50', 'dark:bg-blue-900/40', 'border-blue-400');
+                    el.classList.add('border-transparent');
+                    if (check) check.classList.add('opacity-0');
+                    if (localBtn) localBtn.classList.remove('bg-blue-600', 'text-white');
+                    if (expressBtn) expressBtn.classList.remove('bg-blue-600', 'text-white');
+                }
+            });
+        }
+
+        // Toggle route selection (Multi-select support)
+        function toggleRouteSelection(routeId) {
+            if (selectedRoutes.has(routeId)) {
+                selectedRoutes.delete(routeId);
+            } else {
+                selectedRoutes.set(routeId, 'all');
+            }
+            updateMapDisplay();
+        }
+
+        // Select Local or Express tier for CoCoR dual-tier lines
+        function selectTier(e, routeId, tier) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            if (selectedRoutes.get(routeId) === tier) {
+                selectedRoutes.delete(routeId);
+            } else {
+                selectedRoutes.set(routeId, tier);
+            }
+            updateMapDisplay();
+        }
+
+        // Clear all route selections
+        function clearSelection() {
+            selectedRoutes.clear();
+            updateMapDisplay();
+        }
+
+        // Category Filter Function
+        function filterCategory(cat) {
+            selectedRoutes.clear();
+            currentCategory = cat;
+
+            // Update chip styles
+            document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
+            const activeChip = document.getElementById(`chip-${cat}`);
+            if (activeChip) activeChip.classList.add('active');
+
+            // Update label
+            const labelMap = {
+                all: 'All Systems',
+                rail: 'CoCoR (COR) Rail Backbone',
+                cocom: 'CoCoM (COM) Bus Division (All)',
+                bustang: 'CoCoM Bustang Express',
+                pegasus: 'CoCoM Pegasus Shuttle',
+                snowstang: 'CoCoM Snowstang Ski',
+                outrider: 'CoCoM Outrider Rural'
+            };
+            document.getElementById('activeFilterLabel').innerText = labelMap[cat] || cat;
+
+            updateMapDisplay();
+        }
+
+        // Toggle Major Station Names Visibility
+        function toggleMajorStationNames() {
+            majorStationNamesHidden = !majorStationNamesHidden;
+            applyMajorStationNames();
+        }
+
+        function applyMajorStationNames() {
+            // Re-bind tooltips for hub stations
+            stations.filter(st => st.hub).forEach(st => {
+                if (!st._marker) return;
+                st._marker.unbindTooltip();
+                st._marker.bindTooltip(st.name, {
+                    permanent: !majorStationNamesHidden,
+                    direction: 'auto',
+                    className: 'station-tooltip hub-tooltip'
+                });
+            });
+
+            // Update Header button text and icon
+            const headerBtnText = document.getElementById('stationNamesBtnText');
+            if (headerBtnText) {
+                headerBtnText.textContent = majorStationNamesHidden ? "Show Major Names" : "Hide Major Names";
+            }
+
+            const headerIcon = document.getElementById('headerStationNamesIcon');
+            if (headerIcon) {
+                headerIcon.innerHTML = majorStationNamesHidden
+                    ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />`
+                    : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
+            }
+
+            // Update Legend button
+            const legendBtn = document.getElementById('legendStationNamesToggleBtn');
+            if (legendBtn) {
+                legendBtn.textContent = majorStationNamesHidden ? "Show Names" : "Hide Names";
+                legendBtn.className = majorStationNamesHidden
+                    ? "text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-all"
+                    : "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900 transition-all";
+            }
+
+            // Update Map Controls button
+            const mapBtn = document.getElementById('mapToggleStationNamesBtn');
+            if (mapBtn) {
+                mapBtn.title = majorStationNamesHidden ? "Show Major Station Names" : "Hide Major Station Names";
+                mapBtn.innerHTML = majorStationNamesHidden
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`;
+            }
+
+            document.body.classList.toggle('hide-major-station-names', majorStationNamesHidden);
+        }
+
+        // Theme handling: default to light, follow device preference or saved localStorage
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+
+        function toggleLegend() {
+            const panel = document.getElementById('legendPanel');
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+            } else {
+                panel.classList.add('hidden');
+                panel.classList.remove('flex');
+            }
+        }
+
+        function resetZoom() {
+            map.fitBounds(coloradoBounds, { padding: [15, 15] });
+        }
+
+        // Prevent Leaflet map from capturing scroll/wheel events inside the legend and line list
+        const legendPanel = document.getElementById('legendPanel');
+        if (legendPanel) {
+            L.DomEvent.disableScrollPropagation(legendPanel);
+            L.DomEvent.disableClickPropagation(legendPanel);
+        }
+        const scrollableList = document.getElementById('scrollableLineList');
+        if (scrollableList) {
+            L.DomEvent.disableScrollPropagation(scrollableList);
+        }
+
+        // Initial Map Display Run
+        updateMapDisplay();
+    </script>
+</body>
+</html>
