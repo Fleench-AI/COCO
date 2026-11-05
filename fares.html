@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoCo Fares &amp; C &amp; A Card — Statewide Fare Model (Concept Proposal)</title>
+    <title>Fares &amp; Rate Schedules — Colorado Statewide Transit Proposal (CoCo)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,10 +35,9 @@
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
 
-    <!-- Official Colorado State Government Utility Bar -->
-    <!-- Unofficial Transit Concept & Planning Study Banner -->
-    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-amber-500/30">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3">
+    <!-- Top Disclaimer Utility Bar -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-[#c69214]/40">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3 text-[11px] sm:text-xs">
             <div class="flex items-center gap-2.5 flex-wrap">
                 <!-- Miniature Colorado Flag SVG -->
                 <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
@@ -49,98 +48,112 @@
                     <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
                     <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
                 </svg>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-xs">UNOFFICIAL PROPOSAL</span>
-                <div class="flex items-center gap-1.5 font-medium text-slate-200">
-                    <span>UNOFFICIAL TRANSIT CONCEPT &amp; PLANNING STUDY</span>
-                    <span class="text-slate-500 hidden sm:inline">&bull;</span>
-                    <span class="text-slate-400 hidden sm:inline font-normal">Community Advocacy Proposal &bull; Not Affiliated with CDOT or the State of Colorado</span>
-                </div>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">UNOFFICIAL COMMUNITY PROPOSAL</span>
+                <span class="font-medium text-slate-200">
+                    Non-Governmental Planning Study &bull; Not Affiliated with CDOT or the State of Colorado
+                </span>
             </div>
             <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="hidden md:inline text-slate-400">For official Colorado transit, visit</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">codot.gov</a>
-                <span class="text-slate-600">&amp;</span>
-                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">ridebustang.com</a>
+                <span class="hidden md:inline">Official State Services at</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">codot.gov</a>
+                <span class="text-slate-600">&bull;</span>
+                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">ridebustang.com</a>
             </div>
         </div>
     </aside>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-2 flex items-center justify-between">
-            <!-- Brand -->
-            <div class="flex items-center gap-3.5">
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-[#002855] rounded-full flex items-center justify-center border-2 border-[#c69214] shadow-md shrink-0 transition-transform group-hover:scale-105">
-                        <svg class="w-6 h-6 text-[#c69214]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#c69214" fill-opacity="0.2"/>
-                            <polyline points="2 17 12 22 22 17"/>
-                            <polyline points="2 12 12 17 22 12"/>
-                        </svg>
+    <!-- State Agency Masthead (Modeled after ColoradoSOS.gov) -->
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="w-12 h-12 rounded-full bg-[#002855] border-2 border-[#c69214] shadow-sm flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="19" fill="#002855" stroke="#c69214" stroke-width="1.5"/>
+                        <path d="M20 7 C12.8 7 7 12.8 7 20 C7 27.2 12.8 33 20 33 C25.5 33 30.2 29.6 32.1 24.8 L25.2 24.8 C24.0 26.6 22.1 27.8 20 27.8 C15.7 27.8 12.2 24.3 12.2 20 C12.2 15.7 15.7 12.2 20 12.2 C22.1 12.2 24.0 13.4 25.2 15.2 L32.1 15.2 C30.2 10.4 25.5 7 20 7 Z" fill="#C8102E"/>
+                        <circle cx="20" cy="20" r="5.5" fill="#FFD100"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-lg sm:text-xl font-black tracking-tight text-[#002855] dark:text-white">Colorado Statewide Transit Proposal (CoCo)</span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">Fares &amp; Rates</span>
                     </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">CoCo Transit</span>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#002855] text-amber-300 border border-amber-500/40">Concept Vision &bull; Unofficial</span>
-                        </div>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Statewide Fares &amp; Pass Model &bull; Concept Study</p>
-                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">An Independent Public Transportation Vision for Colorado</p>
+                </div>
+            </a>
+
+            <!-- Header Utility Actions -->
+            <div class="flex items-center gap-2.5">
+                <a href="ca-card.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#002855] text-white hover:bg-[#0f294a] text-xs font-bold transition-colors">
+                    <span>C &amp; A Smart Card</span>
                 </a>
-            </div>
-
-            <!-- Header Navigation & Actions -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <!-- Navigation Links -->
-                <nav class="flex items-center gap-1.5 sm:gap-2">
-                    <a href="index.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Back to Home Portal">
-                        <span class="hidden sm:inline">Home Portal</span>
-                        <span class="sm:hidden">Home</span>
-                    </a>
-                    <a href="map.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Interactive Map">
-                        <span class="hidden sm:inline">Interactive Map</span>
-                        <span class="sm:hidden">Map</span>
-                    </a>
-                    <a href="ca-card.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs sm:text-sm font-bold transition-colors" title="C & A E-Ink Smart Card">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                        <span>C &amp; A Card</span>
-                    </a>
-                    <span class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#002855] text-amber-300 border border-blue-900 text-xs sm:text-sm font-bold shadow-xs">
-                        <span>Fares</span>
-                    </span>
-                </nav>
-
-                <!-- Theme Switcher -->
-                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm transition-colors">
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-colors">
                     <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 block dark:hidden text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
             </div>
         </div>
+
+        <!-- Official Colorado State Horizontal Navigation Bar -->
+        <nav aria-label="Main Navigation" class="bg-[#002855] text-white border-b-2 border-[#c69214]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto whitespace-nowrap py-1 scrollbar-none text-xs font-bold uppercase tracking-wider">
+                    <a href="index.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Home</a>
+                    <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transit Map</a>
+                    <a href="fares.html" class="px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">Fares &amp; Rates</a>
+                    <a href="#transfer-policy" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transfer Add-On</a>
+                    <a href="ca-card.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">C &amp; A Card</a>
+                    <a href="cocor-local.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoR Local Rail</a>
+                    <a href="cocorx-express.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoRX Express</a>
+                    <a href="cocom-bustang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Bustang Coach</a>
+                    <a href="cocom-pegasus.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Pegasus Shuttle</a>
+                    <a href="cocom-outrider.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Outrider Rural</a>
+                    <a href="cocom-snowstang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Snowstang Ski</a>
+                    <a href="#guidelines" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Accessibility</a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Subheader Quick-Jump Anchor Bar -->
-    <div class="bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky top-18 z-40 backdrop-blur-sm overflow-x-auto">
+    <div class="bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky top-0 z-40 backdrop-blur-sm overflow-x-auto">
         <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
             <span class="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] mr-1 hidden sm:inline">Jump To:</span>
-            <a href="#calculator" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🧮 Fare Calculator</a>
-            <a href="ca-card.html" class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950/70 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 transition-colors shadow-xs font-bold">📱 E-Ink Card Simulator</a>
-            <a href="#cocor-local" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-indigo-700 dark:text-indigo-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚆 CoCoR Local (COR)</a>
-            <a href="#cocorx-express" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-700 dark:text-blue-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⚡ CoCoRX Express (COR-X)</a>
-            <a href="#cocom-bustang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚌 Bustang</a>
-            <a href="#cocom-pegasus" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-rose-700 dark:text-rose-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚐 Pegasus</a>
-            <a href="#cocom-outrider" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-emerald-700 dark:text-emerald-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🏔️ Outrider</a>
-            <a href="#cocom-snowstang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-cyan-700 dark:text-cyan-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⛷️ Snowstang</a>
-            <a href="#ca-card" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">💳 C &amp; A Architecture</a>
-            <a href="#guidelines" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">♿ Accessibility &amp; Policies</a>
+            <a href="#calculator" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Fare Calculator</a>
+            <a href="#transfer-policy" class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950/70 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 transition-colors shadow-xs font-bold">Transfer Add-On Policy</a>
+            <a href="ca-card.html" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">C &amp; A E-Ink Simulator</a>
+            <a href="#cocor-local" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-indigo-700 dark:text-indigo-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">CoCoR Local Rail</a>
+            <a href="#cocorx-express" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-700 dark:text-blue-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">CoCoRX Express</a>
+            <a href="#cocom-bustang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Bustang</a>
+            <a href="#cocom-pegasus" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-rose-700 dark:text-rose-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Pegasus</a>
+            <a href="#cocom-outrider" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-emerald-700 dark:text-emerald-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Outrider</a>
+            <a href="#cocom-snowstang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-cyan-700 dark:text-cyan-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Snowstang</a>
+            <a href="#guidelines" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Accessibility &amp; Rules</a>
         </div>
     </div>
-
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
+
+        <!-- Notice Alert Box (modeled after ColoradoSOS.gov announcements) -->
+        <section aria-label="Official civic announcement">
+            <div class="rounded-xl border-l-4 border-l-[#c69214] border border-slate-300 dark:border-slate-700 bg-amber-50/80 dark:bg-slate-900 p-4 sm:p-5 shadow-xs">
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-[#002855] text-amber-300 flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
+                        !
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
+                        <strong class="font-black text-[#002855] dark:text-amber-400 uppercase tracking-wide mr-1.5">Civic Notice &bull; Strict Transfer Add-On Policy:</strong>
+                        Standard single-ride transit tickets are point-to-point only and <strong class="text-red-700 dark:text-red-400 font-extrabold">DO NOT include transfer privileges</strong>. To connect between rail and bus lines (or between services), passengers must purchase the <strong>Universal Transfer Add-On (+$3.00 Local / +$5.00 Express)</strong> or hold an active Monthly C&amp;A Pass.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
 
         <!-- Hero Section -->
         <section class="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-800/40">
@@ -161,7 +174,7 @@
                     Colorado Connected (CoCo) &bull; Integrated Pricing Model
                 </p>
                 <p class="text-slate-300 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-3xl">
-                    CoCo (Colorado Connected) is an independent, speculative statewide transit advocacy master plan developed to demonstrate how passenger rail and regional buses could seamlessly integrate across Colorado. Calculate proposed point-to-point fares across all 92 statewide stations with our transparent distance-based formula, explore express vs. local rail options, and learn how the contactless <strong class="text-white">C &amp; A Card</strong> concept models 2-hour universal free transfers across rail and bus.
+                    CoCo (Colorado Connected) is an independent, speculative statewide transit advocacy master plan developed to demonstrate how passenger rail and regional buses could seamlessly integrate across Colorado. Calculate proposed point-to-point fares across all 92 statewide stations with our transparent distance-based formula, explore express vs. local rail options, and learn how the <strong class="text-white">Universal Transfer Add-On (+$3.00 Local / +$5.00 Express)</strong> enables seamless 2-hour connecting privileges across rail and bus networks.
                 </p>
 
                 <!-- Key Guarantee Metric Pills -->
@@ -177,9 +190,9 @@
                         <div class="text-[11px] text-slate-300 mt-0.5">Guaranteed seat reservation</div>
                     </div>
                     <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Transfers</div>
-                        <div class="text-lg sm:text-xl font-black text-emerald-400">2-Hour Free</div>
-                        <div class="text-[11px] text-slate-300 mt-0.5">Universal Rail &bull; Bus &bull; RTD</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Transfer Add-On</div>
+                        <div class="text-lg sm:text-xl font-black text-amber-300">+$3.00 / +$5.00</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">Base single tickets point-to-point only</div>
                     </div>
                     <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
                         <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Concessions</div>
@@ -522,6 +535,25 @@
                         </div>
                     </div>
 
+                    <!-- Transfer Add-On Selector -->
+                    <div class="p-4 rounded-xl border-2 border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-850">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <label class="flex items-center gap-3 cursor-pointer select-none">
+                                <input type="checkbox" id="transferAddonCheckbox" class="w-5 h-5 rounded border-slate-300 text-[#002855] focus:ring-[#002855] cursor-pointer">
+                                <div>
+                                    <span class="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                                        <span>Add Universal Transfer Window</span>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#c69214] text-slate-950">+$3.00 Add-On</span>
+                                    </span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">Required to connect between passenger rail and regional bus lines within 2 hours. Base single tickets do NOT include transfers.</p>
+                                </div>
+                            </label>
+                            <div id="transferCalculatorBadge" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 whitespace-nowrap self-start sm:self-center">
+                                Point-to-point single ride only (No transfer permitted)
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Quick Preset Corridors -->
                     <div class="flex items-center gap-2 flex-wrap text-xs">
                         <span class="text-slate-500 dark:text-slate-400 font-medium">Popular Routes:</span>
@@ -579,6 +611,7 @@
                                     <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="corFormulaDisplay">
                                         Base $4.00 + ($0.18 &times; 71 mi)
                                     </div>
+                                    <div class="mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300" id="corTransferStatus">Point-to-point single ride only (No transfer permitted)</div>
                                 </div>
 
                                 <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 mb-4 text-xs font-semibold text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
@@ -632,6 +665,7 @@
                                     <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="corxFormulaDisplay">
                                         $16.78 + 25% Express Premium
                                     </div>
+                                    <div class="mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300" id="corxTransferStatus">Point-to-point single ride only (No transfer permitted)</div>
                                 </div>
 
                                 <div class="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 mb-4 text-xs font-semibold text-blue-800 dark:text-blue-300 flex items-center justify-between">
@@ -681,6 +715,7 @@
                                     <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="busFormulaDisplay">
                                         CDOT Bustang Corridor Standard
                                     </div>
+                                    <div class="mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300" id="busTransferStatus">Point-to-point single ride only (No transfer permitted)</div>
                                 </div>
 
                                 <div class="p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 mb-4 text-xs font-semibold text-purple-800 dark:text-purple-300 flex items-center justify-between">
@@ -718,14 +753,14 @@
                     <!-- Transfer Eligibility & Pass Integration Box -->
                     <div class="mt-6 p-5 rounded-2xl bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-amber-900/10 border-2 border-blue-200 dark:border-blue-800/80">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                            <!-- 2-Hour Transfer -->
+                            <!-- Strict Transfer Add-On Policy -->
                             <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-300 dark:border-blue-700 font-bold text-sm">
-                                    2h
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 flex items-center justify-center shrink-0 border border-amber-300 dark:border-amber-700 font-bold text-xs">
+                                    +$3
                                 </div>
                                 <div>
-                                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">Universal 2-Hour Free Transfer</h4>
-                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Pay once with your C &amp; A Card. Seamlessly transfer between CoCoR Rail and CoCoM Bus (and RTD local) with zero added base fare.</p>
+                                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">Transfer Add-On Policy</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Standard single tickets DO NOT include transfers. Purchase the Universal Transfer Add-On (+$3.00 Local / +$5.00 Express) or hold a Monthly Pass to connect between lines.</p>
                                 </div>
                             </div>
 
@@ -751,6 +786,110 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEDICATED SECTION: STRICT TRANSFER ADD-ON POLICY -->
+        <section id="transfer-policy" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-[#002855] dark:border-amber-400/50 shadow-xl overflow-hidden">
+                <div class="h-3 w-full bg-[#002855] border-b-2 border-[#c69214]"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#002855] dark:text-amber-400 mb-1">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#c69214]"></span>
+                                <span>Official State Fare Regulation &bull; Connecting Transit Rules</span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+                                Strict Transfer Add-On Policy &amp; Connecting Privileges
+                            </h2>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+                                Standard point-to-point single tickets (CoCoR Rail or CoCoM Bus) cover a single non-transfer journey only. Transfers are NOT automatic or free. Riders connecting between rail and bus lines (or between services) must purchase the Universal Transfer Add-On or carry an active Monthly Pass.
+                            </p>
+                        </div>
+                        <span class="px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 font-extrabold text-xs uppercase tracking-wide">
+                            Mandatory for Connecting Rides
+                        </span>
+                    </div>
+
+                    <!-- 3 Policy Pillar Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                            <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-950/80 text-red-700 dark:text-red-300 flex items-center justify-center font-black text-sm mb-3">
+                                ✕
+                            </div>
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">Single-Leg Base Tickets</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Standard point-to-point tickets (CoCoR Rail or CoCoM Bus) cover a single non-transfer journey only. Tapping onto a connecting line without an active add-on will display <code class="font-bold text-red-600">TRANSFER DENIED - NO ADD-ON</code> and charge a full new fare.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
+                            <div class="w-10 h-10 rounded-xl bg-[#c69214] text-slate-950 flex items-center justify-center font-black text-sm mb-3">
+                                +$3
+                            </div>
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">Universal Transfer Add-On</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Purchasing the add-on (+ $3.00 Local/Regional / + $5.00 Statewide Express) writes a 2-hour cryptographic transfer token to your ticket or C&amp;A Card, enabling seamless connections between rail, bus, and RTD local.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
+                            <div class="w-10 h-10 rounded-xl bg-[#002855] text-amber-300 flex items-center justify-center font-black text-sm mb-3">
+                                PASS
+                            </div>
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">Monthly Pass Bundled Transfers</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Front Range Commuter Pass ($175/mo) and Statewide All-Access Pass ($340/mo) holders enjoy universal transfers bundled automatically at $0.00 extra cost with every tap.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Matrix Table -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 mb-4">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-[#002855] text-white font-bold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="py-3 px-4">Fare Media / Ticket Type</th>
+                                    <th class="py-3 px-4">Transfer Privilege</th>
+                                    <th class="py-3 px-4">Add-On Surcharge</th>
+                                    <th class="py-3 px-4">Valid Window</th>
+                                    <th class="py-3 px-4">Connecting Acceptance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                                <tr class="bg-white dark:bg-slate-900">
+                                    <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">Base Single Ticket (CoCoR / CoCoM)</td>
+                                    <td class="py-3 px-4 text-red-600 dark:text-red-400 font-bold">No Transfer Permitted</td>
+                                    <td class="py-3 px-4 font-mono">$0.00 (Base only)</td>
+                                    <td class="py-3 px-4">Single ride duration</td>
+                                    <td class="py-3 px-4 text-slate-500">None (Leg terminated upon exit)</td>
+                                </tr>
+                                <tr class="bg-amber-50/50 dark:bg-amber-950/20">
+                                    <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">Local / Regional Ticket + Transfer Add-On</td>
+                                    <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold">Universal Transfer Active</td>
+                                    <td class="py-3 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">+ $3.00</td>
+                                    <td class="py-3 px-4 font-bold">2 Hours from 1st Tap</td>
+                                    <td class="py-3 px-4">CoCoR Local, Bustang, RTD Local, Mountain Metro</td>
+                                </tr>
+                                <tr class="bg-white dark:bg-slate-900">
+                                    <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">Express Rail / Mountain + Transfer Add-On</td>
+                                    <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold">Statewide Transfer Active</td>
+                                    <td class="py-3 px-4 font-mono font-bold text-amber-700 dark:text-amber-400">+ $5.00</td>
+                                    <td class="py-3 px-4 font-bold">3 Hours from 1st Tap</td>
+                                    <td class="py-3 px-4">CoCoRX Express, Pegasus Mountain, Snowstang, Outrider</td>
+                                </tr>
+                                <tr class="bg-blue-50/50 dark:bg-blue-950/20">
+                                    <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">Monthly C &amp; A Pass (Commuter or Statewide)</td>
+                                    <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold">Unlimited Bundled Transfers</td>
+                                    <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold">Included ($0.00)</td>
+                                    <td class="py-3 px-4 font-bold">Calendar Month Active</td>
+                                    <td class="py-3 px-4">All statewide rail, bus, shuttles &amp; regional agencies</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -1323,7 +1462,7 @@
                         The C &amp; A Card: Colorado &amp; Access Pass
                     </h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                        The C &amp; A Card is Colorado's unified transit passport. Operating on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required, the system automatically protects riders with universal 2-hour transfer windows, daily expenditure caps, and monthly passes.
+                        The C &amp; A Card is Colorado's unified transit passport. Operating on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required, the system enforces single-leg base tickets, universal 2-hour transfer add-ons, daily expenditure caps, and monthly passes.
                     </p>
 
                     <!-- Dedicated E-Ink Simulator Callout Banner -->
@@ -1522,83 +1661,80 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-auto bg-slate-900 text-white border-t border-slate-800 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-
-                <!-- Col 1: Project Identity & Mission -->
-                <div class="md:col-span-2 space-y-4">
-                    <div class="flex items-center gap-3.5">
+    <!-- Official Colorado State Government Civic Footer (Modeled after ColoradoSOS.gov) -->
+    <footer class="mt-auto bg-[#001428] text-white border-t-4 border-[#c69214] transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-xs">
+                <!-- Col 1: Initiative Identification & Contact -->
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
-                            <span class="text-[#c69214] font-black text-sm">CO</span>
+                            <span class="text-[#c69214] font-black text-xs">CO</span>
                         </div>
                         <div>
-                            <div class="text-sm font-black tracking-tight text-white flex items-center gap-2">
-                                <span>CoCo Transit System</span>
-                                <span class="px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950">Unofficial Proposal</span>
+                            <div class="font-bold text-sm tracking-tight text-white flex items-center gap-2">
+                                <span>Colorado Statewide Transit Proposal (CoCo)</span>
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950">Unofficial</span>
                             </div>
-                            <div class="text-xs text-amber-300 font-semibold">Colorado Connected &bull; Statewide Transit Concept &amp; Planning Study</div>
+                            <div class="text-[11px] text-amber-300">Independent Community Public Transportation Master Plan</div>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
-                        CoCo (Colorado Connected) is an independent, community-driven transit advocacy proposal uniting Colorado's Front Range, Eastern Plains, Western Slope, and Mountain Corridors into a cohesive vision for synchronized passenger rail and regional bus mobility.
+                    <p class="text-slate-400 leading-relaxed text-[11px]">
+                        CoCo (Colorado Connected) is an independent civic advocacy study proposing a unified statewide passenger rail and intercity coach network connecting the Front Range, Western Slope, Mountain Resorts, and Rural Plains.
                     </p>
-                    <div class="text-[11px] text-slate-400 space-y-1">
-                        <div><strong>Project Status:</strong> Speculative Planning Study &bull; Public Community Advocacy</div>
-                        <div><strong>Focus Area:</strong> Intercity Rail &amp; Regional Bus Harmonization Across Colorado</div>
+                    <div class="text-slate-400 text-[11px] space-y-0.5">
+                        <p><strong>Advocacy Address:</strong> 1700 Broadway, Suite 1200, Denver, CO 80290</p>
+                        <p><strong>Public Inquiries:</strong> info@cocotransit.org &bull; (303) 555-COCO</p>
                     </div>
                 </div>
 
-                <!-- Col 2: System Portals -->
+                <!-- Col 2: Network Directory -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Concept Proposals</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card (E-Ink Concept)</a></li>
-                        <li><a href="fares.html" class="hover:text-amber-400 transition-colors">Proposed Fares &amp; Calculator</a></li>
-                        <li><a href="map.html" class="hover:text-amber-400 transition-colors">Interactive Concept Route Map</a></li>
-                        <li><a href="cocor-local.html" class="hover:text-amber-400 transition-colors">CoCoR Local Rail Concept</a></li>
-                        <li><a href="cocorx-express.html" class="hover:text-amber-400 transition-colors">CoCoRX High-Speed Vision</a></li>
-                        <li><a href="cocom-bustang.html" class="hover:text-amber-400 transition-colors">Regional Bus Feeder Network</a></li>
+                    <h4 class="font-bold uppercase tracking-wider text-amber-400 mb-3 text-xs">Network Directory</h4>
+                    <ul class="space-y-1.5 text-slate-300 text-xs">
+                        <li><a href="map.html" class="hover:text-amber-300 transition-colors">Statewide Transit Map</a></li>
+                        <li><a href="fares.html" class="hover:text-amber-300 transition-colors">Fares &amp; Rate Schedules</a></li>
+                        <li><a href="#transfer-policy" class="hover:text-amber-300 transition-colors">Transfer Add-On Policy</a></li>
+                        <li><a href="ca-card.html" class="hover:text-amber-300 transition-colors">C &amp; A E-Ink Smart Card</a></li>
+                        <li><a href="cocor-local.html" class="hover:text-amber-300 transition-colors">CoCoR Local Passenger Rail</a></li>
+                        <li><a href="cocorx-express.html" class="hover:text-amber-300 transition-colors">CoCoRX Express Rail</a></li>
+                        <li><a href="cocom-bustang.html" class="hover:text-amber-300 transition-colors">CoCoM Bustang Coach</a></li>
+                        <li><a href="#guidelines" class="hover:text-amber-300 transition-colors">Accessibility &amp; Rider Policies</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Official State Resources -->
+                <!-- Col 3: Official State Agencies & Transparency -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Official Colorado Transit</h4>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">CDOT Official Portal (codot.gov) &nearr;</a></li>
-                        <li><a href="https://ridebustang.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Bustang Official (ridebustang.com) &nearr;</a></li>
-                        <li><a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">RTD Denver (rtd-denver.com) &nearr;</a></li>
-                        <li><a href="https://www.amtrak.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Amtrak Colorado &nearr;</a></li>
-                        <li><a href="https://frontrangepassengerrail.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Front Range Passenger Rail District &nearr;</a></li>
+                    <h4 class="font-bold uppercase tracking-wider text-amber-400 mb-3 text-xs">Official State Portals</h4>
+                    <ul class="space-y-1.5 text-slate-300 text-xs">
+                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado DOT (codot.gov) &nearr;</a></li>
+                        <li><a href="https://ridebustang.com" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Bustang Official (ridebustang.com) &nearr;</a></li>
+                        <li><a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">RTD Denver (rtd-denver.com) &nearr;</a></li>
+                        <li><a href="https://leg.colorado.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado General Assembly &nearr;</a></li>
+                        <li><a href="https://coloradosos.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado Secretary of State &nearr;</a></li>
                     </ul>
                 </div>
-
             </div>
 
-            <!-- Authoritative Disclaimer Box Required by Specification -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 mb-6 text-xs text-slate-300 leading-relaxed">
-                <p class="font-bold text-amber-300 mb-1 flex items-center gap-1.5">
-                    <span class="inline-block w-2 h-2 rounded-full bg-amber-400"></span>
-                    Disclaimer &bull; Unofficial Public Transit Concept
-                </p>
-                <p class="text-slate-400 text-[11px] sm:text-xs">
-                    Disclaimer: CoCo Transit System is an independent, community-driven transit concept study and planning proposal. This website is unofficial and is not operated by, endorsed by, or affiliated with the Colorado Department of Transportation (CDOT), the State of Colorado, Regional Transportation District (RTD), or Amtrak. All routes, schedules, fares, and vehicle concepts are proposed for public advocacy, research, and planning demonstration purposes. For official Colorado state transit services and real-time alerts, please visit CDOT (<a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline">codot.gov</a>), Bustang (<a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">ridebustang.com</a>), and RTD (<a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">rtd-denver.com</a>).
-                </p>
+            <!-- Civic Transparency & CORA Notice -->
+            <div class="p-3.5 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 leading-relaxed mb-6">
+                <strong class="text-amber-400">Civic Disclaimer &amp; Open Public Records (CORA):</strong>
+                This website is an independent community advocacy and planning concept. It is not managed, operated, or funded by the State of Colorado, CDOT, RTD, or any government body. Under the Colorado Open Records Act (C.R.S. &sect; 24-72-201 et seq.), official state public transportation records and legislative filings may be requested directly from official state custodians at <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-300 underline font-semibold">codot.gov</a>.
             </div>
 
-            <!-- Legal Disclaimers & Copyright -->
-            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
+            <!-- Bottom Legal & Accessibility Links -->
+            <div class="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-3">
                 <div>
-                    &copy; 2026 CoCo Transit Concept Proposal &bull; Independent Community Advocacy Study.
+                    &copy; 2026 Colorado Statewide Transit Proposal (CoCo). Independent Community Planning Study.
                 </div>
-                <div class="flex items-center gap-4 text-slate-400">
-                    <a href="fares.html#guidelines" class="hover:text-slate-300">Accessibility</a>
+                <div class="flex items-center gap-3">
+                    <a href="#guidelines" class="hover:text-slate-200">ADA Accessibility</a>
                     <span>&bull;</span>
-                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Notice</a>
+                    <a href="#guidelines" class="hover:text-slate-200">Title VI Compliance</a>
                     <span>&bull;</span>
-                    <a href="fares.html#guidelines" class="hover:text-slate-300">Concept Terms</a>
+                    <a href="#guidelines" class="hover:text-slate-200">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="#transfer-policy" class="hover:text-slate-200">Transfer Rules</a>
                 </div>
             </div>
         </div>
@@ -1723,6 +1859,12 @@
             'trinidad': 11.00
         };
 
+        const transferAddonCheckbox = document.getElementById('transferAddonCheckbox');
+        const transferCalculatorBadge = document.getElementById('transferCalculatorBadge');
+        const corTransferStatus = document.getElementById('corTransferStatus');
+        const corxTransferStatus = document.getElementById('corxTransferStatus');
+        const busTransferStatus = document.getElementById('busTransferStatus');
+
         function calculateFares() {
             const origId = originSelect.value;
             const destId = destinationSelect.value;
@@ -1751,52 +1893,93 @@
             }
 
             const directDistance = calculateHaversine(stOrig.lat, stOrig.lon, stDest.lat, stDest.lon);
-            // Colorado highway & rail topography curvature multiplier (~1.22x)
             const routeDistance = Math.max(5, Math.round(directDistance * 1.22));
 
             metricDirectMiles.textContent = Math.round(directDistance);
             metricRouteMiles.textContent = routeDistance;
 
             const discount = getDiscountFactor();
+            const hasTransferAddon = transferAddonCheckbox ? transferAddonCheckbox.checked : false;
+
+            // Surcharge for transfer add-on: $3.00 for local/bus, $5.00 for express (waived for free youth, 50% for senior)
+            let localAddonCost = 0.00;
+            let expressAddonCost = 0.00;
+
+            if (hasTransferAddon) {
+                if (discount === 0.0) {
+                    localAddonCost = 0.00;
+                    expressAddonCost = 0.00;
+                } else if (discount === 0.5) {
+                    localAddonCost = 1.50;
+                    expressAddonCost = 2.50;
+                } else {
+                    localAddonCost = 3.00;
+                    expressAddonCost = 5.00;
+                }
+
+                if (transferCalculatorBadge) {
+                    transferCalculatorBadge.textContent = '2-Hour Transfer Window Active (+$3.00 Add-On)';
+                    transferCalculatorBadge.className = 'text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-400 whitespace-nowrap self-start sm:self-center';
+                }
+            } else {
+                if (transferCalculatorBadge) {
+                    transferCalculatorBadge.textContent = 'Point-to-point single ride only (No transfer permitted)';
+                    transferCalculatorBadge.className = 'text-xs font-bold px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 whitespace-nowrap self-start sm:self-center';
+                }
+            }
 
             // 1. CoCoR Local: $4.00 base + $0.18/mile
             const rawLocal = 4.00 + (0.18 * routeDistance);
-            const corFinal = rawLocal * discount;
+            const corBase = rawLocal * discount;
+            const corFinal = corBase + localAddonCost;
             corPriceDisplay.textContent = `$${corFinal.toFixed(2)}`;
+
             if (discount === 0.0) {
-                corFormulaDisplay.textContent = `FREE Youth Pass (18 & under) &bull; Standard: $${rawLocal.toFixed(2)}`;
+                corFormulaDisplay.textContent = `FREE Youth Pass (18 & under) ${hasTransferAddon ? '&bull; Transfer Add-On Included' : '&bull; Standard: $' + rawLocal.toFixed(2)}`;
+            } else if (hasTransferAddon) {
+                corFormulaDisplay.textContent = `Base $${corBase.toFixed(2)} + $${localAddonCost.toFixed(2)} Universal Transfer Add-On`;
             } else if (discount === 0.5) {
                 corFormulaDisplay.textContent = `50% Concession applied (Base $4.00 + $0.18/mi &times; 0.5)`;
             } else {
                 corFormulaDisplay.textContent = `Base $4.00 + ($0.18 &times; ${routeDistance} mi)`;
             }
 
-            // Travel times
-            // COR Local avg speed: 48 mph
+            if (corTransferStatus) {
+                corTransferStatus.textContent = hasTransferAddon ? '2-Hour Transfer Active (Rail + Bustang)' : 'Point-to-point single ride only (No transfer permitted)';
+                corTransferStatus.className = hasTransferAddon ? 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border border-amber-400' : 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
+            }
+
             const localMinutes = (routeDistance / 48) * 60;
             corTravelTime.textContent = formatDuration(localMinutes);
 
             // 2. CoCoRX Express: 25% premium over Local
             const rawExpress = rawLocal * 1.25;
-            const corxFinal = rawExpress * discount;
+            const corxBase = rawExpress * discount;
+            const corxFinal = corxBase + expressAddonCost;
             corxPriceDisplay.textContent = `$${corxFinal.toFixed(2)}`;
+
             if (discount === 0.0) {
-                corxFormulaDisplay.textContent = `FREE Youth Pass (18 & under) &bull; Standard: $${rawExpress.toFixed(2)}`;
+                corxFormulaDisplay.textContent = `FREE Youth Pass &bull; Standard: $${rawExpress.toFixed(2)}`;
+            } else if (hasTransferAddon) {
+                corxFormulaDisplay.textContent = `Express $${corxBase.toFixed(2)} + $${expressAddonCost.toFixed(2)} Express Transfer Add-On`;
             } else if (discount === 0.5) {
                 corxFormulaDisplay.textContent = `50% Concession applied (+25% express premium)`;
             } else {
                 corxFormulaDisplay.textContent = `$${rawLocal.toFixed(2)} + 25% Express Premium`;
             }
 
-            // COR-X Express avg speed: 65 mph
+            if (corxTransferStatus) {
+                corxTransferStatus.textContent = hasTransferAddon ? '3-Hour Statewide Transfer Active (Express + All)' : 'Point-to-point single ride only (No transfer permitted)';
+                corxTransferStatus.className = hasTransferAddon ? 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border border-amber-400' : 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
+            }
+
             const expressMinutes = (routeDistance / 65) * 60;
             corxTravelTime.textContent = formatDuration(expressMinutes);
 
-            // 3. CoCoM Bus Equivalent ($9 - $45 CDOT baseline)
+            // 3. CoCoM Bus Equivalent
             let baseBusFare = 9.00;
             let corridorName = 'Regional Bus Corridor';
 
-            // Check if one endpoint is Denver and matches known CDOT pairs
             const otherEndpoint = (origId === 'denver') ? destId : ((destId === 'denver') ? origId : null);
             if (otherEndpoint && knownBustangFares[otherEndpoint]) {
                 baseBusFare = knownBustangFares[otherEndpoint];
@@ -1812,7 +1995,6 @@
                     corridorName = 'Outrider Rural Route';
                 }
             } else {
-                // Scaled CDOT bus distance model:
                 if (routeDistance <= 30) {
                     baseBusFare = 9.00;
                     corridorName = 'Local CDOT Regional Link';
@@ -1834,18 +2016,26 @@
                 }
             }
 
-            const busFinal = baseBusFare * discount;
+            const busBase = baseBusFare * discount;
+            const busFinal = busBase + localAddonCost;
             busPriceDisplay.textContent = `$${busFinal.toFixed(2)}`;
             busCorridorBadge.textContent = corridorName;
+
             if (discount === 0.0) {
                 busFormulaDisplay.textContent = `FREE Youth Pass &bull; Standard: $${baseBusFare.toFixed(2)}`;
+            } else if (hasTransferAddon) {
+                busFormulaDisplay.textContent = `Bus $${busBase.toFixed(2)} + $${localAddonCost.toFixed(2)} Transfer Add-On`;
             } else if (discount === 0.5) {
                 busFormulaDisplay.textContent = `50% Concession applied to CDOT baseline`;
             } else {
                 busFormulaDisplay.textContent = `CDOT Published Baseline Fare`;
             }
 
-            // Bus avg speed: 52 mph
+            if (busTransferStatus) {
+                busTransferStatus.textContent = hasTransferAddon ? '2-Hour Transfer Active (Bus + Rail)' : 'Point-to-point single ride only (No transfer permitted)';
+                busTransferStatus.className = hasTransferAddon ? 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border border-amber-400' : 'mt-2 text-[11px] font-bold px-2 py-0.5 rounded inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
+            }
+
             const busMinutes = (routeDistance / 52) * 60;
             busTravelTime.textContent = formatDuration(busMinutes);
         }
@@ -1860,6 +2050,7 @@
 
         // Event listeners
         originSelect.addEventListener('change', calculateFares);
+        if (transferAddonCheckbox) transferAddonCheckbox.addEventListener('change', calculateFares);
         destinationSelect.addEventListener('change', calculateFares);
 
         document.querySelectorAll('input[name="concession"]').forEach(radio => {
