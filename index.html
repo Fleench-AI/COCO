@@ -136,7 +136,7 @@
         }
     </style>
 </head>
-<body class="dark">
+<body>
 
     <!-- Header -->
     <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 p-3 sm:p-4 shadow-md z-20 flex justify-between items-center shrink-0 transition-colors">
@@ -182,7 +182,10 @@
         <div id="legendPanel" class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 legend-panel p-4 sm:p-5 rounded-2xl shadow-2xl z-[1000] w-72 sm:w-84 hidden md:flex flex-col max-h-[80vh] pointer-events-auto">
             <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2 mb-3 shrink-0">
                 <h3 class="text-slate-900 dark:text-white font-bold text-xs sm:text-sm tracking-widest uppercase">Transit Network</h3>
-                <span class="text-[10px] text-slate-400 font-semibold" id="activeFilterLabel">All Systems</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-slate-400 font-semibold" id="activeFilterLabel">All Systems</span>
+                    <button id="clearSelectionBtn" onclick="clearSelection()" class="hidden text-[10px] bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900/80 text-red-700 dark:text-red-300 font-bold px-2 py-0.5 rounded transition-all">Clear ✕</button>
+                </div>
             </div>
 
             <!-- Category Filter Chips -->
@@ -201,23 +204,77 @@
                 <!-- CoCoR Rail Backbone (Standard & Express X Lines) -->
                 <div class="category-block" data-category="rail">
                     <h4 class="text-[10px] font-bold text-blue-600 dark:text-blue-400 mb-1.5 uppercase tracking-wider">CoCoR Rail / COR (Standard & Express X)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #2563eb;"></div> <span>Front Range (FR Local / FRX Express: Ft Collins ↔ Trinidad)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #b45309;"></div> <span>Northeast Line (NE Local / NEX Express: Denver ↔ Julesburg)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #eab308;"></div> <span>Eastern Plains (EP Local / EPX Express)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #dc2626;"></div> <span>Southern Line (SL Local / SLX Express)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #9333ea;"></div> <span>Arkansas Valley (AV Local / AVX Express: Pueblo ↔ Lamar)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #4338ca;"></div> <span>Lamar–Trinidad (LT Local / LTX Express)</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-fr" onclick="toggleRouteSelection('rail-fr')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #2563eb;"></div>
+                                <span class="text-[11px] leading-tight">Front Range (<button type="button" class="tier-btn tier-btn-local hover:underline text-blue-600 dark:text-blue-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-fr', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-blue-600 dark:text-blue-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-fr', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-blue-600 dark:text-blue-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-ne" onclick="toggleRouteSelection('rail-ne')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #b45309;"></div>
+                                <span class="text-[11px] leading-tight">Northeast Line (<button type="button" class="tier-btn tier-btn-local hover:underline text-amber-600 dark:text-amber-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ne', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-amber-600 dark:text-amber-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ne', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-amber-600 dark:text-amber-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-ep" onclick="toggleRouteSelection('rail-ep')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #eab308;"></div>
+                                <span class="text-[11px] leading-tight">Eastern Plains (<button type="button" class="tier-btn tier-btn-local hover:underline text-yellow-600 dark:text-yellow-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ep', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-yellow-600 dark:text-yellow-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-ep', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-yellow-600 dark:text-yellow-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-sl" onclick="toggleRouteSelection('rail-sl')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #dc2626;"></div>
+                                <span class="text-[11px] leading-tight">Southern Line (<button type="button" class="tier-btn tier-btn-local hover:underline text-red-600 dark:text-red-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-sl', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-red-600 dark:text-red-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-sl', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-red-600 dark:text-red-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-av" onclick="toggleRouteSelection('rail-av')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #9333ea;"></div>
+                                <span class="text-[11px] leading-tight">Arkansas Valley (<button type="button" class="tier-btn tier-btn-local hover:underline text-purple-600 dark:text-purple-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-av', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-purple-600 dark:text-purple-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-av', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-purple-600 dark:text-purple-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-lt" onclick="toggleRouteSelection('rail-lt')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #4338ca;"></div>
+                                <span class="text-[11px] leading-tight">Lamar–Trinidad (<button type="button" class="tier-btn tier-btn-local hover:underline text-indigo-600 dark:text-indigo-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-lt', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-indigo-600 dark:text-indigo-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-lt', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-indigo-600 dark:text-indigo-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Amtrak Partnership Rail -->
                 <div class="category-block" data-category="rail">
                     <h4 class="text-[10px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">Amtrak Partner Cars (Standard & Express)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #475569;"></div> <span>California Zephyr (CZ / ZX Express)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #0284c7;"></div> <span>Winter Park Express (W / WX Ski Express)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1.5 rounded-full" style="background-color: #1e293b;"></div> <span>Southwest Chief (S / SX Express)</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-cz" onclick="toggleRouteSelection('rail-cz')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #475569;"></div>
+                                <span class="text-[11px] leading-tight">California Zephyr (<button type="button" class="tier-btn tier-btn-local hover:underline text-slate-600 dark:text-slate-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-cz', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-slate-600 dark:text-slate-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-cz', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-slate-600 dark:text-slate-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-wpe" onclick="toggleRouteSelection('rail-wpe')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #0284c7;"></div>
+                                <span class="text-[11px] leading-tight">Winter Park Express (<button type="button" class="tier-btn tier-btn-local hover:underline text-sky-600 dark:text-sky-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-wpe', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-sky-600 dark:text-sky-400 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-wpe', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-sky-600 dark:text-sky-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="rail-swc" onclick="toggleRouteSelection('rail-swc')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1.5 rounded-full shrink-0" style="background-color: #1e293b;"></div>
+                                <span class="text-[11px] leading-tight">Southwest Chief (<button type="button" class="tier-btn tier-btn-local hover:underline text-slate-700 dark:text-slate-300 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-swc', 'local')">Local</button> / <button type="button" class="tier-btn tier-btn-express hover:underline text-slate-700 dark:text-slate-300 font-bold px-0.5 rounded" onclick="selectTier(event, 'rail-swc', 'express')">Express</button>)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-slate-700 dark:text-slate-300 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
 
@@ -232,43 +289,133 @@
                 <!-- Bustang under CoCoM -->
                 <div class="category-block" data-category="bustang">
                     <h4 class="text-[10px] font-bold text-purple-600 dark:text-purple-400 mb-1.5 uppercase tracking-wider">CoCoM Bustang (Intercity Express)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #7c3aed; border-color: #7c3aed;"></div> <span>West Line (Denver ↔ Grand Jct)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #0d9488; border-color: #0d9488;"></div> <span>North Line (Denver ↔ Ft Collins)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #0891b2; border-color: #0891b2;"></div> <span>South Line (Denver ↔ Pueblo)</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-west" onclick="toggleRouteSelection('bustang-west')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #7c3aed; border-color: #7c3aed;"></div>
+                                <span class="text-[11px] leading-tight">West Line (Denver ↔ Grand Jct)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-purple-600 dark:text-purple-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-north" onclick="toggleRouteSelection('bustang-north')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0d9488; border-color: #0d9488;"></div>
+                                <span class="text-[11px] leading-tight">North Line (Denver ↔ Ft Collins)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-teal-600 dark:text-teal-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="bustang-south" onclick="toggleRouteSelection('bustang-south')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0891b2; border-color: #0891b2;"></div>
+                                <span class="text-[11px] leading-tight">South Line (Denver ↔ Pueblo)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-cyan-600 dark:text-cyan-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Pegasus under CoCoM -->
                 <div class="category-block" data-category="pegasus">
                     <h4 class="text-[10px] font-bold text-rose-600 dark:text-rose-400 mb-1.5 uppercase tracking-wider">CoCoM Pegasus (I-70 Mountain Shuttle)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full" style="background-color: #f43f5e;"></div> <span>Pegasus Shuttle (Denver ↔ Avon)</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="pegasus" onclick="toggleRouteSelection('pegasus')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full shrink-0" style="background-color: #f43f5e;"></div>
+                                <span class="text-[11px] leading-tight">Pegasus Shuttle (Denver ↔ Avon)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-600 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Snowstang under CoCoM -->
                 <div class="category-block" data-category="snowstang">
                     <h4 class="text-[10px] font-bold text-sky-600 dark:text-sky-400 mb-1.5 uppercase tracking-wider">CoCoM Snowstang (Ski Express)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dotted" style="background-color: #38bdf8; border-color: #38bdf8;"></div> <span>Loveland & Arapahoe Basin</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dotted" style="background-color: #c026d3; border-color: #c026d3;"></div> <span>Copper Mountain & Breckenridge</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="snowstang-loveland" onclick="toggleRouteSelection('snowstang-loveland')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dotted shrink-0" style="background-color: #38bdf8; border-color: #38bdf8;"></div>
+                                <span class="text-[11px] leading-tight">Loveland & Arapahoe Basin</span>
+                            </div>
+                            <span class="select-check text-[11px] text-sky-600 dark:text-sky-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="snowstang-copper" onclick="toggleRouteSelection('snowstang-copper')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dotted shrink-0" style="background-color: #c026d3; border-color: #c026d3;"></div>
+                                <span class="text-[11px] leading-tight">Copper Mountain & Breckenridge</span>
+                            </div>
+                            <span class="select-check text-[11px] text-fuchsia-600 dark:text-fuchsia-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Outrider under CoCoM -->
                 <div class="category-block" data-category="outrider">
                     <h4 class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mb-1.5 uppercase tracking-wider">CoCoM Outrider (Rural Regional)</h4>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #16a34a; border-color: #16a34a;"></div> <span>Craig ↔ Denver (US-40)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #84cc16; border-color: #84cc16;"></div> <span>Crested Butte / Gunnison ↔ Denver (US-285)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #ea580c; border-color: #ea580c;"></div> <span>Durango ↔ Grand Junction (US-160/145/550)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #e11d48; border-color: #e11d48;"></div> <span>Alamosa ↔ Salida ↔ Cañon City ↔ Pueblo</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #d97706; border-color: #d97706;"></div> <span>Lamar ↔ Colorado Springs (US-50)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #10b981; border-color: #10b981;"></div> <span>Sterling ↔ Denver (I-76)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #059669; border-color: #059669;"></div> <span>Sterling ↔ Greeley (US-34)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #0e7490; border-color: #0e7490;"></div> <span>Denver ↔ Boulder ↔ Estes Park (US-36)</span></div>
-                        <div class="flex items-center gap-2.5"><div class="w-5 h-1 rounded-full border-t border-b border-dashed" style="background-color: #881337; border-color: #881337;"></div> <span>Pueblo ↔ Trinidad (I-25)</span></div>
+                    <div class="space-y-1">
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-craig" onclick="toggleRouteSelection('outrider-craig')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #16a34a; border-color: #16a34a;"></div>
+                                <span class="text-[11px] leading-tight">Craig ↔ Denver (US-40)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-emerald-600 dark:text-emerald-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-gunnison" onclick="toggleRouteSelection('outrider-gunnison')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #84cc16; border-color: #84cc16;"></div>
+                                <span class="text-[11px] leading-tight">Crested Butte / Gunnison ↔ Denver (US-285)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-lime-600 dark:text-lime-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-durango" onclick="toggleRouteSelection('outrider-durango')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #ea580c; border-color: #ea580c;"></div>
+                                <span class="text-[11px] leading-tight">Durango ↔ Grand Junction (US-160/145/550)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-orange-600 dark:text-orange-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-alamosa" onclick="toggleRouteSelection('outrider-alamosa')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #e11d48; border-color: #e11d48;"></div>
+                                <span class="text-[11px] leading-tight">Alamosa ↔ Salida ↔ Cañon City ↔ Pueblo</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-600 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-lamar" onclick="toggleRouteSelection('outrider-lamar')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #d97706; border-color: #d97706;"></div>
+                                <span class="text-[11px] leading-tight">Lamar ↔ Colorado Springs (US-50)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-amber-600 dark:text-amber-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-sterling" onclick="toggleRouteSelection('outrider-sterling')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #10b981; border-color: #10b981;"></div>
+                                <span class="text-[11px] leading-tight">Sterling ↔ Denver (I-76)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-emerald-600 dark:text-emerald-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-greeley" onclick="toggleRouteSelection('outrider-greeley')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #059669; border-color: #059669;"></div>
+                                <span class="text-[11px] leading-tight">Sterling ↔ Greeley (US-34)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-teal-600 dark:text-teal-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-estes" onclick="toggleRouteSelection('outrider-estes')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #0e7490; border-color: #0e7490;"></div>
+                                <span class="text-[11px] leading-tight">Denver ↔ Boulder ↔ Estes Park (US-36)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-cyan-600 dark:text-cyan-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
+                        <div class="line-item flex items-center justify-between p-1 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent" data-route-id="outrider-trinidad" onclick="toggleRouteSelection('outrider-trinidad')">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-1 rounded-full border-t border-b border-dashed shrink-0" style="background-color: #881337; border-color: #881337;"></div>
+                                <span class="text-[11px] leading-tight">Pueblo ↔ Trinidad (I-25)</span>
+                            </div>
+                            <span class="select-check text-[11px] text-rose-800 dark:text-rose-400 font-bold opacity-0 shrink-0">✓</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,11 +432,18 @@
     </main>
 
     <script>
-        // Initialize Leaflet Map over Colorado
+        // Colorado Geographic Bounds
+        const coloradoBounds = L.latLngBounds([36.9, -109.1], [41.1, -102.0]);
+
+        // Initialize Leaflet Map locked over Colorado
         const map = L.map('mapContainer', { 
             zoomControl: false, 
-            attributionControl: false 
-        }).setView([39.1, -105.3], 7);
+            attributionControl: false,
+            maxBounds: coloradoBounds,
+            maxBoundsViscosity: 1.0,
+            minZoom: 6,
+            maxZoom: 18
+        }).setView([39.05, -105.5], 7);
 
         // OpenStreetMap Tile Layer
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1076,15 +1230,132 @@
             }
         ];
 
-        // Store active polylines and markers
+        // Route stops and local/express tier specifications
+        const routeStopsAndTiers = {
+            'rail-fr': {
+                tiers: {
+                    local: ['ftcollins', 'loveland', 'berthoud', 'longmont', 'boulder', 'broomfield', 'denver', 'castlerock', 'monument', 'cosprings', 'fountain', 'pueblo', 'coloradocity', 'walsenburg', 'aguilar', 'trinidad'],
+                    express: ['ftcollins', 'loveland', 'longmont', 'boulder', 'denver', 'cosprings', 'pueblo', 'trinidad']
+                }
+            },
+            'rail-ne': {
+                tiers: {
+                    local: ['denver', 'dia', 'brighton', 'hudson', 'keenesburg', 'wiggins', 'ftmorgan', 'brush', 'sterling', 'julesburg'],
+                    express: ['denver', 'dia', 'ftmorgan', 'sterling', 'julesburg']
+                }
+            },
+            'rail-ep': {
+                tiers: {
+                    local: ['denver', 'dia', 'limon', 'flagler', 'burlington'],
+                    express: ['denver', 'dia', 'limon', 'burlington']
+                }
+            },
+            'rail-sl': {
+                tiers: {
+                    local: ['pueblo', 'walsenburg', 'alamosa', 'montevista', 'delnorte', 'southfork', 'pagosa', 'bayfield', 'durango'],
+                    express: ['pueblo', 'walsenburg', 'alamosa', 'durango']
+                }
+            },
+            'rail-av': {
+                tiers: {
+                    local: ['pueblo', 'fowler', 'manzanola', 'rockyford', 'lajunta', 'lasanimas', 'lamar'],
+                    express: ['pueblo', 'rockyford', 'lajunta', 'lamar']
+                }
+            },
+            'rail-lt': {
+                tiers: {
+                    local: ['lamar', 'lasanimas', 'lajunta', 'trinidad'],
+                    express: ['lamar', 'lajunta', 'trinidad']
+                }
+            },
+            'rail-cz': {
+                tiers: {
+                    local: ['denver', 'winterpark', 'fraser', 'granby', 'kremmling', 'glenwood', 'palisade', 'grandjct'],
+                    express: ['denver', 'winterpark', 'glenwood', 'grandjct']
+                }
+            },
+            'rail-wpe': {
+                tiers: {
+                    local: ['denver', 'winterpark'],
+                    express: ['denver', 'winterpark']
+                }
+            },
+            'rail-swc': {
+                tiers: {
+                    local: ['lamar', 'lasanimas', 'lajunta', 'trinidad'],
+                    express: ['lamar', 'lajunta', 'trinidad']
+                }
+            },
+            'bustang-west': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'georgetown', 'frisco', 'copper', 'vail', 'avon', 'eagle', 'glenwood', 'newcastle', 'rifle', 'parachute', 'palisade', 'grandjct']
+            },
+            'bustang-north': {
+                stops: ['denver', 'longmont', 'berthoud', 'loveland', 'ftcollins']
+            },
+            'bustang-south': {
+                stops: ['denver', 'castlerock', 'monument', 'cosprings', 'fountain', 'pueblo']
+            },
+            'pegasus': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'elrancho', 'idahosprings', 'georgetown', 'frisco', 'vail', 'avon']
+            },
+            'snowstang-loveland': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'georgetown', 'loveland_ski', 'abasin']
+            },
+            'snowstang-copper': {
+                stops: ['denver', 'federalcenter', 'woolymammoth', 'idahosprings', 'frisco', 'breckenridge', 'copper']
+            },
+            'outrider-craig': {
+                stops: ['craig', 'hayden', 'steamboat', 'kremmling', 'granby', 'fraser', 'winterpark', 'idahosprings', 'federalcenter', 'denver']
+            },
+            'outrider-gunnison': {
+                stops: ['crestedbutte', 'gunnison', 'ponchasprings', 'salida', 'buenavista', 'fairplay', 'bailey', 'federalcenter', 'denver']
+            },
+            'outrider-durango': {
+                stops: ['bayfield', 'durango', 'mancos', 'cortez', 'dolores', 'rico', 'telluride', 'placerville', 'ridgway', 'montrose', 'olathe', 'delta', 'grandjct']
+            },
+            'outrider-alamosa': {
+                stops: ['alamosa', 'moffat', 'ponchasprings', 'salida', 'cotopaxi', 'canoncity', 'pueblo']
+            },
+            'outrider-lamar': {
+                stops: ['lamar', 'lasanimas', 'lajunta', 'rockyford', 'manzanola', 'fowler', 'pueblo', 'fountain', 'cosprings']
+            },
+            'outrider-sterling': {
+                stops: ['sterling', 'brush', 'ftmorgan', 'wiggins', 'keenesburg', 'hudson', 'dia', 'denver']
+            },
+            'outrider-greeley': {
+                stops: ['sterling', 'brush', 'ftmorgan', 'wiggins', 'kersey', 'greeley']
+            },
+            'outrider-estes': {
+                stops: ['denver', 'broomfield', 'boulder', 'lyons', 'estespark', 'rmnp']
+            },
+            'outrider-trinidad': {
+                stops: ['pueblo', 'coloradocity', 'walsenburg', 'aguilar', 'trinidad']
+            }
+        };
+
+        // Attach stops & tiers to routesData
+        routesData.forEach(r => {
+            const cfg = routeStopsAndTiers[r.id];
+            if (cfg) {
+                if (cfg.tiers) {
+                    r.tiers = cfg.tiers;
+                    r.stops = [...new Set([...cfg.tiers.local, ...cfg.tiers.express])];
+                }
+                if (cfg.stops) {
+                    r.stops = cfg.stops;
+                }
+            }
+        });
+
+        // Store active polylines
         const polylineLayers = [];
-        const markerLayers = [];
 
         // Render All Polylines
         routesData.forEach(route => {
             const polyline = L.polyline(route.path, route.style).addTo(map);
             polyline.bindTooltip(`<b>${route.name}</b>`, { sticky: true, className: 'station-tooltip' });
             polyline._routeData = route;
+            polyline.on('click', () => toggleRouteSelection(route.id));
             polylineLayers.push(polyline);
         });
 
@@ -1207,15 +1478,19 @@
             { coord: coords.crestedbutte, name: "Crested Butte", hub: false, color: '#84cc16' }
         ];
 
-        // Draw Station Markers
+        // Map station ID from coordinates key
+        const coordEntries = Object.entries(coords);
         stations.forEach(st => {
+            const found = coordEntries.find(([k, v]) => Math.abs(v[0] - st.coord[0]) < 0.0001 && Math.abs(v[1] - st.coord[1]) < 0.0001);
+            st.id = found ? found[0] : st.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+
             const marker = L.circleMarker(st.coord, {
                 radius: st.hub ? 7 : 5,
                 fillColor: '#ffffff',
                 color: st.color,
                 weight: st.hub ? 3 : 2,
                 fillOpacity: 1
-            }).addTo(map);
+            });
 
             marker.bindTooltip(st.name, {
                 permanent: st.hub,
@@ -1223,11 +1498,144 @@
                 className: st.hub ? 'station-tooltip hub-tooltip' : 'station-tooltip'
             });
 
-            markerLayers.push(marker);
+            st._marker = marker;
+            marker.addTo(map);
         });
+
+        // Interactive Line Selection & Category Filter State
+        const selectedRoutes = new Map(); // routeId -> 'all' | 'local' | 'express'
+        let currentCategory = 'all';
+
+        function updateMapDisplay() {
+            const isSelecting = selectedRoutes.size > 0;
+            const visibleStopIds = new Set();
+            const cocomCategories = ['bustang', 'pegasus', 'snowstang', 'outrider'];
+
+            // 1. Filter polylines
+            polylineLayers.forEach(poly => {
+                const route = poly._routeData;
+                const isSelected = selectedRoutes.has(route.id);
+                const inCategory = (currentCategory === 'all') || 
+                                  (currentCategory === 'cocom' && cocomCategories.includes(route.category)) || 
+                                  (route.category === currentCategory);
+
+                if (isSelecting) {
+                    if (isSelected) {
+                        poly.setStyle({ opacity: route.style.opacity || 1, weight: (route.style.weight || 4) + 1.5 });
+                        const tier = selectedRoutes.get(route.id);
+                        if (tier === 'local' && route.tiers && route.tiers.local) {
+                            route.tiers.local.forEach(id => visibleStopIds.add(id));
+                        } else if (tier === 'express' && route.tiers && route.tiers.express) {
+                            route.tiers.express.forEach(id => visibleStopIds.add(id));
+                        } else if (route.stops) {
+                            route.stops.forEach(id => visibleStopIds.add(id));
+                        }
+                    } else {
+                        poly.setStyle({ opacity: 0.05, weight: 1.5 });
+                    }
+                } else {
+                    if (inCategory) {
+                        poly.setStyle({ opacity: route.style.opacity || 1, weight: route.style.weight || 4 });
+                        if (route.stops) {
+                            route.stops.forEach(id => visibleStopIds.add(id));
+                        }
+                    } else {
+                        poly.setStyle({ opacity: 0.07, weight: 1.5 });
+                    }
+                }
+            });
+
+            // 2. Filter stations (Requirement 3 & 6)
+            stations.forEach(st => {
+                if (!st._marker) return;
+                const show = visibleStopIds.has(st.id);
+                if (show) {
+                    if (!map.hasLayer(st._marker)) map.addLayer(st._marker);
+                } else {
+                    if (map.hasLayer(st._marker)) map.removeLayer(st._marker);
+                }
+            });
+
+            // 3. Update Clear button in legend header
+            const clearBtn = document.getElementById('clearSelectionBtn');
+            if (clearBtn) {
+                if (isSelecting) {
+                    clearBtn.classList.remove('hidden');
+                    clearBtn.innerText = `Clear (${selectedRoutes.size}) ✕`;
+                } else {
+                    clearBtn.classList.add('hidden');
+                }
+            }
+
+            // 4. Update line-item highlights and checkmarks in legend
+            document.querySelectorAll('.line-item').forEach(el => {
+                const rid = el.getAttribute('data-route-id');
+                const check = el.querySelector('.select-check');
+                const localBtn = el.querySelector('.tier-btn-local');
+                const expressBtn = el.querySelector('.tier-btn-express');
+
+                if (selectedRoutes.has(rid)) {
+                    el.classList.add('bg-blue-50', 'dark:bg-blue-900/40', 'border-blue-400');
+                    el.classList.remove('border-transparent');
+                    if (check) check.classList.remove('opacity-0');
+
+                    const tier = selectedRoutes.get(rid);
+                    if (localBtn) {
+                        if (tier === 'local') {
+                            localBtn.classList.add('bg-blue-600', 'text-white');
+                        } else {
+                            localBtn.classList.remove('bg-blue-600', 'text-white');
+                        }
+                    }
+                    if (expressBtn) {
+                        if (tier === 'express') {
+                            expressBtn.classList.add('bg-blue-600', 'text-white');
+                        } else {
+                            expressBtn.classList.remove('bg-blue-600', 'text-white');
+                        }
+                    }
+                } else {
+                    el.classList.remove('bg-blue-50', 'dark:bg-blue-900/40', 'border-blue-400');
+                    el.classList.add('border-transparent');
+                    if (check) check.classList.add('opacity-0');
+                    if (localBtn) localBtn.classList.remove('bg-blue-600', 'text-white');
+                    if (expressBtn) expressBtn.classList.remove('bg-blue-600', 'text-white');
+                }
+            });
+        }
+
+        // Toggle route selection (Multi-select support)
+        function toggleRouteSelection(routeId) {
+            if (selectedRoutes.has(routeId)) {
+                selectedRoutes.delete(routeId);
+            } else {
+                selectedRoutes.set(routeId, 'all');
+            }
+            updateMapDisplay();
+        }
+
+        // Select Local or Express tier for CoCoR dual-tier lines
+        function selectTier(e, routeId, tier) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            if (selectedRoutes.get(routeId) === tier) {
+                selectedRoutes.delete(routeId);
+            } else {
+                selectedRoutes.set(routeId, tier);
+            }
+            updateMapDisplay();
+        }
+
+        // Clear all route selections
+        function clearSelection() {
+            selectedRoutes.clear();
+            updateMapDisplay();
+        }
 
         // Category Filter Function
         function filterCategory(cat) {
+            selectedRoutes.clear();
+            currentCategory = cat;
+
             // Update chip styles
             document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
             const activeChip = document.getElementById(`chip-${cat}`);
@@ -1245,22 +1653,26 @@
             };
             document.getElementById('activeFilterLabel').innerText = labelMap[cat] || cat;
 
-            // Filter polylines
-            const cocomCategories = ['bustang', 'pegasus', 'snowstang', 'outrider'];
-            polylineLayers.forEach(poly => {
-                const match = (cat === 'all') || 
-                              ((cat === 'cocom' || cat === 'cococo') && cocomCategories.includes(poly._routeData.category)) || 
-                              (poly._routeData.category === cat);
-
-                if (match) {
-                    poly.setStyle({ opacity: poly._routeData.style.opacity, weight: poly._routeData.style.weight });
-                } else {
-                    poly.setStyle({ opacity: 0.1, weight: 2 });
-                }
-            });
+            updateMapDisplay();
         }
 
-        // Theme and UI Toggles
+        // Theme handling: default to light, follow device preference
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark');
+            } else {
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => applyTheme(e.matches));
+        } else {
+            applyTheme(false);
+        }
+
         function toggleTheme() {
             document.body.classList.toggle('dark');
         }
@@ -1277,7 +1689,7 @@
         }
 
         function resetZoom() {
-            map.setView([39.1, -105.3], 7, { animate: true });
+            map.fitBounds(coloradoBounds, { padding: [15, 15] });
         }
 
         // Prevent Leaflet map from capturing scroll/wheel events inside the legend and line list
@@ -1290,6 +1702,9 @@
         if (scrollableList) {
             L.DomEvent.disableScrollPropagation(scrollableList);
         }
+
+        // Initial Map Display Run
+        updateMapDisplay();
     </script>
 </body>
 </html>
