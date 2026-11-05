@@ -28,39 +28,54 @@
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-indigo-600 selection:text-white">
 
-    <!-- Top Disclaimer Utility Bar -->
-    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-[#c69214]/40">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3 text-[11px] sm:text-xs">
-            <div class="flex items-center gap-2.5 flex-wrap">
-                <!-- Miniature Colorado Flag SVG -->
-                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
-                    <rect width="36" height="8" fill="#002855"/>
-                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
-                    <rect y="16" width="36" height="8" fill="#002855"/>
-                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
-                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
-                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
-                </svg>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">UNOFFICIAL COMMUNITY PROPOSAL</span>
-                <span class="font-medium text-slate-200">
-                    Non-Governmental Planning Study &bull; Not Affiliated with CDOT or the State of Colorado
-                </span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="hidden md:inline">Official State Services at</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">codot.gov</a>
-                <span class="text-slate-600">&bull;</span>
-                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">ridebustang.com</a>
-            </div>
+    <!-- Top Click-to-Expand Disclaimer Utility Bar -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs border-b border-[#c69214]/40 shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <details class="group">
+                <summary class="flex items-center justify-between cursor-pointer py-1.5 text-[11px] sm:text-xs select-none hover:text-amber-300 transition-colors list-none">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                            <rect width="36" height="8" fill="#002855"/>
+                            <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                            <rect y="16" width="36" height="8" fill="#002855"/>
+                            <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                            <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                            <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">CIVIC NOTICE</span>
+                        <span class="font-bold text-slate-200">&#9888;&#65039; Civic Notice &amp; Planning Study Disclaimer &bull; Not Affiliated with CDOT</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-amber-400 font-bold text-[11px]">
+                        <span class="group-open:hidden">Click to Expand Notice &amp; Legal Info &#9662;</span>
+                        <span class="hidden group-open:inline">Hide Notice &#9652;</span>
+                    </div>
+                </summary>
+                <div class="pt-2 pb-3 border-t border-slate-800 text-[11px] text-slate-300 space-y-2 leading-relaxed">
+                    <p>
+                        <strong class="text-amber-400 font-bold">Independent Community Concept:</strong> The Colorado Connected (CoCo) transit initiative is an independent public transportation proposal modeling synchronized passenger rail and statewide bus mobility across Colorado. It is not managed, operated, or funded by the State of Colorado, CDOT, RTD, or any governmental entity.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px]">
+                        <p class="text-slate-400">
+                            Official State of Colorado transportation services and public records:
+                            <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">codot.gov</a> &bull;
+                            <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">ridebustang.com</a>
+                        </p>
+                        <span class="text-slate-400">Base tickets are single-leg point-to-point &bull; Transfers require the <a href="fares.html#transfer-policy" class="text-amber-300 underline font-semibold">Universal Transfer Add-On</a></span>
+                    </div>
+                </div>
+            </details>
         </div>
     </aside>
 
     <!-- State Agency Masthead (Modeled after ColoradoSOS.gov) -->
-    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors shrink-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3.5 group">
                 <div class="w-12 h-12 rounded-full bg-[#002855] border-2 border-[#c69214] shadow-sm flex items-center justify-center shrink-0">
@@ -73,7 +88,7 @@
                 <div>
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-lg sm:text-xl font-black tracking-tight text-[#002855] dark:text-white">Colorado Statewide Transit Proposal (CoCo)</span>
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">Local Rail</span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950/80 text-indigo-900 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-800">Local Rail</span>
                     </div>
                     <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">An Independent Public Transportation Vision for Colorado</p>
                 </div>
@@ -95,22 +110,87 @@
             </div>
         </div>
 
-        <!-- Official Colorado State Horizontal Navigation Bar -->
+        <!-- Official Colorado State Simplified Navigation Bar (6 Core Tabs) -->
         <nav aria-label="Main Navigation" class="bg-[#002855] text-white border-b-2 border-[#c69214]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto whitespace-nowrap py-1 scrollbar-none text-xs font-bold uppercase tracking-wider">
-                    <a href="index.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Home</a>
-                    <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transit Map</a>
-                    <a href="fares.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Fares &amp; Rates</a>
-                    <a href="fares.html#transfer-policy" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transfer Add-On</a>
-                    <a href="ca-card.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">C &amp; A Card</a>
-                    <a href="cocor-local.html" class="px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">CoCoR Local Rail</a>
-                    <a href="cocorx-express.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoRX Express</a>
-                    <a href="cocom-bustang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Bustang Coach</a>
-                    <a href="cocom-pegasus.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Pegasus Shuttle</a>
-                    <a href="cocom-outrider.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Outrider Rural</a>
-                    <a href="cocom-snowstang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Snowstang Ski</a>
-                    <a href="fares.html#guidelines" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Accessibility</a>
+                <div class="flex items-center justify-between py-1">
+                    <!-- Desktop Nav Menu -->
+                    <div class="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs font-bold uppercase tracking-wider">
+                        <!-- 1. Home -->
+                        <a href="index.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Home</a>
+
+                        <!-- 2. Transit Map -->
+                        <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Transit Map</a>
+
+                        <!-- 3. Fares & Cards (Dropdown) -->
+                        <div class="relative group">
+                            <a href="fares.html" class="flex items-center gap-1 px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                                <span>Fares &amp; Cards</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="fares.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Fares &amp; Rate Schedules</a>
+                                <a href="fares.html#transfer-policy" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Transfer Add-On Policy</a>
+                                <a href="ca-card.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">CoCo Cards &amp; E-Ink Architecture</a>
+                                <a href="fares.html#guidelines" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Accessibility &amp; Rider Rules</a>
+                            </div>
+                        </div>
+
+                        <!-- 4. Rail Network (Active Dropdown) -->
+                        <div class="relative group">
+                            <a href="cocor-local.html" class="flex items-center gap-1 px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">
+                                <span>Rail Network</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="cocor-local.html" class="block px-4 py-2 text-xs text-amber-300 bg-[#0f294a] font-black transition-colors">CoCoR Local Rail (All-Stops)</a>
+                                <a href="cocorx-express.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">CoCoRX Express (125 mph High-Speed)</a>
+                            </div>
+                        </div>
+
+                        <!-- 5. Bus & Shuttles (Dropdown) -->
+                        <div class="relative group">
+                            <a href="cocom-bustang.html" class="flex items-center gap-1 px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                                <span>Bus &amp; Shuttles</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="cocom-bustang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Bustang Intercity Coach</a>
+                                <a href="cocom-pegasus.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Pegasus Mountain Shuttle</a>
+                                <a href="cocom-outrider.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Outrider Rural Lifeline (10 Routes)</a>
+                                <a href="cocom-snowstang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Snowstang Ski Express</a>
+                            </div>
+                        </div>
+
+                        <!-- 6. Services & Notices -->
+                        <a href="services-notices.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Services &amp; Notices</a>
+                    </div>
+
+                    <!-- Mobile Menu Hamburger Button -->
+                    <div class="md:hidden flex items-center justify-between w-full py-1">
+                        <span class="text-xs font-black text-amber-300 uppercase tracking-wider">CoCoR Local Rail</span>
+                        <button onclick="toggleMobileNav()" aria-label="Toggle navigation menu" class="p-1.5 rounded bg-[#0f294a] hover:bg-[#1b4d3e] text-amber-400 focus:outline-none">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Expandable Menu Drawer -->
+                <div id="mobileNavDrawer" class="hidden md:hidden pb-3 pt-1 border-t border-slate-700/60 text-xs uppercase font-bold space-y-1">
+                    <a href="index.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Home</a>
+                    <a href="map.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Transit Map</a>
+                    <a href="fares.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Fares &amp; Cards</a>
+                    <a href="cocor-local.html" class="block px-3 py-1.5 text-amber-300 bg-[#0f294a] rounded font-black">Rail Network (Local &amp; Express)</a>
+                    <a href="cocom-bustang.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Bus &amp; Shuttles (Bustang, Pegasus, Outrider, Snowstang)</a>
+                    <a href="services-notices.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Services &amp; Notices</a>
                 </div>
             </div>
         </nav>
@@ -119,19 +199,26 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
 
-        <!-- Civic Notice & Strict Transfer Add-On Policy Banner (Modeled after ColoradoSOS.gov) -->
+        <!-- Click-to-Expand Civic Notice & Strict Transfer Add-On Policy Banner -->
         <section aria-label="Official civic announcement">
-            <div class="rounded-xl border-l-4 border-l-[#c69214] border border-slate-300 dark:border-slate-700 bg-amber-50/80 dark:bg-slate-900 p-4 sm:p-5 shadow-xs">
-                <div class="flex items-start gap-3">
-                    <div class="w-6 h-6 rounded-full bg-[#002855] text-amber-300 flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
-                        !
+            <details class="group rounded-xl border border-amber-300 dark:border-amber-800 bg-amber-50/80 dark:bg-slate-900 p-3.5 sm:p-4 shadow-xs">
+                <summary class="flex items-center justify-between cursor-pointer text-xs sm:text-sm select-none list-none text-[#002855] dark:text-amber-400 font-black tracking-wide">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-5 h-5 rounded-full bg-[#002855] text-amber-300 flex items-center justify-center font-black text-xs shrink-0">!</span>
+                        <span>Strict Transfer Add-On Policy &bull; CoCoR Local Passenger Rail</span>
                     </div>
-                    <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
-                        <strong class="font-black text-[#002855] dark:text-amber-400 uppercase tracking-wide mr-1.5">Strict Transfer Add-On Policy &bull; CoCoR Local Rail:</strong>
+                    <span class="text-xs text-amber-600 dark:text-amber-400 font-bold group-open:hidden">Expand Policy &#9662;</span>
+                    <span class="text-xs text-amber-600 dark:text-amber-400 font-bold hidden group-open:inline">Collapse &#9652;</span>
+                </summary>
+                <div class="mt-3 pt-3 border-t border-amber-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed space-y-2">
+                    <p>
                         Base tickets aboard this service are <strong>single-leg point-to-point only</strong> and <strong class="text-red-700 dark:text-red-400 font-extrabold">DO NOT include transfer privileges</strong>. To connect between passenger rail and regional bus lines (or between corridors), passengers must purchase the <a href="fares.html#transfer-policy" class="font-bold underline text-[#002855] dark:text-amber-400">Universal Transfer Add-On (+$3.00 Local / +$5.00 Express)</a> or hold an active Monthly C&amp;A Pass.
-                    </div>
+                    </p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">
+                        For official state transit operations, visit <a href="https://www.codot.gov" target="_blank" rel="noopener" class="font-bold underline text-[#002855] dark:text-amber-400">codot.gov</a> and <a href="https://ridebustang.com" target="_blank" rel="noopener" class="font-bold underline text-[#002855] dark:text-amber-400">ridebustang.com</a>.
+                    </p>
                 </div>
-            </div>
+            </details>
         </section>
 
         <!-- Hero Section -->
@@ -436,19 +523,20 @@
                             <span class="text-xs font-semibold text-slate-500">Every 30–60 mins</span>
                         </div>
                         <h4 class="text-base font-black text-slate-900 dark:text-white">Front Range Local Corridor</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Connecting 10 major Colorado population centers from north to south.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Connecting 16 major Front Range cities and towns from Fort Collins all the way south to Trinidad.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-indigo-600 dark:text-indigo-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-indigo-200 dark:border-indigo-800 space-y-1">
-                                <div>Fort Collins &bull; Loveland &bull; Longmont &bull; Boulder</div>
+                            <div class="font-semibold text-indigo-600 dark:text-indigo-400">All 16 Stations:</div>
+                            <div class="pl-2 border-l-2 border-indigo-200 dark:border-indigo-800 space-y-1 text-[11px] leading-relaxed">
+                                <div>Fort Collins DTC &bull; Loveland Centerra &bull; Berthoud &bull; Longmont Hub &bull; Boulder Downtown &bull; Broomfield</div>
                                 <div class="font-bold text-slate-900 dark:text-white">Denver Union Station (Central Hub)</div>
-                                <div>Littleton &bull; Castle Rock &bull; Colorado Springs &bull; Fountain &bull; Pueblo</div>
+                                <div>Castle Rock &bull; Monument &bull; Colorado Springs Depot &bull; Fountain &bull; Pueblo Union Depot</div>
+                                <div>Colorado City &bull; Walsenburg &bull; Aguilar &bull; Trinidad</div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>End-to-End: 178 miles</span>
-                        <a href="map.html" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>End-to-End: 235 miles &bull; 16 Stations</span>
+                        <a href="map.html" class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
 
@@ -460,19 +548,19 @@
                             <span class="text-xs font-semibold text-slate-500">4 daily round-trips</span>
                         </div>
                         <h4 class="text-base font-black text-slate-900 dark:text-white">Northeast Plains Corridor</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Agricultural &amp; college community lifeline connecting Denver with the South Platte Valley.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Agricultural lifeline and college community link connecting Denver with the South Platte Valley and Julesburg.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-blue-600 dark:text-blue-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-blue-200 dark:border-blue-800 space-y-1">
-                                <div>Denver Union Station &bull; Brighton &bull; Fort Lupton</div>
-                                <div>Greeley (UNC Campus) &bull; Eaton &bull; Sterling</div>
-                                <div>Julesburg (Nebraska State Line connection)</div>
+                            <div class="font-semibold text-blue-600 dark:text-blue-400">All 10 Stations:</div>
+                            <div class="pl-2 border-l-2 border-blue-200 dark:border-blue-800 space-y-1 text-[11px] leading-relaxed">
+                                <div class="font-bold text-slate-900 dark:text-white">Denver Union Station &bull; Denver International Airport (DIA)</div>
+                                <div>Brighton &bull; Hudson &bull; Keenesburg &bull; Wiggins</div>
+                                <div>Fort Morgan &bull; Brush &bull; Sterling &bull; Julesburg</div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>End-to-End: 182 miles</span>
-                        <a href="map.html" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>End-to-End: 182 miles &bull; 10 Stations</span>
+                        <a href="map.html" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
 
@@ -484,71 +572,71 @@
                             <span class="text-xs font-semibold text-slate-500">6 daily round-trips</span>
                         </div>
                         <h4 class="text-base font-black text-slate-900 dark:text-white">Arkansas Valley Corridor</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Historic Santa Fe route connecting Pueblo with Southeast Colorado farms and communities.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Historic Santa Fe valley route connecting Pueblo Union Depot with Southeast agricultural centers through Lamar.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-amber-600 dark:text-amber-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-amber-200 dark:border-amber-800 space-y-1">
-                                <div>Pueblo Union Depot &bull; Avondale</div>
-                                <div>Manzanola &bull; Rocky Ford &bull; Swink</div>
-                                <div>La Junta &bull; Las Animas &bull; Lamar</div>
+                            <div class="font-semibold text-amber-600 dark:text-amber-400">All 7 Stations:</div>
+                            <div class="pl-2 border-l-2 border-amber-200 dark:border-amber-800 space-y-1 text-[11px] leading-relaxed">
+                                <div class="font-bold text-slate-900 dark:text-white">Pueblo Union Depot</div>
+                                <div>Fowler &bull; Manzanola &bull; Rocky Ford</div>
+                                <div>La Junta Hub &bull; Las Animas &bull; Lamar</div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>End-to-End: 121 miles</span>
-                        <a href="map.html" class="text-amber-600 dark:text-amber-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>End-to-End: 121 miles &bull; 7 Stations</span>
+                        <a href="map.html" class="text-amber-600 dark:text-amber-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
 
-                <!-- Corridor 4: Estes Park (EP) -->
+                <!-- Corridor 4: Eastern Plains Line (EP) -->
                 <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 font-extrabold text-xs">Line EP</span>
-                            <span class="text-xs font-semibold text-slate-500">Seasonal / Hourly</span>
+                            <span class="text-xs font-semibold text-slate-500">4 daily round-trips</span>
                         </div>
-                        <h4 class="text-base font-black text-slate-900 dark:text-white">Estes Park National Park Line</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Eco-friendly gateway service transporting visitors directly to Rocky Mountain National Park.</p>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white">Eastern Plains Line</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Critical high-plains artery connecting Denver &amp; DIA directly across the I-70 eastern corridor to Kansas border communities.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-emerald-600 dark:text-emerald-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-emerald-200 dark:border-emerald-800 space-y-1">
-                                <div>Denver Union Station &bull; Broomfield &bull; Longmont</div>
-                                <div>Lyons Foothills Transfer Station</div>
-                                <div>Estes Park Gateway Transit Center</div>
+                            <div class="font-semibold text-emerald-600 dark:text-emerald-400">All 5 Stations:</div>
+                            <div class="pl-2 border-l-2 border-emerald-200 dark:border-emerald-800 space-y-1 text-[11px] leading-relaxed">
+                                <div class="font-bold text-slate-900 dark:text-white">Denver Union Station &bull; DIA (Denver Int'l Airport)</div>
+                                <div>Limon &bull; Flagler &bull; Burlington (Kansas State Line Gateway)</div>
                             </div>
+                            <div class="text-[10px] text-slate-500 italic mt-1">Note: Estes Park is served exclusively via Outrider Bus Line US-36.</div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>Seamless National Park shuttles</span>
-                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>End-to-End: 168 miles &bull; 5 Stations</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
 
-                <!-- Corridor 5: San Luis Valley (SL) -->
+                <!-- Corridor 5: Southern Line (SL) -->
                 <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-extrabold text-xs">Line SL</span>
                             <span class="text-xs font-semibold text-slate-500">3 daily round-trips</span>
                         </div>
-                        <h4 class="text-base font-black text-slate-900 dark:text-white">San Luis Valley Rail Link</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Traversing scenic La Veta Pass to unite Alamosa, Adams State University, and the high mountain valley.</p>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white">Southern Line (San Luis Valley &amp; Southwest)</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Scenic mountain pass corridor uniting Pueblo and Walsenburg across the San Luis Valley to Pagosa Springs and Durango.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-purple-600 dark:text-purple-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-purple-200 dark:border-purple-800 space-y-1">
-                                <div>Pueblo Union Depot &bull; Walsenburg &bull; La Veta</div>
-                                <div>Fort Garland &bull; Alamosa Downtown</div>
-                                <div>Monte Vista &bull; Del Norte &bull; South Fork</div>
+                            <div class="font-semibold text-purple-600 dark:text-purple-400">All 10 Stations:</div>
+                            <div class="pl-2 border-l-2 border-purple-200 dark:border-purple-800 space-y-1 text-[11px] leading-relaxed">
+                                <div>Pueblo Union Depot &bull; Colorado City &bull; Walsenburg</div>
+                                <div class="font-bold text-slate-900 dark:text-white">Alamosa Hub &bull; Monte Vista &bull; Del Norte &bull; South Fork</div>
+                                <div>Pagosa Springs &bull; Bayfield &bull; Durango Transit Hub</div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>Mountain Pass Route</span>
-                        <a href="map.html" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>Mountain Cross-State Route &bull; 10 Stations</span>
+                        <a href="map.html" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
 
-                <!-- Corridor 6: Lamar-Trinidad (LT) -->
+                <!-- Corridor 6: Lamar–Trinidad (LT) -->
                 <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-2">
@@ -556,19 +644,17 @@
                             <span class="text-xs font-semibold text-slate-500">4 daily round-trips</span>
                         </div>
                         <h4 class="text-base font-black text-slate-900 dark:text-white">Lamar &ndash; Trinidad Southern Link</h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Connecting Southeast Colorado plains to historic Trinidad, I-25, and New Mexico border rail.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Connecting Southeast Colorado agricultural hubs directly to the Front Range rail trunk at Trinidad.</p>
                         <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
-                            <div class="font-semibold text-teal-600 dark:text-teal-400">Key Community Stops:</div>
-                            <div class="pl-2 border-l-2 border-teal-200 dark:border-teal-800 space-y-1">
-                                <div>Lamar Depot &bull; Granada &bull; Springfield</div>
-                                <div>Pritchett &bull; Kim &bull; Hoehne</div>
-                                <div>Trinidad Amtrak Transfer Depot</div>
+                            <div class="font-semibold text-teal-600 dark:text-teal-400">All 4 Stations:</div>
+                            <div class="pl-2 border-l-2 border-teal-200 dark:border-teal-800 space-y-1 text-[11px] leading-relaxed">
+                                <div>Lamar &bull; Las Animas &bull; La Junta Hub &bull; Trinidad</div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 flex justify-between items-center">
-                        <span>Southern Border Corridor</span>
-                        <a href="map.html" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">View Stations &rarr;</a>
+                        <span>Southern Plains Link &bull; 4 Stations</span>
+                        <a href="map.html" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">View on Map &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -695,6 +781,7 @@
                         <li><a href="cocor-local.html" class="hover:text-amber-300 transition-colors">CoCoR Local Passenger Rail</a></li>
                         <li><a href="cocorx-express.html" class="hover:text-amber-300 transition-colors">CoCoRX Express Rail</a></li>
                         <li><a href="cocom-bustang.html" class="hover:text-amber-300 transition-colors">CoCoM Bustang Coach</a></li>
+                        <li><a href="services-notices.html" class="hover:text-amber-300 transition-colors">Services &amp; Advisories</a></li>
                         <li><a href="fares.html#guidelines" class="hover:text-amber-300 transition-colors">Accessibility &amp; Rider Policies</a></li>
                     </ul>
                 </div>
@@ -769,6 +856,11 @@
             const targetDark = !isDarkNow;
             applyTheme(targetDark);
             localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavDrawer') || document.getElementById('mobileNavMenu');
+            if (menu) menu.classList.toggle('hidden');
         }
     </script>
 </body>

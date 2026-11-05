@@ -35,30 +35,42 @@
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
 
-    <!-- Top Disclaimer Utility Bar -->
-    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-[#c69214]/40">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3 text-[11px] sm:text-xs">
-            <div class="flex items-center gap-2.5 flex-wrap">
-                <!-- Miniature Colorado Flag SVG -->
-                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
-                    <rect width="36" height="8" fill="#002855"/>
-                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
-                    <rect y="16" width="36" height="8" fill="#002855"/>
-                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
-                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
-                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
-                </svg>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">UNOFFICIAL COMMUNITY PROPOSAL</span>
-                <span class="font-medium text-slate-200">
-                    Non-Governmental Planning Study &bull; Not Affiliated with CDOT or the State of Colorado
-                </span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="hidden md:inline">Official State Services at</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">codot.gov</a>
-                <span class="text-slate-600">&bull;</span>
-                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">ridebustang.com</a>
-            </div>
+    <!-- Top Disclaimer Utility Bar (Click-to-Expand for Civic Transparency) -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs border-b border-[#c69214]/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <details class="group py-1.5 cursor-pointer">
+                <summary class="flex items-center justify-between gap-2 text-[11px] sm:text-xs list-none select-none">
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <!-- Miniature Colorado Flag SVG -->
+                        <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                            <rect width="36" height="8" fill="#002855"/>
+                            <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                            <rect y="16" width="36" height="8" fill="#002855"/>
+                            <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                            <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                            <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">UNOFFICIAL COMMUNITY PROPOSAL</span>
+                        <span class="font-medium text-slate-200">
+                            Non-Governmental Planning Study &bull; Click for Legal &amp; Custodian Disclaimers
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[11px] text-amber-400 font-semibold group-open:rotate-180 transition-transform duration-200">
+                        <span>Details &#9662;</span>
+                    </div>
+                </summary>
+                <div class="mt-2.5 pt-2 border-t border-slate-700/60 text-[11px] text-slate-300 space-y-1.5 leading-relaxed">
+                    <p>
+                        This website is an independent community planning proposal and educational study for a unified Colorado rail and coach network. It is <strong>NOT</strong> managed, funded, or approved by the Colorado Department of Transportation (CDOT), the Regional Transportation District (RTD), Bustang, or any governmental authority.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-400 pt-1">
+                        <span>Official State Portals:</span>
+                        <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">codot.gov &nearr;</a>
+                        <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">ridebustang.com &nearr;</a>
+                        <a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">rtd-denver.com &nearr;</a>
+                    </div>
+                </div>
+            </details>
         </div>
     </aside>
 
@@ -95,25 +107,83 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
+                <!-- Mobile Navigation Toggle -->
+                <button onclick="toggleMobileNav()" aria-label="Toggle Navigation Menu" class="md:hidden p-2 rounded-md bg-[#002855] text-white hover:bg-[#0f294a] text-xs font-bold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Official Colorado State Horizontal Navigation Bar -->
+        <!-- Official Colorado State Horizontal Navigation Bar (Simplified 6-Pillar Structure) -->
         <nav aria-label="Main Navigation" class="bg-[#002855] text-white border-b-2 border-[#c69214]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto whitespace-nowrap py-1 scrollbar-none text-xs font-bold uppercase tracking-wider">
-                    <a href="index.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Home</a>
-                    <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transit Map</a>
-                    <a href="fares.html" class="px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">Fares &amp; Rates</a>
-                    <a href="#transfer-policy" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transfer Add-On</a>
-                    <a href="ca-card.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCo Cards &amp; E-Ink</a>
-                    <a href="cocor-local.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoR Local Rail</a>
-                    <a href="cocorx-express.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoRX Express</a>
-                    <a href="cocom-bustang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Bustang Coach</a>
-                    <a href="cocom-pegasus.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Pegasus Shuttle</a>
-                    <a href="cocom-outrider.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Outrider Rural</a>
-                    <a href="cocom-snowstang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Snowstang Ski</a>
-                    <a href="#guidelines" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Accessibility</a>
+                <!-- Desktop Nav Bar -->
+                <div class="hidden md:flex items-center space-x-1 py-1 text-xs font-bold uppercase tracking-wider">
+                    <a href="index.html" class="px-3.5 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Home</a>
+                    <a href="map.html" class="px-3.5 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Transit Map</a>
+                    
+                    <!-- Fares & Cards Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 px-3.5 py-2 text-amber-300 bg-[#0f294a] rounded transition-colors font-black">
+                            <span>Fares &amp; Cards</span>
+                            <span class="text-[10px]">&#9662;</span>
+                        </button>
+                        <div class="absolute left-0 top-full hidden group-hover:block w-56 bg-[#001f3f] border border-[#c69214]/50 shadow-xl rounded-b-md z-50 py-1 normal-case font-medium">
+                            <a href="fares.html" class="block px-4 py-2 text-xs text-amber-300 bg-[#002855] font-bold">Fares &amp; Rate Schedules (Active)</a>
+                            <a href="#transfer-policy" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">Universal Transfer Add-On</a>
+                            <a href="ca-card.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">C &amp; A E-Ink Smart Card</a>
+                        </div>
+                    </div>
+
+                    <!-- Rail Network Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 px-3.5 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                            <span>Rail Network</span>
+                            <span class="text-[10px]">&#9662;</span>
+                        </button>
+                        <div class="absolute left-0 top-full hidden group-hover:block w-56 bg-[#001f3f] border border-[#c69214]/50 shadow-xl rounded-b-md z-50 py-1 normal-case font-medium">
+                            <a href="cocor-local.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">CoCoR Local Passenger Rail</a>
+                            <a href="cocorx-express.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">CoCoRX Express Rail</a>
+                        </div>
+                    </div>
+
+                    <!-- Bus & Shuttles Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 px-3.5 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                            <span>Bus &amp; Shuttles</span>
+                            <span class="text-[10px]">&#9662;</span>
+                        </button>
+                        <div class="absolute left-0 top-full hidden group-hover:block w-60 bg-[#001f3f] border border-[#c69214]/50 shadow-xl rounded-b-md z-50 py-1 normal-case font-medium">
+                            <a href="cocom-bustang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">Bustang Regional Coach</a>
+                            <a href="cocom-pegasus.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">Pegasus I-70 Mountain Shuttle</a>
+                            <a href="cocom-outrider.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">Outrider Rural Lifeline</a>
+                            <a href="cocom-snowstang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#002855] hover:text-amber-300">Snowstang Ski Direct</a>
+                        </div>
+                    </div>
+
+                    <a href="services-notices.html" class="px-3.5 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Services &amp; Notices</a>
+                </div>
+
+                <!-- Mobile Menu Drawer (Hidden by default) -->
+                <div id="mobileNavMenu" class="hidden md:hidden py-3 border-t border-blue-900 text-xs font-semibold space-y-1">
+                    <a href="index.html" class="block px-3 py-2 text-slate-100 hover:bg-[#0f294a] rounded">Home</a>
+                    <a href="map.html" class="block px-3 py-2 text-slate-100 hover:bg-[#0f294a] rounded">Transit Map</a>
+                    <div class="pt-2 pb-1 px-3 text-[10px] font-black uppercase text-amber-400">Fares &amp; Cards</div>
+                    <a href="fares.html" class="block pl-6 pr-3 py-1.5 text-amber-300 font-bold bg-[#0f294a] rounded">Fares &amp; Rate Schedules (Active)</a>
+                    <a href="#transfer-policy" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Transfer Add-On Policy</a>
+                    <a href="ca-card.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">C &amp; A Smart Card</a>
+                    <div class="pt-2 pb-1 px-3 text-[10px] font-black uppercase text-amber-400">Rail Network</div>
+                    <a href="cocor-local.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">CoCoR Local Passenger Rail</a>
+                    <a href="cocorx-express.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">CoCoRX Express Rail</a>
+                    <div class="pt-2 pb-1 px-3 text-[10px] font-black uppercase text-amber-400">Bus &amp; Shuttles</div>
+                    <a href="cocom-bustang.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Bustang Regional Coach</a>
+                    <a href="cocom-pegasus.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Pegasus Mountain Shuttle</a>
+                    <a href="cocom-outrider.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Outrider Rural Lifeline</a>
+                    <a href="cocom-snowstang.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Snowstang Ski Direct</a>
+                    <div class="pt-2 pb-1 px-3 text-[10px] font-black uppercase text-amber-400">Services &amp; Advisory</div>
+                    <a href="services-notices.html" class="block pl-6 pr-3 py-1.5 text-slate-200 hover:bg-[#0f294a] rounded">Services, Advisories &amp; Notices</a>
                 </div>
             </div>
         </nav>
@@ -138,19 +208,30 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
 
-        <!-- Notice Alert Box (modeled after ColoradoSOS.gov announcements) -->
+        <!-- Notice Alert Box (Click-to-Expand) -->
         <section aria-label="Official civic announcement">
-            <div class="rounded-xl border-l-4 border-l-[#c69214] border border-slate-300 dark:border-slate-700 bg-amber-50/80 dark:bg-slate-900 p-4 sm:p-5 shadow-xs">
-                <div class="flex items-start gap-3">
-                    <div class="w-6 h-6 rounded-full bg-[#002855] text-amber-300 flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
-                        !
+            <details class="group rounded-xl border-l-4 border-l-[#c69214] border border-slate-300 dark:border-slate-700 bg-amber-50/80 dark:bg-slate-900 p-4 sm:p-5 shadow-xs cursor-pointer">
+                <summary class="flex items-center justify-between gap-3 list-none select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-full bg-[#002855] text-amber-300 flex items-center justify-center font-black text-xs shrink-0">
+                            !
+                        </div>
+                        <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-bold">
+                            <strong class="font-black text-[#002855] dark:text-amber-400 uppercase tracking-wide mr-1.5">Civic Notice &bull; Strict Transfer Add-On Policy:</strong>
+                            Single-Leg Point-to-Point Fare Structure — Click to review transfer rules &amp; add-on requirements
+                        </div>
                     </div>
-                    <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
-                        <strong class="font-black text-[#002855] dark:text-amber-400 uppercase tracking-wide mr-1.5">Civic Notice &bull; Strict Transfer Add-On Policy:</strong>
+                    <span class="text-amber-600 dark:text-amber-400 font-bold text-xs group-open:rotate-180 transition-transform duration-200 shrink-0">&#9662;</span>
+                </summary>
+                <div class="mt-3 pt-3 border-t border-amber-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed space-y-2">
+                    <p>
                         Standard single-ride transit tickets are point-to-point only and <strong class="text-red-700 dark:text-red-400 font-extrabold">DO NOT include transfer privileges</strong>. To connect between rail and bus lines (or between services), passengers must purchase the <strong>Universal Transfer Add-On (+$3.00 Local / +$5.00 Express)</strong> or hold an active Monthly C&amp;A Pass.
-                    </div>
+                    </p>
+                    <p class="text-[11px] text-slate-600 dark:text-slate-400">
+                        Transfer add-ons allow a 2-hour multi-agency connection window across CDOT Bustang, RTD Metro, and connecting regional shuttles statewide.
+                    </p>
                 </div>
-            </div>
+            </details>
         </section>
 
 
@@ -982,7 +1063,7 @@
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Boulder</td>
-                                        <td class="py-2.5 text-slate-500">Broomfield, Westminster</td>
+                                        <td class="py-2.5 text-slate-500">Broomfield</td>
                                         <td class="py-2.5">28 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$9.04</td>
                                         <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$6.33</td>
@@ -990,7 +1071,7 @@
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Fort Collins</td>
-                                        <td class="py-2.5 text-slate-500">Brighton, Longmont, Berthoud, Loveland</td>
+                                        <td class="py-2.5 text-slate-500">Broomfield, Boulder Downtown, Longmont Hub, Berthoud, Loveland Centerra</td>
                                         <td class="py-2.5">65 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$15.70</td>
                                         <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$10.99</td>
@@ -1746,6 +1827,7 @@
                         <li><a href="cocor-local.html" class="hover:text-amber-300 transition-colors">CoCoR Local Passenger Rail</a></li>
                         <li><a href="cocorx-express.html" class="hover:text-amber-300 transition-colors">CoCoRX Express Rail</a></li>
                         <li><a href="cocom-bustang.html" class="hover:text-amber-300 transition-colors">CoCoM Bustang Coach</a></li>
+                        <li><a href="services-notices.html" class="hover:text-amber-300 transition-colors">Services &amp; Advisories</a></li>
                         <li><a href="#guidelines" class="hover:text-amber-300 transition-colors">Accessibility &amp; Rider Policies</a></li>
                     </ul>
                 </div>
@@ -2120,6 +2202,14 @@
                 calculateFares();
             });
         });
+
+        // Mobile navigation toggle
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
 
         // Preset button helper
         function setPreset(orig, dest) {

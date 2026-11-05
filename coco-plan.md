@@ -134,60 +134,64 @@ Accessibility & Mountain Caching: Uses icon-driven navigation, one-tap translati
 
 5. CoCoR (COR): The Rail Network
 
-All dedicated routes use a Two-Letter naming convention (with "X" denoting high-speed, limited-stop express service). Leased Amtrak cars use a Single-Letter convention.
+All dedicated routes use a Two-Letter naming convention (with "X" denoting high-speed, limited-stop express service). Leased Amtrak cars use their corridor designations (CZ / ZX, W / WX, S / SX).
 
 Dedicated State Rail Lines (Standard & Express "X" Service)
 
 Every dedicated state rail corridor operates in two complementary service tiers without branching: a **Standard Line** serving all community station stops, and an **Express Line (marked with 'X')** that bypasses smaller stations to provide rapid intercity transit:
 
-- **CoCoR FR (Front Range Local)** & **CoCoR FRX (Front Range Express):** The I-25 / Joint Line spine connecting Fort Collins, Loveland, Longmont, Boulder, Denver Union Station, Castle Rock, Colorado Springs, Pueblo, Colorado City, Walsenburg, Aguilar, and Trinidad. FR serves all regional mobility hubs; FRX runs express connecting major anchor hubs with dedicated bypass tracks.
-- **CoCoR NE (Northeast Local)** & **CoCoR NEX (Northeast Express):** Denver Union Station $\rightarrow$ DIA $\rightarrow$ Brighton $\rightarrow$ Hudson $\rightarrow$ Keenesburg $\rightarrow$ Fort Morgan $\rightarrow$ Brush $\rightarrow$ Sterling $\rightarrow$ Julesburg. NE serves all agricultural communities along the historic South Platte / Union Pacific corridor; NEX runs express Denver $\leftrightarrow$ DIA $\leftrightarrow$ Fort Morgan $\leftrightarrow$ Sterling $\leftrightarrow$ Julesburg.
-- **CoCoR EP (Eastern Plains Local)** & **CoCoR EPX (Eastern Plains Express):** Denver Union Station $\rightarrow$ DIA $\rightarrow$ Limon $\rightarrow$ Burlington. Shares track with NE between Denver and DIA before diverging along the Kyle Railroad corridor.
-- **CoCoR SL (Southern Local)** & **CoCoR SLX (Southern Express):** Connects Southeast to Southwest Colorado across the San Juan and Sangre de Cristo passes: Pueblo $\rightarrow$ Walsenburg $\rightarrow$ Alamosa (via La Veta Pass) $\rightarrow$ Monte Vista $\rightarrow$ Del Norte $\rightarrow$ South Fork $\rightarrow$ Pagosa Springs (via Wolf Creek Pass) $\rightarrow$ Durango. SLX runs express between Pueblo, Alamosa, and Durango.
-- **CoCoR AV (Arkansas Valley Local)** & **CoCoR AVX (Arkansas Valley Express):** Dedicated regional connection along the Arkansas River between Pueblo $\rightarrow$ Fowler $\rightarrow$ Manzanola $\rightarrow$ Rocky Ford $\rightarrow$ La Junta $\rightarrow$ Las Animas $\rightarrow$ Lamar. AV makes all local stops; AVX provides high-speed express service linking Pueblo Union Depot, La Junta Hub, and Lamar.
-- **CoCoR LT (Lamar–Trinidad Local)** & **CoCoR LTX (Lamar–Trinidad Express):** Connects Southeast Colorado across Prowers, Bent, Otero, and Las Animas counties: Lamar $\rightarrow$ Las Animas $\rightarrow$ La Junta $\rightarrow$ Thatcher $\rightarrow$ Trinidad. LT provides comprehensive local station service; LTX delivers express regional transit unifying the Lower Arkansas Valley with the southern I-25 Front Range spine.
+- **CoCoR FR (Front Range Local)** & **CoCoR FRX (Front Range Express):** The I-25 / Joint Line spine connecting all 16 stations from the map: Fort Collins, Loveland, Berthoud, Longmont, Boulder, Broomfield, Denver Union Station, Castle Rock, Monument, Colorado Springs, Fountain, Pueblo, Colorado City, Walsenburg, Aguilar, Trinidad. FR serves all 16 regional stations; FRX runs express connecting primary anchor hubs (Fort Collins, Loveland, Longmont, Boulder, Denver Union Station, Colorado Springs, Pueblo, Trinidad) with dedicated bypass tracks.
+- **CoCoR NE (Northeast Local)** & **CoCoR NEX (Northeast Express):** Serves all 10 stations from the map: Denver Union Station $\rightarrow$ DIA $\rightarrow$ Brighton $\rightarrow$ Hudson $\rightarrow$ Keenesburg $\rightarrow$ Wiggins $\rightarrow$ Fort Morgan $\rightarrow$ Brush $\rightarrow$ Sterling $\rightarrow$ Julesburg. NE serves all agricultural communities along the historic South Platte / Union Pacific corridor; NEX runs express Denver Union Station $\leftrightarrow$ DIA $\leftrightarrow$ Fort Morgan $\leftrightarrow$ Sterling $\leftrightarrow$ Julesburg.
+- **CoCoR EP (Eastern Plains Local)** & **CoCoR EPX (Eastern Plains Express):** Serves all 5 stations from the map: Denver Union Station $\rightarrow$ DIA $\rightarrow$ Limon $\rightarrow$ Flagler $\rightarrow$ Burlington. (Note: EP designates the Eastern Plains corridor, distinct from Estes Park). Shares track with NE between Denver and DIA before diverging along the Kyle Railroad corridor; EPX runs express Denver Union Station $\leftrightarrow$ DIA $\leftrightarrow$ Limon $\leftrightarrow$ Burlington.
+- **CoCoR SL (Southern Local)** & **CoCoR SLX (Southern Express):** Connects Southeast to Southwest Colorado across the San Juan and Sangre de Cristo passes, serving all 10 stations from the map: Pueblo $\rightarrow$ Colorado City $\rightarrow$ Walsenburg $\rightarrow$ Alamosa (via La Veta Pass) $\rightarrow$ Monte Vista $\rightarrow$ Del Norte $\rightarrow$ South Fork $\rightarrow$ Pagosa Springs (via Wolf Creek Pass) $\rightarrow$ Bayfield $\rightarrow$ Durango. SL makes all local stops; SLX runs express between Pueblo, Walsenburg, Alamosa, and Durango.
+- **CoCoR AV (Arkansas Valley Local)** & **CoCoR AVX (Arkansas Valley Express):** Dedicated regional connection along the Arkansas River serving all 7 stations from the map: Pueblo $\rightarrow$ Fowler $\rightarrow$ Manzanola $\rightarrow$ Rocky Ford $\rightarrow$ La Junta $\rightarrow$ Las Animas $\rightarrow$ Lamar. AV makes all 7 local stops; AVX provides high-speed express service linking Pueblo Union Depot, Rocky Ford, La Junta Hub, and Lamar.
+- **CoCoR LT (Lamar–Trinidad Local)** & **CoCoR LTX (Lamar–Trinidad Express):** Connects Southeast Colorado across Prowers, Bent, Otero, and Las Animas counties serving all 4 stations from the map: Lamar $\rightarrow$ Las Animas $\rightarrow$ La Junta $\rightarrow$ Trinidad. LT provides comprehensive local station service; LTX delivers express regional transit (Lamar, La Junta, Trinidad) unifying the Lower Arkansas Valley with the southern I-25 Front Range spine.
 
 Leased Amtrak Partnership Cars (Standard & Seasonal Express)
 
 Through a Joint Operating Agreement, the CoCo agency pays Amtrak a guaranteed profitable haulage fee to attach state-owned, FRA-compliant CoCoR cars exclusively during the Colorado legs of Amtrak routes:
 
-- **CoCoR Z (California Zephyr)** & **CoCoR ZX (Zephyr Express):** Runs Denver Union Station $\rightarrow$ Moffat Tunnel $\rightarrow$ Winter Park $\rightarrow$ Granby $\rightarrow$ Kremmling $\rightarrow$ Glenwood Springs $\rightarrow$ Grand Junction.
-- **CoCoR W (Winter Park Ski Local)** & **CoCoR WX (Winter Park Express Ski Train):** Dedicated seasonal ski train service from Denver Union Station to Winter Park Resort platform.
-- **CoCoR S (Southwest Chief)** & **CoCoR SX (Chief Express):** State leased cars on Amtrak's interstate through-route: Lamar $\rightarrow$ Las Animas $\rightarrow$ La Junta $\rightarrow$ Thatcher $\rightarrow$ Trinidad.
+- **CoCoR CZ (California Zephyr)** & **CoCoR ZX (Zephyr Express):** Operates along the Moffat Tunnel and Colorado River corridors, serving all 11 Colorado stations from the map: Denver Union Station $\rightarrow$ Winter Park Resort $\rightarrow$ Fraser $\rightarrow$ Granby $\rightarrow$ Kremmling $\rightarrow$ Glenwood Springs $\rightarrow$ New Castle $\rightarrow$ Rifle $\rightarrow$ Parachute $\rightarrow$ Palisade $\rightarrow$ Grand Junction. (CZ serves all Colorado stops; ZX runs express connecting Denver Union Station, Winter Park Resort, Glenwood Springs, and Grand Junction).
+- **CoCoR W (Winter Park Ski Local)** & **CoCoR WX (Winter Park Express Ski Train):** Dedicated seasonal ski train service serving all Colorado stations from the map: Denver Union Station $\leftrightarrow$ Winter Park Resort.
+- **CoCoR S (Southwest Chief)** & **CoCoR SX (Chief Express):** State leased cars on Amtrak's interstate through-route serving all Colorado stations from the map: Lamar $\rightarrow$ Las Animas $\rightarrow$ La Junta $\rightarrow$ Trinidad. (S makes all 4 stops; SX operates express service connecting Lamar, La Junta, and Trinidad).
 
 Onboard CoCoR Experience
 
 Seating: Standard 2x2 configuration (zero middle seats) engineered for trips up to 4 hours, with panoramic windows, fold-down trays, universal AC/USB-C outlets, and CoCo Cargo racks at the ends of every car for skis and bikes.
 
-Premium Trim (Standard on Z, W, S, and Express Cars): Features wipeable navy vegan leather seats with red/yellow stitching, real Colorado timber window framing, warm adjustable LED lighting, and a standing high-top bar area at the CoCo Snack Zones lounge.
+Premium Trim (Standard on CZ, W, S, and Express Cars): Features wipeable navy vegan leather seats with red/yellow stitching, real Colorado timber window framing, warm adjustable LED lighting, and a standing high-top bar area at the CoCo Snack Zones lounge.
 
-The WiFi Flex: Front Range trains use a 5G/Satellite mesh. For the Z, W, and S cars (where Amtrak has zero WiFi), CoCo mounts low-profile satellite dishes (e.g., Starlink) to the roof. To prevent standard Amtrak passengers from stealing bandwidth, the WiFi is locked behind a simple daily password displayed on screens inside the CoCo car and given only to registered CoCo Card holders (C, Y, A, U).
+The WiFi Flex: Front Range trains use a 5G/Satellite mesh. For the CZ, W, and S cars (where Amtrak has zero WiFi), CoCo mounts low-profile satellite dishes (e.g., Starlink) to the roof. To prevent standard Amtrak passengers from stealing bandwidth, the WiFi is locked behind a simple daily password displayed on screens inside the CoCo car and given only to registered CoCo Card holders (C, Y, A, U).
 
 6. CoCoM (COM): Bustang, Pegasus, Snowstang, Outrider & Local Partnerships
  
 CoCoM (COM - CoCo Motor & Mobility) is the dedicated statewide bus division of CoCo, operating and unifying Colorado's established bus services (Bustang, Pegasus, Snowstang, and Bustang Outrider) under the CoCo platform:
 
 Bustang (Intercity Express Coaches):
-- West Line: I-70 corridor connecting Denver Union Station $\leftrightarrow$ Federal Center $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Frisco $\leftrightarrow$ Vail $\leftrightarrow$ Avon $\leftrightarrow$ Eagle $\leftrightarrow$ Glenwood Springs $\leftrightarrow$ Rifle $\leftrightarrow$ Parachute $\leftrightarrow$ Grand Junction.
-- North Line: I-25 corridor connecting Denver Union Station $\leftrightarrow$ Firestone/Longmont Hub $\leftrightarrow$ Berthoud Hub $\leftrightarrow$ Loveland (Centerra) $\leftrightarrow$ Fort Collins (Harmony & DTC).
-- South Line: I-25 corridor connecting Denver Union Station $\leftrightarrow$ RTD Colorado Station $\leftrightarrow$ Lone Tree $\leftrightarrow$ Monument $\leftrightarrow$ Colorado Springs (Tejon P&R) $\leftrightarrow$ Fountain $\leftrightarrow$ Pueblo Transit Center.
+- **West Line (I-70):** Connects Denver to the Western Slope serving all 16 stops from the map: Denver Union Station $\leftrightarrow$ Denver Federal Center $\leftrightarrow$ Wooly Mammoth P&R $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Georgetown $\leftrightarrow$ Frisco Transfer Center $\leftrightarrow$ Copper Mountain $\leftrightarrow$ Vail Transportation Center $\leftrightarrow$ Avon Station $\leftrightarrow$ Eagle Chambers P&R $\leftrightarrow$ Glenwood Springs Hub $\leftrightarrow$ New Castle $\leftrightarrow$ Rifle $\leftrightarrow$ Parachute $\leftrightarrow$ Palisade $\leftrightarrow$ Grand Junction Hub.
+- **North Line (I-25):** Connects Denver to Northern Colorado serving all 5 stops from the map: Denver Union Station $\leftrightarrow$ Longmont Hub $\leftrightarrow$ Berthoud $\leftrightarrow$ Loveland Centerra $\leftrightarrow$ Fort Collins DTC.
+- **South Line (I-25):** Connects Denver to Southern Colorado serving all 6 stops from the map: Denver Union Station $\leftrightarrow$ Castle Rock $\leftrightarrow$ Monument $\leftrightarrow$ Colorado Springs Depot $\leftrightarrow$ Fountain $\leftrightarrow$ Pueblo Union Depot.
 
 Pegasus (I-70 Mountain Express Shuttles):
-- High-frequency 14-passenger Sprinter shuttles utilizing I-70 Mountain Express Lanes to bypass peak congestion between Denver Union Station $\leftrightarrow$ Denver Federal Center $\leftrightarrow$ El Rancho (Evergreen) $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Frisco $\leftrightarrow$ Vail $\leftrightarrow$ Avon.
+- High-frequency 14-passenger Sprinter shuttles utilizing I-70 Mountain Express Lanes to bypass peak congestion, serving all 9 stops from the map: Denver Union Station $\leftrightarrow$ Denver Federal Center $\leftrightarrow$ Wooly Mammoth P&R $\leftrightarrow$ El Rancho (Evergreen) $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Georgetown $\leftrightarrow$ Frisco Transfer Center $\leftrightarrow$ Vail Transportation Center $\leftrightarrow$ Avon Station.
 
 Snowstang (Seasonal Mountain Ski Express):
-- Direct weekend and holiday ski service connecting Denver Union Station and Federal Center to Loveland Ski Area, Arapahoe Basin, Copper Mountain, Breckenridge, and Steamboat.
+Direct weekend and holiday ski express coach service operating two distinct dedicated lines from the map:
+1. **Loveland & Arapahoe Basin Line:** Denver Union Station $\leftrightarrow$ Denver Federal Center $\leftrightarrow$ Wooly Mammoth P&R $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Georgetown $\leftrightarrow$ Loveland Ski Area $\leftrightarrow$ Arapahoe Basin.
+2. **Copper Mountain & Breckenridge Line:** Denver Union Station $\leftrightarrow$ Denver Federal Center $\leftrightarrow$ Wooly Mammoth P&R $\leftrightarrow$ Idaho Springs $\leftrightarrow$ Frisco Transfer Center $\leftrightarrow$ Breckenridge Station $\leftrightarrow$ Copper Mountain.
 
 Bustang Outrider (Rural & Regional Corridors - Complete Statewide Town Reach):
-- Craig $\leftrightarrow$ Denver (via US-40 / I-70 through Hayden, Milner, Steamboat Springs, Kremmling, Granby, Fraser, Winter Park, Empire, Idaho Springs).
-- Crested Butte / Gunnison $\leftrightarrow$ Denver (via US-50 / US-285 through Almont, Monarch Pass, Poncha Springs, Salida, Buena Vista, Fairplay, Bailey, Pine Junction).
-- Alamosa $\leftrightarrow$ Pueblo (via US-285 / US-50 through Moffat, Poncha Springs, Salida, Cotopaxi, Cañon City, Penrose, Pueblo West).
-- Durango $\leftrightarrow$ Grand Junction (via US-160 / CO-145 / US-550 / US-50 through Bayfield, Mancos, Cortez, Dolores, Rico, Lizard Head Pass, Telluride, Placerville, Ridgway, Montrose, Olathe, Delta).
-- Lamar $\leftrightarrow$ Colorado Springs (via US-50 / I-25 through Fort Lyon, Las Animas, La Junta, Swink, Rocky Ford, Manzanola, Fowler, Pueblo Airport, Pueblo, Fountain).
-- Sterling $\leftrightarrow$ Denver (via I-76 through Merino, Brush, Fort Morgan, Wiggins, Keenesburg, Hudson, DIA).
-- Sterling $\leftrightarrow$ Greeley (via US-6 / US-34 through Brush, Fort Morgan, Wiggins, Kersey, Greeley-Evans Transit Center).
-- Denver $\leftrightarrow$ Estes Park & RMNP (via US-36 through Westminster, Broomfield, Louisville, Boulder, Lyons, Estes Park Visitor Center, RMNP Bear Lake Hub).
-- Pueblo $\leftrightarrow$ Trinidad (via I-25 through Colorado City, Walsenburg, Aguilar).
+Connecting rural communities and regional transit hubs across all 10 Outrider routes from the map:
+1. **Craig $\leftrightarrow$ Denver (US-40 / I-70):** Craig, Hayden, Steamboat Springs, Kremmling, Granby, Fraser, Winter Park, Idaho Springs, Denver Federal Center, Denver Union Station.
+2. **Crested Butte / Gunnison $\leftrightarrow$ Denver (US-285):** Crested Butte, Gunnison, Poncha Springs, Salida, Buena Vista, Fairplay, Bailey, Denver Federal Center, Denver Union Station.
+3. **Durango $\leftrightarrow$ Grand Junction (San Juan Skyway):** Bayfield, Durango Transit Hub, Mancos, Cortez, Dolores, Rico, Telluride, Placerville, Ridgway, Montrose, Olathe, Delta, Grand Junction Hub.
+4. **Alamosa $\leftrightarrow$ Salida $\leftrightarrow$ Cañon City $\leftrightarrow$ Pueblo:** Alamosa Hub, Moffat, Poncha Springs, Salida Chaffee Hub, Cotopaxi, Cañon City, Pueblo Union Depot.
+5. **Lamar $\leftrightarrow$ Colorado Springs (US-50 / I-25):** Lamar, Las Animas, La Junta Hub, Rocky Ford, Manzanola, Fowler, Pueblo Union Depot, Fountain, Colorado Springs Depot.
+6. **Sterling $\leftrightarrow$ Denver (I-76):** Sterling, Brush, Fort Morgan, Wiggins, Keenesburg, Hudson, DIA, Denver Union Station.
+7. **Sterling $\leftrightarrow$ Greeley (US-34):** Sterling, Brush, Fort Morgan, Wiggins, Kersey, Greeley Transit Center.
+8. **Denver $\leftrightarrow$ Boulder ↔ Estes Park (US-36):** Denver Union Station, Broomfield, Boulder Downtown, Lyons, Estes Park Visitor Center, RMNP Bear Lake Transit Hub.
+9. **Pueblo ↔ Trinidad (I-25):** Pueblo Union Depot, Colorado City, Walsenburg, Aguilar, Trinidad.
+10. **Grand Junction $\leftrightarrow$ Crested Butte (US-50 / CO-135):** Grand Junction Hub, Delta, Olathe, Montrose, Gunnison, Crested Butte.
 
 The "with CoCo" Local Model & Holdouts
 

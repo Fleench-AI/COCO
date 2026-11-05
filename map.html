@@ -134,34 +134,49 @@
         #scrollableLineList::-webkit-scrollbar-thumb:hover {
             background: rgba(148, 163, 184, 0.7);
         }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Top Disclaimer Utility Bar -->
-    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-[#c69214]/40 shrink-0">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3 text-[11px] sm:text-xs">
-            <div class="flex items-center gap-2.5 flex-wrap">
-                <!-- Miniature Colorado Flag SVG -->
-                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
-                    <rect width="36" height="8" fill="#002855"/>
-                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
-                    <rect y="16" width="36" height="8" fill="#002855"/>
-                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
-                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
-                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
-                </svg>
-                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">UNOFFICIAL COMMUNITY PROPOSAL</span>
-                <span class="font-medium text-slate-200">
-                    Non-Governmental Planning Study &bull; Not Affiliated with CDOT or the State of Colorado
-                </span>
-            </div>
-            <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                <span class="hidden md:inline">Official State Services at</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">codot.gov</a>
-                <span class="text-slate-600">&bull;</span>
-                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold">ridebustang.com</a>
-            </div>
+    <!-- Top Click-to-Expand Disclaimer Utility Bar -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs border-b border-[#c69214]/40 shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <details class="group">
+                <summary class="flex items-center justify-between cursor-pointer py-1 text-[11px] sm:text-xs select-none hover:text-amber-300 transition-colors list-none">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                            <rect width="36" height="8" fill="#002855"/>
+                            <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                            <rect y="16" width="36" height="8" fill="#002855"/>
+                            <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                            <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                            <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">CIVIC NOTICE</span>
+                        <span class="font-bold text-slate-200">&#9888;&#65039; Civic Notice &amp; Planning Study Disclaimer &bull; Not Affiliated with CDOT</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-amber-400 font-bold text-[11px]">
+                        <span class="group-open:hidden">Click to Expand Notice &amp; Legal Info &#9662;</span>
+                        <span class="hidden group-open:inline">Hide Notice &#9652;</span>
+                    </div>
+                </summary>
+                <div class="pt-2 pb-2.5 border-t border-slate-800 text-[11px] text-slate-300 space-y-1.5 leading-relaxed">
+                    <p>
+                        <strong class="text-amber-400 font-bold">Independent Community Concept:</strong> The Colorado Connected (CoCo) transit initiative is an independent public transportation proposal modeling synchronized passenger rail and statewide bus mobility across Colorado. It is not managed, operated, or funded by the State of Colorado, CDOT, RTD, or any governmental entity.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5 text-[11px]">
+                        <p class="text-slate-400">
+                            Official State of Colorado transportation services and public records:
+                            <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">codot.gov</a> &bull;
+                            <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">ridebustang.com</a>
+                        </p>
+                        <span class="text-slate-400">Base tickets are single-leg point-to-point &bull; Transfers require the <a href="fares.html#transfer-policy" class="text-amber-300 underline font-semibold">Universal Transfer Add-On</a></span>
+                    </div>
+                </div>
+            </details>
         </div>
     </aside>
 
@@ -191,9 +206,10 @@
             <nav class="hidden lg:flex items-center gap-1 text-xs font-bold uppercase tracking-wider">
                 <a href="index.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Home</a>
                 <a href="fares.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Fares</a>
-                <a href="fares.html#transfer-policy" class="px-2.5 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/70 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 font-bold transition-colors">Transfer Add-On</a>
                 <a href="ca-card.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">C &amp; A Card</a>
-                <a href="cocor-local.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Services</a>
+                <a href="cocor-local.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Rail</a>
+                <a href="cocom-bustang.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Bus</a>
+                <a href="services-notices.html" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Services &amp; Notices</a>
             </nav>
 
             <!-- Major Station Names Toggle -->
@@ -513,6 +529,8 @@
                 <strong class="text-amber-300">Disclaimer:</strong> CoCo Transit System is an independent, community-driven transit concept study and planning proposal. This website is unofficial and is not operated by, endorsed by, or affiliated with CDOT, State of Colorado, RTD, or Amtrak. All concepts are for advocacy and planning demonstration purposes.
             </div>
             <div class="flex items-center gap-3 shrink-0 text-slate-300">
+                <a href="services-notices.html" class="text-amber-400 hover:underline font-bold">Services &amp; Advisories</a>
+                <span>&bull;</span>
                 <span>Official Transit:</span>
                 <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline">codot.gov</a>
                 <span>&bull;</span>

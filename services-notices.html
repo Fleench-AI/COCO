@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services &amp; Notices — Colorado Statewide Transit Proposal (CoCo)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cdot: {
+                            navy: '#002855',
+                            darknavy: '#0f294a',
+                            green: '#1b4d3e',
+                            gold: '#c69214',
+                            goldlight: '#e0a922',
+                            red: '#bf0a30'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+        }
+        .dark {
+            --bg-color: #0b1120;
+            --text-color: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
+
+    <!-- Top Click-to-Expand Disclaimer Utility Bar -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs border-b border-[#c69214]/40 shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <details class="group">
+                <summary class="flex items-center justify-between cursor-pointer py-1.5 text-[11px] sm:text-xs select-none hover:text-amber-300 transition-colors list-none">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <!-- Miniature Colorado Flag SVG -->
+                        <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                            <rect width="36" height="8" fill="#002855"/>
+                            <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                            <rect y="16" width="36" height="8" fill="#002855"/>
+                            <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                            <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                            <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#c69214] text-slate-950">CIVIC NOTICE</span>
+                        <span class="font-bold text-slate-200">Unofficial Planning Study Proposal &bull; Not Affiliated with CDOT or the State of Colorado</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-amber-400 font-bold text-[11px]">
+                        <span class="group-open:hidden">Click to Expand Notice &amp; Legal Info &#9662;</span>
+                        <span class="hidden group-open:inline">Hide Notice &#9652;</span>
+                    </div>
+                </summary>
+                <div class="pt-2 pb-3 border-t border-slate-800 text-[11px] text-slate-300 space-y-2 leading-relaxed">
+                    <p>
+                        <strong class="text-amber-400 font-bold">Independent Community Concept:</strong> The Colorado Connected (CoCo) transit initiative is an independent public transportation proposal modeling synchronized passenger rail and statewide bus mobility across Colorado. It is not managed, operated, or funded by the State of Colorado, the Colorado Department of Transportation (CDOT), the Regional Transportation District (RTD), or any governmental entity.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px]">
+                        <p class="text-slate-400">
+                            Official State of Colorado transportation services and public records:
+                            <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">codot.gov</a> &bull;
+                            <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-bold ml-1">ridebustang.com</a>
+                        </p>
+                        <span class="text-slate-400">Base tickets are single-leg point-to-point &bull; Transfers require the <a href="fares.html#transfer-policy" class="text-amber-300 underline font-semibold">Universal Transfer Add-On</a></span>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </aside>
+
+    <!-- State Agency Masthead (Modeled after ColoradoSOS.gov) -->
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <!-- Colorado State Emblem Seal Badge -->
+                <div class="w-12 h-12 rounded-full bg-[#002855] border-2 border-[#c69214] shadow-sm flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="19" fill="#002855" stroke="#c69214" stroke-width="1.5"/>
+                        <path d="M20 7 C12.8 7 7 12.8 7 20 C7 27.2 12.8 33 20 33 C25.5 33 30.2 29.6 32.1 24.8 L25.2 24.8 C24.0 26.6 22.1 27.8 20 27.8 C15.7 27.8 12.2 24.3 12.2 20 C12.2 15.7 15.7 12.2 20 12.2 C22.1 12.2 24.0 13.4 25.2 15.2 L32.1 15.2 C30.2 10.4 25.5 7 20 7 Z" fill="#C8102E"/>
+                        <circle cx="20" cy="20" r="5.5" fill="#FFD100"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-lg sm:text-xl font-black tracking-tight text-[#002855] dark:text-white">Colorado Statewide Transit Proposal (CoCo)</span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800">Services &amp; Notices</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">An Independent Public Transportation Vision for Colorado</p>
+                </div>
+            </a>
+
+            <!-- Header Utility Actions -->
+            <div class="flex items-center gap-2.5">
+                <a href="ca-card.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#002855] text-white hover:bg-[#0f294a] text-xs font-bold transition-colors">
+                    <span>CoCo Cards &amp; E-Ink</span>
+                </a>
+                <!-- Dark Mode Toggle Button -->
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-colors">
+                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 block dark:hidden text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Official Colorado State Simplified Navigation Bar (6 Core Tabs) -->
+        <nav aria-label="Main Navigation" class="bg-[#002855] text-white border-b-2 border-[#c69214]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between py-1">
+                    <!-- Desktop Nav Menu -->
+                    <div class="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs font-bold uppercase tracking-wider">
+                        <!-- 1. Home -->
+                        <a href="index.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Home</a>
+
+                        <!-- 2. Transit Map -->
+                        <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">Transit Map</a>
+
+                        <!-- 3. Fares & Cards (Dropdown) -->
+                        <div class="relative group">
+                            <a href="fares.html" class="flex items-center gap-1 px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                                <span>Fares &amp; Cards</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="fares.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Fares &amp; Rate Schedules</a>
+                                <a href="fares.html#transfer-policy" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Transfer Add-On Policy</a>
+                                <a href="ca-card.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">CoCo Cards &amp; E-Ink Architecture</a>
+                                <a href="fares.html#guidelines" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Accessibility &amp; Rider Rules</a>
+                            </div>
+                        </div>
+
+                        <!-- 4. Rail Network (Dropdown) -->
+                        <div class="relative group">
+                            <a href="cocor-local.html" class="flex items-center gap-1 px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                                <span>Rail Network</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="cocor-local.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">CoCoR Local Rail (All-Stops)</a>
+                                <a href="cocorx-express.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">CoCoRX Express (125 mph High-Speed)</a>
+                            </div>
+                        </div>
+
+                        <!-- 5. Bus & Shuttles (Dropdown) -->
+                        <div class="relative group">
+                            <a href="cocom-bustang.html" class="flex items-center gap-1 px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded transition-colors">
+                                <span>Bus &amp; Shuttles</span>
+                                <svg class="w-3 h-3 text-amber-400 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 top-full hidden group-hover:block group-focus-within:block w-64 bg-[#001f42] border border-[#c69214]/60 rounded-b-lg shadow-2xl py-1 z-50">
+                                <a href="cocom-bustang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Bustang Intercity Coach</a>
+                                <a href="cocom-pegasus.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Pegasus Mountain Shuttle</a>
+                                <a href="cocom-outrider.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Outrider Rural Lifeline (10 Routes)</a>
+                                <a href="cocom-snowstang.html" class="block px-4 py-2 text-xs text-slate-100 hover:bg-[#0f294a] hover:text-amber-300 font-bold transition-colors">Snowstang Ski Express</a>
+                            </div>
+                        </div>
+
+                        <!-- 6. Services & Notices (Active) -->
+                        <a href="services-notices.html" class="px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">Services &amp; Notices</a>
+                    </div>
+
+                    <!-- Mobile Menu Hamburger Button -->
+                    <div class="md:hidden flex items-center justify-between w-full py-1">
+                        <span class="text-xs font-black text-amber-300 uppercase tracking-wider">Services &amp; Notices</span>
+                        <button onclick="toggleMobileNav()" aria-label="Toggle navigation menu" class="p-1.5 rounded bg-[#0f294a] hover:bg-[#1b4d3e] text-amber-400 focus:outline-none">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Expandable Menu Drawer -->
+                <div id="mobileNavDrawer" class="hidden md:hidden pb-3 pt-1 border-t border-slate-700/60 text-xs uppercase font-bold space-y-1">
+                    <a href="index.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Home</a>
+                    <a href="map.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Transit Map</a>
+                    <a href="fares.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Fares &amp; Cards</a>
+                    <a href="cocor-local.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Rail Network (Local &amp; Express)</a>
+                    <a href="cocom-bustang.html" class="block px-3 py-1.5 text-slate-200 hover:text-amber-300 rounded">Bus &amp; Shuttles (Bustang, Pegasus, Outrider, Snowstang)</a>
+                    <a href="services-notices.html" class="block px-3 py-1.5 text-amber-300 bg-[#0f294a] rounded font-black">Services &amp; Notices</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full space-y-8">
+
+        <!-- Portal Hero Header -->
+        <section class="bg-gradient-to-r from-[#002855] via-[#0f294a] to-[#1b4d3e] text-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-md border border-slate-700/60">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#c69214]/20 border border-[#c69214]/60 text-amber-300 text-xs font-bold uppercase tracking-wider mb-3">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Live Operations &amp; Civic Notices Portal</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
+                    Statewide Services, Advisories &amp; Public Notices
+                </h1>
+                <p class="text-slate-200 text-sm sm:text-base leading-relaxed max-w-3xl mb-6">
+                    Real-time operational alerts for mountain passes and rail tunnels, independent planning study review windows, station customer service desk locations, and live system reliability metrics.
+                </p>
+
+                <!-- Live Headline Indicator -->
+                <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-white/15 text-xs text-slate-300">
+                    <div class="flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md font-bold border border-emerald-500/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        <span>Moffat Tunnel: Clear</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-md font-bold border border-amber-500/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span>I-70 Vail Pass: Traction Law Active (Chains on Bustang)</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-md font-bold border border-blue-500/40">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                        <span>CoCoR Fleet: 98.4% On-Time</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: ACTIVE TRAVEL & WEATHER ADVISORIES -->
+        <section id="advisories" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-300 dark:border-slate-800 pb-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Section 1</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-[#002855] dark:text-white">Active Travel &amp; Weather Advisories</h2>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Real-time status for mountain passes, highway traction codes, rail corridors, and winter operations</p>
+                </div>
+                <div class="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    Updated every 5 mins &bull; Live Simulation
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card 1: I-70 Mountain Corridor (Eisenhower Tunnel & Vail Pass) -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-amber-400/80 dark:border-amber-500/70 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 font-extrabold text-[10px] uppercase border border-amber-300 dark:border-amber-800">Traction Law Code 15</span>
+                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                                Active Advisory
+                            </span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">I-70 Corridor: Vail Pass &amp; Eisenhower Tunnel</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            Winter weather conditions between Georgetown (MM 228) and Vail (MM 176). Light packed snow on road deck; gusts up to 35 mph.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Bustang West Line:</strong> Automatic Insta-Chains engaged; operating with ~15 min weather delay.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Pegasus Micro-Transit:</strong> Mercedes Sprinter AWD units active in Express Toll Lanes.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Eisenhower-Johnson:</strong> Both bores open, zero metering in effect.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Passenger Traction Code: Required</span>
+                        <a href="cocom-bustang.html" class="text-amber-600 dark:text-amber-400 font-bold hover:underline">Bustang Alerts &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Moffat Tunnel Rail Corridor (CoCoR & Amtrak California Zephyr) -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-400/80 dark:border-emerald-500/70 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 text-emerald-900 dark:text-emerald-300 font-extrabold text-[10px] uppercase border border-emerald-300 dark:border-emerald-800">Clear &bull; On Time</span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                Normal Operation
+                            </span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Moffat Tunnel &amp; Continental Divide Rail</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            East Portal (Rollinsville) to West Portal (Winter Park Resort). Continuous automated ventilation cycles nominal; track heaters running.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Amtrak Zephyr (ZX):</strong> Clear through tunnel with zero freight dispatch delay.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Winter Park Express (WX):</strong> Direct ski platform boarding operational.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Track Temperature:</strong> 34&deg;F internal / 18&deg;F summit surface.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Speed Limit: 60 mph full FRA rating</span>
+                        <a href="cocorx-express.html" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">Ski Rail Status &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card 3: San Juan Skyway (Outrider Durango–Grand Junction) -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950/80 text-blue-900 dark:text-blue-300 font-extrabold text-[10px] uppercase border border-blue-300 dark:border-blue-800">Mountain Pass Alert</span>
+                            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                Pass Caution
+                            </span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">San Juan Skyway &amp; Lizard Head Pass</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            CO-145 and US-550 high elevation passes. CDOT snowplow teams conducting intermittent avalanche mitigation above Telluride.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Outrider Durango &harr; Grand Jct:</strong> Heavy-duty ElDorado 35-ft coaches chained and cleared.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Telluride Transfer:</strong> Local mountain village gondola operating normally.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Rico &amp; Dolores:</strong> Roadway wet with scattered slush.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Commercial Chains: Required</span>
+                        <a href="cocom-outrider.html" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">Outrider Timetables &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card 4: Front Range Spine Rail (FR / FRX) -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-400/80 dark:border-emerald-500/70 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/80 text-emerald-900 dark:text-emerald-300 font-extrabold text-[10px] uppercase border border-emerald-300 dark:border-emerald-800">Spine Clear</span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">98.4% On Time</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Front Range Rail Spine (Fort Collins &harr; Trinidad)</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            All 16 local stations and 8 express hubs reporting nominal signal status. Positive Train Control (PTC) active statewide.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Line FR Local:</strong> 30-min peak intervals running on exact schedule.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Line FRX Express:</strong> 125 mph test runs nominal Denver &harr; Colorado Springs.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Level Boarding:</strong> All gap fillers and platform heating elements clear of ice.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Track Status: 100% Green</span>
+                        <a href="cocor-local.html" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">Local Stations &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card 5: Eastern Plains Corridor (EP / EPX) -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-900 dark:text-amber-300 font-extrabold text-[10px] uppercase border border-amber-300 dark:border-amber-800">Crosswind Watch</span>
+                            <span class="text-xs font-bold text-slate-500">35 mph Gusts</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Eastern Plains Line (Denver &harr; Limon &harr; Burlington)</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            Open prairie wind alert near Flagler and Burlington. Trainsets ballasted for 60+ mph crosswinds; no operating speed reductions.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Station Stops:</strong> Denver, DIA, Limon, Flagler, Burlington all fully operational.</div>
+                            <div><strong class="text-slate-900 dark:text-white">DIA Connections:</strong> Synchronized rail transfer platform at DIA terminal running seamlessly.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Passenger Rail &bull; All 5 Stations Open</span>
+                        <a href="cocor-local.html" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">Route Stations &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Card 6: Snowstang Ski Express Weekend Dispatch -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-cyan-400/80 dark:border-cyan-500/70 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-950/80 text-cyan-900 dark:text-cyan-300 font-extrabold text-[10px] uppercase border border-cyan-300 dark:border-cyan-800">Weekend Ski Dispatch</span>
+                            <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400">100% Reserved</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Snowstang Ski Lines: Loveland, A-Basin, Copper, Breck</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 mb-3">
+                            Direct weekend ski coaches departing Denver Union Station and Federal Center at 5:45 AM – 6:00 AM. Chairlift base drops confirmed.
+                        </p>
+                        <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <div><strong class="text-slate-900 dark:text-white">Line 1:</strong> Loveland Basin &amp; Arapahoe Basin base staging operational.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Line 2:</strong> Copper Mountain Center Village &amp; Breck Gondola Station ready.</div>
+                            <div><strong class="text-slate-900 dark:text-white">Ski Locker Storage:</strong> Heated lower luggage bays unlocked for roll-on boarding.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Weekend Peak Dispatch Only</span>
+                        <a href="cocom-snowstang.html" class="text-cyan-600 dark:text-cyan-400 font-bold hover:underline">Snowstang Lines &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CIVIC & PUBLIC PLANNING NOTICES -->
+        <section id="civic-notices" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-300 dark:border-slate-800 pb-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Section 2</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-[#002855] dark:text-white">Civic &amp; Public Planning Notices</h2>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Independent planning study updates, public commentary windows, and environmental documentation</p>
+                </div>
+                <div class="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    60-Day Feedback Window Open
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Planning Notice 1: Environmental Review & Route Alignment Study -->
+                <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 space-y-4 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-[#002855] text-amber-300">STUDY NOTICE #2026-CO-04</span>
+                        <span class="text-xs text-slate-500">Published November 2026 &bull; Independent Civic Review</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                        Draft Statewide Rail Alignment &amp; Clean Dual-Mode Fleet Environmental Review
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        The CoCo Independent Transit Planning Study has published its comprehensive Phase III corridor alignment review, evaluating passenger rail operations along existing BNSF and Union Pacific trackage shared corridors. The report details noise abatement through quiet zones in Loveland, Longmont, and Colorado Springs, zero-emission battery-electric multiple units (BEMU) within urban terminal air basins, and grade separation priority at 14 high-volume Front Range arterial crossings.
+                    </p>
+                    <div class="p-4 rounded-xl bg-amber-50 dark:bg-slate-800/80 border border-amber-200 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200 space-y-2">
+                        <div class="font-bold text-[#002855] dark:text-amber-400 flex items-center gap-1.5">
+                            <span>Public Comment Period: Open through January 15, 2027</span>
+                        </div>
+                        <p class="text-[11px] leading-relaxed">
+                            Members of the public, municipal transportation planners, and regional mobility advocates are invited to review the draft timetables and submit formal written commentary on station dwell times, early-morning airport commuter connections, and ADA low-floor platform specifications.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Feedback Form Box -->
+                    <div class="border-t border-slate-200 dark:border-slate-800 pt-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-2">
+                            Submit Feedback on CoCo Transit Network Proposal
+                        </h4>
+                        <form onsubmit="handleFeedbackSubmit(event)" class="space-y-3 text-xs">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Your Name / Organization</label>
+                                    <input type="text" id="feedbackName" required placeholder="e.g. Jane Doe / Larimer County Transit" class="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#002855]">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Target Corridor / Service</label>
+                                    <select id="feedbackCorridor" class="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#002855]">
+                                        <option value="fr">CoCoR Front Range Line (FR / FRX)</option>
+                                        <option value="ne">CoCoR Northeast Line (NE / NEX)</option>
+                                        <option value="ep">CoCoR Eastern Plains Line (EP / EPX)</option>
+                                        <option value="sl">CoCoR Southern Line (SL / SLX)</option>
+                                        <option value="av">CoCoR Arkansas Valley Line (AV / AVX)</option>
+                                        <option value="lt">CoCoR Lamar–Trinidad Line (LT / LTX)</option>
+                                        <option value="bus">CoCoM Bustang Highway Coaches</option>
+                                        <option value="peg">CoCoM Pegasus Mountain Shuttle</option>
+                                        <option value="out">CoCoM Outrider Rural Lifeline (10 Routes)</option>
+                                        <option value="card">CoCo Cards &amp; E-Ink Fare Hardware</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 dark:text-slate-400 font-semibold mb-1">Feedback Comments or Proposed Service Adjustments</label>
+                                <textarea id="feedbackText" rows="3" required placeholder="Share your suggestions for station locations, frequency, transfer windows, or accessibility enhancements..." class="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#002855]"></textarea>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span id="feedbackStatus" class="text-emerald-600 dark:text-emerald-400 font-bold hidden text-[11px]">Thank you! Your civic feedback has been logged into the planning registry.</span>
+                                <button type="submit" class="px-4 py-2 rounded-lg bg-[#002855] hover:bg-[#0f294a] text-white font-bold transition-colors shadow-xs ml-auto">
+                                    Submit Public Comment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Planning Notice 2: Statutory Context & State Legislative Reference -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 space-y-4 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-[#c69214] text-slate-950">STATUTORY CONTEXT</span>
+                        </div>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white">
+                            Alignment with Colorado Senate Bill 21-260 &amp; Front Range Passenger Rail District
+                        </h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            This independent proposal is architected to complement the statutory framework established under Colorado SB 21-260 (Sustainability of the Transportation System) and SB 24-184 (Support for Passenger Rail Service).
+                        </p>
+                        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs space-y-1.5">
+                            <div class="font-bold text-[#002855] dark:text-amber-400">Key Legal Boundaries:</div>
+                            <ul class="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-300 text-[11px]">
+                                <li>Non-governmental, independent study vision.</li>
+                                <li>Does not supersede CDOT or FRPRD official board filings.</li>
+                                <li>All fares model state equity mandates (50% Youth/Senior, 30% College discounts).</li>
+                                <li>Official public hearings are held exclusively by the State at <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-500 font-bold underline">codot.gov</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500">
+                        <span>CORA Inquiries: Reference C.R.S. &sect; 24-72-201</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: STATION DESKS & KIOSK SERVICES DIRECTORY -->
+        <section id="station-desks" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-300 dark:border-slate-800 pb-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Section 3</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-[#002855] dark:text-white">Station Desks &amp; Kiosk Services Directory</h2>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Locations of fully staffed Main Desks, unbanked cash reload portals, 18th Birthday Swaps, and 24/7 automated kiosks</p>
+                </div>
+                <div class="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    4 Main Regional Desks &bull; 92 Automated Kiosks
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Desk 1: Denver Union Station -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 font-extrabold text-[10px]">MAIN HUB DESK</span>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Staffed 6 AM – 10 PM</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Denver Union Station</h3>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-3">Great Hall Concourse &bull; Lower Level Bus Concourse</div>
+                        <ul class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Unbanked cash-to-card loads ($0 fee)</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Senior / Veteran photo ID verification</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Y-to-C 18th Birthday Free Card Swaps</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>ADA assistance &amp; Braille timetable cards</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-500">
+                        <span>4 Kiosks &bull; 2 Cash Desks</span>
+                        <a href="ca-card.html#hardware" class="text-blue-600 dark:text-blue-400 font-bold hover:underline">Card Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Desk 2: Grand Junction Intermodal Hub -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 font-extrabold text-[10px]">WESTERN REGIONAL DESK</span>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Staffed 7 AM – 7 PM</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Grand Junction Hub</h3>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-3">Platform 1 Intermodal Terminal &bull; Pitkin Ave</div>
+                        <ul class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Outrider rural parcel &amp; luggage check</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Unbanked cash load &amp; C Card tap reload</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Bustang West Line express seat assist</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>GJT Airport bus transfer coordination</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-500">
+                        <span>2 Kiosks &bull; 1 Cash Desk</span>
+                        <a href="cocom-bustang.html" class="text-purple-600 dark:text-purple-400 font-bold hover:underline">West Line &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Desk 3: Pueblo Union Depot -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 font-extrabold text-[10px]">SOUTHERN REGIONAL DESK</span>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Staffed 7 AM – 8 PM</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Pueblo Union Depot</h3>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-3">Historic Great Hall Concourse &bull; Victoria Ave</div>
+                        <ul class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Southern Line (SL) &amp; AV transfer help</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Military / Veteran discount certification</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Pueblo Transit local bus pass linking</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Spanish / English bilingual support</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-500">
+                        <span>2 Kiosks &bull; 1 Cash Desk</span>
+                        <a href="cocor-local.html" class="text-amber-600 dark:text-amber-400 font-bold hover:underline">Southern Line &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Desk 4: Fort Collins Downtown Transit Center -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="px-2 py-0.5 rounded-md bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-300 font-extrabold text-[10px]">NORTHERN REGIONAL DESK</span>
+                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Staffed 6:30 AM – 7:30 PM</span>
+                        </div>
+                        <h3 class="text-base font-black text-slate-900 dark:text-white">Fort Collins DTC</h3>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-3">Mason St &amp; Laporte Ave &bull; Transfort Station</div>
+                        <ul class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>CSU University U-Card transit linking</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Front Range Express (FRX) reservations</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>MAX BRT transfer validation</span>
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <span class="text-emerald-500 font-bold">&check;</span>
+                                <span>Bike locker &amp; cargo trailer rental check</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-500">
+                        <span>3 Kiosks &bull; 1 Cash Desk</span>
+                        <a href="ca-card.html" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">U-Card Matrix &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Service Automated Kiosks Banner -->
+            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-[#002855] text-amber-300 flex items-center justify-center font-bold text-lg shrink-0">
+                        &#9633;
+                    </div>
+                    <div>
+                        <div class="font-bold text-slate-900 dark:text-white">24/7 Automated Touchscreen Kiosks at all 92 Stations</div>
+                        <p class="text-slate-600 dark:text-slate-400 text-[11px]">Instant NFC card issuance, contactless bank card payments, cash insertion (dispenses change), and live multimodal timetable printing.</p>
+                    </div>
+                </div>
+                <div class="shrink-0 flex items-center gap-2">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px] border border-emerald-300 dark:border-emerald-800">100% Kiosk Uptime</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SYSTEM RELIABILITY & ON-TIME PERFORMANCE -->
+        <section id="metrics" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-300 dark:border-slate-800 pb-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Section 4</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-[#002855] dark:text-white">System Reliability &amp; Performance Metrics</h2>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Rolling 30-day simulated operational performance across passenger rail, intercity coaches, and alpine shuttles</p>
+                </div>
+                <div class="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    State Performance Mandate: &ge; 90.0%
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- Metric 1: CoCoR Local Rail -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-sm text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-indigo-600 dark:text-indigo-400 mb-1">98.4%</div>
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">CoCoR Local Rail</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">On-Time Performance (&plusmn;5 mins)</div>
+                    <div class="mt-3 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/50 py-0.5 rounded">
+                        &uarr; +1.2% Above Target
+                    </div>
+                </div>
+
+                <!-- Metric 2: CoCoRX Express Rail -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-sm text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">97.9%</div>
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">CoCoRX Express Rail</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">125 mph Priority Bypass</div>
+                    <div class="mt-3 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/50 py-0.5 rounded">
+                        &uarr; High-Speed On-Time
+                    </div>
+                </div>
+
+                <!-- Metric 3: CoCoM Bustang Intercity -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-sm text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-purple-600 dark:text-purple-400 mb-1">94.8%</div>
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">CoCoM Bustang Coaches</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">I-25 &amp; I-70 Corridors</div>
+                    <div class="mt-3 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/50 py-0.5 rounded">
+                        Adjusts for Mountain Storms
+                    </div>
+                </div>
+
+                <!-- Metric 4: Fleet Accessibility -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-sm text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-amber-500 mb-1">100%</div>
+                    <div class="text-xs font-bold text-slate-900 dark:text-white">ADA Fleet Compliance</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Level Boarding &amp; Ramped Access</div>
+                    <div class="mt-3 text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-950/50 py-0.5 rounded">
+                        Full Accessibility Guarantee
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Official Colorado State Civic Footer -->
+    <footer class="mt-auto bg-[#001428] text-white border-t-4 border-[#c69214] transition-colors shrink-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-xs">
+                <!-- Col 1: Initiative Identification & Contact -->
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
+                            <span class="text-[#c69214] font-black text-xs">CO</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-sm tracking-tight text-white flex items-center gap-2">
+                                <span>Colorado Statewide Transit Proposal (CoCo)</span>
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950">Unofficial</span>
+                            </div>
+                            <div class="text-[11px] text-amber-300">Independent Community Public Transportation Master Plan</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed text-[11px]">
+                        CoCo (Colorado Connected) is an independent civic advocacy study proposing a unified statewide passenger rail and intercity coach network connecting the Front Range, Western Slope, Mountain Resorts, and Rural Plains.
+                    </p>
+                    <div class="text-slate-400 text-[11px] space-y-0.5">
+                        <p><strong>Advocacy Address:</strong> 1700 Broadway, Suite 1200, Denver, CO 80290</p>
+                        <p><strong>Public Inquiries:</strong> info@cocotransit.org &bull; (303) 555-COCO</p>
+                    </div>
+                </div>
+
+                <!-- Col 2: Network Directory -->
+                <div>
+                    <h4 class="font-bold uppercase tracking-wider text-amber-400 mb-3 text-xs">Network Directory</h4>
+                    <ul class="space-y-1.5 text-slate-300 text-xs">
+                        <li><a href="map.html" class="hover:text-amber-300 transition-colors">Statewide Transit Map</a></li>
+                        <li><a href="fares.html" class="hover:text-amber-300 transition-colors">Fares &amp; Rate Schedules</a></li>
+                        <li><a href="fares.html#transfer-policy" class="hover:text-amber-300 transition-colors">Transfer Add-On Policy</a></li>
+                        <li><a href="ca-card.html" class="hover:text-amber-300 transition-colors">CoCo Cards &amp; E-Ink Architecture</a></li>
+                        <li><a href="cocor-local.html" class="hover:text-amber-300 transition-colors">CoCoR Local Passenger Rail</a></li>
+                        <li><a href="cocorx-express.html" class="hover:text-amber-300 transition-colors">CoCoRX Express Rail</a></li>
+                        <li><a href="cocom-bustang.html" class="hover:text-amber-300 transition-colors">CoCoM Bustang Coach</a></li>
+                        <li><a href="services-notices.html" class="hover:text-amber-300 transition-colors">Services &amp; Notices Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Official State Agencies & Transparency -->
+                <div>
+                    <h4 class="font-bold uppercase tracking-wider text-amber-400 mb-3 text-xs">Official State Portals</h4>
+                    <ul class="space-y-1.5 text-slate-300 text-xs">
+                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado DOT (codot.gov) &nearr;</a></li>
+                        <li><a href="https://ridebustang.com" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Bustang Official (ridebustang.com) &nearr;</a></li>
+                        <li><a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">RTD Denver (rtd-denver.com) &nearr;</a></li>
+                        <li><a href="https://leg.colorado.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado General Assembly &nearr;</a></li>
+                        <li><a href="https://coloradosos.gov" target="_blank" rel="noopener" class="hover:text-amber-300 transition-colors">Colorado Secretary of State &nearr;</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Civic Transparency & CORA Notice -->
+            <div class="p-3.5 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 leading-relaxed mb-6">
+                <strong class="text-amber-400">Civic Disclaimer &amp; Open Public Records (CORA):</strong>
+                This website is an independent community advocacy and planning concept. It is not managed, operated, or funded by the State of Colorado, CDOT, RTD, or any government body. Under the Colorado Open Records Act (C.R.S. &sect; 24-72-201 et seq.), official state public transportation records and legislative filings may be requested directly from official state custodians at <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-300 underline font-semibold">codot.gov</a>.
+            </div>
+
+            <!-- Bottom Legal & Accessibility Links -->
+            <div class="border-t border-slate-800 pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-3">
+                <div>
+                    &copy; 2026 Colorado Statewide Transit Proposal (CoCo). Independent Community Planning Study.
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="fares.html#guidelines" class="hover:text-slate-200">ADA Accessibility</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-200">Title VI Compliance</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-200">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#transfer-policy" class="hover:text-slate-200">Transfer Rules</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Handling & Nav Script -->
+    <script>
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+
+        function toggleMobileNav() {
+            const drawer = document.getElementById('mobileNavDrawer');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            const status = document.getElementById('feedbackStatus');
+            const name = document.getElementById('feedbackName');
+            const text = document.getElementById('feedbackText');
+            if (status) {
+                status.classList.remove('hidden');
+                if (name) name.value = '';
+                if (text) text.value = '';
+                setTimeout(() => {
+                    status.classList.add('hidden');
+                }, 6000);
+            }
+        }
+    </script>
+</body>
+</html>
