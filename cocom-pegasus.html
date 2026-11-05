@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCoM Pegasus Mountain Micro-Transit — Fleet &amp; Specifications — CoCo Transit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+        }
+        .dark {
+            --bg-color: #0b1120;
+            --text-color: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-rose-600 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-rose-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(225,29,72,0.5)] shrink-0 transition-transform group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCoM</span>
+                            <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Pegasus</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Mountain Micro-Transit &bull; I-70 Express Shoulder-Running Vans</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Navigation Links & Services Menu -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <nav class="hidden md:flex items-center gap-1.5">
+                    <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Home
+                    </a>
+                    <a href="map.html" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Interactive Map
+                    </a>
+                    <a href="fares.html#cocom-pegasus" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Fares &amp; Calculator
+                    </a>
+                </nav>
+
+                <!-- Services Dropdown Menu -->
+                <div class="relative group">
+                    <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/80 text-rose-700 dark:text-rose-300 font-bold text-xs sm:text-sm border border-rose-200 dark:border-rose-800 shadow-sm transition-all focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span>All Services</span>
+                        <svg class="h-3.5 w-3.5 text-rose-500 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="hidden group-hover:block absolute right-0 mt-1 w-72 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl py-2 z-50 divide-y divide-slate-100 dark:divide-slate-800/60">
+                        <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Passenger Rail (CoCoR)</div>
+                        <div class="py-1">
+                            <a href="cocor-local.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 flex items-center justify-center font-bold text-[10px]">COR</span>
+                                <div>
+                                    <div class="font-bold">CoCoR Local Rail</div>
+                                    <div class="text-[10px] text-slate-400">The Community Rail Backbone</div>
+                                </div>
+                            </a>
+                            <a href="cocorx-express.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center font-bold text-[10px]">COR-X</span>
+                                <div>
+                                    <div class="font-bold">CoCoRX Express</div>
+                                    <div class="text-[10px] text-slate-400">125 mph Rapid Corridor</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Motorcoach &amp; Micro-Transit (CoCoM)</div>
+                        <div class="py-1">
+                            <a href="cocom-bustang.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-purple-950/60 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-[10px]">BUS</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Bustang</div>
+                                    <div class="text-[10px] text-slate-400">Intercity Express Coach</div>
+                                </div>
+                            </a>
+                            <a href="cocom-pegasus.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300">
+                                <span class="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold text-[10px]">PEG</span>
+                                <div>
+                                    <div class="font-bold flex items-center gap-1.5">CoCoM Pegasus <span class="text-[9px] px-1 rounded bg-rose-200 dark:bg-rose-900 text-rose-800 dark:text-rose-200">Active</span></div>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400">Mountain Micro-Transit</div>
+                                </div>
+                            </a>
+                            <a href="cocom-outrider.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center font-bold text-[10px]">OUT</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Outrider</div>
+                                    <div class="text-[10px] text-slate-400">Rural Lifeline Network</div>
+                                </div>
+                            </a>
+                            <a href="cocom-snowstang.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-cyan-100 dark:bg-cyan-900/60 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-[10px]">SKI</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Snowstang</div>
+                                    <div class="text-[10px] text-slate-400">Ski Resort Base Express</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Switcher -->
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm transition-colors">
+                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-rose-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-rose-800/40">
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/30 text-rose-300 text-xs font-semibold mb-4 backdrop-blur-sm">
+                    <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                    I-70 Mountain Express Lane Authorized Shuttle Van
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+                    CoCoM Pegasus Mountain Micro-Transit
+                </h1>
+                <p class="text-rose-100/90 text-lg sm:text-xl font-medium mb-3">
+                    Fast, Agile High-Frequency Mountain Van Transit
+                </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-3xl">
+                    CoCoM Pegasus is Colorado’s nimble mountain micro-transit solution designed to bypass weekend gridlock on I-70. Utilizing customized Mercedes-Benz Sprinter 3500 &amp; Ford Transit AWD vans, Pegasus holds exclusive CDOT authorization to operate toll-free in the I-70 Mountain Express Lanes (Hard Shoulder Running), cutting up to an hour off peak ski commutes.
+                </p>
+
+                <!-- Key Metric Highlights -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-white/10 text-left mb-8">
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-rose-300 font-bold mb-1">Fleet Capacity</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white">11–14 <span class="text-xs font-normal text-rose-300">Guests</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">High-roof captain chairs</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-rose-300 font-bold mb-1">I-70 Traffic Bypass</div>
+                        <div class="text-2xl sm:text-3xl font-black text-yellow-400">Express <span class="text-xs font-normal text-rose-300">Lane</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Hard shoulder running auth</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-rose-300 font-bold mb-1">Winter Tech</div>
+                        <div class="text-2xl sm:text-3xl font-black text-cyan-400">AWD <span class="text-xs font-normal text-cyan-200">+ Chains</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Insta-Chain automatic</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-rose-300 font-bold mb-1">Affordable Fares</div>
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-400">$13–$20</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Includes ski gear locker</div>
+                    </div>
+                </div>
+
+                <!-- Action CTAs -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#fleet-specs" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm shadow-lg shadow-rose-600/30 transition-all flex items-center gap-2">
+                        <span>Inspect Pegasus Van Specs</span>
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </a>
+                    <a href="fares.html#cocom-pegasus" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 backdrop-blur-sm transition-all flex items-center gap-2">
+                        <span>Pegasus Fares &amp; Schedule</span>
+                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"/></svg>
+                    </a>
+                    <a href="map.html" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 backdrop-blur-sm transition-all flex items-center gap-2">
+                        <span>View Mountain Route on Map</span>
+                        <svg class="h-4 w-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fleet & Equipment Specifications Section -->
+        <section id="fleet-specs" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Micro-Transit Van Architecture</div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+                        Fleet &amp; Equipment Specifications
+                    </h2>
+                </div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">
+                    Mercedes-Benz Sprinter 3500XD &amp; Ford Transit AWD High-Roof Shuttles
+                </div>
+            </div>
+
+            <!-- Visual Van Consist Layout Card -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="h-5 w-5 text-rose-600 dark:text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        <span>14-Passenger High-Roof AWD Shuttle Architecture</span>
+                    </h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 font-bold border border-rose-200 dark:border-rose-800">
+                        CDOT Express Lane Certified
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Custom built for steep Continental Divide grades and sudden winter blizzards. Equipped with high-clearance all-wheel drive, severe-duty Nokian Hakkapeliitta studded winter tires, automated Insta-Chain pneumatic snow chain deployment, and electronic Telma transmission retarders.
+                </p>
+
+                <!-- Shuttle Diagram -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2">
+                    <!-- Zone 1: Cockpit & Front Entry -->
+                    <div class="p-4 rounded-2xl bg-rose-50/70 dark:bg-rose-950/40 border-2 border-rose-500 dark:border-rose-600 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-700 dark:text-rose-300">Front Cockpit</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Driver + Co-Pilot</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Commercial Winter Cockpit</div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">CDOT AVL GPS transponder for automatic Express Lane gate clearance. Dashboard Insta-Chain snow chain control switch.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-rose-700 dark:text-rose-300 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Tap-On validator at entry door
+                        </div>
+                    </div>
+
+                    <!-- Zone 2: Guest Cabin -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-slate-200 dark:border-slate-700 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Guest Cabin</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">11–14 Seats</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Luxury Captain Chair Seating</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Individual leatherette captain chairs with armrests, cup holders, USB-C fast charging, and 6'6" standing interior headroom.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> High-speed 5G Wi-Fi hotspot
+                        </div>
+                    </div>
+
+                    <!-- Zone 3: ADA Wheelchair Securement -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-slate-200 dark:border-slate-700 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Accessibility</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">1 Wheelchair</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Rear Power Hydraulic Lift</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Heavy-duty commercial under-chassis wheelchair lift with quick-release flip seating for universal accessible boarding.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 100% ADA compliant
+                        </div>
+                    </div>
+
+                    <!-- Zone 4: Exterior Rear Ski Locker -->
+                    <div class="p-4 rounded-2xl bg-orange-50/70 dark:bg-orange-950/40 border-2 border-orange-500 dark:border-orange-600 relative">
+                        <div class="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-orange-600 text-white text-[9px] font-black uppercase tracking-wider shadow">Gear Locker</div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-orange-700 dark:text-orange-300">Exterior Rear</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">14 Skis/Boards</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Custom Vertical Ski Box</div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Aerodynamic rear swing-away vertical ski locker holding 14 pairs of powder skis or snowboards without cluttering interior cabin space.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-orange-700 dark:text-orange-300 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-orange-500"></span> Free ski gear carriage included
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Specifications Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Spec Card 1: Mountain Powertrain & AWD -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">All-Weather Capability</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">High-Traction AWD Tech</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Drivetrain:</strong> Electronic Torque-on-Demand All-Wheel Drive with low-range transfer case.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Winter Tires:</strong> Severe-service Nokian Hakkapeliitta LT3 studded snow tires.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Insta-Chain:</strong> Pneumatic deployable automatic snow chains engageable at 30 mph with zero stops.</li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 2: Express Lane Hard-Shoulder Running -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">CDOT Express Privilege</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Toll-Free Shoulder Access</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Express Lanes:</strong> Authorized for toll-free usage of eastbound &amp; westbound I-70 Mountain Express Lanes.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Hard Shoulder Running:</strong> Certified to legally utilize reinforced paved shoulders when general lanes halt.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Time Savings:</strong> Bypasses up to 60 minutes of peak Floyd Hill and Georgetown hill gridlock.</li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 3: Exterior Gear Locker -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Adventure Ready</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">14-Pair Vertical Ski Box</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Ski Storage:</strong> Custom rear-mounted fiberglass vault holds 14 skis (up to 205cm) or snowboards.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Boot &amp; Bag Storage:</strong> Heated under-seat luggage trays keep ski boot bags warm and dry.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Summer Config:</strong> Swaps to 8-bike vertical shuttle rack for Summit County downhill trails.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pegasus Mountain Corridor Stops -->
+        <section class="space-y-6">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">High-Frequency Route</div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+                        I-70 Mountain Corridor Service
+                    </h2>
+                </div>
+                <div class="text-xs text-slate-500">Departs every 60 minutes Friday through Monday</div>
+            </div>
+
+            <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded-md bg-rose-100 dark:bg-rose-900/60 text-rose-800 dark:text-rose-300 font-black text-xs">Line PEG</span>
+                        <h4 class="text-xl font-black text-slate-900 dark:text-white mt-2">Denver &harr; Frisco &harr; Vail &harr; Avon</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Connecting Front Range travelers directly to Summit County and Eagle County ski towns.</p>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <div class="text-2xl font-black text-rose-600 dark:text-rose-400">$13.00 – $20.00</div>
+                        <div class="text-[11px] text-slate-400">One-way guaranteed seat</div>
+                    </div>
+                </div>
+
+                <!-- Route Progression Steps -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 pt-2 text-center">
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">1</span>
+                        <div class="font-extrabold text-xs text-slate-900 dark:text-white">Denver Union</div>
+                        <div class="text-[10px] text-slate-400">Downtown Anchor</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">2</span>
+                        <div class="font-extrabold text-xs text-slate-900 dark:text-white">Federal Center</div>
+                        <div class="text-[10px] text-slate-400">Lakewood P&amp;R</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">3</span>
+                        <div class="font-extrabold text-xs text-slate-900 dark:text-white">El Rancho</div>
+                        <div class="text-[10px] text-slate-400">Evergreen Gate</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">4</span>
+                        <div class="font-extrabold text-xs text-slate-900 dark:text-white">Idaho Springs</div>
+                        <div class="text-[10px] text-slate-400">Clear Creek Hub</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">5</span>
+                        <div class="font-extrabold text-xs text-slate-900 dark:text-white">Frisco Transit</div>
+                        <div class="text-[10px] text-slate-400">Summit Hub &bull; $13</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/60 border-2 border-rose-500">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-bold text-xs inline-flex items-center justify-center mb-1.5">6</span>
+                        <div class="font-extrabold text-xs text-rose-800 dark:text-rose-200">Vail &amp; Avon</div>
+                        <div class="text-[10px] text-rose-600 dark:text-rose-300">Vail TC &bull; $20</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Structure & C&A Card Integration -->
+        <section class="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-rose-950 via-slate-900 to-indigo-950 text-white shadow-xl border border-rose-800/40 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 rounded-full bg-rose-500/30 border border-rose-400/30 text-rose-300 text-xs font-bold uppercase tracking-wider">
+                        Guaranteed High-Mountain Pricing
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-black">
+                        Affordable Micro-Transit with C &amp; A Card Integration
+                    </h3>
+                    <p class="text-rose-100/80 text-sm leading-relaxed">
+                        CoCoM Pegasus offers flat, transparent pricing between Denver and high-mountain destinations. No dynamic surge pricing, no expensive toll passes—just a guaranteed seat with ski equipment transport included.
+                    </p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-center shrink-0">
+                    <div class="text-xs uppercase tracking-wider text-rose-300 font-bold">Flat Route Fare</div>
+                    <div class="text-3xl sm:text-4xl font-black text-yellow-400 my-1">$13.00 – $20.00</div>
+                    <div class="text-xs text-slate-300">Equipment locker included</div>
+                </div>
+            </div>
+
+            <!-- Pricing Examples Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-rose-300 font-bold">Denver &harr; Idaho Springs</div>
+                    <div class="text-xl font-black text-white mt-1">$9.00</div>
+                    <div class="text-[11px] text-slate-400">Quick foothills jump</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-rose-300 font-bold">Denver &harr; Frisco Transit Center</div>
+                    <div class="text-xl font-black text-white mt-1">$13.00</div>
+                    <div class="text-[11px] text-slate-400">Breckenridge &amp; Copper transfers</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-rose-300 font-bold">Denver &harr; Vail / Avon</div>
+                    <div class="text-xl font-black text-white mt-1">$20.00</div>
+                    <div class="text-[11px] text-slate-400">Direct to Vail Village &amp; Beaver Creek</div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                <div class="flex items-center gap-2 text-xs text-rose-200">
+                    <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>Instant mobile booking with seat selection on the CoCo RealTime app.</span>
+                </div>
+                <a href="fares.html#cocom-pegasus" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-rose-950 font-black text-xs hover:bg-yellow-400 transition-colors shadow">
+                    <span>Calculate Custom Pegasus Fare</span>
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Sister Services Cross-Navigation -->
+        <section class="space-y-4">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span>Explore Other CoCo Transit Offerings</span>
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <a href="cocor-local.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">CoCoR Local</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">All-Stops Passenger Rail &rarr;</span>
+                </a>
+                <a href="cocorx-express.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">CoCoRX Express</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">125 mph High-Speed &rarr;</span>
+                </a>
+                <a href="cocom-bustang.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">CoCoM Bustang</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">Intercity Motorcoach &rarr;</span>
+                </a>
+                <a href="cocom-outrider.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block">CoCoM Outrider</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400">Rural Lifeline Routes &rarr;</span>
+                </a>
+                <a href="cocom-snowstang.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider block">CoCoM Snowstang</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">Direct Ski Base &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 transition-colors mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-rose-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-sm">
+                    <span class="text-white text-xs font-bold">C</span>
+                </div>
+                <div>
+                    <div class="text-sm font-black text-slate-900 dark:text-white">CoCo Statewide Passenger Transit</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400">State of Colorado Transit Authority &bull; CoCoM Micro-Transit Division (Pegasus)</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 font-semibold">
+                <a href="index.html" class="hover:text-rose-600 dark:hover:text-rose-400">Home</a>
+                <a href="map.html" class="hover:text-rose-600 dark:hover:text-rose-400">Map</a>
+                <a href="fares.html" class="hover:text-rose-600 dark:hover:text-rose-400">Fares &amp; Passes</a>
+                <a href="fares.html#ca-card" class="hover:text-rose-600 dark:hover:text-rose-400">C &amp; A Pass Card</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Handling Script -->
+    <script>
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>

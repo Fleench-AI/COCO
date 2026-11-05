@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCoM Outrider Rural Lifeline — Fleet &amp; Specifications — CoCo Transit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+        }
+        .dark {
+            --bg-color: #0b1120;
+            --text-color: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-600 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(5,150,105,0.5)] shrink-0 transition-transform group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCoM</span>
+                            <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Outrider</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Rural Lifeline Network &bull; Mountain Passes &amp; Plains Corridors</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Navigation Links & Services Menu -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <nav class="hidden md:flex items-center gap-1.5">
+                    <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Home
+                    </a>
+                    <a href="map.html" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Interactive Map
+                    </a>
+                    <a href="fares.html#cocom-outrider" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
+                        Fares &amp; Calculator
+                    </a>
+                </nav>
+
+                <!-- Services Dropdown Menu -->
+                <div class="relative group">
+                    <button type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/80 text-emerald-700 dark:text-emerald-300 font-bold text-xs sm:text-sm border border-emerald-200 dark:border-emerald-800 shadow-sm transition-all focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span>All Services</span>
+                        <svg class="h-3.5 w-3.5 text-emerald-500 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="hidden group-hover:block absolute right-0 mt-1 w-72 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl py-2 z-50 divide-y divide-slate-100 dark:divide-slate-800/60">
+                        <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Passenger Rail (CoCoR)</div>
+                        <div class="py-1">
+                            <a href="cocor-local.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 flex items-center justify-center font-bold text-[10px]">COR</span>
+                                <div>
+                                    <div class="font-bold">CoCoR Local Rail</div>
+                                    <div class="text-[10px] text-slate-400">The Community Rail Backbone</div>
+                                </div>
+                            </a>
+                            <a href="cocorx-express.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center font-bold text-[10px]">COR-X</span>
+                                <div>
+                                    <div class="font-bold">CoCoRX Express</div>
+                                    <div class="text-[10px] text-slate-400">125 mph Rapid Corridor</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Motorcoach &amp; Micro-Transit (CoCoM)</div>
+                        <div class="py-1">
+                            <a href="cocom-bustang.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-purple-950/60 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-[10px]">BUS</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Bustang</div>
+                                    <div class="text-[10px] text-slate-400">Intercity Express Coach</div>
+                                </div>
+                            </a>
+                            <a href="cocom-pegasus.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-rose-950/60 hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300 flex items-center justify-center font-bold text-[10px]">PEG</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Pegasus</div>
+                                    <div class="text-[10px] text-slate-400">Mountain Micro-Transit</div>
+                                </div>
+                            </a>
+                            <a href="cocom-outrider.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">OUT</span>
+                                <div>
+                                    <div class="font-bold flex items-center gap-1.5">CoCoM Outrider <span class="text-[9px] px-1 rounded bg-emerald-200 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200">Active</span></div>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400">Rural Lifeline Network</div>
+                                </div>
+                            </a>
+                            <a href="cocom-snowstang.html" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+                                <span class="w-6 h-6 rounded-lg bg-cyan-100 dark:bg-cyan-900/60 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-[10px]">SKI</span>
+                                <div>
+                                    <div class="font-bold">CoCoM Snowstang</div>
+                                    <div class="text-[10px] text-slate-400">Ski Resort Base Express</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Switcher -->
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm transition-colors">
+                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-emerald-800/40">
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold mb-4 backdrop-blur-sm">
+                    <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                    Colorado Rural Transit Equity &bull; Mountain Passes &amp; Eastern Plains
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+                    CoCoM Outrider Rural Lifeline
+                </h1>
+                <p class="text-emerald-100/90 text-lg sm:text-xl font-medium mb-3">
+                    Guaranteed Essential Transit Access for Every Colorado Community
+                </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-3xl">
+                    CoCoM Outrider connects Colorado’s most remote mountain passes, farming valleys, and rural county seats to regional hospitals, universities, and commercial centers. Operating heavy-duty 35-foot ElDorado National &amp; ARBOC low-floor coaches equipped with ruggedized high-clearance suspensions, ADA roll-on ramps, and heavily subsidized equity fares.
+                </p>
+
+                <!-- Key Metric Highlights -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-white/10 text-left mb-8">
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-emerald-300 font-bold mb-1">Coach Capacity</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white">24–38 <span class="text-xs font-normal text-emerald-300">Seats</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Heavy-duty 35-ft chassis</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-emerald-300 font-bold mb-1">Boarding Access</div>
+                        <div class="text-2xl sm:text-3xl font-black text-yellow-400">1:6 <span class="text-xs font-normal text-emerald-300">Slope Ramp</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Direct curb roll-on ADA</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-emerald-300 font-bold mb-1">Rural Corridors</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white">8 <span class="text-xs font-normal text-emerald-300">Lifeline Lines</span></div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Over 35 remote towns</div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-emerald-300 font-bold mb-1">Subsidized Fare</div>
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-400">$11–$40</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">Equity fare caps apply</div>
+                    </div>
+                </div>
+
+                <!-- Action CTAs -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#fleet-specs" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
+                        <span>Inspect Outrider Specs</span>
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </a>
+                    <a href="fares.html#cocom-outrider" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 backdrop-blur-sm transition-all flex items-center gap-2">
+                        <span>Lifeline Routes &amp; Fares</span>
+                        <svg class="h-4 w-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"/></svg>
+                    </a>
+                    <a href="map.html" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 backdrop-blur-sm transition-all flex items-center gap-2">
+                        <span>Explore Rural Lines on Map</span>
+                        <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fleet & Equipment Specifications Section -->
+        <section id="fleet-specs" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Rural Coach Engineering</div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+                        Fleet &amp; Equipment Specifications
+                    </h2>
+                </div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">
+                    Heavy-Duty 35-ft ElDorado National Axess &amp; ARBOC Low-Floor Coaches
+                </div>
+            </div>
+
+            <!-- Consist Architecture Layout Card -->
+            <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="h-5 w-5 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                        <span>Ruggedized 35-Foot High-Clearance Low-Floor Architecture</span>
+                    </h3>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800">
+                        Mountain Pass All-Weather Spec
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Designed to withstand rugged mountain passes (Monarch Pass, Lizard Head Pass, Wolf Creek Pass) and high plains winds. Features high ground clearance to clear snowdrifts, an ultra-stiff monocoque galvanized steel structure, and automated pneumatic ramp deployment.
+                </p>
+
+                <!-- Coach Diagram -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2">
+                    <!-- Zone 1: Operator & Step-Free Entry -->
+                    <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border-2 border-emerald-500 dark:border-emerald-600 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">Front Entry</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">ADA Ramp</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Low-Floor Ramp &amp; Driver Cab</div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Fast-deploying 1:6 low-slope wheelchair ramp. Yellow C&amp;A Card contactless tap validator at the entry stanchion.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-300 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Zero-step direct sidewalk boarding
+                        </div>
+                    </div>
+
+                    <!-- Zone 2: Priority ADA Zone -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-slate-200 dark:border-slate-700 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Front Cabin</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">2 Mobility Bays</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Dual ADA Securement Area</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Automatic self-tensioning Q-Straint Quantum wheelchair docking stations with easy passenger push-button release.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Non-emergency medical transport certified
+                        </div>
+                    </div>
+
+                    <!-- Zone 3: Main Passenger Cabin -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-slate-200 dark:border-slate-700 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Main Cabin</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">24–38 Seats</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Contoured High-Back Seating</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Antimicrobial vinyl seating designed for multi-hour rural journeys. Dual 110V + USB charging points at every seat row.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Cellular booster antenna
+                        </div>
+                    </div>
+
+                    <!-- Zone 4: Rear & Cargo Locker -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border-2 border-slate-200 dark:border-slate-700 relative">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Rear Cabin</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-900 font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Restroom / Gear</span>
+                        </div>
+                        <div class="text-sm font-extrabold text-slate-900 dark:text-white">Restroom &amp; Rural Freight Cargo</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sanitary onboard flush lavatory. Heavy luggage and medical supply parcel storage zone for lifeline rural delivery.</p>
+                        <div class="mt-3 flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Essential medical supply transit
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Specifications Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Spec Card 1: Rugged Chassis & Mountain Power -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">High-Clearance Chassis</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Severe Terrain Engineering</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Engine:</strong> Cummins L9 Clean Diesel generating 330 hp and 1,000 lb-ft torque.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Suspension:</strong> Ridewell heavy-duty air suspension with automatic ride height leveling over gravel roads.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Clearance:</strong> High-profile underbody protection shields fuel tanks and exhaust from icy mountain ruts.</li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 2: 100% ADA Low-Floor Accessibility -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Equity Accessibility</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Direct Low-Floor Ramp</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Zero Steps:</strong> Full low-floor entry eliminates steep coach stair climbing for seniors and riders with strollers.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Ramp Slope:</strong> 1:6 ultra-gentle grade ensures effortless manual and power wheelchair entry.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Automated Kneeling:</strong> Pneumatic front suspension kneels 4 inches to touch rural curb edges.</li>
+                    </ul>
+                </div>
+
+                <!-- Spec Card 3: Rural Lifeline Reach & Subsidies -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">State Subsidized</div>
+                            <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Equity Fare Guarantee</h4>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 pt-2">
+                        <li><strong class="text-slate-900 dark:text-white">Equity Fare Cap:</strong> Subsidized by Colorado SB-260 transit funding, capping rural lifeline fares at $11–$40.</li>
+                        <li><strong class="text-slate-900 dark:text-white">Medical Access:</strong> Direct connections to VA clinics, regional cancer centers, and dialysis facilities.</li>
+                        <li><strong class="text-slate-900 dark:text-white">C&amp;A Card Offline:</strong> Cards cache trips even in zero-cell coverage valleys along US-50 and US-285.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Outrider Lifeline Corridors -->
+        <section class="space-y-6">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Statewide Rural Coverage</div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+                        Active Outrider Lifeline Corridors
+                    </h2>
+                </div>
+                <div class="text-xs text-slate-500">Uniting 35+ towns across mountain passes and agricultural plains</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Corridor 1: Craig <-> Denver -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-40 &bull; I-70</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Craig &harr; Denver</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Hayden, Steamboat Springs, Kremmling, Granby, Winter Park, Idaho Springs.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$34.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 2: Crested Butte / Gunnison <-> Denver -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-50 &bull; US-285</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Crested Butte &harr; Denver</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Gunnison, Monarch Pass, Salida, Buena Vista, Fairplay, Bailey.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$40.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 3: Durango <-> Grand Junction -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-550 &bull; CO-145</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Durango &harr; Grand Junction</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Mancos, Cortez, Dolores, Telluride, Ridgway, Montrose, Delta.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$32.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 4: Alamosa <-> Pueblo -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-285 &bull; US-50</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Alamosa &harr; Pueblo</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Moffat, Poncha Springs, Salida, Cotopaxi, Cañon City, Penrose.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$21.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 5: Lamar <-> Colorado Springs -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-50 &bull; I-25</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Lamar &harr; Colorado Springs</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Las Animas, La Junta, Swink, Rocky Ford, Manzanola, Fowler, Pueblo.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$24.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 6: Sterling <-> Denver & Greeley -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">I-76 &bull; US-34</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Sterling &harr; Denver &amp; Greeley</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Merino, Brush, Fort Morgan, Wiggins, Keenesburg, Hudson, DIA.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$20.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 7: Grand Junction <-> Crested Butte -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">US-50 &bull; CO-135</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Grand Jct &harr; Crested Butte</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Delta, Montrose, Cimarron, Gunnison, Almont, Crested Butte.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$22.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Corridor 8: Pueblo <-> Trinidad -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-extrabold text-[11px]">I-25 South</span>
+                        <h4 class="text-base font-black text-slate-900 dark:text-white mt-2">Pueblo &harr; Trinidad</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-3">Colorado City, Walsenburg, Aguilar, Trinidad Transit Center.</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400">$11.00</span>
+                        <a href="map.html" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Route Details &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Structure & C&A Card Integration -->
+        <section class="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-emerald-950 via-slate-900 to-indigo-950 text-white shadow-xl border border-emerald-800/40 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="px-3 py-1 rounded-full bg-emerald-500/30 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                        State-Subsidized Equity Pricing
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-black">
+                        Affordable Lifeline Fares with C &amp; A Card Integration
+                    </h3>
+                    <p class="text-emerald-100/80 text-sm leading-relaxed">
+                        To preserve transit access in low-density rural counties, Outrider tickets are state-subsidized up to 60% below private bus alternatives. Tap with your C Card or A Card directly when boarding, or purchase through local county senior &amp; community centers.
+                    </p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-center shrink-0">
+                    <div class="text-xs uppercase tracking-wider text-emerald-300 font-bold">Subsidized Fare Range</div>
+                    <div class="text-3xl sm:text-4xl font-black text-yellow-400 my-1">$11.00 – $40.00</div>
+                    <div class="text-xs text-slate-300">Tap-to-ride with C &amp; A Pass Card</div>
+                </div>
+            </div>
+
+            <!-- Pricing Examples Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-emerald-300 font-bold">Pueblo &harr; Trinidad (65 mi)</div>
+                    <div class="text-xl font-black text-white mt-1">$11.00</div>
+                    <div class="text-[11px] text-slate-400">Subsidized regional link</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-emerald-300 font-bold">Alamosa &harr; Pueblo (140 mi)</div>
+                    <div class="text-xl font-black text-white mt-1">$21.00</div>
+                    <div class="text-[11px] text-slate-400">Over Poncha Pass &amp; Arkansas Valley</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-xs text-emerald-300 font-bold">Crested Butte &harr; Denver (230 mi)</div>
+                    <div class="text-xl font-black text-white mt-1">$40.00</div>
+                    <div class="text-[11px] text-slate-400">Over Monarch Pass &amp; South Park</div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                <div class="flex items-center gap-2 text-xs text-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>Free roll-on wheelchair assistance and baggage carriage included.</span>
+                </div>
+                <a href="fares.html#cocom-outrider" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-emerald-950 font-black text-xs hover:bg-yellow-400 transition-colors shadow">
+                    <span>Calculate Custom Outrider Fare</span>
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Sister Services Cross-Navigation -->
+        <section class="space-y-4">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span>Explore Other CoCo Transit Offerings</span>
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <a href="cocor-local.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">CoCoR Local</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">All-Stops Passenger Rail &rarr;</span>
+                </a>
+                <a href="cocorx-express.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block">CoCoRX Express</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">125 mph High-Speed &rarr;</span>
+                </a>
+                <a href="cocom-bustang.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">CoCoM Bustang</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">Intercity Motorcoach &rarr;</span>
+                </a>
+                <a href="cocom-pegasus.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-rose-500 dark:hover:border-rose-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider block">CoCoM Pegasus</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400">Mountain Van Shuttle &rarr;</span>
+                </a>
+                <a href="cocom-snowstang.html" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition-all group">
+                    <span class="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider block">CoCoM Snowstang</span>
+                    <span class="text-sm font-black text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400">Direct Ski Base &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 transition-colors mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-sm">
+                    <span class="text-white text-xs font-bold">C</span>
+                </div>
+                <div>
+                    <div class="text-sm font-black text-slate-900 dark:text-white">CoCo Statewide Passenger Transit</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400">State of Colorado Transit Authority &bull; CoCoM Rural Transit Division (Outrider)</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 font-semibold">
+                <a href="index.html" class="hover:text-emerald-600 dark:hover:text-emerald-400">Home</a>
+                <a href="map.html" class="hover:text-emerald-600 dark:hover:text-emerald-400">Map</a>
+                <a href="fares.html" class="hover:text-emerald-600 dark:hover:text-emerald-400">Fares &amp; Passes</a>
+                <a href="fares.html#ca-card" class="hover:text-emerald-600 dark:hover:text-emerald-400">C &amp; A Pass Card</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Handling Script -->
+    <script>
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>
