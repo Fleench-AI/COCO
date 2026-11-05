@@ -12,7 +12,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -37,37 +37,47 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <!-- Brand -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(59,130,246,0.5)] shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCo</span>
-                        <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Unified Portal</span>
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(59,130,246,0.5)] shrink-0 transition-transform group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
                     </div>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Statewide Transit System • Colorado</p>
-                </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCo</span>
+                            <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Unified Portal</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Statewide Transit Authority • Colorado</p>
+                    </div>
+                </a>
             </div>
 
             <!-- Header Badges & Actions -->
-            <div class="flex items-center gap-2 sm:gap-4">
-                <div class="hidden md:flex items-center gap-2">
-                    <span class="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-bold border border-blue-200 dark:border-blue-800/80 flex items-center gap-1.5">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="hidden lg:flex items-center gap-2">
+                    <a href="fares.html#ca-card" class="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 text-xs font-bold border border-blue-200 dark:border-blue-800/80 flex items-center gap-1.5 transition-colors">
                         <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                        C & A Cards
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800/80">CoCoR Rail</span>
-                    <span class="px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-800/80">CoCoM Bus</span>
+                        C &amp; A Cards
+                    </a>
+                    <a href="fares.html#cocor-local" class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/80 text-xs font-bold border border-indigo-200 dark:border-indigo-800/80 transition-colors">CoCoR Rail</a>
+                    <a href="fares.html#cocom-bustang" class="px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/80 text-xs font-bold border border-purple-200 dark:border-purple-800/80 transition-colors">CoCoM Bus</a>
                 </div>
+
+                <!-- Navigation Actions -->
+                <a href="fares.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs sm:text-sm border border-slate-300 dark:border-slate-700 shadow-sm transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                    <span>Fares &amp; Passes</span>
+                </a>
 
                 <a href="map.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm hover:shadow transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
-                    <span>View Map</span>
+                    <span>Interactive Map</span>
                 </a>
 
                 <!-- Theme Switcher -->
@@ -84,10 +94,10 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12">
         
         <!-- Hero Section -->
-        <section class="mb-10 sm:mb-14 text-center sm:text-left relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl border border-blue-800/40">
+        <section class="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl border border-blue-800/40">
             <!-- Decorative Accent Elements -->
             <div class="absolute -top-24 -right-24 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -95,7 +105,7 @@
             <div class="relative z-10 max-w-3xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold mb-4 backdrop-blur-sm">
                     <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
-                    Connecting CoCoR Rail & CoCoM Bus
+                    Connecting CoCoR Rail &amp; CoCoM Bus
                 </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-4">
                     Colorado Unified Transit Portal
@@ -107,7 +117,7 @@
                 <!-- Metric Highlights Bar -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-4 border-t border-white/10 text-left">
                     <div class="p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                        <div class="text-2xl sm:text-3xl font-extrabold text-yellow-400">93</div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-yellow-400">92</div>
                         <div class="text-xs text-slate-300 font-medium">Statewide Stations</div>
                     </div>
                     <div class="p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
@@ -128,19 +138,18 @@
 
         <!-- System Architecture Grid -->
         <section>
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">System Modules</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Access live navigation services and explore upcoming transit features</p>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Dedicated Transit Offerings &amp; Modules</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Explore each individual passenger rail line, express motorcoach, and unified pass program</p>
                 </div>
             </div>
 
-            <!-- Responsive Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Responsive Cards Grid: All 8 Dedicated Offerings -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
 
-                <!-- 1. ACTIVE LIVE CARD: Statewide Transit Map -->
-                <div class="md:col-span-2 lg:col-span-2 group relative rounded-2xl bg-white dark:bg-slate-900 border-2 border-blue-500/80 dark:border-blue-500/60 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
-                    <!-- Top Ribbon Accent -->
+                <!-- 1. ACTIVE LIVE CARD: Statewide Interactive Map -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border-2 border-blue-500/80 dark:border-blue-500/60 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
                     <div class="h-2 w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-yellow-400"></div>
                     
                     <div class="p-6 sm:p-8">
@@ -150,56 +159,52 @@
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                 </span>
-                                LIVE INTERACTIVE MODULE
+                                LIVE INTERACTIVE MAP
                             </span>
-                            <div class="flex flex-wrap gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
-                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Leaflet Geo Engine</span>
-                                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Light / Dark Basemap</span>
-                            </div>
+                            <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Leaflet Geo Engine</span>
                         </div>
 
                         <div class="flex items-start gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800 shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                                 </svg>
                             </div>
                             <div>
                                 <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                    Statewide Interactive Transit Map
+                                    Statewide Interactive Map
                                 </h3>
                                 <p class="text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                                    Full statewide geographic visualization of Colorado's unified passenger transit network. Filter by category, isolate specific route corridors, explore local vs. express station stops, and inspect transfer hubs from Grand Junction to Sterling.
+                                    Geographic visualization of Colorado's unified passenger network across 92 stations. Filter by operating division, inspect route corridors, and toggle local vs. express station stops from Grand Junction to Sterling.
                                 </p>
                             </div>
                         </div>
 
                         <!-- System Highlights Pills -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-6 text-xs">
-                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-                                <span class="font-bold text-indigo-600 dark:text-indigo-400 block">CoCoR Rail</span>
-                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">9 Rail Corridors</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 text-xs">
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-indigo-600 dark:text-indigo-400 block">9 Rail Lines</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">CoCoR Network</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-                                <span class="font-bold text-purple-600 dark:text-purple-400 block">CoCoM Bus</span>
-                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">16 Bus Corridors</span>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-purple-600 dark:text-purple-400 block">16 Bus Lines</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">CoCoM Division</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-                                <span class="font-bold text-blue-600 dark:text-blue-400 block">93 Stations</span>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-blue-600 dark:text-blue-400 block">92 Stations</span>
                                 <span class="text-slate-500 dark:text-slate-400 text-[11px]">Hubs &amp; Waypoints</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-                                <span class="font-bold text-pink-600 dark:text-pink-400 block">25 Routes</span>
-                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">Statewide Mastery</span>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-yellow-600 dark:text-yellow-400 block">Light / Dark</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">Dual Basemap</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Footer Action -->
                     <div class="px-6 sm:px-8 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Interactive Leaflet Geo Engine</span>
+                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Direct Route Explorer</span>
                         <a href="map.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
-                            <span>Launch Interactive Map</span>
+                            <span>Open Interactive Map</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
@@ -207,128 +212,343 @@
                     </div>
                 </div>
 
-                <!-- 2. MODULE CARD: Fares & C & A Card -->
-                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-4">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                                In Design / Upcoming
+                <!-- 2. ACTIVE LIVE CARD: Fares & C & A Card -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border-2 border-emerald-500/80 dark:border-emerald-500/60 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-2 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600"></div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 text-xs font-bold border border-emerald-300 dark:border-emerald-700">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                LIVE FARE CALCULATOR
                             </span>
-                            <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Ticketing</span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Ticketing &amp; Passes</span>
                         </div>
-                        <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 flex items-center justify-center mb-3 border border-blue-100 dark:border-blue-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                            </svg>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800 shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                    Fares &amp; C &amp; A Card
+                                </h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    Interactive point-to-point price calculator for all 92 stations. Transparent distance formula ($4.00 base + $0.18/mi), universal 2-hour free transfers, and C &amp; A smartcards (Daily $24 Cap, Monthly Passes, Free Youth).
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Fares &amp; C &amp; A Card</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                            The Colorado Core (C Card) standard pass and CoCo All (A Card) debit commuter transit smartcards. Strict Tap-On validator architecture, local agency pass linking, and CoCo Snacks program.
-                        </p>
+
+                        <!-- Highlights Pills -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 text-xs">
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-yellow-600 dark:text-yellow-400 block">$4.00 + $0.18/mi</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">10% Below Amtrak</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400 block">2-Hour Free</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">Rail &bull; Bus Transfers</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-blue-600 dark:text-blue-400 block">$24 Daily Cap</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">Front Range Pass</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                <span class="font-bold text-purple-600 dark:text-purple-400 block">Free Youth</span>
+                                <span class="text-slate-500 dark:text-slate-400 text-[11px]">18 and Under Free</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span>Tap-On • NFC Wallet • Auto-Reload</span>
-                        <span class="font-semibold text-slate-400">Spec v1.0</span>
+
+                    <div class="px-6 sm:px-8 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400">Calculate Any Route</span>
+                        <a href="fares.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                            <span>Open Fare Calculator</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- 3. MODULE CARD: CoCoR Rail Services -->
-                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between">
-                    <div>
+                <!-- 3. DEDICATED CARD: CoCoR Local Rail (COR) -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-indigo-600"></div>
+
+                    <div class="p-6 sm:p-8">
                         <div class="flex items-center justify-between gap-2 mb-4">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                                In Design / Upcoming
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                                Heavy Rail • All-Stops
                             </span>
-                            <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Heavy Rail</span>
+                            <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">$4.00 + $0.18/mi</span>
                         </div>
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 flex items-center justify-center mb-3 border border-indigo-100 dark:border-indigo-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8m-8 4h8m-6 4h4m6 5l-2-2H6l-2 2M5 3h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
-                            </svg>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-300 flex items-center justify-center shrink-0 border border-indigo-200 dark:border-indigo-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8m-8 4h8m-6 4h4m6 5l-2-2H6l-2 2M5 3h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                    CoCoR Local Rail (COR)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    The passenger rail backbone serving all local communities along the Front Range (FR), Northeast (NE), Eastern Plains (EP), Southern (SL), and Arkansas Valley (AV) lines.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">CoCoR Rail Services</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                            Dedicated passenger rail backbone: Front Range (FR/FRX), Northeast (NE/NEX), Eastern Plains (EP/EPX), Southern (SL/SLX), Arkansas Valley (AV/AVX), and Lamar-Trinidad (LT/LTX).
-                        </p>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">&check;</span> Free CoCo Cargo bike &amp; ski racks in every car</li>
+                            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">&check;</span> Walk-up unreserved open seating with no surge pricing</li>
+                            <li class="flex items-center gap-2"><span class="text-indigo-500 font-bold">&check;</span> 10% cheaper than standard Amtrak coach baseline</li>
+                        </ul>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span>Standard &amp; Express Tiers</span>
-                        <span class="font-semibold text-slate-400">9 Corridors</span>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('cor')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocor-local" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Local Rail</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- 4. MODULE CARD: CoCoM Bus Division -->
-                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between">
-                    <div>
+                <!-- 4. DEDICATED CARD: CoCoRX Express Rail (COR-X) -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-blue-600"></div>
+
+                    <div class="p-6 sm:p-8">
                         <div class="flex items-center justify-between gap-2 mb-4">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                                In Design / Upcoming
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-950/80 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                                High-Speed • Skip-Stop
                             </span>
-                            <span class="text-[11px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider">Bus &amp; Mobility</span>
+                            <span class="text-xs font-bold text-blue-600 dark:text-blue-400">+25% Premium</span>
                         </div>
-                        <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 flex items-center justify-center mb-3 border border-purple-100 dark:border-purple-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                            </svg>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    CoCoRX Express Rail (COR-X)
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    High-speed express passenger rail connecting primary anchor hubs (Fort Collins, Denver, Colo Springs, Pueblo, Grand Junction) bypassing smaller stations.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">CoCoM Bus Division</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                            State-run intercity and regional highway services: Bustang Express (West, North, South), Pegasus mountain shuttles, seasonal Snowstang ski routes, and 10 Outrider rural connectors.
-                        </p>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-blue-500 font-bold">&check;</span> Guaranteed seat reservation included with every ticket</li>
+                            <li class="flex items-center gap-2"><span class="text-blue-500 font-bold">&check;</span> Dedicated Quiet Work Lounge car (whisper-zone)</li>
+                            <li class="flex items-center gap-2"><span class="text-blue-500 font-bold">&check;</span> Starlink satellite Wi-Fi &amp; CoCo Snacks high-top bar</li>
+                        </ul>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span>Bustang • Pegasus • Outrider</span>
-                        <span class="font-semibold text-slate-400">16 Corridors</span>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('corx')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocorx-express" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Express Rail</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- 5. MODULE CARD: Schedules & Timetables -->
-                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between">
-                    <div>
+                <!-- 5. DEDICATED CARD: CoCoM Bustang -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-purple-600"></div>
+
+                    <div class="p-6 sm:p-8">
                         <div class="flex items-center justify-between gap-2 mb-4">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                                In Design / Upcoming
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                                Intercity Motorcoach
                             </span>
-                            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Timetables</span>
+                            <span class="text-xs font-bold text-purple-600 dark:text-purple-400">$9.00 &ndash; $45.00</span>
                         </div>
-                        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 flex items-center justify-center mb-3 border border-emerald-100 dark:border-emerald-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/70 text-purple-600 dark:text-purple-300 flex items-center justify-center shrink-0 border border-purple-200 dark:border-purple-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                    CoCoM Bustang
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    CDOT's established express motorcoach backbone connecting Denver across West Line (I-70 to Grand Jct), North Line (Fort Collins), and South Line (Colo Springs &amp; Pueblo).
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Schedules &amp; Timetables</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                            Synchronized timetable departure matrices for seamless rail-to-bus transfers, peak hourly Front Range clock-face headways, offline timetable downloads, and GTFS transit feeds.
-                        </p>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-purple-500 font-bold">&check;</span> 50-passenger MCI motorcoaches with onboard restroom</li>
+                            <li class="flex items-center gap-2"><span class="text-purple-500 font-bold">&check;</span> 110V power outlets at every seat &amp; free 5G Wi-Fi</li>
+                            <li class="flex items-center gap-2"><span class="text-purple-500 font-bold">&check;</span> Undercarriage luggage bays &amp; 3-bike front racks</li>
+                        </ul>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span>Real-Time GTFS • Timetable PDFs</span>
-                        <span class="font-semibold text-slate-400">Offline Caching</span>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('bustang')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocom-bustang" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Bustang</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- 6. MODULE CARD: Service Alerts & Real-Time Ops -->
-                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all p-6 flex flex-col justify-between">
-                    <div>
+                <!-- 6. DEDICATED CARD: CoCoM Pegasus -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-rose-500"></div>
+
+                    <div class="p-6 sm:p-8">
                         <div class="flex items-center justify-between gap-2 mb-4">
-                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60">
-                                In Design / Upcoming
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                                Mountain Micro-Transit
                             </span>
-                            <span class="text-[11px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">Operations</span>
+                            <span class="text-xs font-bold text-rose-600 dark:text-rose-400">$13.00 &ndash; $20.00</span>
                         </div>
-                        <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 flex items-center justify-center mb-3 border border-rose-100 dark:border-rose-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-950/70 text-rose-600 dark:text-rose-300 flex items-center justify-center shrink-0 border border-rose-200 dark:border-rose-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                                    CoCoM Pegasus
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    High-frequency 14-passenger custom Sprinter passenger vans authorized to use the I-70 Mountain Express Lanes to bypass peak weekend ski traffic between Denver, Frisco, Vail, and Avon.
+                                </p>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Service Alerts</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                            Live operational bulletins, mountain pass weather advisories (Loveland Pass, Wolf Creek Pass, Rabbit Ears Pass), chain law activations, track maintenance, and emergency reroutes.
-                        </p>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-rose-500 font-bold">&check;</span> Toll-free authorization in I-70 Mountain Express Lanes</li>
+                            <li class="flex items-center gap-2"><span class="text-rose-500 font-bold">&check;</span> Hourly weekend departures from Denver Union Station</li>
+                            <li class="flex items-center gap-2"><span class="text-rose-500 font-bold">&check;</span> Exterior ski/snowboard racks and USB charging ports</li>
+                        </ul>
                     </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span>CDOT Co-Integration • Push Alerts</span>
-                        <span class="font-semibold text-slate-400">Live Status</span>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('pegasus')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocom-pegasus" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Pegasus</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 7. DEDICATED CARD: CoCoM Outrider -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-emerald-600"></div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                Rural Lifeline Transit
+                            </span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">$11.00 &ndash; $40.00</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                    CoCoM Outrider
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    Subsidized rural transit connecting remote mountain communities and agricultural plains—Craig, Crested Butte, Alamosa, Durango, Lamar, and Sterling—ensuring statewide mobility for all Coloradans.
+                                </p>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">&check;</span> 10 comprehensive long-distance statewide corridors</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">&check;</span> Mountain-capable high-clearance motorcoaches</li>
+                            <li class="flex items-center gap-2"><span class="text-emerald-500 font-bold">&check;</span> Heavily subsidized fares ensuring healthcare access</li>
+                        </ul>
+                    </div>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('outrider')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocom-outrider" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Outrider</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 8. DEDICATED CARD: CoCoM Snowstang -->
+                <div class="group relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden">
+                    <div class="h-1.5 w-full bg-cyan-500"></div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-cyan-100 text-cyan-800 dark:bg-cyan-950/80 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+                                Seasonal Ski Express
+                            </span>
+                            <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400">$25 &ndash; $40 Round-Trip</span>
+                        </div>
+
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-50 dark:bg-cyan-950/70 text-cyan-600 dark:text-cyan-300 flex items-center justify-center shrink-0 border border-cyan-200 dark:border-cyan-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                                    CoCoM Snowstang
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                    Direct weekend winter ski buses from Denver Union Station and Denver Federal Center to chairlift bases at Loveland, Arapahoe Basin, Copper Mountain, Breckenridge, and Steamboat.
+                                </p>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400 mb-4">
+                            <li class="flex items-center gap-2"><span class="text-cyan-500 font-bold">&check;</span> Direct drop-off at resort chairlift bases (no resort parking fee)</li>
+                            <li class="flex items-center gap-2"><span class="text-cyan-500 font-bold">&check;</span> Guaranteed round-trip reserved seat and heated gear storage</li>
+                            <li class="flex items-center gap-2"><span class="text-cyan-500 font-bold">&check;</span> Operates every Saturday, Sunday &amp; Holiday Monday (Dec&ndash;May)</li>
+                        </ul>
+                    </div>
+
+                    <div class="px-6 sm:px-8 py-3.5 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+                        <button onclick="openServiceModal('snowstang')" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 underline decoration-slate-300">
+                            Quick Specs
+                        </button>
+                        <a href="fares.html#cocom-snowstang" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs shadow transition-colors">
+                            <span>Explore Snowstang</span>
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -336,6 +556,16 @@
         </section>
 
     </main>
+
+    <!-- Quick Info Modal Overlay -->
+    <div id="serviceModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative">
+            <button onclick="closeServiceModal()" class="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-colors">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors">
@@ -354,10 +584,12 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                <div class="flex items-center gap-4 sm:gap-6 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    <a href="index.html" class="text-blue-600 dark:text-blue-400 font-bold">Home Portal</a>
+                    <span class="text-slate-300 dark:text-slate-700">•</span>
                     <a href="map.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Interactive Map</a>
                     <span class="text-slate-300 dark:text-slate-700">•</span>
-                    <span>93 Stations • 25 Routes</span>
+                    <a href="fares.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Fares &amp; Passes</a>
                     <span class="text-slate-300 dark:text-slate-700">•</span>
                     <span>CDOT Transit &amp; Rail</span>
                 </div>
@@ -369,7 +601,7 @@
         </div>
     </footer>
 
-    <!-- Theme Handling Script -->
+    <!-- Theme Handling & Modal Script -->
     <script>
         function applyTheme(isDark) {
             if (isDark) {
@@ -403,6 +635,89 @@
             applyTheme(targetDark);
             localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
         }
+
+        // Modal Content Data
+        const serviceModalData = {
+            cor: {
+                title: "CoCoR Local Rail (COR)",
+                badge: "Standard Heavy Rail",
+                formula: "$4.00 Base + $0.18 / Mile",
+                desc: "All-stops passenger rail connecting every community stop along the Front Range, South Platte, Eastern Plains, and Southern corridors. Walk-up open seating, free roll-on bike racks, and ski gear storage.",
+                link: "fares.html#cocor-local",
+                color: "indigo"
+            },
+            corx: {
+                title: "CoCoRX Express Rail (COR-X)",
+                badge: "High-Speed Limited-Stop",
+                formula: "+25% Premium over Local",
+                desc: "Limited-stop express passenger rail linking Colorado's major economic hubs. Guaranteed seat reservations, Quiet Work Lounge car, Starlink satellite Wi-Fi, and 100% Colorado CoCo Snacks bar.",
+                link: "fares.html#cocorx-express",
+                color: "blue"
+            },
+            bustang: {
+                title: "CoCoM Bustang",
+                badge: "CDOT Intercity Express Motorcoach",
+                formula: "$9.00 – $45.00 Corridor Baseline",
+                desc: "CDOT's express coach network operating the West Line (I-70 to Grand Jct), North Line (Fort Collins), and South Line (Colo Springs & Pueblo) with onboard restrooms, 110V power, and 5G Wi-Fi.",
+                link: "fares.html#cocom-bustang",
+                color: "purple"
+            },
+            pegasus: {
+                title: "CoCoM Pegasus",
+                badge: "Mountain Micro-Transit Shuttles",
+                formula: "$13.00 – $20.00 Express Van Fares",
+                desc: "14-passenger custom Sprinter shuttles utilizing I-70 Mountain Express Lanes to bypass weekend ski congestion between Denver, Idaho Springs, Frisco, Vail, and Avon.",
+                link: "fares.html#cocom-pegasus",
+                color: "rose"
+            },
+            outrider: {
+                title: "CoCoM Outrider",
+                badge: "Subsidized Rural Lifeline",
+                formula: "$11.00 – $40.00 Subsidized Fares",
+                desc: "Subsidized rural transit routes across 10 corridors connecting Craig, Crested Butte, Gunnison, Alamosa, Durango, Lamar, and Sterling to regional healthcare and commerce centers.",
+                link: "fares.html#cocom-outrider",
+                color: "emerald"
+            },
+            snowstang: {
+                title: "CoCoM Snowstang",
+                badge: "Seasonal Weekend Ski Express",
+                formula: "$25.00 – $40.00 Round-Trip",
+                desc: "Weekend ski express coaches direct from Denver to the chairlift bases of Loveland Ski Area, Arapahoe Basin, Copper Mountain, Breckenridge, and Steamboat Springs.",
+                link: "fares.html#cocom-snowstang",
+                color: "cyan"
+            }
+        };
+
+        function openServiceModal(key) {
+            const data = serviceModalData[key];
+            if (!data) return;
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="mb-4">
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">${data.badge}</span>
+                    <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-2">${data.title}</h3>
+                    <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mt-1">${data.formula}</div>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">${data.desc}</p>
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <button onclick="closeServiceModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Close</button>
+                    <a href="${data.link}" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow">Open Full Fares &amp; Details &rarr;</a>
+                </div>
+            `;
+            document.getElementById('serviceModal').classList.remove('hidden');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.add('hidden');
+        }
+
+        // Close on escape or outside click
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeServiceModal();
+        });
+        document.getElementById('serviceModal').addEventListener('click', (e) => {
+            if (e.target.id === 'serviceModal') closeServiceModal();
+        });
     </script>
 </body>
 </html>

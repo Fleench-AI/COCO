@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCo Fares &amp; C &amp; A Card — Statewide Fare Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+        }
+        .dark {
+            --bg-color: #0b1120;
+            --text-color: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(59,130,246,0.5)] shrink-0 transition-transform group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCo</span>
+                            <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Fares &amp; Passes</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Statewide Transit Authority &bull; Colorado</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Header Navigation & Actions -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Navigation Links -->
+                <nav class="flex items-center gap-1.5 sm:gap-2">
+                    <a href="index.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Back to Home Portal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span class="hidden sm:inline">Home Portal</span>
+                        <span class="sm:hidden">Home</span>
+                    </a>
+                    <a href="map.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Interactive Map">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        </svg>
+                        <span class="hidden sm:inline">Interactive Map</span>
+                        <span class="sm:hidden">Map</span>
+                    </a>
+                    <span class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs sm:text-sm font-bold shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        <span>Fares &amp; Passes</span>
+                    </span>
+                </nav>
+
+                <!-- Theme Switcher -->
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm transition-colors">
+                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Subheader Quick-Jump Anchor Bar -->
+    <div class="bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky top-16 z-40 backdrop-blur-sm overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
+            <span class="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] mr-1 hidden sm:inline">Jump To:</span>
+            <a href="#calculator" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🧮 Fare Calculator</a>
+            <a href="#cocor-local" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-indigo-700 dark:text-indigo-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚆 CoCoR Local (COR)</a>
+            <a href="#cocorx-express" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-700 dark:text-blue-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⚡ CoCoRX Express (COR-X)</a>
+            <a href="#cocom-bustang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚌 Bustang</a>
+            <a href="#cocom-pegasus" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-rose-700 dark:text-rose-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚐 Pegasus</a>
+            <a href="#cocom-outrider" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-emerald-700 dark:text-emerald-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🏔️ Outrider</a>
+            <a href="#cocom-snowstang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-cyan-700 dark:text-cyan-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⛷️ Snowstang</a>
+            <a href="#ca-card" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">💳 C &amp; A Pass Card</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-800/40">
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold mb-4 backdrop-blur-sm">
+                    <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                    One Colorado &bull; One Card &bull; Endless Journey
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-4">
+                    Transparent Fares &amp; Unified Pass Platform
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base lg:text-lg font-normal leading-relaxed mb-8 max-w-3xl">
+                    Colorado transit pricing should be simple, fair, and predictable. Calculate exact point-to-point fares across all 92 statewide stations with our transparent distance-based formula, explore express vs. local rail options, and learn how the contactless <strong class="text-white">C &amp; A Card</strong> guarantees 2-hour universal free transfers across rail and bus.
+                </p>
+
+                <!-- Key Guarantee Metric Pills -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                    <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Local Rail</div>
+                        <div class="text-lg sm:text-xl font-black text-yellow-400">$4.00 + $0.18/mi</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">10% cheaper than Amtrak</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Express Rail</div>
+                        <div class="text-lg sm:text-xl font-black text-blue-300">+25% Premium</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">Guaranteed seat reservation</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Transfers</div>
+                        <div class="text-lg sm:text-xl font-black text-emerald-400">2-Hour Free</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">Universal Rail &bull; Bus &bull; RTD</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Concessions</div>
+                        <div class="text-lg sm:text-xl font-black text-purple-300">50% Off / Free</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">Seniors, Vets, Free Youth</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Interactive Fare Calculator -->
+        <section id="calculator" class="scroll-mt-24">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <!-- Section Header -->
+                <div class="p-6 sm:p-8 bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white border-b border-blue-800/50">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-yellow-400 mb-1">
+                                <span>Dynamic Route Fare Calculator</span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Interactive Colorado Fare Estimator</h2>
+                            <p class="text-slate-300 text-xs sm:text-sm mt-1">Select your origin and destination station across Colorado to see real-time distance, travel times, and service comparisons.</p>
+                        </div>
+                        <div class="flex items-center gap-2 self-start sm:self-center">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-200 text-xs font-semibold border border-blue-400/30">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                Live Pricing Engine
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator Form Area -->
+                <div class="p-6 sm:p-8 space-y-6">
+                    <!-- Dropdowns Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+                        <!-- Origin Station -->
+                        <div class="lg:col-span-5 space-y-1.5">
+                            <label for="originSelect" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>
+                                Origin Station
+                            </label>
+                            <div class="relative">
+                                <select id="originSelect" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-sm focus:border-blue-600 focus:outline-none transition-colors appearance-none cursor-pointer">
+    <optgroup label="Major Multimodal Hubs">
+      <option value="denver" selected>Denver Union Station ★</option>
+      <option value="cosprings">Colorado Springs Depot ★</option>
+      <option value="pueblo">Pueblo Union Depot ★</option>
+      <option value="grandjct">Grand Junction Hub ★</option>
+      <option value="glenwood">Glenwood Springs Hub ★</option>
+      <option value="frisco">Frisco Transfer Center ★</option>
+      <option value="durango">Durango Transit Hub ★</option>
+      <option value="ftcollins">Fort Collins DTC ★</option>
+      <option value="dia">Denver Int'l Airport (DEN) ★</option>
+      <option value="salida">Salida Chaffee Hub ★</option>
+    </optgroup>
+    <optgroup label="Front Range Corridor">
+      <option value="loveland">Loveland Centerra</option>
+      <option value="berthoud">Berthoud</option>
+      <option value="longmont">Longmont Hub</option>
+      <option value="boulder">Boulder Downtown</option>
+      <option value="broomfield">Broomfield</option>
+      <option value="castlerock">Castle Rock</option>
+      <option value="monument">Monument</option>
+      <option value="fountain">Fountain</option>
+      <option value="coloradocity">Colorado City</option>
+      <option value="walsenburg">Walsenburg</option>
+      <option value="aguilar">Aguilar</option>
+      <option value="trinidad">Trinidad</option>
+      <option value="federalcenter">Denver Federal Center</option>
+      <option value="woolymammoth">Wooly Mammoth P&R</option>
+    </optgroup>
+    <optgroup label="I-70 Mountain Corridor & Canyons">
+      <option value="elrancho">El Rancho (Evergreen)</option>
+      <option value="idahosprings">Idaho Springs</option>
+      <option value="georgetown">Georgetown</option>
+      <option value="vail">Vail Transportation Center</option>
+      <option value="avon">Avon Station</option>
+      <option value="eagle">Eagle Chambers P&R</option>
+      <option value="newcastle">New Castle</option>
+      <option value="rifle">Rifle</option>
+      <option value="parachute">Parachute</option>
+      <option value="palisade">Palisade</option>
+    </optgroup>
+    <optgroup label="Ski Resorts & High Passes">
+      <option value="loveland_ski">Loveland Ski Area</option>
+      <option value="abasin">Arapahoe Basin</option>
+      <option value="copper">Copper Mountain</option>
+      <option value="breckenridge">Breckenridge Station</option>
+    </optgroup>
+    <optgroup label="Northern Mountains & Yampa Valley">
+      <option value="winterpark">Winter Park Resort</option>
+      <option value="fraser">Fraser</option>
+      <option value="granby">Granby</option>
+      <option value="kremmling">Kremmling</option>
+      <option value="steamboat">Steamboat Springs</option>
+      <option value="hayden">Hayden</option>
+      <option value="craig">Craig</option>
+    </optgroup>
+    <optgroup label="Estes Park & Rocky Mountain National Park">
+      <option value="lyons">Lyons</option>
+      <option value="estespark">Estes Park Visitor Center</option>
+      <option value="rmnp">RMNP Bear Lake Transit Hub</option>
+    </optgroup>
+    <optgroup label="Northern Plains & South Platte Corridor">
+      <option value="greeley">Greeley Transit Center</option>
+      <option value="kersey">Kersey</option>
+      <option value="brighton">Brighton</option>
+      <option value="hudson">Hudson</option>
+      <option value="keenesburg">Keenesburg</option>
+      <option value="wiggins">Wiggins</option>
+      <option value="ftmorgan">Fort Morgan</option>
+      <option value="brush">Brush</option>
+      <option value="sterling">Sterling</option>
+      <option value="julesburg">Julesburg</option>
+    </optgroup>
+    <optgroup label="Eastern Plains Corridor">
+      <option value="limon">Limon</option>
+      <option value="flagler">Flagler</option>
+      <option value="burlington">Burlington</option>
+    </optgroup>
+    <optgroup label="Arkansas River Valley & Central Mountains">
+      <option value="fowler">Fowler</option>
+      <option value="manzanola">Manzanola</option>
+      <option value="rockyford">Rocky Ford</option>
+      <option value="lajunta">La Junta Hub</option>
+      <option value="lasanimas">Las Animas</option>
+      <option value="lamar">Lamar</option>
+      <option value="canoncity">Cañon City</option>
+      <option value="cotopaxi">Cotopaxi</option>
+      <option value="ponchasprings">Poncha Springs</option>
+      <option value="buenavista">Buena Vista</option>
+      <option value="fairplay">Fairplay</option>
+      <option value="bailey">Bailey</option>
+    </optgroup>
+    <optgroup label="San Luis Valley & Southwest Skyway">
+      <option value="moffat">Moffat</option>
+      <option value="alamosa">Alamosa Hub</option>
+      <option value="montevista">Monte Vista</option>
+      <option value="delnorte">Del Norte</option>
+      <option value="southfork">South Fork</option>
+      <option value="pagosa">Pagosa Springs</option>
+      <option value="bayfield">Bayfield</option>
+      <option value="mancos">Mancos</option>
+      <option value="cortez">Cortez</option>
+      <option value="dolores">Dolores</option>
+      <option value="rico">Rico</option>
+      <option value="delta">Delta</option>
+      <option value="olathe">Olathe</option>
+      <option value="montrose">Montrose</option>
+      <option value="ridgway">Ridgway</option>
+      <option value="placerville">Placerville</option>
+      <option value="telluride">Telluride</option>
+      <option value="gunnison">Gunnison</option>
+      <option value="crestedbutte">Crested Butte</option>
+    </optgroup>
+
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Swap Button -->
+                        <div class="lg:col-span-2 flex justify-center py-2 lg:py-0">
+                            <button id="swapBtn" type="button" aria-label="Swap Stations" class="p-3 rounded-xl bg-slate-100 hover:bg-blue-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-blue-600 dark:text-blue-400 border border-slate-300 dark:border-slate-700 shadow-sm transition-all transform hover:rotate-180 duration-300" title="Swap Origin and Destination">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Destination Station -->
+                        <div class="lg:col-span-5 space-y-1.5">
+                            <label for="destinationSelect" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span>
+                                Destination Station
+                            </label>
+                            <div class="relative">
+                                <select id="destinationSelect" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-sm focus:border-blue-600 focus:outline-none transition-colors appearance-none cursor-pointer">
+    <optgroup label="Major Multimodal Hubs">
+      <option value="denver">Denver Union Station ★</option>
+      <option value="cosprings" selected>Colorado Springs Depot ★</option>
+      <option value="pueblo">Pueblo Union Depot ★</option>
+      <option value="grandjct">Grand Junction Hub ★</option>
+      <option value="glenwood">Glenwood Springs Hub ★</option>
+      <option value="frisco">Frisco Transfer Center ★</option>
+      <option value="durango">Durango Transit Hub ★</option>
+      <option value="ftcollins">Fort Collins DTC ★</option>
+      <option value="dia">Denver Int'l Airport (DEN) ★</option>
+      <option value="salida">Salida Chaffee Hub ★</option>
+    </optgroup>
+    <optgroup label="Front Range Corridor">
+      <option value="loveland">Loveland Centerra</option>
+      <option value="berthoud">Berthoud</option>
+      <option value="longmont">Longmont Hub</option>
+      <option value="boulder">Boulder Downtown</option>
+      <option value="broomfield">Broomfield</option>
+      <option value="castlerock">Castle Rock</option>
+      <option value="monument">Monument</option>
+      <option value="fountain">Fountain</option>
+      <option value="coloradocity">Colorado City</option>
+      <option value="walsenburg">Walsenburg</option>
+      <option value="aguilar">Aguilar</option>
+      <option value="trinidad">Trinidad</option>
+      <option value="federalcenter">Denver Federal Center</option>
+      <option value="woolymammoth">Wooly Mammoth P&R</option>
+    </optgroup>
+    <optgroup label="I-70 Mountain Corridor & Canyons">
+      <option value="elrancho">El Rancho (Evergreen)</option>
+      <option value="idahosprings">Idaho Springs</option>
+      <option value="georgetown">Georgetown</option>
+      <option value="vail">Vail Transportation Center</option>
+      <option value="avon">Avon Station</option>
+      <option value="eagle">Eagle Chambers P&R</option>
+      <option value="newcastle">New Castle</option>
+      <option value="rifle">Rifle</option>
+      <option value="parachute">Parachute</option>
+      <option value="palisade">Palisade</option>
+    </optgroup>
+    <optgroup label="Ski Resorts & High Passes">
+      <option value="loveland_ski">Loveland Ski Area</option>
+      <option value="abasin">Arapahoe Basin</option>
+      <option value="copper">Copper Mountain</option>
+      <option value="breckenridge">Breckenridge Station</option>
+    </optgroup>
+    <optgroup label="Northern Mountains & Yampa Valley">
+      <option value="winterpark">Winter Park Resort</option>
+      <option value="fraser">Fraser</option>
+      <option value="granby">Granby</option>
+      <option value="kremmling">Kremmling</option>
+      <option value="steamboat">Steamboat Springs</option>
+      <option value="hayden">Hayden</option>
+      <option value="craig">Craig</option>
+    </optgroup>
+    <optgroup label="Estes Park & Rocky Mountain National Park">
+      <option value="lyons">Lyons</option>
+      <option value="estespark">Estes Park Visitor Center</option>
+      <option value="rmnp">RMNP Bear Lake Transit Hub</option>
+    </optgroup>
+    <optgroup label="Northern Plains & South Platte Corridor">
+      <option value="greeley">Greeley Transit Center</option>
+      <option value="kersey">Kersey</option>
+      <option value="brighton">Brighton</option>
+      <option value="hudson">Hudson</option>
+      <option value="keenesburg">Keenesburg</option>
+      <option value="wiggins">Wiggins</option>
+      <option value="ftmorgan">Fort Morgan</option>
+      <option value="brush">Brush</option>
+      <option value="sterling">Sterling</option>
+      <option value="julesburg">Julesburg</option>
+    </optgroup>
+    <optgroup label="Eastern Plains Corridor">
+      <option value="limon">Limon</option>
+      <option value="flagler">Flagler</option>
+      <option value="burlington">Burlington</option>
+    </optgroup>
+    <optgroup label="Arkansas River Valley & Central Mountains">
+      <option value="fowler">Fowler</option>
+      <option value="manzanola">Manzanola</option>
+      <option value="rockyford">Rocky Ford</option>
+      <option value="lajunta">La Junta Hub</option>
+      <option value="lasanimas">Las Animas</option>
+      <option value="lamar">Lamar</option>
+      <option value="canoncity">Cañon City</option>
+      <option value="cotopaxi">Cotopaxi</option>
+      <option value="ponchasprings">Poncha Springs</option>
+      <option value="buenavista">Buena Vista</option>
+      <option value="fairplay">Fairplay</option>
+      <option value="bailey">Bailey</option>
+    </optgroup>
+    <optgroup label="San Luis Valley & Southwest Skyway">
+      <option value="moffat">Moffat</option>
+      <option value="alamosa">Alamosa Hub</option>
+      <option value="montevista">Monte Vista</option>
+      <option value="delnorte">Del Norte</option>
+      <option value="southfork">South Fork</option>
+      <option value="pagosa">Pagosa Springs</option>
+      <option value="bayfield">Bayfield</option>
+      <option value="mancos">Mancos</option>
+      <option value="cortez">Cortez</option>
+      <option value="dolores">Dolores</option>
+      <option value="rico">Rico</option>
+      <option value="delta">Delta</option>
+      <option value="olathe">Olathe</option>
+      <option value="montrose">Montrose</option>
+      <option value="ridgway">Ridgway</option>
+      <option value="placerville">Placerville</option>
+      <option value="telluride">Telluride</option>
+      <option value="gunnison">Gunnison</option>
+      <option value="crestedbutte">Crested Butte</option>
+    </optgroup>
+
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passenger Concession & Discounts -->
+                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                            <label class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                                Passenger Concession Category
+                            </label>
+                            <span class="text-[11px] text-slate-500 dark:text-slate-400">Discount automatically applied to all computed fares</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/80 dark:bg-blue-950/60 text-blue-900 dark:text-blue-100 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="adult" checked class="text-blue-600 focus:ring-blue-500">
+                                <div>
+                                    <div class="font-bold">Standard Adult</div>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400">Full Fare (100%)</div>
+                                </div>
+                            </label>
+                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="senior" class="text-blue-600 focus:ring-blue-500">
+                                <div>
+                                    <div class="font-bold">Senior (65+)</div>
+                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">50% Discount</div>
+                                </div>
+                            </label>
+                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="special" class="text-blue-600 focus:ring-blue-500">
+                                <div>
+                                    <div class="font-bold">Student / Veteran</div>
+                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">50% Discount</div>
+                                </div>
+                            </label>
+                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="youth" class="text-blue-600 focus:ring-blue-500">
+                                <div>
+                                    <div class="font-bold">Youth (18 &amp; under)</div>
+                                    <div class="text-[10px] text-purple-600 dark:text-purple-400 font-bold">100% FREE ($0.00)</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Quick Preset Corridors -->
+                    <div class="flex items-center gap-2 flex-wrap text-xs">
+                        <span class="text-slate-500 dark:text-slate-400 font-medium">Popular Routes:</span>
+                        <button type="button" onclick="setPreset('denver', 'cosprings')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Denver &harr; Colo Springs</button>
+                        <button type="button" onclick="setPreset('denver', 'ftcollins')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Denver &harr; Fort Collins</button>
+                        <button type="button" onclick="setPreset('denver', 'glenwood')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Denver &harr; Glenwood Spgs</button>
+                        <button type="button" onclick="setPreset('denver', 'grandjct')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Denver &harr; Grand Jct</button>
+                        <button type="button" onclick="setPreset('denver', 'winterpark')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Denver &harr; Winter Park</button>
+                        <button type="button" onclick="setPreset('pueblo', 'trinidad')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Pueblo &harr; Trinidad</button>
+                        <button type="button" onclick="setPreset('alamosa', 'durango')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-colors">Alamosa &harr; Durango</button>
+                    </div>
+
+                    <!-- Calculated Route Metrics Header -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-slate-100 to-blue-50/50 dark:from-slate-800 dark:to-slate-800/60 border border-slate-200 dark:border-slate-700">
+                            <div>
+                                <div class="text-xs uppercase font-extrabold tracking-wider text-slate-500 dark:text-slate-400">Route Corridor</div>
+                                <div class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2 mt-0.5">
+                                    <span id="routeOriginName">Denver Union Station</span>
+                                    <span class="text-blue-600 dark:text-blue-400">&rarr;</span>
+                                    <span id="routeDestinationName">Colorado Springs Depot</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-xs sm:text-sm">
+                                <div class="text-right">
+                                    <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase">Route Distance</div>
+                                    <div class="text-base sm:text-lg font-black text-blue-600 dark:text-blue-400"><span id="metricRouteMiles">71</span> miles</div>
+                                </div>
+                                <div class="h-8 w-px bg-slate-300 dark:bg-slate-700"></div>
+                                <div class="text-right">
+                                    <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase">Direct (Haversine)</div>
+                                    <div class="text-sm font-bold text-slate-700 dark:text-slate-300"><span id="metricDirectMiles">64</span> mi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Computed Price Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+
+                        <!-- Card 1: CoCoR Local Rail (COR) -->
+                        <div class="relative rounded-2xl bg-white dark:bg-slate-800 border-2 border-indigo-500/70 dark:border-indigo-500/50 shadow-md hover:shadow-xl transition-all p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                                        CoCoR Local (COR)
+                                    </span>
+                                    <span class="text-[11px] font-bold text-slate-400 uppercase">Rail Backbone</span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white" id="corPriceDisplay">
+                                        $16.78
+                                    </div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="corFormulaDisplay">
+                                        Base $4.00 + ($0.18 &times; 71 mi)
+                                    </div>
+                                </div>
+
+                                <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 mb-4 text-xs font-semibold text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
+                                    <span>vs. Amtrak Coach (~$22.50)</span>
+                                    <span class="px-2 py-0.5 rounded bg-emerald-200 dark:bg-emerald-900 text-[10px] font-bold uppercase">10% Cheaper</span>
+                                </div>
+
+                                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300 mb-6">
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Est. Travel Time: <strong class="text-slate-900 dark:text-white" id="corTravelTime">1h 28m</strong></span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>All community station stops served</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Free bike &amp; ski CoCo Cargo storage</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Unreserved open seating (no surge fares)</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href="#cocor-local" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs text-center shadow transition-colors">
+                                View CoCoR Local Details &rarr;
+                            </a>
+                        </div>
+
+                        <!-- Card 2: CoCoRX Express Rail (COR-X) -->
+                        <div class="relative rounded-2xl bg-white dark:bg-slate-800 border-2 border-blue-600 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col justify-between">
+                            <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-wider shadow">
+                                High-Speed Express
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-950/80 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                                        CoCoRX Express (COR-X)
+                                    </span>
+                                    <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase">+25% Premium</span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white" id="corxPriceDisplay">
+                                        $20.98
+                                    </div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="corxFormulaDisplay">
+                                        $16.78 + 25% Express Premium
+                                    </div>
+                                </div>
+
+                                <div class="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 mb-4 text-xs font-semibold text-blue-800 dark:text-blue-300 flex items-center justify-between">
+                                    <span>Anchor Hub Bypass</span>
+                                    <span class="px-2 py-0.5 rounded bg-blue-200 dark:bg-blue-900 text-[10px] font-bold uppercase">Skip-Stop Fast</span>
+                                </div>
+
+                                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300 mb-6">
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-blue-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Est. Travel Time: <strong class="text-slate-900 dark:text-white" id="corxTravelTime">1h 05m</strong> (Fastest)</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-blue-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Guaranteed seat reservation included</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-blue-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Quiet work lounge car &amp; Starlink Wi-Fi</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-blue-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Power outlets &amp; CoCo Snacks high-top bar</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href="#cocorx-express" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs text-center shadow transition-colors">
+                                View CoCoRX Express Details &rarr;
+                            </a>
+                        </div>
+
+                        <!-- Card 3: CoCoM Bus Equivalent -->
+                        <div class="relative rounded-2xl bg-white dark:bg-slate-800 border-2 border-purple-500/70 dark:border-purple-500/50 shadow-md hover:shadow-xl transition-all p-6 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                                        CoCoM Bus Equivalent
+                                    </span>
+                                    <span class="text-[11px] font-bold text-slate-400 uppercase">CDOT Baseline</span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white" id="busPriceDisplay">
+                                        $12.00
+                                    </div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="busFormulaDisplay">
+                                        CDOT Bustang Corridor Standard
+                                    </div>
+                                </div>
+
+                                <div class="p-2.5 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 mb-4 text-xs font-semibold text-purple-800 dark:text-purple-300 flex items-center justify-between">
+                                    <span id="busCorridorBadge">Bustang South Line</span>
+                                    <span class="px-2 py-0.5 rounded bg-purple-200 dark:bg-purple-900 text-[10px] font-bold uppercase">$9&ndash;$45 Baseline</span>
+                                </div>
+
+                                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300 mb-6">
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Est. Travel Time: <strong class="text-slate-900 dark:text-white" id="busTravelTime">1h 22m</strong></span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Highway express motorcoach (50-seat MCI)</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>5G Wi-Fi, 110V power, and onboard restroom</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <svg class="h-4 w-4 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                        <span>Undercarriage luggage &amp; 3-bike front racks</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href="#cocom-bustang" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs text-center shadow transition-colors">
+                                View CoCoM Bus Details &rarr;
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- Transfer Eligibility & Pass Integration Box -->
+                    <div class="mt-6 p-5 rounded-2xl bg-gradient-to-r from-blue-900/10 via-indigo-900/10 to-amber-900/10 border-2 border-blue-200 dark:border-blue-800/80">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                            <!-- 2-Hour Transfer -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-300 flex items-center justify-center shrink-0 border border-blue-300 dark:border-blue-700 font-bold text-sm">
+                                    2h
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">Universal 2-Hour Free Transfer</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Pay once with your C &amp; A Card. Seamlessly transfer between CoCoR Rail and CoCoM Bus (and RTD local) with zero added base fare.</p>
+                                </div>
+                            </div>
+
+                            <!-- Daily Cap -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0 border border-emerald-300 dark:border-emerald-700 font-bold text-sm">
+                                    $24
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">Front Range Daily Cap</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Never overpay. After tapping up to $24.00 on any calendar day, all subsequent rides on the Front Range corridor are 100% free.</p>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Passes -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-300 flex items-center justify-center shrink-0 border border-amber-300 dark:border-amber-700 font-bold text-xs">
+                                    PASS
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-white">Monthly Unlimited Passes</h4>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5"><strong class="text-slate-900 dark:text-white">$175/mo</strong> Front Range Commuter Pass or <strong class="text-slate-900 dark:text-white">$340/mo</strong> Statewide All-Access Pass.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEPARATE DEDICATED BREAKDOWN SECTIONS -->
+
+        <!-- 1. CoCoR Local Rail (COR) -->
+        <section id="cocor-local" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-800"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-300 flex items-center justify-center border border-indigo-200 dark:border-indigo-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8m-8 4h8m-6 4h4m6 5l-2-2H6l-2 2M5 3h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoR Local Rail (COR)</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-300 text-xs font-bold">Standard Heavy Rail</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">All-Stops Community Connector Across Colorado's Passenger Rail Backbone</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Standard Formula</div>
+                            <div class="text-xl sm:text-2xl font-black text-indigo-600 dark:text-indigo-400">$4.00 Base + $0.18 / Mile</div>
+                            <div class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">10% Cheaper than Amtrak Baseline</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 dark:text-slate-300 mb-8">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Service Overview &amp; Philosophy</h4>
+                            <p class="leading-relaxed mb-4">
+                                CoCoR Local (COR) trains serve every station community along Colorado's passenger rail corridors without exception. Engineered with high-capacity bi-level and single-level modern rail cars, COR connects towns like Loveland, Longmont, Castle Rock, Fountain, and Walsenburg into the state economy with reliable, weather-resilient hourly service.
+                            </p>
+                            <p class="leading-relaxed">
+                                Pricing is intentionally set 10% lower than comparable Amtrak long-distance coach baselines to guarantee passenger rail is an affordable everyday choice for Colorado families and daily commuters.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Included Amenities &amp; Policies</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🚲 Free CoCo Cargo</strong>
+                                    <span>Dedicated roll-on bike racks and ski storage in every rail car at zero extra charge.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🪑 Unreserved Seating</strong>
+                                    <span>Walk-on flexibility with your C &amp; A Card. No blackout dates, surge pricing, or seat lock-ins.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🔌 Universal Power</strong>
+                                    <span>Standard 110V AC and dual USB-C rapid charging ports at all 2x2 passenger seats.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">📶 5G Mesh Wi-Fi</strong>
+                                    <span>Continuous high-speed statewide data connection for seamless remote work and streaming.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corridor Sample Table -->
+                    <div class="border-t border-slate-200 dark:border-slate-800 pt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Popular CoCoR Local Station Pairs</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400 uppercase">
+                                        <th class="py-2 font-semibold">Corridor</th>
+                                        <th class="py-2 font-semibold">Stops Served</th>
+                                        <th class="py-2 font-semibold">Approx. Dist.</th>
+                                        <th class="py-2 font-semibold">COR Adult Fare</th>
+                                        <th class="py-2 font-semibold">Senior / Vet / Student (50%)</th>
+                                        <th class="py-2 font-semibold">Youth (18 &amp; under)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Boulder</td>
+                                        <td class="py-2.5 text-slate-500">Broomfield, Westminster</td>
+                                        <td class="py-2.5">28 mi</td>
+                                        <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$9.04</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$4.52</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Fort Collins</td>
+                                        <td class="py-2.5 text-slate-500">Brighton, Longmont, Berthoud, Loveland</td>
+                                        <td class="py-2.5">65 mi</td>
+                                        <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$15.70</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$7.85</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Colorado Springs</td>
+                                        <td class="py-2.5 text-slate-500">Castle Rock, Monument</td>
+                                        <td class="py-2.5">71 mi</td>
+                                        <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$16.78</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$8.39</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Pueblo &harr; Trinidad</td>
+                                        <td class="py-2.5 text-slate-500">Colorado City, Walsenburg, Aguilar</td>
+                                        <td class="py-2.5">86 mi</td>
+                                        <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$19.48</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$9.74</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CoCoRX Express Rail (COR-X) -->
+        <section id="cocorx-express" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-blue-500/80 dark:border-blue-500/60 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-blue-600 via-yellow-400 to-indigo-600"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-300 flex items-center justify-center border border-blue-200 dark:border-blue-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoRX Express Rail (COR-X)</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-blue-600 text-white text-xs font-extrabold uppercase">High-Speed Express</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Limited-Stop High-Speed Service Connecting Major Colorado Anchor Hubs</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Express Pricing</div>
+                            <div class="text-xl sm:text-2xl font-black text-blue-600 dark:text-blue-400">+25% Premium over Local</div>
+                            <div class="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">Guaranteed Seat Reservation Included</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 dark:text-slate-300 mb-8">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">The Express Experience</h4>
+                            <p class="leading-relaxed mb-4">
+                                CoCoRX Express (COR-X) is designed for intercity business travellers and travelers prioritizing time. Operating on dedicated bypass tracks along the Front Range spine and major regional corridors, COR-X skips minor waypoints to shave up to 35% off trip times.
+                            </p>
+                            <p class="leading-relaxed">
+                                Every COR-X ticket comes with a <strong class="text-slate-900 dark:text-white">guaranteed assigned seat</strong>, eliminating boarding rushes. Ticket holders can choose standard coach or book directly into the dedicated Quiet Work Lounge car.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Premium Cabin Amenities</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🤫 Quiet Work Lounge</strong>
+                                    <span>Cell phone calls strictly prohibited. Ergonomic high-back leather seats and whisper-quiet HVAC.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🛰️ Starlink Satellite Wi-Fi</strong>
+                                    <span>High-throughput satellite mesh on all cars ensuring uninterrupted connectivity in canyons.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">🥨 CoCo Snacks Lounge Bar</strong>
+                                    <span>Standing high-top bar offering 100% Colorado local roasters, craft sodas, and artisan snacks.</span>
+                                </div>
+                                <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <strong class="text-slate-900 dark:text-white block mb-0.5">💺 Vegan Navy Leather</strong>
+                                    <span>Premium wipeable upholstery with Colorado state flag red and gold racing stitch accents.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corridor Sample Table -->
+                    <div class="border-t border-slate-200 dark:border-slate-800 pt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Popular CoCoRX Express Corridor Pairs</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-400 uppercase">
+                                        <th class="py-2 font-semibold">Corridor</th>
+                                        <th class="py-2 font-semibold">Service Tier</th>
+                                        <th class="py-2 font-semibold">Transit Time</th>
+                                        <th class="py-2 font-semibold">COR-X Adult Fare</th>
+                                        <th class="py-2 font-semibold">Senior / Vet / Student</th>
+                                        <th class="py-2 font-semibold">Youth (18 &amp; under)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver Union Station &harr; Fort Collins DTC</td>
+                                        <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
+                                        <td class="py-2.5">~52 min</td>
+                                        <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$19.63</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$9.81</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver Union Station &harr; Colorado Springs Depot</td>
+                                        <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
+                                        <td class="py-2.5">~1h 05m</td>
+                                        <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$20.98</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$10.49</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver Union Station &harr; Pueblo Union Depot</td>
+                                        <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
+                                        <td class="py-2.5">~1h 45m</td>
+                                        <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$29.50</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$14.75</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Glenwood Springs</td>
+                                        <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">ZX Zephyr Express</td>
+                                        <td class="py-2.5">~2h 30m</td>
+                                        <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$41.00</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$20.50</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CoCoM Bustang -->
+        <section id="cocom-bustang" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-800"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-300 flex items-center justify-center border border-purple-200 dark:border-purple-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoM Bustang</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-300 text-xs font-bold">Intercity Express Motorcoach</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">CDOT's Flagship Regional Highway Express System Under Unified CoCo Transit</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Current CDOT Baseline</div>
+                            <div class="text-xl sm:text-2xl font-black text-purple-600 dark:text-purple-400">$9.00 &ndash; $45.00</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Corridor-Based Fixed Fares</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 dark:text-slate-300 mb-8">
+                        <!-- West Line -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-purple-700 dark:text-purple-300">West Line (I-70)</span>
+                                <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 font-bold">$9 &ndash; $45</span>
+                            </div>
+                            <p class="mb-3 text-slate-500 dark:text-slate-400">Denver Union Station &harr; Grand Junction via I-70 mountain corridor.</p>
+                            <ul class="space-y-1 font-medium">
+                                <li class="flex justify-between"><span>Denver &harr; Frisco</span><span class="font-bold text-slate-900 dark:text-white">$12.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Vail</span><span class="font-bold text-slate-900 dark:text-white">$17.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Glenwood Spgs</span><span class="font-bold text-slate-900 dark:text-white">$28.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Grand Junction</span><span class="font-bold text-slate-900 dark:text-white">$45.00</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- North Line -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-purple-700 dark:text-purple-300">North Line (I-25 North)</span>
+                                <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 font-bold">$9 &ndash; $10</span>
+                            </div>
+                            <p class="mb-3 text-slate-500 dark:text-slate-400">Denver Union Station &harr; Loveland / Fort Collins Downtown Transit Center.</p>
+                            <ul class="space-y-1 font-medium">
+                                <li class="flex justify-between"><span>Denver &harr; Firestone/Longmont</span><span class="font-bold text-slate-900 dark:text-white">$7.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Loveland Centerra</span><span class="font-bold text-slate-900 dark:text-white">$9.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Fort Collins Harmony</span><span class="font-bold text-slate-900 dark:text-white">$10.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Fort Collins DTC</span><span class="font-bold text-slate-900 dark:text-white">$10.00</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- South Line -->
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-purple-700 dark:text-purple-300">South Line (I-25 South)</span>
+                                <span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 font-bold">$9 &ndash; $17</span>
+                            </div>
+                            <p class="mb-3 text-slate-500 dark:text-slate-400">Denver Union Station &harr; Colorado Springs &amp; Pueblo Transit Center.</p>
+                            <ul class="space-y-1 font-medium">
+                                <li class="flex justify-between"><span>Denver &harr; Monument P&amp;R</span><span class="font-bold text-slate-900 dark:text-white">$11.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Colorado Springs</span><span class="font-bold text-slate-900 dark:text-white">$12.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Fountain</span><span class="font-bold text-slate-900 dark:text-white">$14.00</span></li>
+                                <li class="flex justify-between"><span>Denver &harr; Pueblo Transit Ctr</span><span class="font-bold text-slate-900 dark:text-white">$17.00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-purple-50/60 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800/50 flex flex-wrap items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-purple-700 dark:text-purple-300">Bustang Coach Amenities:</span>
+                            <span class="text-slate-600 dark:text-slate-300">Restroom onboard &bull; 110V power outlets at each seat &bull; Free 5G Wi-Fi &bull; 3-bike front racks &bull; Full ADA wheelchair lift</span>
+                        </div>
+                        <span class="font-semibold text-slate-500 dark:text-slate-400">50-Passenger MCI Fleet</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CoCoM Pegasus -->
+        <section id="cocom-pegasus" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-rose-500 via-pink-600 to-rose-700"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-950/80 text-rose-600 dark:text-rose-300 flex items-center justify-center border border-rose-200 dark:border-rose-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoM Pegasus</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-300 text-xs font-bold">Mountain Micro-Transit Express</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Fast 14-Passenger Sprinter Vans Bypassing Peak Weekend I-70 Traffic</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Express Shuttle Fares</div>
+                            <div class="text-xl sm:text-2xl font-black text-rose-600 dark:text-rose-400">$13.00 &ndash; $20.00</div>
+                            <div class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Uses I-70 Mountain Express Lanes</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 dark:text-slate-300 mb-8">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">High-Frequency Mountain Shuttles</h4>
+                            <p class="leading-relaxed mb-4">
+                                Pegasus micro-transit vans operate along the I-70 Mountain Corridor departing from Denver Union Station and the Denver Federal Center. Built on custom 14-passenger Mercedes-Benz Sprinter chassis, Pegasus vehicles are legally authorized to travel in the <strong class="text-slate-900 dark:text-white">I-70 Mountain Express Lanes</strong> for free, blowing past weekend ski gridlock.
+                            </p>
+                            <p class="leading-relaxed">
+                                Departures run every 60 minutes on peak Thursday through Monday schedules, providing a nimble car-free gateway into Summit and Eagle counties.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Key Stops &amp; Flat Fares</h4>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Denver &harr; Idaho Springs</strong>
+                                        <span class="text-slate-500">Historic Clear Creek County gateway</span>
+                                    </div>
+                                    <span class="text-sm font-black text-rose-600 dark:text-rose-400">$13.00</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Denver &harr; Frisco Transfer Center</strong>
+                                        <span class="text-slate-500">Summit Stage hub (Breck, Keystone, Copper)</span>
+                                    </div>
+                                    <span class="text-sm font-black text-rose-600 dark:text-rose-400">$15.00</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Denver &harr; Vail Transportation Center</strong>
+                                        <span class="text-slate-500">Direct village center drop-off</span>
+                                    </div>
+                                    <span class="text-sm font-black text-rose-600 dark:text-rose-400">$18.00</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Denver &harr; Avon Station</strong>
+                                        <span class="text-slate-500">Beaver Creek mountain portal</span>
+                                    </div>
+                                    <span class="text-sm font-black text-rose-600 dark:text-rose-400">$20.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CoCoM Outrider -->
+        <section id="cocom-outrider" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-800"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-300 flex items-center justify-center border border-emerald-200 dark:border-emerald-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoM Outrider</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 text-xs font-bold">Subsidized Rural Lifeline</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">State-Subsidized Long-Distance Routes Connecting Remote Colorado Communities</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Rural Fares</div>
+                            <div class="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">$11.00 &ndash; $40.00</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Heavy State Transit Subsidy</div>
+                        </div>
+                    </div>
+
+                    <div class="text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        CoCoM Outrider serves as the essential mobility lifeline for rural Coloradans, connecting agricultural plains and high mountain communities to major medical hubs, universities, and commercial centers. Fares are heavily subsidized by the State of Colorado so cost is never a barrier to healthcare, work, or family travel.
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Craig &harr; Denver</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$34.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via Steamboat Springs, Kremmling, Granby (US-40)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Gunnison / Crested Butte &harr; Denver</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$38.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via Monarch Pass, Salida, Buena Vista (US-285)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Alamosa &harr; Pueblo</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$20.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via Poncha Springs, Salida, Ca&ntilde;on City (US-50)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Durango &harr; Grand Junction</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$32.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via Cortez, Telluride, Ridgway, Montrose</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Lamar &harr; Colorado Springs</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$17.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via La Junta, Rocky Ford, Pueblo (US-50)</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                            <div class="flex justify-between items-center mb-1">
+                                <strong class="text-slate-900 dark:text-white">Sterling &harr; Denver (I-76)</strong>
+                                <span class="font-bold text-emerald-600 dark:text-emerald-400">$22.00</span>
+                            </div>
+                            <div class="text-[11px] text-slate-500">Via Brush, Fort Morgan, Hudson, DIA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CoCoM Snowstang -->
+        <section id="cocom-snowstang" class="scroll-mt-24">
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div class="h-2 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600"></div>
+                <div class="p-6 sm:p-10">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-300 flex items-center justify-center border border-cyan-200 dark:border-cyan-800 shadow-sm shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">CoCoM Snowstang</h3>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900/60 dark:text-cyan-300 text-xs font-bold">Seasonal Weekend Ski Express</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Direct Weekend Ski &amp; Board Service From Denver to Top Colorado Ski Resorts</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Round-Trip Fares</div>
+                            <div class="text-xl sm:text-2xl font-black text-cyan-600 dark:text-cyan-400">$25.00 &ndash; $40.00 RT</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">Guaranteed Round-Trip Seat</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 dark:text-slate-300 mb-6">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Skip Resort Parking &amp; I-70 Hassle</h4>
+                            <p class="leading-relaxed mb-4">
+                                Snowstang operates every Saturday, Sunday, and winter holiday Monday between December and May. Coaches depart early morning from Denver Union Station and the Denver Federal Center (RTD Light Rail station), delivering riders directly to resort chairlift bases.
+                            </p>
+                            <p class="leading-relaxed">
+                                No paying $40+ for mountain parking lots or riding crowded parking lot shuttle buses. Your round-trip reservation guarantees your gear storage and evening ride home.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base">Seasonal Resort Routes &amp; Pricing</h4>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Loveland Ski Area</strong>
+                                        <span class="text-slate-500">Closest resort drop at Basin base</span>
+                                    </div>
+                                    <span class="text-sm font-black text-cyan-600 dark:text-cyan-400">$25.00 Round-Trip</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Arapahoe Basin (The Legend)</strong>
+                                        <span class="text-slate-500">Drop at Early Riser lift base</span>
+                                    </div>
+                                    <span class="text-sm font-black text-cyan-600 dark:text-cyan-400">$25.00 Round-Trip</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Copper Mountain &amp; Breckenridge</strong>
+                                        <span class="text-slate-500">Center Village &amp; Breck Gondola Station</span>
+                                    </div>
+                                    <span class="text-sm font-black text-cyan-600 dark:text-cyan-400">$30.00 Round-Trip</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                                    <div>
+                                        <strong class="text-slate-900 dark:text-white block">Steamboat Springs Resort</strong>
+                                        <span class="text-slate-500">Gondola Square weekend express</span>
+                                    </div>
+                                    <span class="text-sm font-black text-cyan-600 dark:text-cyan-400">$40.00 Round-Trip</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. C & A Card (Colorado & Access Pass) -->
+        <section id="ca-card" class="scroll-mt-24">
+            <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-800/50">
+                <div class="max-w-4xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 text-xs font-semibold mb-4">
+                        <span>Universal State Smartcard Architecture</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-4">
+                        The C &amp; A Card: Colorado &amp; Access Pass
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                        The C &amp; A Card is Colorado's unified transit passport. Operating on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required, the system automatically protects riders with universal 2-hour transfer windows, daily expenditure caps, and monthly passes.
+                    </p>
+
+                    <!-- Dual Card Comparison -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-left">
+                        <!-- C Card (Core) -->
+                        <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-400/50 transition-all">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-yellow-400 font-black text-xl">
+                                    C
+                                </div>
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30">Standard Transit Pass</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">The C Card (CoCo Core)</h3>
+                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                The accessible, everyday Colorado smartcard. Works offline in deep mountain canyons without cellular connectivity, holding a local cash balance and up to 5 pre-purchased tickets loaded at any platform kiosk.
+                            </p>
+                            <ul class="space-y-1.5 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Offline NFC storage drive</li>
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Linkable to CoCo RealTime mobile app</li>
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Balance protection when registered</li>
+                            </ul>
+                        </div>
+
+                        <!-- A Card (All) -->
+                        <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-yellow-400/50 transition-all">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-yellow-500/30 border border-yellow-400/40 flex items-center justify-center text-yellow-300 font-black text-xl">
+                                    A
+                                </div>
+                                <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold border border-yellow-400/30">Commuter + Debit Card</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">The A Card (CoCo All)</h3>
+                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                The premium all-in-one commuter card. Functions as a contactless transit key and a standard debit card backed by your linked checking account, enabling seamless everyday coffee, groceries, and travel.
+                            </p>
+                            <ul class="space-y-1.5 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Automatic bank auto-reload</li>
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> 10% instant rebate on CoCo Snacks</li>
+                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Universal debit tap anywhere Mastercard is accepted</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pass Rules & Caps Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="text-2xl font-black text-yellow-400">$24.00</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Front Range Daily Cap</div>
+                            <p class="text-[11px] text-slate-300 mt-1">Once you tap $24 in a day on FR rail or Bustang, all remaining rides that day are completely free.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="text-2xl font-black text-blue-300">$175.00</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Monthly Commuter Pass</div>
+                            <p class="text-[11px] text-slate-300 mt-1">Unlimited monthly rides across Front Range CoCoR Rail (FR/FRX) and Bustang North/South lines.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="text-2xl font-black text-emerald-400">$340.00</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Statewide All-Access</div>
+                            <p class="text-[11px] text-slate-300 mt-1">Total freedom: unlimited CoCoR Rail, Bustang, Pegasus, Outrider, and Snowstang statewide.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div class="text-2xl font-black text-purple-300">50% &amp; FREE</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Special Concessions</div>
+                            <p class="text-[11px] text-slate-300 mt-1">50% off for Seniors (65+), Students, and Veterans. 100% Free transit for Youth aged 18 and under.</p>
+                        </div>
+                    </div>
+
+                    <!-- CoCo Snacks Box -->
+                    <div class="mt-8 p-4 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                        <div>
+                            <strong class="text-yellow-300 font-bold block text-sm">CoCo Snacks Program (100% Colorado Local Mandate)</strong>
+                            <p class="text-slate-300 mt-0.5">Use your C or A Card at station kiosks and lounge cars to purchase Colorado-crafted snacks (Boulder Canyon, Hammond's, local roasters). Bypasses third-party bank swipe fees with 10% rebate back to riders.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-yellow-400 text-slate-950 font-black text-[11px] whitespace-nowrap">10% CARD REBATE</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">CoCo (Colorado Connect) Transit System</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">CoCoR (Rail) &bull; CoCoM (Motor &amp; Mobility Division) &bull; State of Colorado</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 sm:gap-6 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home Portal</a>
+                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
+                    <a href="map.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Interactive Map</a>
+                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
+                    <a href="fares.html" class="text-blue-600 dark:text-blue-400 font-bold">Fares &amp; Passes</a>
+                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
+                    <span>CDOT Transit &amp; Rail</span>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 text-center text-[11px] text-slate-400 dark:text-slate-500">
+                &copy; CoCo Statewide Transit Master Network. Fares, formulas, and C &amp; A Pass rules established under the Colorado Unified Passenger Transit Directive.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme & Calculator Script -->
+    <script>
+        // Stations Registry with accurate coordinates
+        const stationsRegistry = [{"id":"denver","name":"Denver Union Station","lat":39.7525,"lon":-105,"hub":true,"color":"#1d4ed8"},{"id":"cosprings","name":"Colorado Springs Depot","lat":38.8339,"lon":-104.8214,"hub":true,"color":"#1d4ed8"},{"id":"pueblo","name":"Pueblo Union Depot","lat":38.2544,"lon":-104.6091,"hub":true,"color":"#1d4ed8"},{"id":"grandjct","name":"Grand Junction Hub","lat":39.0639,"lon":-108.5506,"hub":true,"color":"#1d4ed8"},{"id":"glenwood","name":"Glenwood Springs Hub","lat":39.5505,"lon":-107.3248,"hub":true,"color":"#1d4ed8"},{"id":"frisco","name":"Frisco Transfer Center","lat":39.5744,"lon":-106.0975,"hub":true,"color":"#1d4ed8"},{"id":"durango","name":"Durango Transit Hub","lat":37.2753,"lon":-107.88,"hub":true,"color":"#1d4ed8"},{"id":"ftcollins","name":"Fort Collins DTC","lat":40.5853,"lon":-105.0844,"hub":true,"color":"#1d4ed8"},{"id":"dia","name":"Denver Int'l Airport (DEN)","lat":39.8561,"lon":-104.6737,"hub":true,"color":"#eab308"},{"id":"salida","name":"Salida Chaffee Hub","lat":38.5347,"lon":-105.9989,"hub":true,"color":"#1d4ed8"},{"id":"loveland","name":"Loveland Centerra","lat":40.3978,"lon":-105.075,"hub":false,"color":"#3b82f6"},{"id":"berthoud","name":"Berthoud","lat":40.308,"lon":-105.078,"hub":false,"color":"#3b82f6"},{"id":"longmont","name":"Longmont Hub","lat":40.1672,"lon":-105.1019,"hub":false,"color":"#3b82f6"},{"id":"boulder","name":"Boulder Downtown","lat":40.015,"lon":-105.2705,"hub":false,"color":"#3b82f6"},{"id":"broomfield","name":"Broomfield","lat":39.9142,"lon":-105.0869,"hub":false,"color":"#3b82f6"},{"id":"castlerock","name":"Castle Rock","lat":39.3722,"lon":-104.8561,"hub":false,"color":"#3b82f6"},{"id":"monument","name":"Monument","lat":39.091,"lon":-104.872,"hub":false,"color":"#3b82f6"},{"id":"fountain","name":"Fountain","lat":38.682,"lon":-104.7,"hub":false,"color":"#3b82f6"},{"id":"coloradocity","name":"Colorado City","lat":38.03,"lon":-104.73,"hub":false,"color":"#3b82f6"},{"id":"walsenburg","name":"Walsenburg","lat":37.6239,"lon":-104.7803,"hub":false,"color":"#dc2626"},{"id":"aguilar","name":"Aguilar","lat":37.4,"lon":-104.65,"hub":false,"color":"#881337"},{"id":"trinidad","name":"Trinidad","lat":37.1695,"lon":-104.5005,"hub":false,"color":"#3b82f6"},{"id":"federalcenter","name":"Denver Federal Center","lat":39.7197,"lon":-105.1328,"hub":false,"color":"#6366f1"},{"id":"woolymammoth","name":"Wooly Mammoth P&R","lat":39.6978,"lon":-105.21,"hub":false,"color":"#6366f1"},{"id":"greeley","name":"Greeley Transit Center","lat":40.4233,"lon":-104.7091,"hub":false,"color":"#059669"},{"id":"kersey","name":"Kersey","lat":40.387,"lon":-104.56,"hub":false,"color":"#059669"},{"id":"brighton","name":"Brighton","lat":39.9869,"lon":-104.8206,"hub":false,"color":"#b45309"},{"id":"hudson","name":"Hudson","lat":40.075,"lon":-104.64,"hub":false,"color":"#b45309"},{"id":"keenesburg","name":"Keenesburg","lat":40.108,"lon":-104.52,"hub":false,"color":"#b45309"},{"id":"wiggins","name":"Wiggins","lat":40.233,"lon":-104.072,"hub":false,"color":"#b45309"},{"id":"ftmorgan","name":"Fort Morgan","lat":40.2503,"lon":-103.8,"hub":false,"color":"#b45309"},{"id":"brush","name":"Brush","lat":40.2589,"lon":-103.6238,"hub":false,"color":"#b45309"},{"id":"sterling","name":"Sterling","lat":40.6255,"lon":-103.2077,"hub":false,"color":"#b45309"},{"id":"julesburg","name":"Julesburg","lat":40.9883,"lon":-102.2644,"hub":false,"color":"#b45309"},{"id":"limon","name":"Limon","lat":39.2639,"lon":-103.6922,"hub":false,"color":"#eab308"},{"id":"flagler","name":"Flagler","lat":39.293,"lon":-103.067,"hub":false,"color":"#eab308"},{"id":"burlington","name":"Burlington","lat":39.3044,"lon":-102.2694,"hub":false,"color":"#eab308"},{"id":"fowler","name":"Fowler","lat":38.15,"lon":-104.25,"hub":false,"color":"#9333ea"},{"id":"manzanola","name":"Manzanola","lat":38.11,"lon":-103.865,"hub":false,"color":"#9333ea"},{"id":"rockyford","name":"Rocky Ford","lat":38.068,"lon":-103.72,"hub":false,"color":"#9333ea"},{"id":"lajunta","name":"La Junta Hub","lat":37.985,"lon":-103.5439,"hub":false,"color":"#9333ea"},{"id":"lasanimas","name":"Las Animas","lat":38.068,"lon":-103.222,"hub":false,"color":"#d97706"},{"id":"lamar","name":"Lamar","lat":38.0872,"lon":-102.6208,"hub":false,"color":"#d97706"},{"id":"canoncity","name":"Cañon City","lat":38.441,"lon":-105.2424,"hub":false,"color":"#e11d48"},{"id":"cotopaxi","name":"Cotopaxi","lat":38.371,"lon":-105.688,"hub":false,"color":"#e11d48"},{"id":"ponchasprings","name":"Poncha Springs","lat":38.515,"lon":-106.075,"hub":false,"color":"#84cc16"},{"id":"buenavista","name":"Buena Vista","lat":38.8422,"lon":-106.1311,"hub":false,"color":"#84cc16"},{"id":"fairplay","name":"Fairplay","lat":39.2247,"lon":-105.9986,"hub":false,"color":"#84cc16"},{"id":"bailey","name":"Bailey","lat":39.475,"lon":-105.475,"hub":false,"color":"#84cc16"},{"id":"moffat","name":"Moffat","lat":37.998,"lon":-105.908,"hub":false,"color":"#e11d48"},{"id":"alamosa","name":"Alamosa Hub","lat":37.4694,"lon":-105.87,"hub":false,"color":"#dc2626"},{"id":"montevista","name":"Monte Vista","lat":37.579,"lon":-106.146,"hub":false,"color":"#dc2626"},{"id":"delnorte","name":"Del Norte","lat":37.678,"lon":-106.353,"hub":false,"color":"#dc2626"},{"id":"southfork","name":"South Fork","lat":37.665,"lon":-106.635,"hub":false,"color":"#dc2626"},{"id":"pagosa","name":"Pagosa Springs","lat":37.2694,"lon":-107.01,"hub":false,"color":"#dc2626"},{"id":"bayfield","name":"Bayfield","lat":37.226,"lon":-107.598,"hub":false,"color":"#dc2626"},{"id":"mancos","name":"Mancos","lat":37.345,"lon":-108.288,"hub":false,"color":"#ea580c"},{"id":"cortez","name":"Cortez","lat":37.3489,"lon":-108.5859,"hub":false,"color":"#ea580c"},{"id":"dolores","name":"Dolores","lat":37.474,"lon":-108.498,"hub":false,"color":"#ea580c"},{"id":"rico","name":"Rico","lat":37.692,"lon":-108.03,"hub":false,"color":"#ea580c"},{"id":"elrancho","name":"El Rancho (Evergreen)","lat":39.702,"lon":-105.335,"hub":false,"color":"#f43f5e"},{"id":"idahosprings","name":"Idaho Springs","lat":39.7425,"lon":-105.5136,"hub":false,"color":"#a855f7"},{"id":"georgetown","name":"Georgetown","lat":39.715,"lon":-105.697,"hub":false,"color":"#a855f7"},{"id":"vail","name":"Vail Transportation Center","lat":39.6403,"lon":-106.3742,"hub":false,"color":"#a855f7"},{"id":"avon","name":"Avon Station","lat":39.634,"lon":-106.517,"hub":false,"color":"#f43f5e"},{"id":"eagle","name":"Eagle Chambers P&R","lat":39.655,"lon":-106.828,"hub":false,"color":"#a855f7"},{"id":"newcastle","name":"New Castle","lat":39.572,"lon":-107.535,"hub":false,"color":"#a855f7"},{"id":"rifle","name":"Rifle","lat":39.534,"lon":-107.783,"hub":false,"color":"#a855f7"},{"id":"parachute","name":"Parachute","lat":39.452,"lon":-108.052,"hub":false,"color":"#a855f7"},{"id":"palisade","name":"Palisade","lat":39.11,"lon":-108.355,"hub":false,"color":"#a855f7"},{"id":"loveland_ski","name":"Loveland Ski Area","lat":39.68,"lon":-105.897,"hub":false,"color":"#38bdf8"},{"id":"abasin","name":"Arapahoe Basin","lat":39.6425,"lon":-105.8719,"hub":false,"color":"#38bdf8"},{"id":"copper","name":"Copper Mountain","lat":39.5022,"lon":-106.151,"hub":false,"color":"#c026d3"},{"id":"breckenridge","name":"Breckenridge Station","lat":39.4817,"lon":-106.0384,"hub":false,"color":"#c026d3"},{"id":"winterpark","name":"Winter Park Resort","lat":39.8869,"lon":-105.7625,"hub":false,"color":"#0284c7"},{"id":"fraser","name":"Fraser","lat":39.948,"lon":-105.817,"hub":false,"color":"#0284c7"},{"id":"granby","name":"Granby","lat":40.0861,"lon":-105.9397,"hub":false,"color":"#0284c7"},{"id":"kremmling","name":"Kremmling","lat":40.0583,"lon":-106.3986,"hub":false,"color":"#16a34a"},{"id":"steamboat","name":"Steamboat Springs","lat":40.485,"lon":-106.8317,"hub":false,"color":"#16a34a"},{"id":"hayden","name":"Hayden","lat":40.485,"lon":-107.258,"hub":false,"color":"#16a34a"},{"id":"craig","name":"Craig","lat":40.5153,"lon":-107.5464,"hub":false,"color":"#16a34a"},{"id":"lyons","name":"Lyons","lat":40.2247,"lon":-105.2714,"hub":false,"color":"#0284c7"},{"id":"estespark","name":"Estes Park Visitor Center","lat":40.3772,"lon":-105.5217,"hub":false,"color":"#0284c7"},{"id":"rmnp","name":"RMNP Bear Lake Transit Hub","lat":40.343,"lon":-105.599,"hub":false,"color":"#0284c7"},{"id":"delta","name":"Delta","lat":38.7422,"lon":-108.0689,"hub":false,"color":"#ea580c"},{"id":"olathe","name":"Olathe","lat":38.604,"lon":-107.982,"hub":false,"color":"#ea580c"},{"id":"montrose","name":"Montrose","lat":38.4783,"lon":-107.8761,"hub":false,"color":"#ea580c"},{"id":"ridgway","name":"Ridgway","lat":38.157,"lon":-107.758,"hub":false,"color":"#ea580c"},{"id":"placerville","name":"Placerville","lat":38.015,"lon":-108.053,"hub":false,"color":"#ea580c"},{"id":"telluride","name":"Telluride","lat":37.9375,"lon":-107.8123,"hub":false,"color":"#ea580c"},{"id":"gunnison","name":"Gunnison","lat":38.5458,"lon":-106.9253,"hub":false,"color":"#84cc16"},{"id":"crestedbutte","name":"Crested Butte","lat":38.8697,"lon":-106.9878,"hub":false,"color":"#84cc16"}];
+        const stationMap = {};
+        stationsRegistry.forEach(st => stationMap[st.id] = st);
+
+        // Theme Support
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+
+        // Haversine Distance in Miles
+        function calculateHaversine(lat1, lon1, lat2, lon2) {
+            const R = 3958.8; // Earth radius in miles
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        // Format duration helper
+        function formatDuration(minutes) {
+            const hrs = Math.floor(minutes / 60);
+            const mins = Math.round(minutes % 60);
+            if (hrs === 0) return `${mins}m`;
+            return `${hrs}h ${mins.toString().padStart(2, '0')}m`;
+        }
+
+        // Calculator DOM references
+        const originSelect = document.getElementById('originSelect');
+        const destinationSelect = document.getElementById('destinationSelect');
+        const swapBtn = document.getElementById('swapBtn');
+        const routeOriginName = document.getElementById('routeOriginName');
+        const routeDestinationName = document.getElementById('routeDestinationName');
+        const metricRouteMiles = document.getElementById('metricRouteMiles');
+        const metricDirectMiles = document.getElementById('metricDirectMiles');
+
+        const corPriceDisplay = document.getElementById('corPriceDisplay');
+        const corFormulaDisplay = document.getElementById('corFormulaDisplay');
+        const corTravelTime = document.getElementById('corTravelTime');
+
+        const corxPriceDisplay = document.getElementById('corxPriceDisplay');
+        const corxFormulaDisplay = document.getElementById('corxFormulaDisplay');
+        const corxTravelTime = document.getElementById('corxTravelTime');
+
+        const busPriceDisplay = document.getElementById('busPriceDisplay');
+        const busFormulaDisplay = document.getElementById('busFormulaDisplay');
+        const busTravelTime = document.getElementById('busTravelTime');
+        const busCorridorBadge = document.getElementById('busCorridorBadge');
+
+        // Discount Factor based on selection
+        function getDiscountFactor() {
+            const selected = document.querySelector('input[name="concession"]:checked');
+            const val = selected ? selected.value : 'adult';
+            if (val === 'youth') return 0.0;
+            if (val === 'senior' || val === 'special') return 0.5;
+            return 1.0;
+        }
+
+        // Known CDOT corridor price map (Denver baseline)
+        const knownBustangFares = {
+            'cosprings': 12.00,
+            'pueblo': 17.00,
+            'monument': 11.00,
+            'fountain': 14.00,
+            'ftcollins': 10.00,
+            'loveland': 9.00,
+            'longmont': 7.00,
+            'frisco': 12.00,
+            'vail': 17.00,
+            'avon': 20.00,
+            'glenwood': 28.00,
+            'grandjct': 45.00,
+            'idahosprings': 13.00,
+            'steamboat': 34.00,
+            'craig': 34.00,
+            'sterling': 22.00,
+            'alamosa': 20.00,
+            'durango': 32.00,
+            'gunnison': 38.00,
+            'crestedbutte': 38.00,
+            'lamar': 17.00,
+            'trinidad': 11.00
+        };
+
+        function calculateFares() {
+            const origId = originSelect.value;
+            const destId = destinationSelect.value;
+            const stOrig = stationMap[origId];
+            const stDest = stationMap[destId];
+
+            if (!stOrig || !stDest) return;
+
+            routeOriginName.textContent = stOrig.name;
+            routeDestinationName.textContent = stDest.name;
+
+            // Same station selected
+            if (origId === destId) {
+                metricRouteMiles.textContent = '0';
+                metricDirectMiles.textContent = '0';
+                corPriceDisplay.textContent = '$0.00';
+                corFormulaDisplay.textContent = 'Origin and destination are the same station';
+                corxPriceDisplay.textContent = '$0.00';
+                corxFormulaDisplay.textContent = 'Origin and destination are the same station';
+                busPriceDisplay.textContent = '$0.00';
+                busFormulaDisplay.textContent = 'Origin and destination are the same station';
+                corTravelTime.textContent = '0m';
+                corxTravelTime.textContent = '0m';
+                busTravelTime.textContent = '0m';
+                return;
+            }
+
+            const directDistance = calculateHaversine(stOrig.lat, stOrig.lon, stDest.lat, stDest.lon);
+            // Colorado highway & rail topography curvature multiplier (~1.22x)
+            const routeDistance = Math.max(5, Math.round(directDistance * 1.22));
+
+            metricDirectMiles.textContent = Math.round(directDistance);
+            metricRouteMiles.textContent = routeDistance;
+
+            const discount = getDiscountFactor();
+
+            // 1. CoCoR Local: $4.00 base + $0.18/mile
+            const rawLocal = 4.00 + (0.18 * routeDistance);
+            const corFinal = rawLocal * discount;
+            corPriceDisplay.textContent = `$${corFinal.toFixed(2)}`;
+            if (discount === 0.0) {
+                corFormulaDisplay.textContent = `FREE Youth Pass (18 & under) &bull; Standard: $${rawLocal.toFixed(2)}`;
+            } else if (discount === 0.5) {
+                corFormulaDisplay.textContent = `50% Concession applied (Base $4.00 + $0.18/mi &times; 0.5)`;
+            } else {
+                corFormulaDisplay.textContent = `Base $4.00 + ($0.18 &times; ${routeDistance} mi)`;
+            }
+
+            // Travel times
+            // COR Local avg speed: 48 mph
+            const localMinutes = (routeDistance / 48) * 60;
+            corTravelTime.textContent = formatDuration(localMinutes);
+
+            // 2. CoCoRX Express: 25% premium over Local
+            const rawExpress = rawLocal * 1.25;
+            const corxFinal = rawExpress * discount;
+            corxPriceDisplay.textContent = `$${corxFinal.toFixed(2)}`;
+            if (discount === 0.0) {
+                corxFormulaDisplay.textContent = `FREE Youth Pass (18 & under) &bull; Standard: $${rawExpress.toFixed(2)}`;
+            } else if (discount === 0.5) {
+                corxFormulaDisplay.textContent = `50% Concession applied (+25% express premium)`;
+            } else {
+                corxFormulaDisplay.textContent = `$${rawLocal.toFixed(2)} + 25% Express Premium`;
+            }
+
+            // COR-X Express avg speed: 65 mph
+            const expressMinutes = (routeDistance / 65) * 60;
+            corxTravelTime.textContent = formatDuration(expressMinutes);
+
+            // 3. CoCoM Bus Equivalent ($9 - $45 CDOT baseline)
+            let baseBusFare = 9.00;
+            let corridorName = 'Regional Bus Corridor';
+
+            // Check if one endpoint is Denver and matches known CDOT pairs
+            const otherEndpoint = (origId === 'denver') ? destId : ((destId === 'denver') ? origId : null);
+            if (otherEndpoint && knownBustangFares[otherEndpoint]) {
+                baseBusFare = knownBustangFares[otherEndpoint];
+                if (['ftcollins', 'loveland', 'longmont'].includes(otherEndpoint)) {
+                    corridorName = 'Bustang North Line';
+                } else if (['cosprings', 'pueblo', 'monument', 'fountain'].includes(otherEndpoint)) {
+                    corridorName = 'Bustang South Line';
+                } else if (['frisco', 'vail', 'glenwood', 'grandjct'].includes(otherEndpoint)) {
+                    corridorName = 'Bustang West Line';
+                } else if (['idahosprings', 'avon'].includes(otherEndpoint)) {
+                    corridorName = 'Pegasus Mountain Van';
+                } else {
+                    corridorName = 'Outrider Rural Route';
+                }
+            } else {
+                // Scaled CDOT bus distance model:
+                if (routeDistance <= 30) {
+                    baseBusFare = 9.00;
+                    corridorName = 'Local CDOT Regional Link';
+                } else if (routeDistance <= 55) {
+                    baseBusFare = 10.00;
+                    corridorName = 'Intercity Express Motorcoach';
+                } else if (routeDistance <= 85) {
+                    baseBusFare = 12.00;
+                    corridorName = 'Bustang Highway Corridor';
+                } else if (routeDistance <= 130) {
+                    baseBusFare = 17.00;
+                    corridorName = 'Bustang / Outrider Regional';
+                } else if (routeDistance <= 180) {
+                    baseBusFare = 28.00;
+                    corridorName = 'Bustang West / Mountain Route';
+                } else {
+                    baseBusFare = Math.min(45.00, 32.00 + ((routeDistance - 180) * 0.12));
+                    corridorName = 'Bustang / Outrider Statewide';
+                }
+            }
+
+            const busFinal = baseBusFare * discount;
+            busPriceDisplay.textContent = `$${busFinal.toFixed(2)}`;
+            busCorridorBadge.textContent = corridorName;
+            if (discount === 0.0) {
+                busFormulaDisplay.textContent = `FREE Youth Pass &bull; Standard: $${baseBusFare.toFixed(2)}`;
+            } else if (discount === 0.5) {
+                busFormulaDisplay.textContent = `50% Concession applied to CDOT baseline`;
+            } else {
+                busFormulaDisplay.textContent = `CDOT Published Baseline Fare`;
+            }
+
+            // Bus avg speed: 52 mph
+            const busMinutes = (routeDistance / 52) * 60;
+            busTravelTime.textContent = formatDuration(busMinutes);
+        }
+
+        // Swap function
+        swapBtn.addEventListener('click', () => {
+            const temp = originSelect.value;
+            originSelect.value = destinationSelect.value;
+            destinationSelect.value = temp;
+            calculateFares();
+        });
+
+        // Event listeners
+        originSelect.addEventListener('change', calculateFares);
+        destinationSelect.addEventListener('change', calculateFares);
+
+        document.querySelectorAll('input[name="concession"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                document.querySelectorAll('.concession-label').forEach(lbl => {
+                    lbl.classList.remove('border-blue-600', 'bg-blue-50/80', 'dark:bg-blue-950/60', 'text-blue-900', 'dark:text-blue-100');
+                    lbl.classList.add('border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-slate-800');
+                });
+                const parent = e.target.closest('.concession-label');
+                if (parent) {
+                    parent.classList.remove('border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-slate-800');
+                    parent.classList.add('border-blue-600', 'bg-blue-50/80', 'dark:bg-blue-950/60', 'text-blue-900', 'dark:text-blue-100');
+                }
+                calculateFares();
+            });
+        });
+
+        // Preset button helper
+        function setPreset(orig, dest) {
+            originSelect.value = orig;
+            destinationSelect.value = dest;
+            calculateFares();
+        }
+
+        // Initialize on load
+        calculateFares();
+    </script>
+</body>
+</html>

@@ -140,12 +140,20 @@
 
     <!-- Header -->
     <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 p-3 sm:p-4 shadow-md z-20 flex justify-between items-center shrink-0 transition-colors">
-        <div class="flex items-center gap-3 sm:gap-4">
+        <div class="flex items-center gap-2 sm:gap-3">
             <a href="index.html" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 shadow-sm text-xs font-semibold transition-colors shrink-0" title="Back to Home Portal">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                <span>Home Portal</span>
+                <span class="hidden sm:inline">Home Portal</span>
+                <span class="sm:hidden">Home</span>
+            </a>
+            <a href="fares.html" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/60 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shadow-sm text-xs font-semibold transition-colors shrink-0" title="Fares & C & A Pass Calculator">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <span class="hidden sm:inline">Fares &amp; Passes</span>
+                <span class="sm:hidden">Fares</span>
             </a>
             <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_10px_rgba(59,130,246,0.6)] shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -160,7 +168,7 @@
         </div>
         <div class="flex gap-2 sm:gap-3 items-center">
             <div class="hidden lg:flex gap-2">
-                <span class="px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-xs font-bold border border-blue-300 dark:border-blue-700/50">C & A Cards</span>
+                <a href="fares.html#ca-card" class="px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 text-blue-800 dark:text-blue-300 text-xs font-bold border border-blue-300 dark:border-blue-700/50 transition-colors">C & A Cards</a>
                 <span class="px-2.5 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 text-xs font-bold border border-indigo-300 dark:border-indigo-700/50">CoCoR (COR) Rail</span>
                 <span class="px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300 text-xs font-bold border border-purple-300 dark:border-purple-700/50">CoCoM (COM) Bus Division</span>
                 <span class="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium border border-slate-300 dark:border-slate-600">Bustang</span>
