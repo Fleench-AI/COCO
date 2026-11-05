@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CoCo Statewide Transit Map</title>
+    <title>CoCo Statewide Transit Map — Unofficial Concept Proposal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -139,9 +139,10 @@
 <body>
 
     <!-- Official Colorado State Government Utility Bar -->
-    <aside aria-label="Official state government verification" class="bg-[#001a38] text-slate-300 text-xs py-1 px-4 border-b border-blue-950/80 shrink-0">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2">
+    <!-- Unofficial Transit Concept & Planning Study Banner -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1 px-4 border-b border-amber-500/30 shrink-0">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3">
+            <div class="flex items-center gap-2 flex-wrap">
                 <!-- Miniature Colorado Flag SVG -->
                 <svg class="w-4.5 h-3 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
                     <rect width="36" height="8" fill="#002855"/>
@@ -151,16 +152,18 @@
                     <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
                     <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
                 </svg>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-xs">UNOFFICIAL PROPOSAL</span>
                 <div class="flex items-center gap-1.5 font-medium text-slate-200 text-[11px]">
-                    <span>Official State of Colorado Transit Map</span>
+                    <span>UNOFFICIAL TRANSIT CONCEPT &amp; PLANNING STUDY</span>
                     <span class="text-slate-500 hidden sm:inline">&bull;</span>
-                    <span class="text-slate-400 hidden sm:inline font-normal">Department of Transportation</span>
+                    <span class="text-slate-400 hidden sm:inline font-normal">Community Advocacy Proposal &bull; Not Affiliated with CDOT or the State of Colorado</span>
                 </div>
             </div>
-            <div class="flex items-center gap-3 text-[11px] text-slate-400">
-                <span class="hidden md:inline">C.R.S. Title 43 &bull; CDOT Transit &amp; Rail</span>
-                <span class="hidden md:inline text-slate-600">&bull;</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">codot.gov</a>
+            <div class="flex items-center gap-2 text-[11px] text-slate-400">
+                <span class="hidden md:inline text-slate-400">For official Colorado transit, visit</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">codot.gov</a>
+                <span class="text-slate-600">&amp;</span>
+                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">ridebustang.com</a>
             </div>
         </div>
     </aside>
@@ -189,8 +192,11 @@
                 </svg>
             </div>
             <div>
-                <h1 class="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white leading-tight transition-colors">Colorado <span class="text-blue-700 dark:text-amber-300">Transit Map</span></h1>
-                <p class="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-wider transition-colors uppercase">CDOT Division of Transit &amp; Rail</p>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white leading-tight transition-colors">Colorado <span class="text-blue-700 dark:text-amber-300">Transit Map</span></h1>
+                    <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-400 text-slate-950">CONCEPT TRANSIT VISION &bull; UNOFFICIAL PROPOSAL</span>
+                </div>
+                <p class="text-[9px] sm:text-[10px] text-amber-600 dark:text-amber-400 font-bold tracking-wider transition-colors uppercase">Concept Transit Vision &bull; Planning Study Proposal</p>
             </div>
         </div>
         <div class="flex gap-2 sm:gap-3 items-center">
@@ -228,12 +234,22 @@
     <main class="map-container relative z-0" id="mapContainer">
         <!-- Interactive Legend Panel -->
         <div id="legendPanel" class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 legend-panel p-4 sm:p-5 rounded-2xl shadow-2xl z-[1000] w-72 sm:w-84 hidden md:flex flex-col max-h-[80vh] pointer-events-auto">
-            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2 mb-3 shrink-0">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2 mb-2 shrink-0">
                 <h3 class="text-slate-900 dark:text-white font-bold text-xs sm:text-sm tracking-widest uppercase">Transit Network</h3>
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] text-slate-400 font-semibold" id="activeFilterLabel">All Systems</span>
                     <button id="clearSelectionBtn" onclick="clearSelection()" class="hidden text-[10px] bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900/80 text-red-700 dark:text-red-300 font-bold px-2 py-0.5 rounded transition-all">Clear ✕</button>
                 </div>
+            </div>
+
+            <!-- Unofficial Concept Disclaimer Notice -->
+            <div class="mb-2.5 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-[10px] leading-relaxed shrink-0">
+                <div class="font-bold text-amber-800 dark:text-amber-300 mb-0.5 flex items-center gap-1.5">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span>CONCEPT TRANSIT VISION &bull; UNOFFICIAL PROPOSAL</span>
+                </div>
+                <div class="mb-1 text-slate-700 dark:text-slate-300">CoCo (Colorado Connected) is a speculative/advocacy statewide transit master plan developed to demonstrate how passenger rail and regional buses could seamlessly integrate across Colorado.</div>
+                <div>Disclaimer: CoCo Transit System is an independent, community-driven transit concept study and planning proposal. This website is unofficial and is not operated by, endorsed by, or affiliated with the Colorado Department of Transportation (CDOT), the State of Colorado, Regional Transportation District (RTD), or Amtrak. All routes, schedules, fares, and vehicle concepts are proposed for public advocacy, research, and planning demonstration purposes. For official Colorado state transit services and real-time alerts, please visit CDOT (<a href="https://www.codot.gov" target="_blank" rel="noopener" class="underline font-semibold text-blue-700 dark:text-amber-300">codot.gov</a>), Bustang (<a href="https://ridebustang.com" target="_blank" rel="noopener" class="underline font-semibold text-blue-700 dark:text-amber-300">ridebustang.com</a>), and RTD (<a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="underline font-semibold text-blue-700 dark:text-amber-300">rtd-denver.com</a>).</div>
             </div>
 
             <!-- Category Filter Chips -->
@@ -498,6 +514,20 @@
                 </svg>
             </button>
         </div>
+        <!-- Bottom Disclaimer Footer Bar -->
+        <footer class="absolute bottom-0 left-0 right-0 z-[500] bg-slate-900/90 text-slate-400 text-[10px] py-1.5 px-4 border-t border-slate-800 hidden lg:flex items-center justify-between backdrop-blur-sm pointer-events-auto">
+            <div class="truncate max-w-4xl">
+                <strong class="text-amber-300">Disclaimer:</strong> CoCo Transit System is an independent, community-driven transit concept study and planning proposal. This website is unofficial and is not operated by, endorsed by, or affiliated with CDOT, State of Colorado, RTD, or Amtrak. All concepts are for advocacy and planning demonstration purposes.
+            </div>
+            <div class="flex items-center gap-3 shrink-0 text-slate-300">
+                <span>Official Transit:</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline">codot.gov</a>
+                <span>&bull;</span>
+                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">ridebustang.com</a>
+                <span>&bull;</span>
+                <a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">rtd-denver.com</a>
+            </div>
+        </footer>
     </main>
 
     <script>

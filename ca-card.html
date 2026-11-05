@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C &amp; A E-Ink Smart Card — Official State of Colorado Transit Media — CDOT</title>
+    <title>C &amp; A E-Ink Smart Card — Transit Media Concept Proposal — CoCo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -89,9 +89,10 @@
 <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
 
     <!-- Official Colorado State Government Utility Bar -->
-    <aside aria-label="Official state government verification" class="bg-[#001a38] text-slate-300 text-xs py-1.5 px-4 border-b border-blue-950/80">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
+    <!-- Unofficial Transit Concept & Planning Study Banner -->
+    <aside aria-label="Unofficial transit concept disclaimer" class="bg-[#001428] text-slate-300 text-xs py-1.5 px-4 border-b border-amber-500/30">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-3">
+            <div class="flex items-center gap-2.5 flex-wrap">
                 <!-- Miniature Colorado Flag SVG -->
                 <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
                     <rect width="36" height="8" fill="#002855"/>
@@ -101,16 +102,18 @@
                     <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
                     <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
                 </svg>
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-xs">UNOFFICIAL PROPOSAL</span>
                 <div class="flex items-center gap-1.5 font-medium text-slate-200">
-                    <span>An official State of Colorado website</span>
+                    <span>UNOFFICIAL TRANSIT CONCEPT &amp; PLANNING STUDY</span>
                     <span class="text-slate-500 hidden sm:inline">&bull;</span>
-                    <span class="text-slate-400 hidden sm:inline font-normal">Department of Transportation</span>
+                    <span class="text-slate-400 hidden sm:inline font-normal">Community Advocacy Proposal &bull; Not Affiliated with CDOT or the State of Colorado</span>
                 </div>
             </div>
-            <div class="flex items-center gap-3 text-[11px] text-slate-400">
-                <span class="hidden md:inline">C.R.S. Title 43 &bull; CDOT Division of Transit &amp; Rail</span>
-                <span class="hidden md:inline text-slate-600">&bull;</span>
-                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">codot.gov</a>
+            <div class="flex items-center gap-2 text-[11px] text-slate-400">
+                <span class="hidden md:inline text-slate-400">For official Colorado transit, visit</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">codot.gov</a>
+                <span class="text-slate-600">&amp;</span>
+                <a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline font-semibold">ridebustang.com</a>
             </div>
         </div>
     </aside>
@@ -132,9 +135,9 @@
                     <div>
                         <div class="flex items-center gap-2">
                             <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">CoCo Transit</span>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#002855] text-amber-300 border border-blue-900">CDOT Transit &amp; Rail</span>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#002855] text-amber-300 border border-amber-500/40">Concept Vision &bull; Unofficial</span>
                         </div>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">State of Colorado Multimodal Passenger Network</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Smart Card Concept &bull; Statewide Planning Study</p>
                     </div>
                 </a>
             </div>
@@ -172,26 +175,26 @@
     <!-- Main Container -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
 
-        <!-- Government Institutional Hero Banner -->
+        <!-- Concept Hero Banner -->
         <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#001a38] via-[#002855] to-[#1b4d3e] text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-900/60">
             <div class="absolute -top-36 -right-36 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-36 -left-36 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 max-w-4xl">
-                <!-- Official Pill Badge -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#c69214]/60 text-amber-300 text-xs font-bold mb-4 shadow-xs">
-                    <span class="w-2 h-2 rounded-full bg-[#c69214] animate-ping"></span>
-                    <span>CDOT Division of Transit &amp; Rail &bull; Official Fare Media Standard</span>
+                <!-- Concept Transit Vision Pill Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/15 backdrop-blur-md border border-amber-400/50 text-amber-300 text-xs font-bold mb-4 shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    <span>CONCEPT TRANSIT VISION &bull; UNOFFICIAL PROPOSAL</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-3">
                     The C &amp; A E-Ink Smart Card
                 </h1>
-                <p class="text-blue-100 text-base sm:text-xl font-medium mb-4 max-w-3xl">
-                    Colorado &amp; Access Universal Contactless Fare Pass with Bi-Stable Electronic Paper Display &amp; Zero-Battery NFC Energy Harvesting.
+                <p class="text-amber-100 text-base sm:text-xl font-medium mb-4 max-w-3xl">
+                    Colorado &amp; Access Universal Contactless Fare Media Concept &bull; Bi-Stable Electronic Paper Display &amp; NFC Energy Harvesting.
                 </p>
                 <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl mb-8">
-                    Engineered under Colorado Revised Statutes § 43-4-1201, the C &amp; A Smart Card serves as Colorado's unified statewide transit media across CoCoR heavy rail, CoCoRX express lines, Bustang coaches, Pegasus mountain shuttles, and Outrider rural transit. Featuring a persistent electronic ink display, offline cryptographic validation, and 100% battery-free operation down to -25°F.
+                    Proposed as part of the CoCo (Colorado Connected) speculative statewide transit master plan to demonstrate how passenger rail and regional buses could seamlessly integrate across Colorado. The C &amp; A Smart Card is a conceptual unified fare medium modeling seamless tap-to-ride capability across CoCoR heavy rail, CoCoRX express lines, Bustang coaches, Pegasus mountain shuttles, and Outrider rural transit.
                 </p>
 
                 <!-- Quick Highlights Row -->
@@ -390,7 +393,7 @@
                                     <span class="tracking-widest">0849 &bull; 2026 &bull; 8812 &bull; 4401</span>
                                 </div>
                                 <div class="text-right font-sans font-bold text-[8px] text-slate-400">
-                                    C.R.S. &sect; 43-4-1201
+                                    Concept Spec &sect; 43-4-1201
                                 </div>
                             </div>
 
@@ -580,7 +583,7 @@
             <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div class="inline-flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-widest mb-1">
                     <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                    CDOT Engineering Standards &bull; C.R.S. § 43-4-1203
+                    Proposed Hardware Architecture &bull; Technical Specifications
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
                     Technical Specifications &amp; Architectural Breakdown
@@ -605,7 +608,7 @@
                         100% Battery-Free NFC Energy Harvesting
                     </h3>
                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                        The C &amp; A card contains <strong>zero chemical batteries</strong>, eliminating toxic lithium disposal, fire hazards, and winter battery death. When the card passes within 4 cm of an official CoCo platform validator or NFC-enabled smartphone, an integrated planar PCB coil harvests energy directly from the 13.56 MHz RF electromagnetic field.
+                        The C &amp; A card contains <strong>zero chemical batteries</strong>, eliminating toxic lithium disposal, fire hazards, and winter battery death. When the card passes within 4 cm of an CoCo platform validator or NFC-enabled smartphone, an integrated planar PCB coil harvests energy directly from the 13.56 MHz RF electromagnetic field.
                     </p>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">
                         <li class="flex items-start gap-2">
@@ -834,7 +837,7 @@
                 <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                     <h3 class="font-bold text-slate-900 dark:text-white mb-2">What if I lose my physical C &amp; A card?</h3>
                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                        If your card is registered to your Colorado.gov account, your balance is 100% protected under C.R.S. § 43-4-1204. Simply log into the portal to freeze the lost card instantly. A replacement card will be issued with your full balance restored immediately.
+                        If your card is registered to your account, your balance is 100% protected under standard transit balance protection policies. Simply log into the portal to freeze the lost card instantly. A replacement card will be issued with your full balance restored immediately.
                     </p>
                 </div>
 
@@ -849,68 +852,83 @@
 
     </main>
 
-    <!-- Official Colorado Government Footer -->
+    <!-- Footer -->
     <footer class="mt-auto bg-slate-900 text-white border-t border-slate-800 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
 
-                <!-- Col 1: State Seal & Mission -->
+                <!-- Col 1: Project Identity & Mission -->
                 <div class="md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3.5">
                         <div class="w-10 h-10 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
                             <span class="text-[#c69214] font-black text-sm">CO</span>
                         </div>
                         <div>
-                            <div class="text-sm font-black tracking-tight text-white">State of Colorado &bull; Department of Transportation</div>
-                            <div class="text-xs text-amber-300 font-semibold">Division of Transit &amp; Rail &bull; CoCo Passenger System</div>
+                            <div class="text-sm font-black tracking-tight text-white flex items-center gap-2">
+                                <span>CoCo Transit System</span>
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950">Unofficial Proposal</span>
+                            </div>
+                            <div class="text-xs text-amber-300 font-semibold">Colorado Connected &bull; Statewide Transit Concept &amp; Planning Study</div>
                         </div>
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed max-w-md">
-                        Operating under the authority of the Governor's Office and C.R.S. Title 43. Uniting Colorado's Front Range, Eastern Plains, Western Slope, and Mountain Corridors into one synchronized public passenger rail and intercity coach network.
+                        CoCo (Colorado Connected) is an independent, community-driven transit advocacy proposal uniting Colorado's Front Range, Eastern Plains, Western Slope, and Mountain Corridors into a cohesive vision for synchronized passenger rail and regional bus mobility.
                     </p>
                     <div class="text-[11px] text-slate-400 space-y-1">
-                        <div><strong>Executive Director:</strong> Shoshana M. Lew &bull; <strong>Transit Director:</strong> CDOT Division of Transit &amp; Rail</div>
-                        <div><strong>Headquarters:</strong> 2829 W. Howard Place, Denver, CO 80204</div>
+                        <div><strong>Project Status:</strong> Speculative Planning Study &bull; Public Community Advocacy</div>
+                        <div><strong>Focus Area:</strong> Intercity Rail &amp; Regional Bus Harmonization Across Colorado</div>
                     </div>
                 </div>
 
                 <!-- Col 2: System Portals -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">State Transit Media</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Concept Proposals</h4>
                     <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card (E-Ink)</a></li>
-                        <li><a href="fares.html" class="hover:text-amber-400 transition-colors">Statewide Fares &amp; Calculator</a></li>
-                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Concessions &amp; Youth Pass</a></li>
-                        <li><a href="map.html" class="hover:text-amber-400 transition-colors">Statewide Interactive Route Map</a></li>
-                        <li><a href="fares.html#ca-card" class="hover:text-amber-400 transition-colors">Account Balance Portal</a></li>
+                        <li><a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card (E-Ink Concept)</a></li>
+                        <li><a href="fares.html" class="hover:text-amber-400 transition-colors">Proposed Fares &amp; Calculator</a></li>
+                        <li><a href="map.html" class="hover:text-amber-400 transition-colors">Interactive Concept Route Map</a></li>
+                        <li><a href="cocor-local.html" class="hover:text-amber-400 transition-colors">CoCoR Local Rail Concept</a></li>
+                        <li><a href="cocorx-express.html" class="hover:text-amber-400 transition-colors">CoCoRX High-Speed Vision</a></li>
+                        <li><a href="cocom-bustang.html" class="hover:text-amber-400 transition-colors">Regional Bus Feeder Network</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Compliance & Legal -->
+                <!-- Col 3: Official State Resources -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Statutory &amp; Civil Rights</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Official Colorado Transit</h4>
                     <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Title VI Civil Rights Plan</a></li>
-                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">ADA &amp; Section 508 Standards</a></li>
-                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors">Colorado Open Records Act (CORA)</a></li>
-                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Colorado Privacy Act Notice</a></li>
-                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Equal Opportunity Employer</a></li>
+                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">CDOT Official Portal (codot.gov) &nearr;</a></li>
+                        <li><a href="https://ridebustang.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Bustang Official (ridebustang.com) &nearr;</a></li>
+                        <li><a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">RTD Denver (rtd-denver.com) &nearr;</a></li>
+                        <li><a href="https://www.amtrak.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Amtrak Colorado &nearr;</a></li>
+                        <li><a href="https://frontrangepassengerrail.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">Front Range Passenger Rail District &nearr;</a></li>
                     </ul>
                 </div>
 
             </div>
 
+            <!-- Authoritative Disclaimer Box Required by Specification -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 mb-6 text-xs text-slate-300 leading-relaxed">
+                <p class="font-bold text-amber-300 mb-1 flex items-center gap-1.5">
+                    <span class="inline-block w-2 h-2 rounded-full bg-amber-400"></span>
+                    Disclaimer &bull; Unofficial Public Transit Concept
+                </p>
+                <p class="text-slate-400 text-[11px] sm:text-xs">
+                    Disclaimer: CoCo Transit System is an independent, community-driven transit concept study and planning proposal. This website is unofficial and is not operated by, endorsed by, or affiliated with the Colorado Department of Transportation (CDOT), the State of Colorado, Regional Transportation District (RTD), or Amtrak. All routes, schedules, fares, and vehicle concepts are proposed for public advocacy, research, and planning demonstration purposes. For official Colorado state transit services and real-time alerts, please visit CDOT (<a href="https://www.codot.gov" target="_blank" rel="noopener" class="text-amber-400 hover:underline">codot.gov</a>), Bustang (<a href="https://ridebustang.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">ridebustang.com</a>), and RTD (<a href="https://www.rtd-denver.com" target="_blank" rel="noopener" class="text-amber-400 hover:underline">rtd-denver.com</a>).
+                </p>
+            </div>
+
             <!-- Legal Disclaimers & Copyright -->
             <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
                 <div>
-                    &copy; 2026 State of Colorado Department of Transportation (CDOT). All rights reserved.
+                    &copy; 2026 CoCo Transit Concept Proposal &bull; Independent Community Advocacy Study.
                 </div>
                 <div class="flex items-center gap-4 text-slate-400">
                     <a href="fares.html#guidelines" class="hover:text-slate-300">Accessibility</a>
                     <span>&bull;</span>
-                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Policy</a>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Notice</a>
                     <span>&bull;</span>
-                    <a href="fares.html#guidelines" class="hover:text-slate-300">Terms of Carriage</a>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Concept Terms</a>
                 </div>
             </div>
         </div>
