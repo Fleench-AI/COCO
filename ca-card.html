@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C &amp; A E-Ink Smart Card — Official State of Colorado Transit Media — CDOT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cdot: {
+                            navy: '#002855',
+                            darknavy: '#001a38',
+                            green: '#1b4d3e',
+                            gold: '#c69214',
+                            goldlight: '#e0a922',
+                            red: '#bf0a30'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+        }
+        .dark {
+            --bg-color: #0b1120;
+            --text-color: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .font-mono-eink {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* E-Ink Display Styling */
+        .eink-screen {
+            background-color: #e9e8e0;
+            color: #121516;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(0,0,0,0.12);
+            position: relative;
+        }
+        .eink-screen::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 0);
+            background-size: 3px 3px;
+            opacity: 0.8;
+        }
+
+        /* Realistic E-Ink Refresh Animation */
+        @keyframes einkInvert {
+            0% { filter: invert(0); }
+            30% { filter: invert(1); background-color: #111; color: #fff; }
+            65% { filter: invert(0); background-color: #fff; color: #000; }
+            85% { filter: invert(0.9); }
+            100% { filter: invert(0); }
+        }
+        .eink-refreshing {
+            animation: einkInvert 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Phone NFC Scan Wave Animation */
+        @keyframes nfcPulse {
+            0% { transform: scale(0.92); opacity: 0.9; }
+            50% { transform: scale(1.06); opacity: 0.4; }
+            100% { transform: scale(1.15); opacity: 0; }
+        }
+        .nfc-ring {
+            animation: nfcPulse 1.4s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
+
+    <!-- Official Colorado State Government Utility Bar -->
+    <aside aria-label="Official state government verification" class="bg-[#001a38] text-slate-300 text-xs py-1.5 px-4 border-b border-blue-950/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <!-- Miniature Colorado Flag SVG -->
+                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                    <rect width="36" height="8" fill="#002855"/>
+                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                    <rect y="16" width="36" height="8" fill="#002855"/>
+                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                </svg>
+                <div class="flex items-center gap-1.5 font-medium text-slate-200">
+                    <span>An official State of Colorado website</span>
+                    <span class="text-slate-500 hidden sm:inline">&bull;</span>
+                    <span class="text-slate-400 hidden sm:inline font-normal">Department of Transportation</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-[11px] text-slate-400">
+                <span class="hidden md:inline">C.R.S. Title 43 &bull; CDOT Division of Transit &amp; Rail</span>
+                <span class="hidden md:inline text-slate-600">&bull;</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">codot.gov</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- State Agency Header -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-2 flex items-center justify-between">
+            <!-- Brand & Agency Identification -->
+            <div class="flex items-center gap-3.5">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <!-- CDOT / Colorado Seal Emblem -->
+                    <div class="w-11 h-11 rounded-full bg-[#002855] border-2 border-[#c69214] shadow-md flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
+                        <svg class="w-7 h-7 text-[#c69214]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#c69214" fill-opacity="0.2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">CoCo Transit</span>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#002855] text-amber-300 border border-blue-900">CDOT Transit &amp; Rail</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">State of Colorado Multimodal Passenger Network</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <nav class="hidden lg:flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200">
+                    <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Home</a>
+                    <a href="map.html" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Transit Map</a>
+                    <a href="fares.html" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Fares &amp; Passes</a>
+                    <a href="ca-card.html" class="px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-[#002855] dark:text-amber-300 border border-blue-200 dark:border-blue-900 font-bold transition-colors">C &amp; A Smart Card</a>
+                    <a href="cocor-local.html" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Services</a>
+                    <a href="fares.html#guidelines" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Accessibility</a>
+                </nav>
+
+                <!-- Mobile / Direct Quick Links -->
+                <div class="flex items-center gap-2">
+                    <a href="fares.html" class="lg:hidden px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200">Fares</a>
+                    <a href="map.html" class="lg:hidden px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200">Map</a>
+
+                    <!-- Theme Switcher -->
+                    <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-xs transition-colors">
+                        <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full space-y-12 sm:space-y-16">
+
+        <!-- Government Institutional Hero Banner -->
+        <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#001a38] via-[#002855] to-[#1b4d3e] text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-900/60">
+            <div class="absolute -top-36 -right-36 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-36 -left-36 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl">
+                <!-- Official Pill Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#c69214]/60 text-amber-300 text-xs font-bold mb-4 shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-[#c69214] animate-ping"></span>
+                    <span>CDOT Division of Transit &amp; Rail &bull; Official Fare Media Standard</span>
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-3">
+                    The C &amp; A E-Ink Smart Card
+                </h1>
+                <p class="text-blue-100 text-base sm:text-xl font-medium mb-4 max-w-3xl">
+                    Colorado &amp; Access Universal Contactless Fare Pass with Bi-Stable Electronic Paper Display &amp; Zero-Battery NFC Energy Harvesting.
+                </p>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl mb-8">
+                    Engineered under Colorado Revised Statutes § 43-4-1201, the C &amp; A Smart Card serves as Colorado's unified statewide transit media across CoCoR heavy rail, CoCoRX express lines, Bustang coaches, Pegasus mountain shuttles, and Outrider rural transit. Featuring a persistent electronic ink display, offline cryptographic validation, and 100% battery-free operation down to -25°F.
+                </p>
+
+                <!-- Quick Highlights Row -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left pt-6 border-t border-white/10">
+                    <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div class="text-xl sm:text-2xl font-black text-amber-400">0 Watts</div>
+                        <div class="text-[11px] text-slate-300 font-medium">Standby Power (Bi-Stable)</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div class="text-xl sm:text-2xl font-black text-blue-300">100% NFC</div>
+                        <div class="text-[11px] text-slate-300 font-medium">Energy Harvesting (No Battery)</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div class="text-xl sm:text-2xl font-black text-emerald-400">Offline</div>
+                        <div class="text-[11px] text-slate-300 font-medium">Tunnel Cryptographic Barcode</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div class="text-xl sm:text-2xl font-black text-yellow-300">-25&deg;F</div>
+                        <div class="text-[11px] text-slate-300 font-medium">Alpine Cold Rated</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive E-Ink Smart Card Simulator & Live Deck -->
+        <section class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-1">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        Interactive Hardware Simulation
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+                        CDOT Physical E-Ink Smart Card Simulator
+                    </h2>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl">
+                        Interact with the physical card below to simulate platform validation, conductor seat reservation, Bustang transfers, concession switching, and smartphone NFC balance top-up.
+                    </p>
+                </div>
+                <!-- Status Badge -->
+                <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-mono">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-slate-700 dark:text-slate-300 font-bold" id="simulatorStatusBadge">VALIDATOR EMULATOR: ONLINE</span>
+                </div>
+            </div>
+
+            <!-- Two Column Layout: Simulator on Left/Top, Interactive Controls & Telemetry on Right -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Left Column: The Physical E-Ink Card (7 Cols) -->
+                <div class="lg:col-span-7 flex flex-col items-center">
+
+                    <!-- Outer Card Housing Container -->
+                    <div class="relative w-full max-w-[540px] rounded-[32px] bg-gradient-to-b from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-900 p-2 sm:p-3 shadow-2xl border-2 border-slate-300 dark:border-slate-700 transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,40,85,0.25)]">
+
+                        <!-- Physical Card Shell (CR80 Standard Dimensions Ratio ~ 1.58:1) -->
+                        <div id="physicalSmartCard" class="relative w-full aspect-[1.58/1] rounded-[24px] bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 p-4 sm:p-5 flex flex-col justify-between overflow-hidden shadow-inner select-none transition-transform duration-200">
+
+                            <!-- Holographic & Security Decorative Overlays -->
+                            <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-gradient-to-tr from-amber-400/20 via-blue-500/10 to-transparent blur-xl pointer-events-none"></div>
+                            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#002855] via-[#bf0a30] via-[#c69214] to-[#1b4d3e]"></div>
+
+                            <!-- Card Header: State Seal, Agency, Card Brand -->
+                            <div class="relative z-10 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2.5">
+                                <div class="flex items-center gap-2.5">
+                                    <!-- Colorado Flag Mini Emblem -->
+                                    <div class="w-7 h-5 rounded-xs shadow-xs overflow-hidden border border-slate-300 dark:border-slate-700 shrink-0">
+                                        <svg class="w-full h-full" viewBox="0 0 36 24" fill="none">
+                                            <rect width="36" height="8" fill="#002855"/>
+                                            <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                                            <rect y="16" width="36" height="8" fill="#002855"/>
+                                            <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                                            <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                                            <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] font-black tracking-widest text-[#002855] dark:text-blue-300 uppercase leading-none">State of Colorado</div>
+                                        <div class="text-[9px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider leading-tight">CDOT Transit &amp; Rail</div>
+                                    </div>
+                                </div>
+
+                                <!-- Brand & Contactless Icon -->
+                                <div class="flex items-center gap-2">
+                                    <div class="text-right">
+                                        <span class="text-xs font-black tracking-tight text-slate-900 dark:text-white block leading-none">C &amp; A PASS</span>
+                                        <span class="text-[8px] font-mono text-slate-400 dark:text-slate-500 uppercase">ISO 14443-A</span>
+                                    </div>
+                                    <!-- Contactless Waves SVG -->
+                                    <svg class="w-5 h-5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                        <path d="M8.5 16.5a5 5 0 0 1 0-9"/>
+                                        <path d="M12 19a8.5 8.5 0 0 0 0-14"/>
+                                        <path d="M15.5 21.5a12 12 0 0 0 0-19"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Centered Embedded Active E-Ink Screen Container -->
+                            <div class="relative z-10 flex-grow my-2.5 rounded-xl eink-screen p-3 sm:p-3.5 flex flex-col justify-between overflow-hidden border border-neutral-400 font-mono-eink" id="einkScreen">
+
+                                <!-- Screen Refresh Overlay (Flash Effect) -->
+                                <div id="einkFlashOverlay" class="absolute inset-0 bg-neutral-900 opacity-0 pointer-events-none transition-opacity duration-75 z-30"></div>
+
+                                <!-- E-Ink Screen Header -->
+                                <div class="flex items-center justify-between border-b border-neutral-700/60 pb-1 text-[9px] sm:text-[10px] font-bold tracking-tight">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                                        <span id="einkAgencyTag">COLORADO CDOT SMARTPASS</span>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 text-neutral-800">
+                                        <span>⚡ NFC HARVESTED</span>
+                                        <span class="text-neutral-400">&bull;</span>
+                                        <span id="einkBatteryNotice">0.0W STANDBY</span>
+                                    </div>
+                                </div>
+
+                                <!-- E-Ink Main Content Section: Dynamic Balance & Concession -->
+                                <div class="grid grid-cols-12 gap-2 my-1 items-center">
+                                    <div class="col-span-7">
+                                        <div class="text-[9px] text-neutral-600 font-semibold uppercase tracking-wider">Stored Balance</div>
+                                        <div class="text-2xl sm:text-3xl font-black tracking-tight text-neutral-950 flex items-baseline gap-1" id="einkBalance">
+                                            $42.50
+                                        </div>
+                                        <div class="text-[8px] text-neutral-600 mt-0.5">
+                                            Account: <span class="font-bold">CO-9942-881</span> &bull; <span id="einkCardholder">GLENN M.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-span-5 text-right flex flex-col items-end justify-center">
+                                        <!-- Concession Badge -->
+                                        <span id="einkConcessionBadge" class="inline-block px-2 py-0.5 rounded-sm bg-neutral-900 text-[#e9e8e0] text-[9px] font-black uppercase tracking-wider">
+                                            ADULT STANDARD
+                                        </span>
+                                        <span id="einkFareNotice" class="text-[8px] text-neutral-600 mt-0.5 font-medium">Full Statewide Fare</span>
+                                    </div>
+                                </div>
+
+                                <!-- E-Ink Active Trip & Reservation Sector -->
+                                <div class="rounded-sm bg-neutral-800/10 border border-neutral-700/40 p-2 text-[9px] sm:text-[10px] leading-tight space-y-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-black uppercase tracking-wide text-neutral-950 flex items-center gap-1">
+                                            <span id="tripStatusIcon">●</span>
+                                            <span id="einkRouteTitle">TICKET: FR-104 FRONT RANGE LOCAL</span>
+                                        </span>
+                                        <span class="font-bold text-neutral-800" id="einkSeatBadge">SEAT: UNRESERVED LOCAL</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-neutral-700 text-[8.5px] sm:text-[9.5px]">
+                                        <span id="einkTripDetails">Denver Union Station ➔ Fort Collins Hub</span>
+                                        <span class="font-bold text-neutral-900" id="einkTransferTimer">Transfer: 1h 58m</span>
+                                    </div>
+                                </div>
+
+                                <!-- E-Ink Screen Footer: Cryptographic Conductor Aztec Matrix & Signature -->
+                                <div class="flex items-center justify-between pt-1 border-t border-neutral-700/60 mt-1">
+                                    <div class="flex items-center gap-2">
+                                        <!-- Aztec 2D Matrix Barcode Canvas/SVG -->
+                                        <div class="w-8 h-8 sm:w-9 sm:h-9 bg-neutral-950 p-0.5 rounded-xs shrink-0 flex items-center justify-center">
+                                            <svg id="einkAztecBarcode" class="w-full h-full text-white" viewBox="0 0 16 16" fill="currentColor">
+                                                <!-- High-Density Dynamic Aztec Matrix Elements -->
+                                                <rect x="0" y="0" width="16" height="16" fill="#e9e8e0"/>
+                                                <rect x="2" y="2" width="12" height="12" fill="#121516"/>
+                                                <rect x="4" y="4" width="8" height="8" fill="#e9e8e0"/>
+                                                <rect x="6" y="6" width="4" height="4" fill="#121516"/>
+                                                <!-- Dynamic Data Pixels -->
+                                                <rect x="0" y="0" width="2" height="2" fill="#121516"/>
+                                                <rect x="14" y="0" width="2" height="2" fill="#121516"/>
+                                                <rect x="0" y="14" width="2" height="2" fill="#121516"/>
+                                                <rect x="14" y="14" width="2" height="2" fill="#121516"/>
+                                                <rect x="1" y="7" width="2" height="2" fill="#121516"/>
+                                                <rect x="13" y="7" width="2" height="2" fill="#121516"/>
+                                                <rect x="7" y="1" width="2" height="2" fill="#121516"/>
+                                                <rect x="7" y="13" width="2" height="2" fill="#121516"/>
+                                                <rect x="10" y="10" width="2" height="2" fill="#121516"/>
+                                            </svg>
+                                        </div>
+                                        <div class="leading-none">
+                                            <div class="text-[8px] font-bold text-neutral-900" id="einkHashLabel">ECDSA-P256: CDOT-TKT-9942</div>
+                                            <div class="text-[7px] text-neutral-600 mt-0.5">OFFLINE TUNNEL VALIDATION OK</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-right text-[7.5px] text-neutral-600 font-mono">
+                                        <div>KEY: V-DEN-04 &bull; REV: 4.2</div>
+                                        <div>CRYPTO-STAMP: VALID</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Card Bottom Foil / Hardware Footer -->
+                            <div class="relative z-10 flex items-center justify-between text-[9px] text-slate-500 dark:text-slate-400 font-mono pt-1">
+                                <div class="flex items-center gap-2">
+                                    <!-- Metallic Gold Foil Stamp Emblem -->
+                                    <div class="w-6 h-4 rounded-xs bg-gradient-to-tr from-amber-600 via-amber-300 to-amber-500 border border-amber-600/60 shadow-xs flex items-center justify-center text-[7px] font-black text-slate-900 tracking-tighter">
+                                        CDOT
+                                    </div>
+                                    <span class="tracking-widest">0849 &bull; 2026 &bull; 8812 &bull; 4401</span>
+                                </div>
+                                <div class="text-right font-sans font-bold text-[8px] text-slate-400">
+                                    C.R.S. &sect; 43-4-1201
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Phone NFC Floating Simulation Overlay (Triggered on Phone NFC Refresh) -->
+                        <div id="phoneNfcSimulator" class="absolute inset-0 bg-slate-950/80 backdrop-blur-md rounded-[32px] z-20 flex flex-col items-center justify-center text-white p-6 opacity-0 pointer-events-none transition-all duration-300">
+                            <!-- NFC Animated Waves -->
+                            <div class="relative w-20 h-20 flex items-center justify-center mb-3">
+                                <div class="absolute inset-0 rounded-full border-2 border-amber-400 nfc-ring"></div>
+                                <div class="absolute inset-2 rounded-full border-2 border-blue-400 nfc-ring" style="animation-delay: 0.3s"></div>
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg">
+                                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                                        <line x1="12" y1="18" x2="12.01" y2="18"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="text-sm font-black tracking-tight text-amber-300">Apple Wallet / Google Wallet NFC Sync</div>
+                            <p class="text-xs text-slate-300 text-center mt-1">Holding smartphone over E-Ink Smart Card...</p>
+                            <p class="text-[11px] font-mono text-emerald-400 mt-2" id="phoneNfcStatusMsg">Energy Harvesting: 3.3V @ 13.56 MHz</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Visual Legend / Card Architecture -->
+                    <div class="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-neutral-900 dark:bg-neutral-100"></span>
+                            Bi-Stable E-Ink (E Ink Carta&trade;)
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            13.56 MHz RF Energy Harvesting
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            Offline Cryptographic Aztec Token
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Control Deck & Event Audit Log (5 Cols) -->
+                <div class="lg:col-span-5 space-y-5">
+
+                    <!-- Control Panel Card -->
+                    <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Card State Simulator Controls</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Execute simulated transit transactions</p>
+                            </div>
+                            <button onclick="resetSimulation()" class="text-xs text-blue-600 dark:text-blue-400 hover:underline font-semibold">
+                                Reset
+                            </button>
+                        </div>
+
+                        <!-- 5 Main Interactive State Actions -->
+                        <div class="space-y-2.5">
+
+                            <!-- Action 1: Tap In Local -->
+                            <button onclick="actionTapInLocal()" class="w-full text-left p-3.5 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-[#002855] text-amber-300 flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+                                        🚆
+                                    </div>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            Tap In: Front Range Local
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+                                            Deducts fare &bull; Starts 2hr transfer window &bull; Writes ticket
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200">
+                                    Tap
+                                </span>
+                            </button>
+
+                            <!-- Action 2: Reserve Seat Express -->
+                            <button onclick="actionReserveExpress()" class="w-full text-left p-3.5 rounded-xl border border-indigo-200 dark:border-indigo-900 bg-indigo-50/60 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-all flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+                                        ⚡
+                                    </div>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                            Reserve Seat: CoCoRX Express
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+                                            Assigns Car 2 &bull; Seat 14A &bull; Train #402 Non-Stop
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-indigo-200 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-200">
+                                    Seat
+                                </span>
+                            </button>
+
+                            <!-- Action 3: Transfer Bustang -->
+                            <button onclick="actionTransferBustang()" class="w-full text-left p-3.5 rounded-xl border border-purple-200 dark:border-purple-900 bg-purple-50/60 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 transition-all flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-purple-600 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+                                        🚌
+                                    </div>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                            Transfer: CoCoM Bustang
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+                                            $0.00 transfer credit applied under active 2hr window
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-200">
+                                    $0 Transfer
+                                </span>
+                            </button>
+
+                            <!-- Action 4: Concession Mode Cycle -->
+                            <button onclick="actionToggleConcession()" class="w-full text-left p-3.5 rounded-xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50/60 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-all flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-[#1b4d3e] text-amber-300 flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+                                        🎫
+                                    </div>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                            Toggle Concession Mode
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+                                            Cycle: Standard &bull; Youth 18 (Free) &bull; Senior 65+ (50%)
+                                        </div>
+                                    </div>
+                                </div>
+                                <span id="deckConcessionBadge" class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-200 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-200">
+                                    Standard Adult
+                                </span>
+                            </button>
+
+                            <!-- Action 5: Phone NFC Refresh -->
+                            <button onclick="actionPhoneNfcRefresh()" class="w-full text-left p-3.5 rounded-xl border border-amber-200 dark:border-amber-900/80 bg-amber-50/60 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-all flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-[#c69214] text-slate-950 flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+                                        📱
+                                    </div>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                                            Phone NFC Refresh (+ $25)
+                                        </div>
+                                        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+                                            Simulate phone tap to reload balance &amp; trigger e-ink wash
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200">
+                                    NFC Wave
+                                </span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- Live NFC & Cryptographic Telemetry Log -->
+                    <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4 font-mono text-[11px] text-slate-300 shadow-md">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2 text-slate-400">
+                            <span class="flex items-center gap-1.5 text-xs font-bold text-slate-200">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                ISO/IEC 14443 &amp; Cryptographic Telemetry
+                            </span>
+                            <span class="text-[10px] text-slate-500">13.56 MHz CARRIER</span>
+                        </div>
+                        <div id="telemetryFeed" class="h-32 overflow-y-auto space-y-1 text-[10px] scrollbar-thin scrollbar-thumb-slate-700">
+                            <div class="text-slate-400">[READY] CDOT Validator terminal online. Waiting for card induction...</div>
+                            <div class="text-emerald-400">[STATUS] Bi-stable display steady state. Quiescent current: 0.00 &mu;A.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical Specifications & Engineering Breakdown -->
+        <section class="space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-widest mb-1">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                    CDOT Engineering Standards &bull; C.R.S. § 43-4-1203
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+                    Technical Specifications &amp; Architectural Breakdown
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+                    Detailed engineering breakdown of how Colorado's universal fare media functions without batteries, maintains visibility in blinding alpine sunlight, and cryptographically proves ticket validity deep inside mountain rail tunnels.
+                </p>
+            </div>
+
+            <!-- 4 Core Engineering Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- 1. 100% Battery-Free Energy Harvesting -->
+                <div class="rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-500/50 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-900 flex items-center justify-center text-2xl text-blue-600 dark:text-blue-400 mb-4">
+                        ⚡
+                    </div>
+                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 text-[11px] font-bold mb-2">
+                        ISO/IEC 14443 &amp; 15693 Magnetic Induction
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                        100% Battery-Free NFC Energy Harvesting
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                        The C &amp; A card contains <strong>zero chemical batteries</strong>, eliminating toxic lithium disposal, fire hazards, and winter battery death. When the card passes within 4 cm of an official CoCo platform validator or NFC-enabled smartphone, an integrated planar PCB coil harvests energy directly from the 13.56 MHz RF electromagnetic field.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>Rapid Charge Capacitor:</strong> Harvests 3.3V @ 12mA in under 45 milliseconds to refresh the screen.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>Dual-Standard Support:</strong> Complies with both ISO 14443 Type A (transit gates) and ISO 15693 (extended range inventory).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>Indefinite Lifespan:</strong> Without a battery to degrade, physical cards are certified for 10+ years of daily use.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 2. Bi-Stable Electronic Paper Display -->
+                <div class="rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-amber-500/50 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-900 flex items-center justify-center text-2xl text-amber-600 dark:text-amber-400 mb-4">
+                        📄
+                    </div>
+                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 text-[11px] font-bold mb-2">
+                        E Ink Carta&trade; Electrophoretic Microcapsules
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                        Bi-Stable Electronic Ink Microcapsules
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                        Unlike power-draining OLED or LCD smartcards, the C &amp; A card utilizes micro-encapsulated electrophoretic display (EPD) technology. Positively charged white titanium dioxide particles and negatively charged black carbon particles move into place under momentary electrical excitation and stay physically anchored forever without power.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-500 font-bold">&check;</span>
+                            <span><strong>Zero Standby Draw:</strong> Display maintains your balance and seat assignment even if left in a drawer for years.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-500 font-bold">&check;</span>
+                            <span><strong>Glir-Free Alpine Sunlight:</strong> Reflective paper display offers 100% legibility in blinding 14,000-ft Colorado sunshine.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-amber-500 font-bold">&check;</span>
+                            <span><strong>Electrophoretic Wash:</strong> Firmware cleans microcapsule ghosting with an automatic 3-phase inversion cycle.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. Offline Cryptographic Barcode Validation -->
+                <div class="rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-purple-500/50 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-900 flex items-center justify-center text-2xl text-purple-600 dark:text-purple-400 mb-4">
+                        🔐
+                    </div>
+                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 text-[11px] font-bold mb-2">
+                        ECDSA-P256 Asymmetric Encryption
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                        Offline Mountain Tunnel Cryptographic Security
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                        Over 40% of Colorado's mountain passenger routes cross areas with zero cellular reception—such as the 6.2-mile Moffat Tunnel, Glenwood Canyon, and Wolf Creek Pass. The C &amp; A card solves this by rendering an encrypted Aztec 2D matrix barcode directly on the E-ink display upon boarding.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 font-bold">&check;</span>
+                            <span><strong>Conductor Offline Verification:</strong> Conductor optical scanners verify the card's ECDSA signature without internet.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 font-bold">&check;</span>
+                            <span><strong>Anti-Cloning Counter:</strong> Each ticket generation increments an encrypted internal monotonic hardware counter.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-purple-500 font-bold">&check;</span>
+                            <span><strong>Tamper-Resistant Secure Element:</strong> EAL6+ certified cryptographic co-processor protects user private keys.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 4. Sub-Zero Alpine Climate Durability -->
+                <div class="rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/50 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-900 flex items-center justify-center text-2xl text-emerald-600 dark:text-emerald-400 mb-4">
+                        ❄️
+                    </div>
+                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold mb-2">
+                        IP68 Submersible &bull; -25&deg;F Operational Rating
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                        Sub-Zero Alpine Climate &amp; Physical Durability
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                        Engineered specifically for Colorado winter conditions. The card is laminated in a multi-tier polycarbonate and TPU polymer matrix that resists freeze-thaw cycles, high-altitude UV radiation, and heavy road de-icing salts (magnesium chloride).
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>-25&deg;F Temperature Rating:</strong> Microcapsule electrophoretic fluid formulated to prevent freezing down to -31.6&deg;C.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>Bend &amp; Torsion Resistant:</strong> Flexible display substrate survives 10,000+ pocket flexes without fracturing.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 font-bold">&check;</span>
+                            <span><strong>IP68 Waterproof:</strong> 100% submersible in snowmelt and puddle slush; no battery compartment seals to fail.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Ordering, Cardholder Portal & State Concessions -->
+        <section class="rounded-3xl bg-slate-900 text-white p-6 sm:p-10 lg:p-12 shadow-xl border border-slate-800">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-semibold mb-4">
+                    <span>Cardholder Services &bull; Colorado.gov Portal</span>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-black tracking-tight mb-4">
+                    Obtaining Your C &amp; A Smart Card
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                    Under CDOT Policy Directive 1605, every Colorado resident is entitled to a free initial C &amp; A Transit Pass. Cards can be issued instantly at station kiosks or linked online through your Colorado.gov digital identity.
+                </p>
+
+                <!-- 3 Issuance Pathways -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
+                    <!-- Path 1 -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-400/50 transition-all">
+                        <div class="text-2xl mb-2">🏢</div>
+                        <h3 class="text-base font-bold text-white mb-1">Station Platform Kiosks</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Dispensed in 30 seconds at all 92 CoCoR and Bustang stations across Colorado. Tap any credit card, debit card, or cash to load initial balance.
+                        </p>
+                    </div>
+
+                    <!-- Path 2 -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-400/50 transition-all">
+                        <div class="text-2xl mb-2">📬</div>
+                        <h3 class="text-base font-bold text-white mb-1">Mailed via Colorado.gov</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Order online with your Colorado Driver's License or State ID. Shipped free within 3-5 business days pre-registered with lost card protection.
+                        </p>
+                    </div>
+
+                    <!-- Path 3 -->
+                    <div class="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/50 transition-all">
+                        <div class="text-2xl mb-2">📲</div>
+                        <h3 class="text-base font-bold text-white mb-1">Apple &amp; Google Wallet</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Add a virtual C &amp; A card directly to your mobile wallet. Tap your phone or Apple Watch at validators without waking your screen using Express Mode.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cardholder Rights & Concessions Table -->
+                <div class="border-t border-white/10 pt-8 space-y-4">
+                    <h3 class="text-lg font-bold text-amber-300">Statewide Fare Concessions &amp; Rider Protections</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="border-b border-white/20 text-white font-bold uppercase tracking-wider text-[11px]">
+                                <tr>
+                                    <th class="py-2.5 pr-4">Rider Category</th>
+                                    <th class="py-2.5 px-4">Eligibility &amp; Documentation</th>
+                                    <th class="py-2.5 px-4">Fare Rate</th>
+                                    <th class="py-2.5 pl-4">Daily Cap</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/10">
+                                <tr>
+                                    <td class="py-3 pr-4 font-bold text-white">Youth (18 &amp; Under)</td>
+                                    <td class="py-3 px-4">Colorado School ID or Birth Certificate verification</td>
+                                    <td class="py-3 px-4 text-emerald-400 font-bold">100% FREE (Zero Fare)</td>
+                                    <td class="py-3 pl-4 font-mono">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-bold text-white">Seniors (Age 65+)</td>
+                                    <td class="py-3 px-4">State ID or Medicare Card linked to account</td>
+                                    <td class="py-3 px-4 text-amber-300 font-bold">50% Off Published Fare</td>
+                                    <td class="py-3 pl-4 font-mono">$12.00 / day</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-bold text-white">Individuals with Disabilities</td>
+                                    <td class="py-3 px-4">Regional Transit Disability Card or VA Disability Letter</td>
+                                    <td class="py-3 px-4 text-amber-300 font-bold">50% Off Published Fare</td>
+                                    <td class="py-3 pl-4 font-mono">$12.00 / day</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-bold text-white">Standard Adult (19–64)</td>
+                                    <td class="py-3 px-4">Standard card issuance</td>
+                                    <td class="py-3 px-4 text-blue-300 font-bold">Full Baseline Fare</td>
+                                    <td class="py-3 pl-4 font-mono">$24.00 / day</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Frequently Asked Questions Accordion -->
+        <section class="space-y-6">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+                    Frequently Asked Questions (FAQ)
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    Everything you need to know about Colorado's electronic ink transit media.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Do I ever need to plug the card into a charger?</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        No. The card has zero batteries and no charging ports. The electronic ink screen draws zero watts while holding an image. It receives instantaneous micro-bursts of power purely through NFC radio waves whenever tapped against a transit validator or scanned by your smartphone.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">How does the 2-hour transfer rule work?</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        When you tap onto any CoCoR passenger train or CoCoM bus, the system writes a cryptographic timestamp to your card starting a 2-hour transfer window. Transferring to any connecting local line or partner agency (RTD, Mountain Metro, Bustang) within that window is completely free ($0.00).
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">What if I lose my physical C &amp; A card?</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        If your card is registered to your Colorado.gov account, your balance is 100% protected under C.R.S. § 43-4-1204. Simply log into the portal to freeze the lost card instantly. A replacement card will be issued with your full balance restored immediately.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-2">Can I use my employer pre-tax transit dollars (IRC § 132f)?</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Yes. You can link any IRS Code § 132(f) Qualified Transportation Fringe commuter benefit debit card (WageWorks, Edenred, HealthEquity) directly to auto-reload your C &amp; A card balance, saving up to 35% on Colorado transit through pre-tax payroll deductions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Official Colorado Government Footer -->
+    <footer class="mt-auto bg-slate-900 text-white border-t border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+
+                <!-- Col 1: State Seal & Mission -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
+                            <span class="text-[#c69214] font-black text-sm">CO</span>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black tracking-tight text-white">State of Colorado &bull; Department of Transportation</div>
+                            <div class="text-xs text-amber-300 font-semibold">Division of Transit &amp; Rail &bull; CoCo Passenger System</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+                        Operating under the authority of the Governor's Office and C.R.S. Title 43. Uniting Colorado's Front Range, Eastern Plains, Western Slope, and Mountain Corridors into one synchronized public passenger rail and intercity coach network.
+                    </p>
+                    <div class="text-[11px] text-slate-400 space-y-1">
+                        <div><strong>Executive Director:</strong> Shoshana M. Lew &bull; <strong>Transit Director:</strong> CDOT Division of Transit &amp; Rail</div>
+                        <div><strong>Headquarters:</strong> 2829 W. Howard Place, Denver, CO 80204</div>
+                    </div>
+                </div>
+
+                <!-- Col 2: System Portals -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">State Transit Media</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card (E-Ink)</a></li>
+                        <li><a href="fares.html" class="hover:text-amber-400 transition-colors">Statewide Fares &amp; Calculator</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Concessions &amp; Youth Pass</a></li>
+                        <li><a href="map.html" class="hover:text-amber-400 transition-colors">Statewide Interactive Route Map</a></li>
+                        <li><a href="fares.html#ca-card" class="hover:text-amber-400 transition-colors">Account Balance Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Compliance & Legal -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Statutory &amp; Civil Rights</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Title VI Civil Rights Plan</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">ADA &amp; Section 508 Standards</a></li>
+                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors">Colorado Open Records Act (CORA)</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Colorado Privacy Act Notice</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Equal Opportunity Employer</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Legal Disclaimers & Copyright -->
+            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
+                <div>
+                    &copy; 2026 State of Colorado Department of Transportation (CDOT). All rights reserved.
+                </div>
+                <div class="flex items-center gap-4 text-slate-400">
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Accessibility</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Terms of Carriage</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Simulator JavaScript -->
+    <script>
+        // State variables
+        let currentBalance = 42.50;
+        let concessionMode = 'standard'; // 'standard', 'youth', 'senior'
+        let transferSecondsLeft = 7120; // ~1h 58m
+        let transferTimerInterval = null;
+        let seatAssigned = false;
+        let isRefreshing = false;
+
+        // Elements
+        const einkScreen = document.getElementById('einkScreen');
+        const einkFlashOverlay = document.getElementById('einkFlashOverlay');
+        const einkBalance = document.getElementById('einkBalance');
+        const einkConcessionBadge = document.getElementById('einkConcessionBadge');
+        const einkFareNotice = document.getElementById('einkFareNotice');
+        const deckConcessionBadge = document.getElementById('deckConcessionBadge');
+        const einkRouteTitle = document.getElementById('einkRouteTitle');
+        const einkSeatBadge = document.getElementById('einkSeatBadge');
+        const einkTripDetails = document.getElementById('einkTripDetails');
+        const einkTransferTimer = document.getElementById('einkTransferTimer');
+        const einkHashLabel = document.getElementById('einkHashLabel');
+        const simulatorStatusBadge = document.getElementById('simulatorStatusBadge');
+        const telemetryFeed = document.getElementById('telemetryFeed');
+        const phoneNfcSimulator = document.getElementById('phoneNfcSimulator');
+        const phoneNfcStatusMsg = document.getElementById('phoneNfcStatusMsg');
+
+        // Telemetry logger helper
+        function logTelemetry(type, message) {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0');
+            const row = document.createElement('div');
+            if (type === 'tap') row.className = 'text-amber-400 font-bold';
+            else if (type === 'success') row.className = 'text-emerald-400';
+            else if (type === 'crypto') row.className = 'text-purple-300';
+            else row.className = 'text-slate-300';
+
+            row.textContent = `[${timeStr}] ${message}`;
+            telemetryFeed.appendChild(row);
+            telemetryFeed.scrollTop = telemetryFeed.scrollHeight;
+        }
+
+        // Realistic Electrophoretic E-Ink Screen Refresh cycle
+        function triggerEinkRefresh(callback) {
+            if (isRefreshing) return;
+            isRefreshing = true;
+
+            // Step 1: Flash black inversion
+            einkScreen.classList.add('eink-refreshing');
+            einkFlashOverlay.style.opacity = '0.9';
+
+            setTimeout(() => {
+                // Step 2: Flash white inversion & mutate DOM state
+                einkFlashOverlay.style.opacity = '0.1';
+                if (typeof callback === 'function') callback();
+
+                setTimeout(() => {
+                    // Step 3: Complete crisp rendering
+                    einkFlashOverlay.style.opacity = '0';
+                    einkScreen.classList.remove('eink-refreshing');
+                    isRefreshing = false;
+                }, 140);
+            }, 120);
+        }
+
+        // Format countdown seconds into Hh Mm
+        function formatTransferTime(totalSec) {
+            if (totalSec <= 0) return 'Expired';
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            if (h > 0) {
+                return `Transfer: ${h}h ${String(m).padStart(2, '0')}m`;
+            }
+            return `Transfer: ${m}m ${String(s).padStart(2, '0')}s`;
+        }
+
+        // Start countdown
+        function startTransferCountdown(seconds) {
+            if (transferTimerInterval) clearInterval(transferTimerInterval);
+            transferSecondsLeft = seconds;
+            einkTransferTimer.textContent = formatTransferTime(transferSecondsLeft);
+
+            transferTimerInterval = setInterval(() => {
+                if (transferSecondsLeft > 0) {
+                    transferSecondsLeft--;
+                    einkTransferTimer.textContent = formatTransferTime(transferSecondsLeft);
+                } else {
+                    clearInterval(transferTimerInterval);
+                    einkTransferTimer.textContent = 'Transfer: Expired';
+                }
+            }, 1000);
+        }
+
+        // Helper to generate dynamic cryptographic ticket hash
+        function generateTicketHash(routeCode) {
+            const hex = Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase().padStart(6, '0');
+            return `ECDSA-P256: CDOT-${routeCode}-${hex}`;
+        }
+
+        // Action 1: Tap In Front Range Local
+        function actionTapInLocal() {
+            let fare = 6.00;
+            if (concessionMode === 'youth') fare = 0.00;
+            else if (concessionMode === 'senior') fare = 3.00;
+
+            if (currentBalance < fare) {
+                alert('Insufficient C & A Card balance! Use Phone NFC Refresh to add funds.');
+                return;
+            }
+
+            logTelemetry('tap', `ISO 14443-4 Tap at Validator #V-DEN-GATE-02.`);
+            logTelemetry('crypto', `Generating ticket signature ECDSA Curve P-256...`);
+
+            triggerEinkRefresh(() => {
+                currentBalance -= fare;
+                einkBalance.textContent = `$${currentBalance.toFixed(2)}`;
+                einkRouteTitle.textContent = 'TICKET: FR-104 FRONT RANGE LOCAL';
+                einkSeatBadge.textContent = 'SEAT: UNRESERVED LOCAL';
+                einkTripDetails.textContent = 'Denver Union Station ➔ Loveland ➔ Fort Collins';
+                einkHashLabel.textContent = generateTicketHash('FR104');
+                startTransferCountdown(7200); // 2 hours
+            });
+
+            logTelemetry('success', `Fare deducted: $${fare.toFixed(2)}. Remaining balance: $${(currentBalance - fare).toFixed(2)}. 2-hour transfer active.`);
+            simulatorStatusBadge.textContent = 'CARD STATUS: TAPPED IN (FR-104)';
+        }
+
+        // Action 2: Reserve Seat CoCoRX Express
+        function actionReserveExpress() {
+            logTelemetry('tap', `CoCoRX Express reservation requested via Colorado.gov backend.`);
+            logTelemetry('crypto', `Cryptographically signing seat allocation Car 2 • Seat 14A.`);
+
+            triggerEinkRefresh(() => {
+                einkRouteTitle.textContent = 'EXPRESS: CoCoRX #402 HIGH-SPEED';
+                einkSeatBadge.textContent = 'CAR 2 • SEAT 14A (QUIET)';
+                einkTripDetails.textContent = 'Denver Union Station ➔ Fort Collins (Direct Non-Stop)';
+                einkHashLabel.textContent = generateTicketHash('RX402');
+                seatAssigned = true;
+            });
+
+            logTelemetry('success', `Reservation confirmed. Display updated with guaranteed seat assignment Car 2 • Seat 14A.`);
+            simulatorStatusBadge.textContent = 'CARD STATUS: RESERVED (SEAT 14A)';
+        }
+
+        // Action 3: Transfer Bustang
+        function actionTransferBustang() {
+            logTelemetry('tap', `Intercity Bustang Tap detected at Coach #CDOT-604 validator.`);
+
+            if (transferSecondsLeft > 0) {
+                logTelemetry('success', `Valid 2-Hour Transfer Window detected (${formatTransferTime(transferSecondsLeft)} remaining). Fare: $0.00 FREE transfer.`);
+                triggerEinkRefresh(() => {
+                    einkRouteTitle.textContent = 'TRANSFER: CoCoM BUSTANG WEST';
+                    einkSeatBadge.textContent = 'COACH SEAT: OPEN';
+                    einkTripDetails.textContent = 'Denver ➔ Frisco Hub ➔ Vail Transit Center';
+                    einkHashLabel.textContent = generateTicketHash('BUS-W');
+                });
+                simulatorStatusBadge.textContent = 'CARD STATUS: BUSTANG TRANSFER ACTIVE';
+            } else {
+                let fare = 12.00;
+                if (concessionMode === 'youth') fare = 0.00;
+                else if (concessionMode === 'senior') fare = 6.00;
+
+                logTelemetry('tap', `Transfer window expired. Deducting baseline Bustang fare: $${fare.toFixed(2)}.`);
+                triggerEinkRefresh(() => {
+                    currentBalance -= fare;
+                    einkBalance.textContent = `$${currentBalance.toFixed(2)}`;
+                    einkRouteTitle.textContent = 'TICKET: CoCoM BUSTANG WEST';
+                    einkSeatBadge.textContent = 'COACH SEAT: OPEN';
+                    einkTripDetails.textContent = 'Denver ➔ Frisco Hub ➔ Vail Transit Center';
+                    einkHashLabel.textContent = generateTicketHash('BUS-W');
+                    startTransferCountdown(7200);
+                });
+            }
+        }
+
+        // Action 4: Toggle Concession Mode
+        function actionToggleConcession() {
+            logTelemetry('crypto', `Concession certification token updated via secure element.`);
+
+            if (concessionMode === 'standard') {
+                concessionMode = 'youth';
+            } else if (concessionMode === 'youth') {
+                concessionMode = 'senior';
+            } else {
+                concessionMode = 'standard';
+            }
+
+            triggerEinkRefresh(() => {
+                if (concessionMode === 'youth') {
+                    einkConcessionBadge.textContent = 'YOUTH 18 • ZERO FARE';
+                    einkFareNotice.textContent = '100% Free Colorado Transit';
+                    deckConcessionBadge.textContent = 'Youth 18 (Free)';
+                    deckConcessionBadge.className = 'px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-200 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-200';
+                } else if (concessionMode === 'senior') {
+                    einkConcessionBadge.textContent = 'SENIOR 65+ • 50%';
+                    einkFareNotice.textContent = '50% Concessionary Fare';
+                    deckConcessionBadge.textContent = 'Senior 65+ (50%)';
+                    deckConcessionBadge.className = 'px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200';
+                } else {
+                    einkConcessionBadge.textContent = 'ADULT STANDARD';
+                    einkFareNotice.textContent = 'Full Statewide Fare';
+                    deckConcessionBadge.textContent = 'Standard Adult';
+                    deckConcessionBadge.className = 'px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200';
+                }
+            });
+
+            logTelemetry('success', `Concession status updated to: ${concessionMode.toUpperCase()}.`);
+        }
+
+        // Action 5: Phone NFC Refresh
+        function actionPhoneNfcRefresh() {
+            phoneNfcSimulator.classList.remove('opacity-0', 'pointer-events-none');
+            logTelemetry('tap', `Smartphone NFC antenna aligned over C & A card.`);
+            logTelemetry('crypto', `Energy harvesting established: 3.3V @ 13.56 MHz carrier frequency.`);
+
+            setTimeout(() => {
+                phoneNfcStatusMsg.textContent = 'AES-256 session authenticated. Transferring +$25.00...';
+
+                setTimeout(() => {
+                    phoneNfcSimulator.classList.add('opacity-0', 'pointer-events-none');
+
+                    triggerEinkRefresh(() => {
+                        currentBalance += 25.00;
+                        einkBalance.textContent = `$${currentBalance.toFixed(2)}`;
+                    });
+
+                    logTelemetry('success', `Reload successful: +$25.00 loaded from Colorado.gov account. New balance: $${currentBalance.toFixed(2)}.`);
+                    simulatorStatusBadge.textContent = 'CARD STATUS: NFC REFRESH COMPLETED';
+                }, 1200);
+            }, 900);
+        }
+
+        // Reset Simulator
+        function resetSimulation() {
+            currentBalance = 42.50;
+            concessionMode = 'standard';
+            seatAssigned = false;
+
+            triggerEinkRefresh(() => {
+                einkBalance.textContent = '$42.50';
+                einkConcessionBadge.textContent = 'ADULT STANDARD';
+                einkFareNotice.textContent = 'Full Statewide Fare';
+                deckConcessionBadge.textContent = 'Standard Adult';
+                deckConcessionBadge.className = 'px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-200 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-200';
+                einkRouteTitle.textContent = 'TICKET: FR-104 FRONT RANGE LOCAL';
+                einkSeatBadge.textContent = 'SEAT: UNRESERVED LOCAL';
+                einkTripDetails.textContent = 'Denver Union Station ➔ Fort Collins Hub';
+                einkHashLabel.textContent = 'ECDSA-P256: CDOT-TKT-9942';
+                startTransferCountdown(7120);
+            });
+
+            logTelemetry('success', 'Simulator state restored to baseline default.');
+            simulatorStatusBadge.textContent = 'VALIDATOR EMULATOR: ONLINE';
+        }
+
+        // Theme Handling Script
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('coco-theme');
+        const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        } else if (darkQuery) {
+            applyTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', e => {
+                if (!localStorage.getItem('coco-theme')) {
+                    applyTheme(e.matches);
+                }
+            });
+        } else {
+            applyTheme(false);
+        }
+
+        function toggleTheme() {
+            const isDarkNow = document.body.classList.contains('dark');
+            const targetDark = !isDarkNow;
+            applyTheme(targetDark);
+            localStorage.setItem('coco-theme', targetDark ? 'dark' : 'light');
+        }
+
+        // Initialize countdown on boot
+        startTransferCountdown(transferSecondsLeft);
+    </script>
+</body>
+</html>

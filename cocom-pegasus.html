@@ -32,6 +32,33 @@
 </head>
 <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-rose-600 selection:text-white">
 
+        <!-- Official Colorado State Government Utility Bar -->
+    <aside aria-label="Official state government verification" class="bg-[#001a38] text-slate-300 text-xs py-1.5 px-4 border-b border-blue-950/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <!-- Miniature Colorado Flag SVG -->
+                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                    <rect width="36" height="8" fill="#002855"/>
+                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                    <rect y="16" width="36" height="8" fill="#002855"/>
+                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                </svg>
+                <div class="flex items-center gap-1.5 font-medium text-slate-200">
+                    <span>An official State of Colorado website</span>
+                    <span class="text-slate-500 hidden sm:inline">&bull;</span>
+                    <span class="text-slate-400 hidden sm:inline font-normal">Department of Transportation</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-[11px] text-slate-400">
+                <span class="hidden md:inline">C.R.S. Title 43 &bull; Colorado Public Transit System</span>
+                <span class="hidden md:inline text-slate-600">&bull;</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">codot.gov</a>
+            </div>
+        </div>
+    </aside>
+
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -65,6 +92,9 @@
                     </a>
                     <a href="fares.html#cocom-pegasus" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors">
                         Fares &amp; Calculator
+                    </a>
+                    <a href="ca-card.html" class="px-3 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs sm:text-sm font-bold transition-colors">
+                        C &amp; A Card
                     </a>
                 </nav>
 
@@ -495,23 +525,40 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 transition-colors mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-rose-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-sm">
-                    <span class="text-white text-xs font-bold">C</span>
+        <!-- Official Colorado Government Footer -->
+    <footer class="mt-auto bg-slate-900 text-white border-t border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
+                        <span class="text-[#c69214] font-black text-xs">CO</span>
+                    </div>
+                    <div>
+                        <div class="text-xs sm:text-sm font-bold text-white">State of Colorado &bull; Department of Transportation</div>
+                        <div class="text-[11px] text-amber-300 font-semibold">CDOT Division of Transit &amp; Rail &bull; CoCoM Pegasus Mountain Shuttles</div>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-sm font-black text-slate-900 dark:text-white">CoCo Statewide Passenger Transit</div>
-                    <div class="text-xs text-slate-500 dark:text-slate-400">State of Colorado Transit Authority &bull; CoCoM Micro-Transit Division (Pegasus)</div>
+                <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300 font-semibold">
+                    <a href="index.html" class="hover:text-amber-400 transition-colors">Home</a>
+                    <span class="text-slate-600">&bull;</span>
+                    <a href="map.html" class="hover:text-amber-400 transition-colors">Transit Map</a>
+                    <span class="text-slate-600">&bull;</span>
+                    <a href="fares.html" class="hover:text-amber-400 transition-colors">Fares &amp; Passes</a>
+                    <span class="text-slate-600">&bull;</span>
+                    <a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card</a>
+                    <span class="text-slate-600">&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Accessibility</a>
                 </div>
             </div>
-            <div class="flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 font-semibold">
-                <a href="index.html" class="hover:text-rose-600 dark:hover:text-rose-400">Home</a>
-                <a href="map.html" class="hover:text-rose-600 dark:hover:text-rose-400">Map</a>
-                <a href="fares.html" class="hover:text-rose-600 dark:hover:text-rose-400">Fares &amp; Passes</a>
-                <a href="fares.html#ca-card" class="hover:text-rose-600 dark:hover:text-rose-400">C &amp; A Pass Card</a>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
+                <div>&copy; 2026 State of Colorado Department of Transportation (CDOT). All rights reserved. C.R.S. Title 43.</div>
+                <div class="flex items-center gap-3">
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Title VI Civil Rights</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">ADA 508</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Policy</a>
+                </div>
             </div>
         </div>
     </footer>

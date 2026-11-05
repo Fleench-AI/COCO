@@ -33,26 +33,54 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-[#002855] selection:text-white">
+
+    <!-- Official Colorado State Government Utility Bar -->
+    <aside aria-label="Official state government verification" class="bg-[#001a38] text-slate-300 text-xs py-1.5 px-4 border-b border-blue-950/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <!-- Miniature Colorado Flag SVG -->
+                <svg class="w-5 h-3.5 rounded-xs shadow-xs shrink-0" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="State of Colorado Flag">
+                    <rect width="36" height="8" fill="#002855"/>
+                    <rect y="8" width="36" height="8" fill="#FFFFFF"/>
+                    <rect y="16" width="36" height="8" fill="#002855"/>
+                    <circle cx="12" cy="12" r="6" fill="#C8102E"/>
+                    <circle cx="12" cy="12" r="3.2" fill="#FFD100"/>
+                    <path d="M 12 12 L 18 8 L 18 16 Z" fill="#FFFFFF"/>
+                </svg>
+                <div class="flex items-center gap-1.5 font-medium text-slate-200">
+                    <span>An official website of the State of Colorado</span>
+                    <span class="text-slate-500 hidden sm:inline">&bull;</span>
+                    <span class="text-slate-400 hidden sm:inline font-normal">Department of Transportation</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-[11px] text-slate-400">
+                <span class="hidden md:inline">C.R.S. Title 43 &bull; Colorado Public Transit System</span>
+                <span class="hidden md:inline text-slate-600">&bull;</span>
+                <a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors font-medium">codot.gov</a>
+            </div>
+        </div>
+    </aside>
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-2 flex items-center justify-between">
             <!-- Brand -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3.5">
                 <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shadow-[0_0_12px_rgba(59,130,246,0.5)] shrink-0 transition-transform group-hover:scale-105">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    <div class="w-10 h-10 bg-[#002855] rounded-full flex items-center justify-center border-2 border-[#c69214] shadow-md shrink-0 transition-transform group-hover:scale-105">
+                        <svg class="w-6 h-6 text-[#c69214]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" fill="#c69214" fill-opacity="0.2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
                         </svg>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">CoCo</span>
-                            <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Fares &amp; Passes</span>
+                            <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">CoCo Transit</span>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#002855] text-amber-300 border border-blue-900">Fares &amp; Passes</span>
                         </div>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Statewide Transit Authority &bull; Colorado</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">CDOT Division of Transit &amp; Rail &bull; State of Colorado</p>
                     </div>
                 </a>
             </div>
@@ -62,33 +90,28 @@
                 <!-- Navigation Links -->
                 <nav class="flex items-center gap-1.5 sm:gap-2">
                     <a href="index.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Back to Home Portal">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
                         <span class="hidden sm:inline">Home Portal</span>
                         <span class="sm:hidden">Home</span>
                     </a>
                     <a href="map.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-colors" title="Interactive Map">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                        </svg>
                         <span class="hidden sm:inline">Interactive Map</span>
                         <span class="sm:hidden">Map</span>
                     </a>
-                    <span class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs sm:text-sm font-bold shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                        </svg>
-                        <span>Fares &amp; Passes</span>
+                    <a href="ca-card.html" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs sm:text-sm font-bold transition-colors" title="C & A E-Ink Smart Card">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span>C &amp; A Card</span>
+                    </a>
+                    <span class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#002855] text-amber-300 border border-blue-900 text-xs sm:text-sm font-bold shadow-xs">
+                        <span>Fares</span>
                     </span>
                 </nav>
 
                 <!-- Theme Switcher -->
                 <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm transition-colors">
-                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 block dark:hidden text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
@@ -97,17 +120,19 @@
     </header>
 
     <!-- Subheader Quick-Jump Anchor Bar -->
-    <div class="bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky top-16 z-40 backdrop-blur-sm overflow-x-auto">
+    <div class="bg-slate-100/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky top-18 z-40 backdrop-blur-sm overflow-x-auto">
         <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold whitespace-nowrap">
             <span class="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] mr-1 hidden sm:inline">Jump To:</span>
             <a href="#calculator" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🧮 Fare Calculator</a>
+            <a href="ca-card.html" class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950/70 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 transition-colors shadow-xs font-bold">📱 E-Ink Card Simulator</a>
             <a href="#cocor-local" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-indigo-700 dark:text-indigo-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚆 CoCoR Local (COR)</a>
             <a href="#cocorx-express" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-700 dark:text-blue-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⚡ CoCoRX Express (COR-X)</a>
             <a href="#cocom-bustang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚌 Bustang</a>
             <a href="#cocom-pegasus" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-rose-700 dark:text-rose-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🚐 Pegasus</a>
             <a href="#cocom-outrider" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-emerald-700 dark:text-emerald-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">🏔️ Outrider</a>
             <a href="#cocom-snowstang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-cyan-700 dark:text-cyan-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">⛷️ Snowstang</a>
-            <a href="#ca-card" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">💳 C &amp; A Pass Card</a>
+            <a href="#ca-card" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">💳 C &amp; A Architecture</a>
+            <a href="#guidelines" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">♿ Accessibility &amp; Policies</a>
         </div>
     </div>
 
@@ -1289,9 +1314,33 @@
                     <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-4">
                         The C &amp; A Card: Colorado &amp; Access Pass
                     </h2>
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
                         The C &amp; A Card is Colorado's unified transit passport. Operating on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required, the system automatically protects riders with universal 2-hour transfer windows, daily expenditure caps, and monthly passes.
                     </p>
+
+                    <!-- Dedicated E-Ink Simulator Callout Banner -->
+                    <a href="ca-card.html" class="block p-4 sm:p-5 rounded-2xl bg-amber-400/15 border-2 border-amber-400/50 hover:bg-amber-400/25 transition-all mb-8 group">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-md">
+                                    📱
+                                </div>
+                                <div>
+                                    <div class="text-sm sm:text-base font-bold text-amber-300 group-hover:text-amber-200 transition-colors flex items-center gap-2">
+                                        <span>Experience the Interactive C &amp; A E-Ink Smart Card Simulator</span>
+                                        <span class="text-xs bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-wide">Dedicated Page</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300 mt-0.5">
+                                        Test simulated taps, CoCoRX seat reservations, Bustang transfers, concession switching, and phone NFC reloads with realistic e-ink bi-stable refresh animations.
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                                <span>Launch Simulator</span>
+                                <span>&rarr;</span>
+                            </span>
+                        </div>
+                    </a>
 
                     <!-- Dual Card Comparison -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-left">
@@ -1371,38 +1420,163 @@
             </div>
         </section>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center border-2 border-yellow-400 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">CoCo (Colorado Connect) Transit System</p>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">CoCoR (Rail) &bull; CoCoM (Motor &amp; Mobility Division) &bull; State of Colorado</p>
-                    </div>
+        <!-- 8. Accessibility & Rider Policies (#guidelines) -->
+        <section id="guidelines" class="scroll-mt-24 space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-1">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    CDOT Civil Rights &bull; C.R.S. Title 43 Article 4
                 </div>
-
-                <div class="flex items-center gap-4 sm:gap-6 text-xs text-slate-600 dark:text-slate-400 font-medium">
-                    <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home Portal</a>
-                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
-                    <a href="map.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Interactive Map</a>
-                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
-                    <a href="fares.html" class="text-blue-600 dark:text-blue-400 font-bold">Fares &amp; Passes</a>
-                    <span class="text-slate-300 dark:text-slate-700">&bull;</span>
-                    <span>CDOT Transit &amp; Rail</span>
-                </div>
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+                    Accessibility, Passenger Rights &amp; Rider Policies
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-3xl">
+                    Colorado is dedicated to providing barrier-free, equitable, and dignified public transit for all residents and visitors across every county and mountain corridor.
+                </p>
             </div>
 
-            <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 text-center text-[11px] text-slate-400 dark:text-slate-500">
-                &copy; CoCo Statewide Transit Master Network. Fares, formulas, and C &amp; A Pass rules established under the Colorado Unified Passenger Transit Directive.
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. ADA Wheelchair & Level Boarding -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        ♿
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">ADA Universal Accessibility</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        All CoCoR passenger rail cars feature 100% level boarding at Tier 1 and Tier 2 stations, dedicated tie-down spaces with universal power docks, and ADA-compliant accessible restrooms. Bustang and Pegasus motorcoaches are equipped with automated BraunAbility wheelchair lifts.
+                    </p>
+                    <div class="text-[11px] font-bold text-blue-600 dark:text-blue-400">Zero reservation required for ADA spaces.</div>
+                </div>
+
+                <!-- 2. Service Animals Welcome -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        🐕
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Service Animals Policy</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        Trained service animals accompanying passengers with disabilities ride free on all CoCo vehicles without restriction. Small pets inside fully enclosed, leak-proof airline-compliant pet carriers that fit beneath seats are permitted at no extra charge.
+                    </p>
+                    <div class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Compliant with 49 C.F.R. Part 37.</div>
+                </div>
+
+                <!-- 3. Skis, Snowboards & Bicycles -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        ⛷️
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">CoCo Cargo: Ski &amp; Bike Gear</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        In accordance with Colorado outdoor recreation priorities, passengers may bring up to two pairs of skis/snowboards or one bicycle completely free of charge. CoCoR trains feature dedicated end-car racks; Bustang coaches provide underfloor climate-controlled luggage bays.
+                    </p>
+                    <div class="text-[11px] font-bold text-cyan-600 dark:text-cyan-400">Free gear transit on all corridors.</div>
+                </div>
+
+                <!-- 4. Zero Fare for Youth Mandate -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        🎒
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Zero Fare for Colorado Youth</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        Pursuant to state ozone mitigation and youth equity statutes, all individuals aged 18 and under ride 100% free statewide on all standard CoCoR trains and CoCoM buses. Youth passes can be loaded directly onto physical C &amp; A Smart Cards or paired with Colorado student IDs.
+                    </p>
+                    <div class="text-[11px] font-bold text-amber-600 dark:text-amber-400">Mandated under C.R.S. § 43-4-1102.</div>
+                </div>
+
+                <!-- 5. Title VI Civil Rights Notice -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        ⚖️
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Title VI Non-Discrimination</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        The Colorado Department of Transportation (CDOT) operates its transit programs without regard to race, color, national origin, sex, age, or disability in accordance with Title VI of the Civil Rights Act of 1964. Free translation and interpretation services are available in Spanish, Vietnamese, and 12 other languages.
+                    </p>
+                    <div class="text-[11px] font-bold text-purple-600 dark:text-purple-400">CDOT Civil Rights Office: (303) 757-9234.</div>
+                </div>
+
+                <!-- 6. Passenger Code of Conduct -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                    <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl mb-3 font-bold">
+                        🛡️
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Passenger Code of Conduct</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        To maintain a comfortable transit environment, smoking/vaping, alcohol consumption outside designated dining cars, and disruptive audio devices without headphones are strictly prohibited. Fare inspection is conducted randomly by authorized state transit fare marshals.
+                    </p>
+                    <div class="text-[11px] font-bold text-rose-600 dark:text-rose-400">Colorado State Patrol Transit Liaison.</div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Official Colorado Government Footer -->
+    <footer class="mt-auto bg-slate-900 text-white border-t border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+
+                <!-- Col 1: State Seal & Mission -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-full bg-[#002855] border-2 border-[#c69214] flex items-center justify-center shrink-0">
+                            <span class="text-[#c69214] font-black text-sm">CO</span>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black tracking-tight text-white">State of Colorado &bull; Department of Transportation</div>
+                            <div class="text-xs text-amber-300 font-semibold">Division of Transit &amp; Rail &bull; CoCo Passenger System</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+                        Operating under the authority of the Governor's Office and C.R.S. Title 43. Uniting Colorado's Front Range, Eastern Plains, Western Slope, and Mountain Corridors into one synchronized public passenger rail and intercity coach network.
+                    </p>
+                    <div class="text-[11px] text-slate-400 space-y-1">
+                        <div><strong>Governor:</strong> Jared Polis &bull; <strong>CDOT Executive Director:</strong> Shoshana M. Lew</div>
+                        <div><strong>Headquarters:</strong> 2829 W. Howard Place, Denver, CO 80204</div>
+                    </div>
+                </div>
+
+                <!-- Col 2: System Portals -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">State Transit Media</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="ca-card.html" class="hover:text-amber-400 transition-colors font-bold text-amber-300">C &amp; A Smart Card (E-Ink)</a></li>
+                        <li><a href="fares.html" class="hover:text-amber-400 transition-colors">Statewide Fares &amp; Calculator</a></li>
+                        <li><a href="map.html" class="hover:text-amber-400 transition-colors">Statewide Interactive Route Map</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Concessions &amp; Youth Pass</a></li>
+                        <li><a href="fares.html#ca-card" class="hover:text-amber-400 transition-colors">Account Balance Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Compliance & Legal -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Statutory &amp; Civil Rights</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Title VI Civil Rights Plan</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">ADA &amp; Section 508 Standards</a></li>
+                        <li><a href="https://www.codot.gov" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors">Colorado Open Records Act (CORA)</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Colorado Privacy Act Notice</a></li>
+                        <li><a href="fares.html#guidelines" class="hover:text-amber-400 transition-colors">Equal Opportunity Employer</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Legal Disclaimers & Copyright -->
+            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
+                <div>
+                    &copy; 2026 State of Colorado Department of Transportation (CDOT). All rights reserved.
+                </div>
+                <div class="flex items-center gap-4 text-slate-400">
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Accessibility</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Privacy Policy</a>
+                    <span>&bull;</span>
+                    <a href="fares.html#guidelines" class="hover:text-slate-300">Terms of Carriage</a>
+                </div>
             </div>
         </div>
     </footer>
