@@ -85,7 +85,7 @@
             <!-- Header Utility Actions -->
             <div class="flex items-center gap-2.5">
                 <a href="ca-card.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#002855] text-white hover:bg-[#0f294a] text-xs font-bold transition-colors">
-                    <span>C &amp; A Smart Card</span>
+                    <span>CoCo Cards &amp; E-Ink</span>
                 </a>
                 <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition-colors">
                     <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,7 +106,7 @@
                     <a href="map.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transit Map</a>
                     <a href="fares.html" class="px-3 py-2 text-amber-300 border-b-2 border-[#c69214] font-black">Fares &amp; Rates</a>
                     <a href="#transfer-policy" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Transfer Add-On</a>
-                    <a href="ca-card.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">C &amp; A Card</a>
+                    <a href="ca-card.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCo Cards &amp; E-Ink</a>
                     <a href="cocor-local.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoR Local Rail</a>
                     <a href="cocorx-express.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">CoCoRX Express</a>
                     <a href="cocom-bustang.html" class="px-3 py-2 text-slate-100 hover:text-amber-300 hover:bg-[#0f294a] rounded-t transition-colors">Bustang Coach</a>
@@ -125,7 +125,7 @@
             <span class="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] mr-1 hidden sm:inline">Jump To:</span>
             <a href="#calculator" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Fare Calculator</a>
             <a href="#transfer-policy" class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-950/70 hover:bg-amber-100 dark:hover:bg-amber-900 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 transition-colors shadow-xs font-bold">Transfer Add-On Policy</a>
-            <a href="ca-card.html" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">C &amp; A E-Ink Simulator</a>
+            <a href="ca-card.html" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">CoCo Cards &amp; E-Ink Simulator</a>
             <a href="#cocor-local" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-indigo-700 dark:text-indigo-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">CoCoR Local Rail</a>
             <a href="#cocorx-express" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-blue-700 dark:text-blue-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">CoCoRX Express</a>
             <a href="#cocom-bustang" class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs">Bustang</a>
@@ -195,9 +195,9 @@
                         <div class="text-[11px] text-slate-300 mt-0.5">Base single tickets point-to-point only</div>
                     </div>
                     <div class="p-3.5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Concessions</div>
-                        <div class="text-lg sm:text-xl font-black text-purple-300">50% Off / Free</div>
-                        <div class="text-[11px] text-slate-300 mt-0.5">Seniors, Vets, Free Youth</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Universal Discounts</div>
+                        <div class="text-lg sm:text-xl font-black text-purple-300">30%–50% Off</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">Youth (Y) 50%, Univ (U) 30%</div>
                     </div>
                 </div>
             </div>
@@ -495,43 +495,49 @@
                         </div>
                     </div>
 
-                    <!-- Passenger Concession & Discounts -->
+                    <!-- Passenger Demographic Matrix & Universal Discounts -->
                     <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                             <label class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                                Passenger Concession Category
+                                Demographic Concession Matrix (C, Y, A, U)
                             </label>
-                            <span class="text-[11px] text-slate-500 dark:text-slate-400">Discount automatically applied to all computed fares</span>
+                            <span class="text-[11px] text-slate-500 dark:text-slate-400">Tariff discount applied automatically to all modes</span>
                         </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/80 dark:bg-blue-950/60 text-blue-900 dark:text-blue-100 cursor-pointer font-semibold text-xs transition-all">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            <label class="concession-label relative flex items-center gap-2.5 p-3 rounded-xl border-2 border-blue-600 bg-blue-50/80 dark:bg-blue-950/60 text-blue-900 dark:text-blue-100 cursor-pointer font-semibold text-xs transition-all">
                                 <input type="radio" name="concession" value="adult" checked class="text-blue-600 focus:ring-blue-500">
                                 <div>
-                                    <div class="font-bold">Standard Adult</div>
-                                    <div class="text-[10px] text-slate-500 dark:text-slate-400">Full Fare (100%)</div>
+                                    <div class="font-bold flex items-center gap-1.5">
+                                        <span>Core Adult (C / C+ Card)</span>
+                                        <span class="text-[9px] px-1.5 py-0.2 rounded bg-blue-200 dark:bg-blue-900 text-blue-900 dark:text-blue-200 font-extrabold uppercase">100%</span>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500 dark:text-slate-400">Full Standard Base Fare (18+)</div>
                                 </div>
                             </label>
-                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
-                                <input type="radio" name="concession" value="senior" class="text-blue-600 focus:ring-blue-500">
+                            <label class="concession-label relative flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="univ" class="text-blue-600 focus:ring-blue-500">
                                 <div>
-                                    <div class="font-bold">Senior (65+)</div>
-                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">50% Discount</div>
+                                    <div class="font-bold flex items-center gap-1.5">
+                                        <span>University Student (U / U+)</span>
+                                        <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 font-extrabold uppercase">30% Off</span>
+                                    </div>
+                                    <div class="text-[10px] text-purple-600 dark:text-purple-400 font-semibold">70% Fare &bull; Campus ID NFC Integration</div>
                                 </div>
                             </label>
-                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
-                                <input type="radio" name="concession" value="special" class="text-blue-600 focus:ring-blue-500">
+                            <label class="concession-label relative flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
+                                <input type="radio" name="concession" value="youth_senior" class="text-blue-600 focus:ring-blue-500">
                                 <div>
-                                    <div class="font-bold">Student / Veteran</div>
-                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">50% Discount</div>
+                                    <div class="font-bold flex items-center gap-1.5">
+                                        <span>Youth / Senior / Veteran (Y / Y+)</span>
+                                        <span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-extrabold uppercase">50% Off</span>
+                                    </div>
+                                    <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">Universal Half-Fare &bull; Ages 0–7 Free ($0.00)</div>
                                 </div>
                             </label>
-                            <label class="concession-label relative flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 cursor-pointer font-semibold text-xs transition-all">
-                                <input type="radio" name="concession" value="youth" class="text-blue-600 focus:ring-blue-500">
-                                <div>
-                                    <div class="font-bold">Youth (18 &amp; under)</div>
-                                    <div class="text-[10px] text-purple-600 dark:text-purple-400 font-bold">100% FREE ($0.00)</div>
-                                </div>
-                            </label>
+                        </div>
+                        <div class="mt-2.5 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                            <span>Ages 0–7 ride free across all routes without individual card.</span>
+                            <span class="font-medium text-slate-600 dark:text-slate-300">State Guaranteed Floor: Local zero-fare initiatives (e.g. RTD) fully reimbursed.</span>
                         </div>
                     </div>
 
@@ -968,9 +974,9 @@
                                         <th class="py-2 font-semibold">Corridor</th>
                                         <th class="py-2 font-semibold">Stops Served</th>
                                         <th class="py-2 font-semibold">Approx. Dist.</th>
-                                        <th class="py-2 font-semibold">COR Adult Fare</th>
-                                        <th class="py-2 font-semibold">Senior / Vet / Student (50%)</th>
-                                        <th class="py-2 font-semibold">Youth (18 &amp; under)</th>
+                                        <th class="py-2 font-semibold">COR Adult (C Card)</th>
+                                        <th class="py-2 font-semibold">University (70% - U)</th>
+                                        <th class="py-2 font-semibold">Youth / Senior / Vet (50% - Y)</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
@@ -979,32 +985,32 @@
                                         <td class="py-2.5 text-slate-500">Broomfield, Westminster</td>
                                         <td class="py-2.5">28 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$9.04</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$4.52</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$6.33</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$4.52</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Fort Collins</td>
                                         <td class="py-2.5 text-slate-500">Brighton, Longmont, Berthoud, Loveland</td>
                                         <td class="py-2.5">65 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$15.70</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$7.85</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$10.99</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$7.85</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Colorado Springs</td>
                                         <td class="py-2.5 text-slate-500">Castle Rock, Monument</td>
                                         <td class="py-2.5">71 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$16.78</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$8.39</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$11.75</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$8.39</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Pueblo &harr; Trinidad</td>
                                         <td class="py-2.5 text-slate-500">Colorado City, Walsenburg, Aguilar</td>
                                         <td class="py-2.5">86 mi</td>
                                         <td class="py-2.5 font-bold text-indigo-600 dark:text-indigo-400">$19.48</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$9.74</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$13.64</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$9.74</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1085,9 +1091,9 @@
                                         <th class="py-2 font-semibold">Corridor</th>
                                         <th class="py-2 font-semibold">Service Tier</th>
                                         <th class="py-2 font-semibold">Transit Time</th>
-                                        <th class="py-2 font-semibold">COR-X Adult Fare</th>
-                                        <th class="py-2 font-semibold">Senior / Vet / Student</th>
-                                        <th class="py-2 font-semibold">Youth (18 &amp; under)</th>
+                                        <th class="py-2 font-semibold">COR-X Adult (C Card)</th>
+                                        <th class="py-2 font-semibold">University (70% - U)</th>
+                                        <th class="py-2 font-semibold">Youth / Senior / Vet (50% - Y)</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
@@ -1096,32 +1102,32 @@
                                         <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
                                         <td class="py-2.5">~52 min</td>
                                         <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$19.63</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$9.81</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$13.74</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$9.81</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver Union Station &harr; Colorado Springs Depot</td>
                                         <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
                                         <td class="py-2.5">~1h 05m</td>
                                         <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$20.98</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$10.49</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$14.69</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$10.49</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver Union Station &harr; Pueblo Union Depot</td>
                                         <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">FRX Express</td>
                                         <td class="py-2.5">~1h 45m</td>
                                         <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$29.50</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$14.75</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$20.65</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$14.75</td>
                                     </tr>
                                     <tr>
                                         <td class="py-2.5 font-bold text-slate-900 dark:text-white">Denver &harr; Glenwood Springs</td>
                                         <td class="py-2.5 text-blue-600 dark:text-blue-400 font-bold">ZX Zephyr Express</td>
                                         <td class="py-2.5">~2h 30m</td>
                                         <td class="py-2.5 font-bold text-blue-600 dark:text-blue-400">$41.00</td>
-                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-semibold">$20.50</td>
-                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-bold">FREE</td>
+                                        <td class="py-2.5 text-purple-600 dark:text-purple-400 font-semibold">$28.70</td>
+                                        <td class="py-2.5 text-emerald-600 dark:text-emerald-400 font-bold">$20.50</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1451,18 +1457,18 @@
             </div>
         </section>
 
-        <!-- 7. C & A Card (Colorado & Access Pass) -->
+        <!-- 7. CoCo Transit Cards & E-Ink Architecture (C, Y, A, U Matrix) -->
         <section id="ca-card" class="scroll-mt-24">
             <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white p-6 sm:p-10 lg:p-12 shadow-2xl border border-blue-800/50">
-                <div class="max-w-4xl">
+                <div class="max-w-5xl">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 text-xs font-semibold mb-4">
-                        <span>Universal State Smartcard Architecture</span>
+                        <span>Universal State Smartcard &amp; Hardware Platform</span>
                     </div>
                     <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-4">
-                        The C &amp; A Card: Colorado &amp; Access Pass
+                        CoCo Transit Cards &amp; E-Ink Architecture (C, Y, A, U Matrix)
                     </h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                        The C &amp; A Card is Colorado's unified transit passport. Operating on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required, the system enforces single-leg base tickets, universal 2-hour transfer add-ons, daily expenditure caps, and monthly passes.
+                        Colorado's unified fare media system operates on a strict <strong class="text-yellow-400">Tap-On validator architecture</strong> with no tap-off required. Available across four specialized tiers in either free standard durable recycled plastic or premium battery-free bistable electronic ink (e-ink) powered by 300ms ambient NFC energy harvesting.
                     </p>
 
                     <!-- Dedicated E-Ink Simulator Callout Banner -->
@@ -1470,15 +1476,15 @@
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div class="flex items-center gap-3.5">
                                 <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-md">
-                                    📱
+                                    ⚡
                                 </div>
                                 <div>
                                     <div class="text-sm sm:text-base font-bold text-amber-300 group-hover:text-amber-200 transition-colors flex items-center gap-2">
-                                        <span>Experience the Interactive C &amp; A E-Ink Smart Card Simulator</span>
-                                        <span class="text-xs bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-wide">Dedicated Page</span>
+                                        <span>Launch Interactive CoCo Cards &amp; E-Ink Simulator</span>
+                                        <span class="text-xs bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase tracking-wide">Dedicated Hardware Page</span>
                                     </div>
                                     <p class="text-xs text-slate-300 mt-0.5">
-                                        Test simulated taps, CoCoRX seat reservations, Bustang transfers, concession switching, and phone NFC reloads with realistic e-ink bi-stable refresh animations.
+                                        Test simulated taps across all 4 tiers (C, Y, A, U), battery-free e-ink screen refresh animations, platform proof-of-payment inspection, and Snack Zone barcode rendering.
                                     </p>
                                 </div>
                             </div>
@@ -1489,44 +1495,82 @@
                         </div>
                     </a>
 
-                    <!-- Dual Card Comparison -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-left">
-                        <!-- C Card (Core) -->
-                        <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-400/50 transition-all">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-yellow-400 font-black text-xl">
-                                    C
+                    <!-- 4-Tier Card Comparison Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 text-left">
+                        <!-- 1. Core Card (C / C+) -->
+                        <div class="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-400/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-yellow-400 font-black text-lg">
+                                        C
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold border border-blue-400/30">Adult (18+)</span>
                                 </div>
-                                <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30">Standard Transit Pass</span>
+                                <h3 class="text-base font-bold mb-1.5">Core Card (C / C+)</h3>
+                                <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                                    The default adult pass. Free standard plastic card holds 5 passes + cash balance locally in secure flash. Plus C+ ($20–$25) features battery-free e-ink screen.
+                                </p>
                             </div>
-                            <h3 class="text-xl font-bold mb-2">The C Card (CoCo Core)</h3>
-                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-                                The accessible, everyday Colorado smartcard. Works offline in deep mountain canyons without cellular connectivity, holding a local cash balance and up to 5 pre-purchased tickets loaded at any platform kiosk.
-                            </p>
-                            <ul class="space-y-1.5 text-xs text-slate-300">
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Offline NFC storage drive</li>
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Linkable to CoCo RealTime mobile app</li>
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Balance protection when registered</li>
-                            </ul>
+                            <div class="text-[11px] text-yellow-300 font-semibold border-t border-white/10 pt-2">
+                                100% Full Standard Fare
+                            </div>
                         </div>
 
-                        <!-- A Card (All) -->
-                        <div class="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-yellow-400/50 transition-all">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="w-12 h-12 rounded-xl bg-yellow-500/30 border border-yellow-400/40 flex items-center justify-center text-yellow-300 font-black text-xl">
-                                    A
+                        <!-- 2. Youth Card (Y / Y+) -->
+                        <div class="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-emerald-400/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-600/30 border border-emerald-400/40 flex items-center justify-center text-emerald-300 font-black text-lg">
+                                        Y
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-400/30">0–18 / Senior</span>
                                 </div>
-                                <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold border border-yellow-400/30">Commuter + Debit Card</span>
+                                <h3 class="text-base font-bold mb-1.5">Youth Card (Y / Y+)</h3>
+                                <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                                    Replaces "Kids / K". Managed via Family Dashboard. 18th Birthday Swap kiosk graduation to C Card (with 50% discount voucher toward adult C+).
+                                </p>
                             </div>
-                            <h3 class="text-xl font-bold mb-2">The A Card (CoCo All)</h3>
-                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-                                The premium all-in-one commuter card. Functions as a contactless transit key and a standard debit card backed by your linked checking account, enabling seamless everyday coffee, groceries, and travel.
-                            </p>
-                            <ul class="space-y-1.5 text-xs text-slate-300">
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Automatic bank auto-reload</li>
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> 10% instant rebate on CoCo Snacks</li>
-                                <li class="flex items-center gap-2"><span class="text-yellow-400">&check;</span> Universal debit tap anywhere Mastercard is accepted</li>
-                            </ul>
+                            <div class="text-[11px] text-emerald-300 font-semibold border-t border-white/10 pt-2">
+                                50% Half-Fare Concession
+                            </div>
+                        </div>
+
+                        <!-- 3. All Card (A / A+) -->
+                        <div class="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-yellow-400/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 rounded-xl bg-yellow-500/30 border border-yellow-400/40 flex items-center justify-center text-yellow-300 font-black text-lg">
+                                        A
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 text-[10px] font-bold border border-yellow-400/30">Transit + Debit</span>
+                                </div>
+                                <h3 class="text-base font-bold mb-1.5">All Card (A / A+)</h3>
+                                <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                                    Transit + commercial debit linked to checking account via bank passthrough API. Daily retail spend earns accelerated Snack Zone points. 1 free card replacement/yr.
+                                </p>
+                            </div>
+                            <div class="text-[11px] text-amber-300 font-semibold border-t border-white/10 pt-2">
+                                Checking Account Passthrough
+                            </div>
+                        </div>
+
+                        <!-- 4. University Card (U / U+) -->
+                        <div class="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-purple-400/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-purple-300 font-black text-lg">
+                                        U
+                                    </div>
+                                    <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold border border-purple-400/30">Student NFC</span>
+                                </div>
+                                <h3 class="text-base font-bold mb-1.5">University (U / U+)</h3>
+                                <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                                    Zero-waste digital credential provisioned directly on existing campus ID NFC (CU, CSU, CMU, etc.). Real-time registrar verification for in-state students.
+                                </p>
+                            </div>
+                            <div class="text-[11px] text-purple-300 font-semibold border-t border-white/10 pt-2">
+                                30% Subsidized Discount (70%)
+                            </div>
                         </div>
                     </div>
 
@@ -1548,19 +1592,19 @@
                             <p class="text-[11px] text-slate-300 mt-1">Total freedom: unlimited CoCoR Rail, Bustang, Pegasus, Outrider, and Snowstang statewide.</p>
                         </div>
                         <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div class="text-2xl font-black text-purple-300">50% &amp; FREE</div>
-                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Special Concessions</div>
-                            <p class="text-[11px] text-slate-300 mt-1">50% off for Seniors (65+), Students, and Veterans. 100% Free transit for Youth aged 18 and under.</p>
+                            <div class="text-2xl font-black text-purple-300">30%–50% Off</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-white mt-1">Universal Discounts</div>
+                            <p class="text-[11px] text-slate-300 mt-1">50% universal half-fare for Youth, Seniors (65+), and Veterans. 30% discount for University students. Ages 0–7 Free.</p>
                         </div>
                     </div>
 
-                    <!-- CoCo Snacks Box -->
+                    <!-- CoCo Snack Zones Box -->
                     <div class="mt-8 p-4 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
                         <div>
-                            <strong class="text-yellow-300 font-bold block text-sm">CoCo Snacks Program (100% Colorado Local Mandate)</strong>
-                            <p class="text-slate-300 mt-0.5">Use your C or A Card at station kiosks and lounge cars to purchase Colorado-crafted snacks (Boulder Canyon, Hammond's, local roasters). Bypasses third-party bank swipe fees with 10% rebate back to riders.</p>
+                            <strong class="text-yellow-300 font-bold block text-sm">CoCo Snack Zones Program (100% Colorado Local Mandate)</strong>
+                            <p class="text-slate-300 mt-0.5">Stationed at Tier 1 hubs and lounge cars stocking Boulder Canyon, Hammond's, Olathe corn snacks, and local jerky. Standard cards convert points into automatic $1.00 transit credits; Plus (+) cards unlock visual e-ink progress bars and on-screen redemption barcodes.</p>
                         </div>
-                        <span class="px-3 py-1 rounded-full bg-yellow-400 text-slate-950 font-black text-[11px] whitespace-nowrap">10% CARD REBATE</span>
+                        <span class="px-3 py-1 rounded-full bg-yellow-400 text-slate-950 font-black text-[11px] whitespace-nowrap">LOCAL REWARDS</span>
                     </div>
 
                 </div>
@@ -1620,14 +1664,17 @@
                     <div class="text-[11px] font-bold text-cyan-600 dark:text-cyan-400">Free gear transit on all corridors.</div>
                 </div>
 
-                <!-- 4. Zero Fare for Youth Mandate -->
+                <!-- 4. Universal Youth Mobility & State Guaranteed Floor -->
                 <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                     <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-3 font-bold">
                         🎒
                     </div>
-                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Zero Fare for Colorado Youth</h3>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Universal Youth Mobility &amp; State Guaranteed Floor</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
-                        Pursuant to state ozone mitigation and youth equity statutes, all individuals aged 18 and under ride 100% free statewide on all standard CoCoR trains and CoCoM buses. Youth passes can be loaded directly onto physical C &amp; A Smart Cards or paired with Colorado student IDs.
+                        CoCo establishes structured youth age policies across all state rail and bus routes: <strong>Ages 0–7 ride 100% free</strong> without requiring cards; <strong>ages 8–12 must ride accompanied by an adult</strong> at the 50% half-fare rate; <strong>ages 13–18 ride independently</strong> across all statewide corridors at 50% half-fare.
+                    </p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+                        <strong>State Guaranteed Floor for Municipal Partnerships:</strong> Local transit agencies (e.g., RTD, GVT) retain full authority to enact local zero-fare policies (such as RTD Zero Fare for Youth). The state enforces a legal minimum 50% discount floor for Youth and Seniors across every partnered local system: if a local municipal agency's baseline fare does not provide at least 50%, Y Card taps for half price, and CoCo automatically reimburses the remainder to make the local agency whole.
                     </p>
                     <div class="text-[11px] font-bold text-amber-600 dark:text-amber-400">Modeled on Colorado Youth Transit Priorities (C.R.S. § 43-4-1102).</div>
                 </div>
@@ -1695,7 +1742,7 @@
                         <li><a href="map.html" class="hover:text-amber-300 transition-colors">Statewide Transit Map</a></li>
                         <li><a href="fares.html" class="hover:text-amber-300 transition-colors">Fares &amp; Rate Schedules</a></li>
                         <li><a href="#transfer-policy" class="hover:text-amber-300 transition-colors">Transfer Add-On Policy</a></li>
-                        <li><a href="ca-card.html" class="hover:text-amber-300 transition-colors">C &amp; A E-Ink Smart Card</a></li>
+                        <li><a href="ca-card.html" class="hover:text-amber-300 transition-colors">CoCo Cards &amp; E-Ink Architecture (C, Y, A, U)</a></li>
                         <li><a href="cocor-local.html" class="hover:text-amber-300 transition-colors">CoCoR Local Passenger Rail</a></li>
                         <li><a href="cocorx-express.html" class="hover:text-amber-300 transition-colors">CoCoRX Express Rail</a></li>
                         <li><a href="cocom-bustang.html" class="hover:text-amber-300 transition-colors">CoCoM Bustang Coach</a></li>
@@ -1824,12 +1871,15 @@
         const busTravelTime = document.getElementById('busTravelTime');
         const busCorridorBadge = document.getElementById('busCorridorBadge');
 
-        // Discount Factor based on selection
+        // Discount Factor based on selection:
+        // adult: 100% full fare (factor: 1.0)
+        // univ: 70% of fare / 30% discount (factor: 0.70)
+        // youth_senior: 50% half-fare (factor: 0.50)
         function getDiscountFactor() {
             const selected = document.querySelector('input[name="concession"]:checked');
             const val = selected ? selected.value : 'adult';
-            if (val === 'youth') return 0.0;
-            if (val === 'senior' || val === 'special') return 0.5;
+            if (val === 'youth_senior' || val === 'youth' || val === 'senior') return 0.50;
+            if (val === 'univ') return 0.70;
             return 1.0;
         }
 
@@ -1901,24 +1951,27 @@
             const discount = getDiscountFactor();
             const hasTransferAddon = transferAddonCheckbox ? transferAddonCheckbox.checked : false;
 
-            // Surcharge for transfer add-on: $3.00 for local/bus, $5.00 for express (waived for free youth, 50% for senior)
+            // Surcharge for transfer add-on scaled by demographic concession:
+            // Core Adult (100%): $3.00 local, $5.00 express
+            // University (70%): $2.10 local, $3.50 express (30% discount)
+            // Youth / Senior / Veteran (50%): $1.50 local, $2.50 express (50% concession)
             let localAddonCost = 0.00;
             let expressAddonCost = 0.00;
 
             if (hasTransferAddon) {
-                if (discount === 0.0) {
-                    localAddonCost = 0.00;
-                    expressAddonCost = 0.00;
-                } else if (discount === 0.5) {
+                if (discount === 0.50) {
                     localAddonCost = 1.50;
                     expressAddonCost = 2.50;
+                } else if (discount === 0.70) {
+                    localAddonCost = 2.10;
+                    expressAddonCost = 3.50;
                 } else {
                     localAddonCost = 3.00;
                     expressAddonCost = 5.00;
                 }
 
                 if (transferCalculatorBadge) {
-                    transferCalculatorBadge.textContent = '2-Hour Transfer Window Active (+$3.00 Add-On)';
+                    transferCalculatorBadge.textContent = 'Universal Transfer Window Active (+$' + localAddonCost.toFixed(2) + ' Local / +$' + expressAddonCost.toFixed(2) + ' Express)';
                     transferCalculatorBadge.className = 'text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-400 whitespace-nowrap self-start sm:self-center';
                 }
             } else {
@@ -1934,12 +1987,12 @@
             const corFinal = corBase + localAddonCost;
             corPriceDisplay.textContent = `$${corFinal.toFixed(2)}`;
 
-            if (discount === 0.0) {
-                corFormulaDisplay.textContent = `FREE Youth Pass (18 & under) ${hasTransferAddon ? '&bull; Transfer Add-On Included' : '&bull; Standard: $' + rawLocal.toFixed(2)}`;
-            } else if (hasTransferAddon) {
-                corFormulaDisplay.textContent = `Base $${corBase.toFixed(2)} + $${localAddonCost.toFixed(2)} Universal Transfer Add-On`;
-            } else if (discount === 0.5) {
-                corFormulaDisplay.textContent = `50% Concession applied (Base $4.00 + $0.18/mi &times; 0.5)`;
+            if (hasTransferAddon) {
+                corFormulaDisplay.textContent = `Base $${corBase.toFixed(2)} (${Math.round(discount * 100)}% fare) + $${localAddonCost.toFixed(2)} Universal Transfer Add-On`;
+            } else if (discount === 0.50) {
+                corFormulaDisplay.textContent = `Youth/Senior/Veteran 50% Concession (Y Card) &bull; Standard: $${rawLocal.toFixed(2)}`;
+            } else if (discount === 0.70) {
+                corFormulaDisplay.textContent = `University 30% Discount (U Card) &bull; Standard: $${rawLocal.toFixed(2)}`;
             } else {
                 corFormulaDisplay.textContent = `Base $4.00 + ($0.18 &times; ${routeDistance} mi)`;
             }
@@ -1958,12 +2011,12 @@
             const corxFinal = corxBase + expressAddonCost;
             corxPriceDisplay.textContent = `$${corxFinal.toFixed(2)}`;
 
-            if (discount === 0.0) {
-                corxFormulaDisplay.textContent = `FREE Youth Pass &bull; Standard: $${rawExpress.toFixed(2)}`;
-            } else if (hasTransferAddon) {
-                corxFormulaDisplay.textContent = `Express $${corxBase.toFixed(2)} + $${expressAddonCost.toFixed(2)} Express Transfer Add-On`;
-            } else if (discount === 0.5) {
-                corxFormulaDisplay.textContent = `50% Concession applied (+25% express premium)`;
+            if (hasTransferAddon) {
+                corxFormulaDisplay.textContent = `Express $${corxBase.toFixed(2)} (${Math.round(discount * 100)}% fare) + $${expressAddonCost.toFixed(2)} Express Add-On`;
+            } else if (discount === 0.50) {
+                corxFormulaDisplay.textContent = `Youth/Senior/Veteran 50% Concession (Y Card) &bull; Standard: $${rawExpress.toFixed(2)}`;
+            } else if (discount === 0.70) {
+                corxFormulaDisplay.textContent = `University 30% Discount (U Card) &bull; Standard: $${rawExpress.toFixed(2)}`;
             } else {
                 corxFormulaDisplay.textContent = `$${rawLocal.toFixed(2)} + 25% Express Premium`;
             }
@@ -2021,12 +2074,12 @@
             busPriceDisplay.textContent = `$${busFinal.toFixed(2)}`;
             busCorridorBadge.textContent = corridorName;
 
-            if (discount === 0.0) {
-                busFormulaDisplay.textContent = `FREE Youth Pass &bull; Standard: $${baseBusFare.toFixed(2)}`;
-            } else if (hasTransferAddon) {
-                busFormulaDisplay.textContent = `Bus $${busBase.toFixed(2)} + $${localAddonCost.toFixed(2)} Transfer Add-On`;
-            } else if (discount === 0.5) {
-                busFormulaDisplay.textContent = `50% Concession applied to CDOT baseline`;
+            if (hasTransferAddon) {
+                busFormulaDisplay.textContent = `Bus $${busBase.toFixed(2)} (${Math.round(discount * 100)}% fare) + $${localAddonCost.toFixed(2)} Transfer Add-On`;
+            } else if (discount === 0.50) {
+                busFormulaDisplay.textContent = `Youth/Senior/Veteran 50% Concession (Y Card) &bull; Standard: $${baseBusFare.toFixed(2)}`;
+            } else if (discount === 0.70) {
+                busFormulaDisplay.textContent = `University 30% Discount (U Card) &bull; Standard: $${baseBusFare.toFixed(2)}`;
             } else {
                 busFormulaDisplay.textContent = `CDOT Published Baseline Fare`;
             }

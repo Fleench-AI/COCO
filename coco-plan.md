@@ -34,35 +34,89 @@ Station Tiers & "Mountain Modern" Design
 
 Stations abandon cheap plastic shelters in favor of heavy timber beams, native Colorado sandstone bases, angled steel roofs (engineered for snow loads), and floor-to-ceiling glass windbreaks. Every single stop is anchored by the CoCo Totem—a 12-foot illuminated navy blue pylon topped with a glowing LED Mustang and "C" roundel visible from blocks away.
 
-Tier 1 (CoCoR Rail Hubs): Fully enclosed, heated buildings featuring CoCo Cargo secure gear lockers (for skis and bikes), digital timetable screens, and dedicated local coffee/retail kiosks.
+Tier 1 (CoCoR Rail Hubs): Fully enclosed, heated buildings featuring CoCo Cargo secure gear lockers (for skis and bikes), digital timetable screens, staffed Main Desks, CoCo Snack Zones, automated card kiosks, and dedicated local retail.
 
-Tier 2 ("with CoCo" Local Bus & CoCo Bus Shelters): Three-sided glass and timber structures equipped with push-button infrared radiant ceiling heaters for winter waits, plus integrated yellow Tap-On validators and ticket kiosks.
+Tier 2 ("with CoCo" Local Bus & CoCo Bus Shelters): Three-sided glass and timber structures equipped with push-button infrared radiant ceiling heaters for winter waits, plus integrated yellow Tap-On validators, automated ticket/card kiosks, and route information.
 
-Tier 3 (CoCo Direct Posts): Designed for rural pickup zones or tight urban sidewalks, consisting of the illuminated CoCo Totem, a solar-powered e-ink schedule display, and a Tap-On validator.
+Tier 3 (CoCo Direct Posts): Designed for rural pickup zones or tight urban sidewalks, consisting of the illuminated CoCo Totem, a solar-powered e-ink schedule display, an automated card kiosk, and a Tap-On validator.
 
 3. Payment, Ticketing, and Retail
 
-The Strict "Tap-On" System
+The Strict "Tap-On" Architecture
 
-To keep boarding lines moving quickly, the network uses a Tap-On Only model (no tapping off). There is no complex zone-based fare capping; riders must possess a valid pre-purchased ticket or linked local day pass before tapping. Tapping without a valid ticket triggers an error, though every station and vehicle features an onboard/platform kiosk to buy tickets on the spot. Tourists can also buy single-use paper tickets embedded with RFID/QR codes to tap onto the system.
+To keep boarding lines moving swiftly across all transit modes, the statewide network operates on a strict Tap-On Only model (no tapping off). Boarding validation functions under offline-first and proof-of-payment principles:
 
-The Two-Card System
+- Tap-On Validation: Riders tap their physical CoCo card or digital app credential at the boarding validator. Tapping without a valid pass or sufficient cash balance alerts the operator, though every stop and vehicle platform provides automated kiosks to purchase or load media on the spot.
+- Offline Tap-and-Sync: Onboard NFC readers operate independently of live cellular connectivity. Readers inspect active local passes in flash storage first, apply demographic discounts, and deduct cash values in under 300 milliseconds. Transaction ledgers store securely on the validator and sync asynchronously over cellular or depot Wi-Fi upon reaching coverage.
+- Platform Validators: For open-boarding systems (such as RTD Light Rail platforms and high-volume CoCoR rail stops), riders tap freestanding yellow platform totem validators before boarding. The validator writes an authenticated digital timestamp directly into the card's local storage.
+- Handheld Proof-of-Payment: Onboard fare inspectors carry ruggedized, offline handheld scanners that inspect and cryptographically verify card timestamps and active fare validity on open-boarding lines without requiring live network access.
+- Single-Use Paper Tickets: Tourists and infrequent riders can purchase single-use paper tickets embedded with RFID/QR codes at any automated kiosk to tap into the system.
 
-The C Card (CoCo Core Card): The standard transit pass.
+The CoCo Card Matrix (Four Primary Tiers: Standard Plastic & Premium '+' E-Ink)
 
-Offline Mode: When unlinked, the physical card acts as a local storage drive. It can hold a transit cash balance and up to 5 pre-purchased tickets loaded at a physical CoCo Kiosk.
+CoCo transit cards are available across four purpose-built tiers. Every tier is offered in either standard durable recycled plastic or a premium "Plus" (+) edition featuring an ultra-low-power electronic ink (e-ink) display powered by ambient NFC energy harvesting:
 
-Cloud-Linked Mode: If the user links the C Card to the CoCo App, the card wipes its local storage and becomes a simple NFC key pointing to their digital account. If lost, it can be frozen in the app without losing any tickets.
+1. Core Card (C / C+) — The Default Adult Transit Card
+- Demographic & Eligibility: Universal adult transit pass for riders aged 18 and older.
+- Standard C Card: Issued completely free of charge at all automated kiosks, transit desks, and partner agencies. Holds an offline transit cash balance and up to 5 pre-purchased tickets/passes locally in secure flash storage, ensuring full offline functionality. Operates 100% anonymously when unlinked, or can be registered in the CoCo RealTime app for zero-liability loss protection, balance restoration, and remote card freezing.
+- Plus C+ Card: Premium edition available for a $20–$25 issuance fee. Features a battery-free bistable e-ink display powered entirely via NFC energy harvesting during the 300ms tap. The screen persistently displays the real-time cash balance, active pass/tap verification status, and a visual loyalty progress tracker.
 
-The A Card (CoCo All Card): The premium commuter card.
+2. Youth Card (Y / Y+) — Dependents, Youth, Seniors & Veterans
+- Demographic & Eligibility: Dedicated card family serving dependents and young riders (formally superseding obsolete "Kids / K" terminology), as well as seniors (65+) and military veterans under the unified 50% discount umbrella.
+  - Ages 0–7: Ride 100% free across the entire network without requiring individual cards.
+  - Ages 8–12: Must ride accompanied by an adult per CoCo Terms of Service.
+  - Ages 13–18: Permitted to ride independently across all statewide lines.
+- Parent-Managed Family Dashboard: Centrally managed through the parent or guardian's CoCo RealTime app. Parents can set automated reloads, freeze/unfreeze lost cards instantly, view live boarding location alerts upon each tap, and configure custom reward goals (e.g., educational or transit milestones) reflected on the Y+ e-ink screen.
+- 18th Birthday Swap: To eliminate digital fraud and verify adulthood, Youth cards do not automatically convert in software upon the holder's 18th birthday. At age 18, the rider brings their Y Card to any physical automated kiosk or staffed transit desk to graduate to an adult Core (C) Card. Y+ cardholders receive an exclusive 50% discount voucher toward upgrading to an adult Core Plus (C+) card.
 
-Must be linked to a registered CoCo App account.
+3. All Card (A / A+) — The Hybrid Transit & Everyday Debit Card
+- Demographic & Eligibility: Designed for frequent commuters and statewide residents seeking an all-in-one payment tool.
+- Banking & Passthrough API: Standard A Card pairs a full CoCo transit pass with an everyday commercial debit card. Rather than operating as a custodial bank or depository institution, CoCo functions strictly as a secure transaction passthrough clearinghouse, linking directly to the cardholder's existing checking account via modern open-banking APIs. Works for everyday retail purchases and transit alike.
+- Issuance & Perks: Requires an initial issuance fee. As an exclusive account perk, cardholders receive one free standard Core (C) Card replacement per year if their card is lost or damaged.
+- Plus A+ Card: Features an e-ink display showing transit status alongside live debit account balance alerts. Furthermore, A+ cardholders accrue CoCo Snack Zone reward points at an accelerated multiplier through daily retail and dining transactions outside the transit network.
 
-Functions as a standard transit pass and a regular everyday debit card backed by a linked bank account.
+4. University Card (U / U+) — Digital Campus ID Integration
+- Demographic & Eligibility: Seamless software integration tailored for college and university students throughout Colorado.
+- Zero-Waste Campus Credential: CoCo transit software provisions directly onto a designated, secure, unused NFC sector of the student's existing physical campus ID card (e.g., Colorado Mesa University CMU MAVcard, CU Buff OneCard, CSU RamCard) without issuing new plastic.
+- In-State Subsidy Safeguard: Subsidized university fare discounts apply exclusively to verified Colorado in-state students via real-time registrar data feeds, preventing out-of-state visitor leakage while maintaining deep transit equity for Colorado residents.
+- Plus U+ Card: An optional physical e-ink companion card available at campus bookstores for students who desire hardware e-ink loyalty progress and visual balance tracking.
 
-The CoCo Snacks Program
+Universal Fare & Discount Architecture
 
-Both C and A Cards can be tapped to buy food and drinks via the CoCo Snacks network, located at participating Tier 1 stations, onboard CoCoR dining/lounge cars, and partnered highway rest stops. By using CoCo cards, the state bypasses credit card processing fees. The Local Mandate: CoCo Snacks exclusively stocks 100% Colorado-owned brands (e.g., Boulder Canyon chips, Hammond's Candies, local roasters).
+CoCo establishes a statewide, predictable fare structure engineered to balance equity, accessibility, and high-demand route capacity:
+
+- Core Adult (Standard Fare): 100% full base fare for all standard adult travel across CoCo Rail, Bustang, and local routes.
+- University (U Card): 70% of base fare (30% discount). This targeted 30% reduction keeps statewide intercity travel highly affordable for Colorado students while deliberately safeguarding peak weekend seating capacity on heavily trafficked long-haul routes (such as the Bustang West Line along I-70).
+- Youth / Senior / Veteran (Y Card): 50% of base fare (50% universal "Half-Fare" demographic). Universal half-fare guarantees equitable mobility for youth, seniors, and military veterans while deterring joyriding and preserving seat availability on capacity-constrained premium recreation routes (such as Snowstang ski express coaches).
+- State Guaranteed Floor for Local Municipal Partnerships: Municipal transit agencies (e.g., RTD, Grand Valley Transit) retain full sovereignty to establish local fare policies, including local zero-fare initiatives (e.g., RTD Zero Fare for Youth). However, the State of Colorado establishes a legal minimum 50% discount floor for Youth and Seniors across every partnered local system. If a local municipal agency's baseline fare does not provide at least a 50% concession, any Y Card tap automatically charges the rider half fare, and the CoCo state clearinghouse automatically reimburses the remaining balance directly to the local agency, making them completely whole.
+
+Technical & Hardware Specifications
+
+- Offline Tap-and-Sync Processing: Every onboard validator terminal and platform totem contains a local cryptographically secure ledger and demographic tariff rule engine. When a card taps, the reader inspects local flash memory, verifies ticket/pass validity, calculates applicable demographic discounts, deducts cash value, and commits the write cycle in under 300ms without cellular connectivity. Offline transactions cache locally and broadcast to the central CoCo clearinghouse as soon as cellular or depot Wi-Fi connects.
+- Platform Validators & Offline Proof-of-Payment: Platform validators stationed at rail and rapid-transit stops generate encrypted digital proof-of-tap records written to the card's local storage sector. Mobile fare inspection personnel equipped with offline handheld scanners verify these timestamped cryptograms against vehicle run-sheets without requiring real-time network connectivity.
+- Battery-Free NFC Energy Harvesting E-Ink Displays (+ Cards): All Plus (+) cards utilize ultra-low-power bistable electrophoretic displays (e-ink) devoid of any internal battery. During the 300ms tap, the alternating magnetic field emitted by the validator or kiosk reader induces a microcurrent within the card's internal antenna coil via near-field energy harvesting. This harvested energy powers the onboard secure element and display controller, completing the cryptographic transaction and refreshing the display with the current balance, tap validation checkmark, or reward tracker. Because bistable e-ink requires zero power to maintain an image, the screen remains persistently legible indefinitely until the subsequent tap.
+
+Loyalty Program: CoCo Snack Zones
+
+- Colorado-Local Product Curation: CoCo Snack Zones are stationed at Tier 1 transit hubs, onboard CoCoR rail lounge cars, and partnered highway mobility hubs. Snack Zones exclusively stock 100% Colorado-made goods (such as artisanal jerky, Olathe sweet corn snacks, Palisade fruit treats, Colorado kombuchas, and local craft roasters).
+- Fee Elimination & Local Reinvestment: Transacting directly through CoCo card balances bypasses commercial credit card processing interchange fees, allowing the state to channel transaction savings into rider loyalty rewards and Colorado agricultural producers.
+- Standard Cards (C, Y, A, U) Reward Flow: Standard cardholders accrue base loyalty points per transit tap and dollar spent. Once accumulated, points automatically convert into small recurring fare credits (e.g., $1.00 credit toward subsequent transit rides) via the CoCo RealTime app.
+- Plus Cards (+) Premium Reward Experience: Plus cardholders gain access to the full premium Snack Zone reward menu, unlocking free coffees, specialty teas, and artisanal snack items. Cardholders choose a single active reward goal at a time in the CoCo app, which projects a live visual progress bar onto the card's e-ink screen. When the target is reached, the e-ink screen dynamically renders a scannable optical barcode for immediate, frictionless scanning and redemption at any Snack Zone counter.
+
+Physical Infrastructure: Automated Kiosks & Main Desks
+
+To ensure total statewide inclusion across urban centers, mountain corridors, and rural communities:
+
+- Automated Kiosks (Every Station & Stop): Deployed at every Tier 1, 2, and 3 station stop statewide. These heavy-duty, weather-resistant kiosks:
+  - Dispense anonymous, ready-to-use standard Core (C) cards 24/7.
+  - Accept cash, credit/debit, and contactless digital wallets to reload transit cash balances and passes.
+  - Process 18th Birthday Swaps, verifying age and transitioning graduating youth from Y cards to standard C cards (or issuing discounted Plus C+ upgrade vouchers).
+  - Synchronize offline reward balances, print paper vouchers, and vend RFID/QR single-ride paper tickets for smartphone-free or unbanked riders.
+- Main Desks (Staffed Major Hub Centers): Staffed regional customer support centers positioned at primary transit hubs (including Denver Union Station, Grand Junction Mobility Hub, Pueblo Union Depot, and Fort Collins Downtown Transit Center). Main Desks provide high-touch support:
+  - Serving unbanked passengers with cash account loading, paper receipts, and balance payouts.
+  - Conducting demographic credentialing (in-person Senior, Veteran, and disability verifications).
+  - Issuing immediate on-site hardware replacements for premium Plus (+) e-ink cards.
+  - Providing onboarding guidance and verification for All Card (A / A+) banking API connections.
 
 4. The CoCo RealTime App
 
@@ -70,7 +124,7 @@ Themed in navy blue, white, red, and yellow, the app is the digital brain of the
 
 Home Dashboard: Displays the active ticket (NFC & QR backup), countdown timers for daily commutes, and color-coded system/weather status banners.
 
-The Wallet: A unified storefront to buy CoCoR train tickets, CoCo bus passes (Bustang, Pegasus, Snowstang, Outrider), or link local 30-day "with CoCo" passes (like an RTD monthly pass). Features auto-reload and physical C Card syncing.
+The Wallet: A unified storefront to buy CoCoR train tickets, CoCo bus passes (Bustang, Pegasus, Snowstang, Outrider), or link local 30-day "with CoCo" passes (like an RTD monthly pass). Features auto-reload, physical card syncing across all tiers (C, Y, A, U), Snack Zone reward selection, and the Family Dashboard (allowing parents to manage Youth Y/Y+ cards with auto-reload, instant freezing, live boarding tracking, and custom reward milestones for Y+ e-ink screens).
 
 Multimodal Navigator: Plans door-to-door trips combining walking, local buses, CoCo intercity/regional buses, CoCoR trains, micro-transit vans, and partnered first/last-mile e-bikes/scooters. Includes a single "Buy Required Tickets" button for the whole itinerary.
 
@@ -105,9 +159,9 @@ Onboard CoCoR Experience
 
 Seating: Standard 2x2 configuration (zero middle seats) engineered for trips up to 4 hours, with panoramic windows, fold-down trays, universal AC/USB-C outlets, and CoCo Cargo racks at the ends of every car for skis and bikes.
 
-Premium Trim (Standard on Z, W, S, and Express Cars): Features wipeable navy vegan leather seats with red/yellow stitching, real Colorado timber window framing, warm adjustable LED lighting, and a standing high-top bar area at the CoCo Snacks lounge.
+Premium Trim (Standard on Z, W, S, and Express Cars): Features wipeable navy vegan leather seats with red/yellow stitching, real Colorado timber window framing, warm adjustable LED lighting, and a standing high-top bar area at the CoCo Snack Zones lounge.
 
-The WiFi Flex: Front Range trains use a 5G/Satellite mesh. For the Z, W, and S cars (where Amtrak has zero WiFi), CoCo mounts low-profile satellite dishes (e.g., Starlink) to the roof. To prevent standard Amtrak passengers from stealing bandwidth, the WiFi is locked behind a simple daily password displayed on screens inside the CoCo car and given only to C and A Card holders.
+The WiFi Flex: Front Range trains use a 5G/Satellite mesh. For the Z, W, and S cars (where Amtrak has zero WiFi), CoCo mounts low-profile satellite dishes (e.g., Starlink) to the roof. To prevent standard Amtrak passengers from stealing bandwidth, the WiFi is locked behind a simple daily password displayed on screens inside the CoCo car and given only to registered CoCo Card holders (C, Y, A, U).
 
 6. CoCoM (COM): Bustang, Pegasus, Snowstang, Outrider & Local Partnerships
  
